@@ -9,3 +9,7 @@
 - [Community Wiki](http://destinydevs.github.io/BungieNetPlatform/)
 - [DestinySets ApiExplorer](https://data.destinysets.com/api)
 - [Additional Links](https://www.reddit.com/r/DestinyTheGame/comments/aj4jzj/destiny_api_usage/)
+
+## Contributing
+
+Please view the journal  [here](journal/readme.md).
