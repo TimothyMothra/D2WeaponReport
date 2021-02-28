@@ -13,8 +13,14 @@
     - GET: https://www.bungie.net/platform/Destiny/Manifest/InventoryItem/1274330687/
     - Headers: Key `x-api-key` Value `<GUID API KEY WITHOUT HYPHENS>`
  
- ## Download manifests
+ ## Manifests
+ The manifest is a sqlite database with static values.
+  - https://destinydevs.github.io/BungieNetPlatform/docs/Manifest
+  - How to Read the Manifest
+https://www.bungie.net/sr/Groups/Post?groupId=39966&postId=105901734&sort=0&path=0&showBanned=0
+- https://github.com/vpzed/Destiny2-API-Info/wiki/API-Introduction-Part-3-Manifest
  
+ ### How to Download
 - Using api-key, query GET: https://www.bungie.net/platform/Destiny2/Manifest 
     - IMPORTANT: Pay attention to the path "Destiny" vs "Destiny2". 
 - This will return a json of several manifest content files.
@@ -34,7 +40,6 @@ Can lookup any item's json in either https://www.light.gg/ or https://data.desti
 - https://data.destinysets.com/i/InventoryItem:821154603
 - https://www.light.gg/db/items/821154603/gnawing-hunger/
 - https://www.bungie.net/common/destiny2_content/screenshots/821154603.jpg
-
 - Open the `world_sql_content` database. Sqlite Query:
 ```
 SELECT 
@@ -60,26 +65,18 @@ Note: there is as $.quality.versions field. I haven't seen anything reference th
 - $.stats (Example: Stability, Handling, Range, Aim Assistance, Attack, Inventory Size, Power, Recoil Direction, Zoom, Magazine, Impact, Reload Speed, Rounds Per Minute)
     - contains: hash, value, minumum, maximum, display maximum
 - $.investmentStats -- assuming this is related to mods?
-
 - $.perks.itemCategoryHashes:[] 3 items
 0:3 // <ItemCategory "Energy Weapon">
 1:1 // <ItemCategory "Weapon">
 2:5 // <ItemCategory "Auto Rifle">
-
 - $.itemType:3 // enum DestinyItemType "Weapon"
 - $.itemSubType:6 // enum DestinyItemSubType "AutoRifle"
-
 - damageTypeHashes:[] 1 item
 0:3454344768 // <DamageType "Void">
-
 - damageTypes:[] 1 item
 0:4 // enum DamageType "Void"
-
 - $.defaultDamageType:4 // enum DamageType "Void"
 - $.defaultDamageTypeHash:3454344768 // <DamageType "Void">
-
-
-
 
 Kinetic?
 
