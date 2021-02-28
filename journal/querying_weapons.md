@@ -1,7 +1,20 @@
 # How to query a weapon
 
 ## List of all weapons
-TODO
+
+- Using Manifest: world_sql_content
+- Query:
+```
+SELECT 
+    id,
+    json,
+    json_extract(json, '$.collectibleHash') as collectibleHash,
+    json_extract(json, '$.displayProperties.name') as name,
+    json_extract(json, '$.itemType') as itemType
+  FROM DestinyInventoryItemDefinition
+  WHERE itemType = 3
+```
+
 
 ## Single weapon
 For any item <Name>, how to find it in the API?
