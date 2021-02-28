@@ -106,7 +106,7 @@ Note: there is as $.quality.versions field. I haven't seen anything reference th
 Kinetic?
 
 
-### TODO: HOW TO QUERY AN ITEM'S POSSIBLE PERKS
+### HOW TO QUERY AN ITEM'S POSSIBLE PERKS
 
 - https://www.light.gg/db/items/821154603/gnawing-hunger/
 - https://data.destinysets.com/i/InventoryItem:821154603
@@ -131,7 +131,7 @@ Collections of perks are stored in `DestinyPlugSetDefinition`.
 ### TODO: IS IT POSSIBLE TO QUERY FOR D2 WEAPONS FROM THE REST API?
 
 
-### HOW TO QUERY ALL POSSIBLE PERKS (ex: rampage, outlaw)
+### HOW TO QUERY ALL AVAILABLE PERKS (ex: rampage, outlaw)
 
 ```sql
 SELECT id,
