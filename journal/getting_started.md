@@ -36,6 +36,7 @@ Can lookup any item's json in either https://www.light.gg/ or https://data.desti
 - https://www.bungie.net/common/destiny2_content/screenshots/821154603.jpg
 
 - Open the `world_sql_content` database. Sqlite Query:
+```
 SELECT 
     id,
     json,
@@ -44,19 +45,37 @@ SELECT
     json_extract(json, '$.itemType') as itemType
   FROM DestinyInventoryItemDefinition
   WHERE 
-  itemType = 3 -- enum DestinyItemType "WEAPON"
---id = 821154603 
+  id = 821154603 
 --name = 'Gnawing Hunger'
 --name LIKE '%Gn%';
---itemType:3 // enum DestinyItemType "Weapon"
---itemSubType:6 // enum DestinyItemSubType "AutoRifle"
---defaultDamageType:4 // enum DamageType "Void"
-▶--itemCategoryHashes:[] 3 items
---0:3 // <ItemCategory "Energy Weapon">
---1:1 // <ItemCategory "Weapon">
---2:5 // <ItemCategory "Auto Rifle">
-  ```
+```
 
+#### Other fields
+Note: there is as $.quality.versions field. I haven't seen anything reference this yet, but it should be noted because Perks can change per version.
+
+- $.equippingBlock.ammoType:1 // enum DestinyAmmunitionType "Primary"
+- $.equippingBlock.equipmentSlotTypeHash
+- $.inventory.tierTypeName:"Legendary", 
+- $.summaryItemHash:3520001075 // <InventoryItem "Legendary Gear">
+- $.stats (Example: Stability, Handling, Range, Aim Assistance, Attack, Inventory Size, Power, Recoil Direction, Zoom, Magazine, Impact, Reload Speed, Rounds Per Minute)
+    - contains: hash, value, minumum, maximum, display maximum
+- $.investmentStats -- assuming this is related to mods?
+
+- $.perks.itemCategoryHashes:[] 3 items
+0:3 // <ItemCategory "Energy Weapon">
+1:1 // <ItemCategory "Weapon">
+2:5 // <ItemCategory "Auto Rifle">
+
+- $.itemType:3 // enum DestinyItemType "Weapon"
+- $.itemSubType:6 // enum DestinyItemSubType "AutoRifle"
+
+- $.defaultDamageType:4 // enum DamageType "Void"
+- $.defaultDamageTypeHash:3454344768 // <DamageType "Void">
+
+
+
+
+Kinetic?
 
 
 
@@ -79,40 +98,15 @@ SELECT
 
 ### TODO: IS IT POSSIBLE TO QUERY FOR D2 WEAPONS FROM THE REST API?
 
+## MetaData
 
 ### TODO: HOW TO QUERY AN EXOTIC
 ### TODO: HOW TO QUERY AN EXOTIC WITH RANDOM ROLLS
 ### TODO: HOW TO QUERY A LEGENDARY WITH RANDOM ROLLS
 
-### TODO: HOW TO QUERY WEAPON TYPE (ex: auto rifle, smg)
-### TODO: HOW TO QUERY WEAPON ELEMENT (ex: kinetic, solar, arc, void)
-### TODO: HOW TO QUERY BASE STATS (ex: impact, range, stability)
-
 
 ### TODO: HOW TO QUERY ALL POSSIBLE PERKS (ex: rampage, outlaw)
 
-## MetaData (Example Values from "Gnawing Hunger"
-Note: there is as $.quality.versions field. I haven't seen anything reference this yet, but it should be noted because Perks can change per version.
-
-
-- $.equippingBlock.ammoType:1 // enum DestinyAmmunitionType "Primary"
-- $.equippingBlock.equipmentSlotTypeHash
-- $.inventory.tierTypeName:"Legendary", 
-- $.summaryItemHash:3520001075 // <InventoryItem "Legendary Gear">
-
-- $.stats contains: hash, value, minumum, maximum, display maximum
-- $.investmentStats -- assuming this is related to mods?
-
-- $.perks.itemCategoryHashes:[] 3 items
-0:3 // <ItemCategory "Energy Weapon">
-1:1 // <ItemCategory "Weapon">
-2:5 // <ItemCategory "Auto Rifle">
-
-- $.itemType:3 // enum DestinyItemType "Weapon"
-- $.itemSubType:6 // enum DestinyItemSubType "AutoRifle"
-
-- $.defaultDamageType:4 // enum DamageType "Void"
-- $.defaultDamageTypeHash:3454344768 // <DamageType "Void">
 
 
 
