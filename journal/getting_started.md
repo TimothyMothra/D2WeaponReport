@@ -35,13 +35,35 @@ https://bungie-net.github.io/multi/schema_Destiny-Definitions-DestinyInventoryIt
 
 Can lookup any item's json in either https://www.light.gg/ or https://data.destinysets.com/
 
+
+
+### QUERYING for a list of all weapons
+- Open the `world_sql_content` database.
+- Query:
+```sql
+SELECT 
+    id,
+    json,
+    json_extract(json, '$.collectibleHash') as collectibleHash,
+    json_extract(json, '$.displayProperties.name') as name,
+    json_extract(json, '$.itemType') as itemType
+  FROM DestinyInventoryItemDefinition
+  WHERE itemType = 3 -- enum DestinyItemType "WEAPON"
+```
+
+
+### TODO: HOW TO QUERY AN EXOTIC (With or Without Random Rolls)
+
+There are currently two Exotics available with random rolls. How to discover these programatically?
+
+
 ### Querying for a single weapon (example: "Gnawing Hunger")
 - Id: **821154603**
 - https://data.destinysets.com/i/InventoryItem:821154603
 - https://www.light.gg/db/items/821154603/gnawing-hunger/
 - https://www.bungie.net/common/destiny2_content/screenshots/821154603.jpg
 - Open the `world_sql_content` database. Sqlite Query:
-```
+```sql
 SELECT 
     id,
     json,
@@ -83,33 +105,17 @@ Kinetic?
 
 
 
-### QUERYING for a list of all weapons
-- Open the `world_sql_content` database.
-- Query:
-```
-SELECT 
-    id,
-    json,
-    json_extract(json, '$.collectibleHash') as collectibleHash,
-    json_extract(json, '$.displayProperties.name') as name,
-    json_extract(json, '$.itemType') as itemType
-  FROM DestinyInventoryItemDefinition
-  WHERE itemType = 3 -- enum DestinyItemType "WEAPON"
-```
-
-
 
 ### TODO: IS IT POSSIBLE TO QUERY FOR D2 WEAPONS FROM THE REST API?
 
-## MetaData
 
-### TODO: HOW TO QUERY AN EXOTIC
-### TODO: HOW TO QUERY AN EXOTIC WITH RANDOM ROLLS
-### TODO: HOW TO QUERY A LEGENDARY WITH RANDOM ROLLS
+### HOW TO QUERY ALL POSSIBLE PERKS (ex: rampage, outlaw)
 
-
-### TODO: HOW TO QUERY ALL POSSIBLE PERKS (ex: rampage, outlaw)
-
-
-
+```sql
+SELECT id,
+       json,
+       json_extract(json, '$.displayProperties.name') as name,
+       json_extract(json, '$.displayProperties.description') as description
+  FROM DestinySandboxPerkDefinition;
+```
 
