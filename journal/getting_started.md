@@ -36,18 +36,25 @@ Can lookup any item's json in either https://www.light.gg/ or https://data.desti
 - https://www.bungie.net/common/destiny2_content/screenshots/821154603.jpg
 
 - Open the `world_sql_content` database. Sqlite Query:
-    ```
-    SELECT 
+SELECT 
     id,
     json,
     json_extract(json, '$.collectibleHash') as collectibleHash,
-    json_extract(json, '$.displayProperties.name') as name
+    json_extract(json, '$.displayProperties.name') as name,
+    json_extract(json, '$.itemType') as itemType
   FROM DestinyInventoryItemDefinition
   WHERE 
-  id = 821154603 
-  or
-  name = 'Gnawing Hunger'
-  --name LIKE '%Gn%'
+  itemType = 3 -- enum DestinyItemType "WEAPON"
+--id = 821154603 
+--name = 'Gnawing Hunger'
+--name LIKE '%Gn%';
+--itemType:3 // enum DestinyItemType "Weapon"
+--itemSubType:6 // enum DestinyItemSubType "AutoRifle"
+--defaultDamageType:4 // enum DamageType "Void"
+▶--itemCategoryHashes:[] 3 items
+--0:3 // <ItemCategory "Energy Weapon">
+--1:1 // <ItemCategory "Weapon">
+--2:5 // <ItemCategory "Auto Rifle">
   ```
 
 
