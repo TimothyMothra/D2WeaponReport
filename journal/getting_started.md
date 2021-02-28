@@ -69,6 +69,12 @@ Note: there is as $.quality.versions field. I haven't seen anything reference th
 - $.itemType:3 // enum DestinyItemType "Weapon"
 - $.itemSubType:6 // enum DestinyItemSubType "AutoRifle"
 
+- damageTypeHashes:[] 1 item
+0:3454344768 // <DamageType "Void">
+
+- damageTypes:[] 1 item
+0:4 // enum DamageType "Void"
+
 - $.defaultDamageType:4 // enum DamageType "Void"
 - $.defaultDamageTypeHash:3454344768 // <DamageType "Void">
 
