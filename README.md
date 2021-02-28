@@ -1,6 +1,5 @@
 # DestinySandbox
 
-
 ## Resources
 
 - [Official Api Signup](https://www.bungie.net/en/Application/Create)
