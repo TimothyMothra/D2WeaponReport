@@ -99,11 +99,23 @@ Note: there is as $.quality.versions field. I haven't seen anything reference th
 0:4 // enum DamageType "Void"
 - $.defaultDamageType:4 // enum DamageType "Void"
 - $.defaultDamageTypeHash:3454344768 // <DamageType "Void">
+- $.sockets.socketEntries
+0:socketTypeHash:3956125808 // <SocketType> - <SocketCategory "INTRINSIC TRAITS">
+0:singleInitialItemHash:1294026524 // <InventoryItem "Adaptive Frame">
 
 Kinetic?
 
 
 ### TODO: HOW TO QUERY AN ITEM'S POSSIBLE PERKS
+
+- https://www.light.gg/db/items/821154603/gnawing-hunger/
+Shows that the 4th calumn can have: Rampage, Kill Clip, Multikill Clip, Demolitionist.
+- https://data.destinysets.com/i/InventoryItem:821154603
+The details tap also shows all possible perks.
+Clicking on Kill Clip: https://data.destinysets.com/i/InventoryItem:821154603/InventoryItem:1015611457
+
+kill Clip's hash isn't in the weapon's json. Must be an intermediate table???
+
 
 
 ### TODO: IS IT POSSIBLE TO QUERY FOR D2 WEAPONS FROM THE REST API?
@@ -119,3 +131,5 @@ SELECT id,
   FROM DestinySandboxPerkDefinition;
 ```
 
+- DestinySocketTypeDefinition
+    - Weapon Perks: https://data.destinysets.com/i/InventoryItem:821154603/SocketType:3362409147
