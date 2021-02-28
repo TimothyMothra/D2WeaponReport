@@ -14,8 +14,10 @@
  
  ## Download manifests
  
-- Using api-key, query GET: https://www.bungie.net/platform/Destiny/Manifest
+- Using api-key, query GET: https://www.bungie.net/platform/Destiny2/Manifest 
+    - IMPORTANT: Pay attention to the path "Destiny" vs "Destiny2". 
 - This will return a json of several content files.
-    - For example: https://www.bungie.net/common/destiny_content/sqlite/en/world_sql_content_3453cd870a9e6a4a5230eeeef1ddc651.content (this link works without an api-key)
+    - For example: https://www.bungie.net/common/destiny2_content/sqlite/en/world_sql_content_30e996ad1e317a77a5130f587198da50.content (this link works without an api-key)
 - This .content file is zipped. First change the extension to .zip and unzip. Inside there is another .content file, which is the actual database.
 - Open this inner .content file using SQLiteStudio to explore meta data.
+
