@@ -4,6 +4,9 @@
 - [PostMan](https://www.postman.com/downloads/) for manually querying the API
 - [SQLiteStudio](https://sqlitestudio.pl/) for browsing the sqlite manifest (.content) 
 
+## Resources
+- Community Destiny Api Discussion: https://discord.gg/rJYbzuJhsT
+
 ## Register for an Api-Key
 
 - Go to https://www.bungie.net/en/Application/Create and create a new app. Call it "<name>DestinySandbox". Don't worry about these details, this can be changed as needed.
