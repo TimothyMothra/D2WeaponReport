@@ -19,6 +19,7 @@
   - How to Read the Manifest
 https://www.bungie.net/sr/Groups/Post?groupId=39966&postId=105901734&sort=0&path=0&showBanned=0
 - https://github.com/vpzed/Destiny2-API-Info/wiki/API-Introduction-Part-3-Manifest
+- https://github.com/vpzed/Destiny2-API-Info/wiki/API-Introduction-Part-5-Item-Examples
  
  ### How to Download
 - Using api-key, query GET: https://www.bungie.net/platform/Destiny2/Manifest 
