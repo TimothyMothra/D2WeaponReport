@@ -109,12 +109,22 @@ Kinetic?
 ### TODO: HOW TO QUERY AN ITEM'S POSSIBLE PERKS
 
 - https://www.light.gg/db/items/821154603/gnawing-hunger/
-Shows that the 4th calumn can have: Rampage, Kill Clip, Multikill Clip, Demolitionist.
 - https://data.destinysets.com/i/InventoryItem:821154603
-The details tap also shows all possible perks.
-Clicking on Kill Clip: https://data.destinysets.com/i/InventoryItem:821154603/InventoryItem:1015611457
 
-kill Clip's hash isn't in the weapon's json. Must be an intermediate table???
+
+I recommend browsing perks with data.destysets.com because this will resolve some of the display strings.
+Collections of perks are stored in `DestinyPlugSetDefinition`.
+
+- From any weapon, locate the sockets.sockets > socketEntries > [n] > randomizedPlugSetHash. 
+    - Shows that the 4th calumn can have: Rampage, Kill Clip, Multikill Clip, Demolitionist. https://data.destinysets.com/i/InventoryItem:821154603/PlugSet:1853656119
+    - Can click on an individual perk to see it's details: Example, Kill Clip: https://data.destinysets.com/i/InventoryItem:821154603/InventoryItem:1015611457
+
+
+
+
+
+
+
 
 
 
@@ -130,6 +140,9 @@ SELECT id,
        json_extract(json, '$.displayProperties.description') as description
   FROM DestinySandboxPerkDefinition;
 ```
+
+
+
 
 - DestinySocketTypeDefinition
     - Weapon Perks: https://data.destinysets.com/i/InventoryItem:821154603/SocketType:3362409147
