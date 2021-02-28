@@ -10,16 +10,36 @@ For any item <Name>, how to find it in the API?
 ### 
 Can lookup any item's json in either https://www.light.gg/ or https://data.destinysets.com/
 
+
+## Api
+Destiny1:
+https://www.bungie.net/platform/Destiny/Manifest/InventoryItem/{}/
+with Auth key in header (x-api-key)
+
+Destiny2: TODO THIS
+
+## "Gnawing Hunger" Example
 Example: Gnawing Hunger
 - Item Id appears to be **821154603**
 - [data.destinysets](https://data.destinysets.com/i/InventoryItem:821154603)
 - [light.gg](https://www.light.gg/db/items/821154603/gnawing-hunger/)
-- [Bungie icon](https://www.bungie.net/common/destiny2_content/screenshots/821154603.jpg)
+- https://www.bungie.net/common/destiny2_content/screenshots/821154603.jpg
 
-## Api
-https://www.bungie.net/platform/Destiny/Manifest/InventoryItem/{}/
+- Sqlite Query:
+    ```
+    SELECT 
+    id,
+    json,
+    json_extract(json, '$.collectibleHash') as collectibleHash,
+    json_extract(json, '$.displayProperties.name') as name
+  FROM DestinyInventoryItemDefinition
+  WHERE 
+  id = 821154603 
+  or
+  name = 'Gnawing Hunger'
+  --name LIKE '%Gn%'
+  ```
 
-with Auth key in header (x-api-key)
 
 ### Examples:
 - [Gjallarhorn](https://www.bungie.net/platform/Destiny/Manifest/InventoryItem/1274330687/) - this doesn't appear to work for other item ids
