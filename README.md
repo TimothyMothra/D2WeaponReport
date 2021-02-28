@@ -11,4 +11,4 @@
 
 ## Contributing
 
-Please view the journal  [here](journal/readme.md).
+Please view the journal  [here](journal/).
