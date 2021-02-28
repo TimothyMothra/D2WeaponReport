@@ -12,7 +12,7 @@ SELECT
     json_extract(json, '$.displayProperties.name') as name,
     json_extract(json, '$.itemType') as itemType
   FROM DestinyInventoryItemDefinition
-  WHERE itemType = 3
+  WHERE itemType = 3 -- enum DestinyItemType "WEAPON"
 ```
 
 
