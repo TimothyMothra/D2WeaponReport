@@ -103,7 +103,7 @@ Note: there is as $.quality.versions field. I haven't seen anything reference th
 Kinetic?
 
 
-
+### TODO: HOW TO QUERY AN ITEM'S POSSIBLE PERKS
 
 
 ### TODO: IS IT POSSIBLE TO QUERY FOR D2 WEAPONS FROM THE REST API?
