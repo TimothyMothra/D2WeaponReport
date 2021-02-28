@@ -40,6 +40,10 @@ Example: Gnawing Hunger
   --name LIKE '%Gn%'
   ```
 
+While querying, get familiar with the `DestinyInventoryItemDefinition` table.
+https://bungie-net.github.io/multi/schema_Destiny-Definitions-DestinyInventoryItemDefinition.html
+
+
 
 ### Examples:
 - [Gjallarhorn](https://www.bungie.net/platform/Destiny/Manifest/InventoryItem/1274330687/) - this doesn't appear to work for other item ids
