@@ -92,20 +92,20 @@ Note: there is as $.quality.versions field. I haven't seen anything reference th
     - contains: hash, value, minumum, maximum, display maximum
 - $.investmentStats -- assuming this is related to mods?
 - $.perks.itemCategoryHashes:[] 3 items
-0:3 // <ItemCategory "Energy Weapon">
-1:1 // <ItemCategory "Weapon">
-2:5 // <ItemCategory "Auto Rifle">
+    - 0:3 // <ItemCategory "Energy Weapon">
+    - 1:1 // <ItemCategory "Weapon">
+    - 2:5 // <ItemCategory "Auto Rifle">
 - $.itemType:3 // enum DestinyItemType "Weapon"
 - $.itemSubType:6 // enum DestinyItemSubType "AutoRifle"
 - damageTypeHashes:[] 1 item
-0:3454344768 // <DamageType "Void">
+    - 0:3454344768 // <DamageType "Void">
 - damageTypes:[] 1 item
-0:4 // enum DamageType "Void"
+    - 0:4 // enum DamageType "Void"
 - $.defaultDamageType:4 // enum DamageType "Void"
 - $.defaultDamageTypeHash:3454344768 // <DamageType "Void">
 - $.sockets.socketEntries
-0:socketTypeHash:3956125808 // <SocketType> - <SocketCategory "INTRINSIC TRAITS">
-0:singleInitialItemHash:1294026524 // <InventoryItem "Adaptive Frame">
+    - 0:socketTypeHash:3956125808 // <SocketType> - <SocketCategory "INTRINSIC TRAITS">
+    - 0:singleInitialItemHash:1294026524 // <InventoryItem "Adaptive Frame">
 
 Kinetic?
 
