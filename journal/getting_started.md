@@ -152,6 +152,9 @@ Credit @abarrach 07/17/2018
 > You put the values in y is the final value we want to find. 
 > y - 10 = ((100-10)/(100-0))*(72-0) -> y = 75 which is the final and correct value.
 
+More reading:
+https://github.com/Bungie-net/api/issues/797
+
 ### HOW TO QUERY ALL INTRINSIC PERKS 
 
 ```sql
