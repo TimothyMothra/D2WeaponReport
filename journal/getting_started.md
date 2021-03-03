@@ -137,6 +137,11 @@ Collections of perks are stored in `DestinyPlugSetDefinition`.
 
 ### HOW TO QUERY ALL AVAILABLE PERKS (ex: rampage, outlaw)
 
+DestinyInventoryItemDefinition > DestinyPlugSetDefinition > DestinyInventoryItemDefinition
+
+
+### HOW TO QUERY ALL INTRINSIC PERKS 
+
 ```sql
 SELECT id,
        json,
