@@ -137,8 +137,20 @@ Collections of perks are stored in `DestinyPlugSetDefinition`.
 
 ### HOW TO QUERY ALL AVAILABLE PERKS (ex: rampage, outlaw)
 
-DestinyInventoryItemDefinition > DestinyPlugSetDefinition > DestinyInventoryItemDefinition
+DestinyInventoryItemDefinition > DestinyPlugSetDefinition > DestinyInventoryItemDefinition.investmentStats
 
+Credit @abarrach 07/17/2018
+> Lets take Crimson, for instance. 
+> The base investment value (without any perk effects are added) for its Range stat is 55.
+> It has two perks already activated that boost the Range stat (Smallbore & Accruzied Rounds) and they provide a total of +17 stat bonus. These values can be found in the perk item definition.
+> So you add them up; 55 + 17 = 72.
+> This value is the one before any interpolation is made. 
+> You check the interpolation rules for this specific stat under the statGroupHash of the Crimson. 
+> There we see the interpolation points for Range stat which are (0, 10) and (100,100)
+> Here is the interpolation formula:
+
+> You put the values in y is the final value we want to find. 
+> y - 10 = ((100-10)/(100-0))*(72-0) -> y = 75 which is the final and correct value.
 
 ### HOW TO QUERY ALL INTRINSIC PERKS 
 
