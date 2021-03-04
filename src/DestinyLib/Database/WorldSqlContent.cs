@@ -1,8 +1,6 @@
 ﻿namespace DestinyLib.Database
 {
-    using System.Text.Json;
-
-    using DestinyLib.DataContract;
+    using DataContract;
 
     using Microsoft.Data.Sqlite;
 
@@ -15,21 +13,9 @@
             this.connectionString = connectionString;
         }
 
-        public DestinyInventoryItemDefinition_Weapon GetSingleWeapon(int id) => GetRecord<DestinyInventoryItemDefinition_Weapon>("DestinyInventoryItemDefinition", id);
+        public WeaponItemDefinition GetSingleWeapon(int id) => WeaponItemDefinition.Parse(GetJsonRecord("DestinyInventoryItemDefinition", id));
 
-        public T GetRecord<T>(string tableName, int id)
-        {
-            var record = GetRecord(tableName: tableName, id: id);
-
-            var options = new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            };
-
-            return JsonSerializer.Deserialize<T>(record, options);
-        }
-
-        public string GetRecord(string tableName, int id)
+        public string GetJsonRecord(string tableName, int id)
         {
             using (var connection = new SqliteConnection(this.connectionString))
             {

@@ -16,8 +16,8 @@ namespace Tests
             var data = new WorldSqlContent(connectionString: connStr);
             var weapon = data.GetSingleWeapon(id: 821154603);
 
-            Assert.AreEqual("Gnawing Hunger", weapon.displayProperties.name);
-            Assert.AreEqual(3454344768, weapon.defaultDamageTypeHash);
+            Assert.AreEqual("Gnawing Hunger", weapon.Name);
+            Assert.AreEqual(3454344768, weapon.DefaultDamageTypeHash);
         }
 
         [TestMethod]
