@@ -1,5 +1,7 @@
 ﻿namespace DestinyLib.Database
 {
+    using System;
+
     using DataContract;
 
     using Microsoft.Data.Sqlite;
@@ -13,7 +15,7 @@
             this.connectionString = connectionString;
         }
 
-        public WeaponItemDefinition GetSingleWeapon(int id) => WeaponItemDefinition.Parse(GetJsonRecord("DestinyInventoryItemDefinition", id));
+        public WeaponItemDefinition GetWeaponItemDefinition(int id) => WeaponItemDefinition.Parse(GetJsonRecord("DestinyInventoryItemDefinition", id));
 
         public string GetJsonRecord(string tableName, int id)
         {
@@ -32,7 +34,7 @@
                 }
             }
 
-            return default;
+            throw new Exception("Sqlite query returned no results.");
         }
     }
 }

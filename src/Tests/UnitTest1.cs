@@ -1,6 +1,9 @@
 namespace Tests
 {
     using DestinyLib.Database;
+    using DestinyLib.DataContract;
+
+    using FluentAssertions;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -14,10 +17,17 @@ namespace Tests
             var connStr = $"Data Source={dbPath}";
 
             var data = new WorldSqlContent(connectionString: connStr);
-            var weapon = data.GetSingleWeapon(id: 821154603);
+            var actual = data.GetWeaponItemDefinition(id: 821154603);
 
-            Assert.AreEqual("Gnawing Hunger", weapon.Name);
-            Assert.AreEqual(3454344768, weapon.DefaultDamageTypeHash);
+            var expected = new WeaponItemDefinition 
+            { 
+                DefaultDamageTypeHash = 3454344768,
+                Name = "Gnawing Hunger",
+                AmmoType = 1,
+                TierTypeName = "Legendary",
+            };
+
+            expected.Should().BeEquivalentTo(actual);
         }
 
         [TestMethod]
