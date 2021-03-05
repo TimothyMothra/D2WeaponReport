@@ -2,31 +2,18 @@
 {
     using System;
 
-    using DataContract;
-
     using Microsoft.Data.Sqlite;
-
-    using Newtonsoft.Json;
 
     public class WorldSqlContent
     {
-        private string connectionString;
+        private readonly string connectionString;
 
         public WorldSqlContent(string connectionString)
         {
             this.connectionString = connectionString;
         }
 
-        //public WeaponItemDefinition GetWeaponItemDefinition(int id) => WeaponItemDefinition.Parse(GetJsonRecord("DestinyInventoryItemDefinition", id));
-
-        public dynamic GetDestinyInventoryItemDefinition(int id) => GetJsonDynamic("DestinyInventoryItemDefinition", id);
-
-        public dynamic GetJsonDynamic(string tableName, int id)
-        {
-            //TODO: NULL CHECK
-            var jsonRecord = GetJsonRecord(tableName, id);
-            return JsonConvert.DeserializeObject(jsonRecord);
-        }
+        public string GetDestinyInventoryItemDefinition(int id) => GetJsonRecord("DestinyInventoryItemDefinition", id);
 
         public string GetJsonRecord(string tableName, int id)
         {

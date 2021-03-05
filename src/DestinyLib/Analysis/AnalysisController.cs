@@ -10,12 +10,12 @@
 
     public class AnalysisController
     {
-        public readonly WorldSqlContent WorldSqlContent;
+        //public readonly WorldSqlContent WorldSqlContent;
 
-        public AnalysisController(WorldSqlContent worldSqlContent)
-        {
-            this.WorldSqlContent = worldSqlContent;
-        }
+        //public AnalysisController(WorldSqlContent worldSqlContent)
+        //{
+        //    this.WorldSqlContent = worldSqlContent;
+        //}
 
         //public WeaponDefinition GetWeaponDefinition(int id)
         //{
