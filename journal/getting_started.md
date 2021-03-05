@@ -84,6 +84,7 @@ SELECT
 #### Other fields
 Note: there is as $.quality.versions field. I haven't seen anything reference this yet, but it should be noted because Perks can change per version.
 
+```
 - $.equippingBlock.ammoType:1 // enum DestinyAmmunitionType "Primary"
 - $.equippingBlock.equipmentSlotTypeHash
 - $.inventory.tierTypeName:"Legendary", 
@@ -106,6 +107,7 @@ Note: there is as $.quality.versions field. I haven't seen anything reference th
 - $.sockets.socketEntries
     - 0:socketTypeHash:3956125808 // <SocketType> - <SocketCategory "INTRINSIC TRAITS">
     - 0:singleInitialItemHash:1294026524 // <InventoryItem "Adaptive Frame">
+```
 
 Kinetic?
 
