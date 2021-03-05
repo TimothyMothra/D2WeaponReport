@@ -53,6 +53,7 @@
             }
             catch(HttpRequestException ex)
             {
+                // TODO: I'M INFREQUENTLY SEEING 500. I ASSUME THIS COULD BE THROTTLING, BUT I NEED TO SEE THE ACTUAL RESPONSE MESSAGE.
                 ex.ToString();
             }
             catch(Exception)
@@ -76,11 +77,6 @@
         public void UnzipContent(string filePath, string outputDirectory)
         {
             ZipFile.ExtractToDirectory(filePath, outputDirectory);
-        }
-
-        public async Task DownloadWorldSqlContent2(string directory)
-        {
-
         }
     }
 }

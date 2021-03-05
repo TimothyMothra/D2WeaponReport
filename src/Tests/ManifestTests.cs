@@ -23,7 +23,7 @@
             Assert.IsTrue(value.EndsWith(".content"));
         }
 
-        [TestMethod]
+        //[TestMethod]
         public async Task TestDownload()
         {
             var environmentDirectory = Environment.EnvironmentDirectory;
@@ -31,16 +31,5 @@
             var manifest = new Manifest();
             await manifest.DownloadWorldSqlContent(environmentDirectory);
         }
-
-        //[TestMethod]
-        //public void Test()
-        //{
-        //    var path = "C:\\TimothyMothra\\environment\\world_sql_content_90e1d7d09c06e50408725aaccee64065.content.zip";
-
-        //    var manifest = new Manifest();
-        //    manifest.UnzipContent(path, Environment.EnvironmentDirectory);
-
-
-        //}
     }
 }
