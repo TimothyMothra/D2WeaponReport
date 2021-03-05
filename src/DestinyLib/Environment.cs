@@ -4,18 +4,21 @@
     using System.IO;
     using System.Reflection;
 
+    /// <summary>
+    /// This class encapsulates the local file IO necessary to run this application.
+    /// </summary>
     public static class Environment
     {
         private const string markerFileName = "root.marker"; // this file marks the root of the repo.
         private const string environmentDirectoryName = "environment";
         private static readonly string rootDirectory;
-        private static readonly string environmentDirectory;
-
+        
+        public static readonly string EnvironmentDirectory;
 
         static Environment()
         {
             rootDirectory = GetRootDirectory();
-            environmentDirectory = GetEnvironmentDirectory();
+            EnvironmentDirectory = GetEnvironmentDirectory();
         }
 
         private static string GetRootDirectory()
@@ -49,7 +52,7 @@
 
         public static string GetDatabaseFile(string fileNamePrefix)
         {
-            DirectoryInfo di = new DirectoryInfo(environmentDirectory);
+            DirectoryInfo di = new DirectoryInfo(EnvironmentDirectory);
             FileInfo[] files = di.GetFiles($"{fileNamePrefix}*.content");
 
             if (files.Length == 1)
