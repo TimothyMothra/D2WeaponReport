@@ -1,5 +1,7 @@
 namespace Tests
 {
+    using System.Collections.Generic;
+
     using DestinyLib.Database;
     using DestinyLib.DataContract;
 
@@ -10,24 +12,56 @@ namespace Tests
     [TestClass]
     public class UnitTest1
     {
+        //[TestMethod]
+        //public void TestMethod1()
+        //{
+        //    var dbPath = "C:\\TimothyMothra\\environment\\world_sql_content_30e996ad1e317a77a5130f587198da50.content";
+        //    var connStr = $"Data Source={dbPath}";
+
+        //    var data = new WorldSqlContent(connectionString: connStr);
+        //    var actual = data.GetWeaponItemDefinition(id: 821154603);
+
+        //    var expected = new WeaponItemDefinition 
+        //    { 
+        //        DefaultDamageTypeHash = 3454344768,
+        //        Name = "Gnawing Hunger",
+        //        AmmoType = 1,
+        //        TierTypeName = "Legendary",
+        //    };
+
+        //    expected.Should().BeEquivalentTo(actual);
+        //}
+
         [TestMethod]
-        public void TestMethod1()
+        public void TestGetWeapon()
         {
+            // TODO: THIS IS A WORK IN PROGRESS WHILE I EXPLORE THE API AND DETERMINE THE BEST WAY TO SERIALIZE DATA
+
+            var id_gnawingHunger = 821154603;
+
             var dbPath = "C:\\TimothyMothra\\environment\\world_sql_content_30e996ad1e317a77a5130f587198da50.content";
             var connStr = $"Data Source={dbPath}";
+            var worldSqlContent = new WorldSqlContent(connectionString: connStr);
 
-            var data = new WorldSqlContent(connectionString: connStr);
-            var actual = data.GetWeaponItemDefinition(id: 821154603);
+            var jsonRecord = worldSqlContent.GetDestinyInventoryItemDefinition(id_gnawingHunger);
 
-            var expected = new WeaponItemDefinition 
-            { 
-                DefaultDamageTypeHash = 3454344768,
-                Name = "Gnawing Hunger",
-                AmmoType = 1,
-                TierTypeName = "Legendary",
+            WeaponDefinition weaponDefiniton = WeaponDefinition.Parse(jsonRecord);
+
+            var expected = new WeaponDefinition
+            {
+                MetaData = new WeaponDefinition.WeaponMetaData
+                {
+                    Id = 821154603,
+                    Name = "Gnawing Hunger",
+                    AmmoTypeName = "1",
+                    TierTypeName = "Legendary",
+                    DefaultDamageTypeHash = "3454344768",
+                },
+                Stats = new List<WeaponDefinition.WeaponStat>(),
+                PerkSets = new List<WeaponDefinition.PerkSet>(),
             };
 
-            expected.Should().BeEquivalentTo(actual);
+            weaponDefiniton.Should().BeEquivalentTo(expected);
         }
 
         [TestMethod]

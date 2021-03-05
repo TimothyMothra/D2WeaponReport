@@ -1,4 +1,4 @@
-﻿namespace DestinyLib.Analysis
+﻿namespace DestinyLib.DataContract
 {
     using System;
     using System.Collections.Generic;
