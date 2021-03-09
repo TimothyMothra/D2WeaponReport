@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{2D9843F9-654C-44DD-8950-36F003D88C4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DestinyLib", "DestinyLib\DestinyLib.csproj", "{92E42EA5-9FEF-4028-9752-E872CFD5FC7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DestinyLib", "DestinyLib\DestinyLib.csproj", "{92E42EA5-9FEF-4028-9752-E872CFD5FC7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{B1A5F9AC-9770-43E6-9D83-27D7845998AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{B1A5F9AC-9770-43E6-9D83-27D7845998AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DestinyLib.Interop", "DestinyLib.Interop\DestinyLib.Interop.csproj", "{901D0577-1B9E-4926-98D6-993F090E5643}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2D9843F9-654C-44DD-8950-36F003D88C4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2D9843F9-654C-44DD-8950-36F003D88C4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2D9843F9-654C-44DD-8950-36F003D88C4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2D9843F9-654C-44DD-8950-36F003D88C4F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{92E42EA5-9FEF-4028-9752-E872CFD5FC7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{92E42EA5-9FEF-4028-9752-E872CFD5FC7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92E42EA5-9FEF-4028-9752-E872CFD5FC7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,6 +23,10 @@ Global
 		{B1A5F9AC-9770-43E6-9D83-27D7845998AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1A5F9AC-9770-43E6-9D83-27D7845998AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1A5F9AC-9770-43E6-9D83-27D7845998AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{901D0577-1B9E-4926-98D6-993F090E5643}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{901D0577-1B9E-4926-98D6-993F090E5643}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{901D0577-1B9E-4926-98D6-993F090E5643}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{901D0577-1B9E-4926-98D6-993F090E5643}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

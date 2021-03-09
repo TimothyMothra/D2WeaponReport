@@ -6,14 +6,22 @@
     using System.Text;
     using System.Threading.Tasks;
 
+
+    using DestinyLib.Api;
+
+    using Environment = DestinyLib.Environment;
+
     /// <summary>
     /// This class is to be called from the init-environment.ps1 PowerShell script.
     /// </summary>
     public class InitializeEnvironment
     {
-        public static bool Run()
+        public static async Task Run()
         {
-            return false;
+            var environmentDirectory = Environment.EnvironmentDirectory;
+
+            var manifest = new Manifest();
+            await manifest.DownloadWorldSqlContent(environmentDirectory);
         }
 
         public static string Test()

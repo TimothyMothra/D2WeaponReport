@@ -16,20 +16,11 @@
             var manifest = new Manifest();
             var uri = await manifest.GetWorldSqlContentUri();
 
-            // the result will look like world_sql_content_<GUID>.content.
+            // the result will look like "world_sql_content_<GUID>.content".
             // the GUID value will change as Bungie updates the database.
             var value = uri.AbsoluteUri;
             Assert.IsTrue(value.StartsWith("https://www.bungie.net/common/destiny2_content/sqlite/en/world_sql_content_"));
             Assert.IsTrue(value.EndsWith(".content"));
-        }
-
-        //[TestMethod]
-        public async Task TestDownload()
-        {
-            var environmentDirectory = Environment.EnvironmentDirectory;
-
-            var manifest = new Manifest();
-            await manifest.DownloadWorldSqlContent(environmentDirectory);
         }
     }
 }
