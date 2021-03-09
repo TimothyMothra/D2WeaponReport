@@ -36,18 +36,23 @@
             return null;
         }
 
-        public static string GetEnvironmentDirectory()
+        public static string GetEnvironmentDirectory(bool createIfDoesntExist = true)
         {
             var environmentDirectory = Path.Combine(rootDirectory, environmentDirectoryName);
 
-            if (Directory.Exists(environmentDirectory))
+            // Create if directory doesn't exist.
+            if (createIfDoesntExist && !Directory.Exists(environmentDirectory))
             {
-                return environmentDirectory;
+                Directory.CreateDirectory(environmentDirectory);
             }
-            else
+
+            // Eval before return.
+            if (!Directory.Exists(environmentDirectory))
             {
-                throw new Exception("Environment has not been initialized");
+                throw new Exception("Environment directory doesn't exist. Need to run the init-environment command.");
             }
+
+            return environmentDirectory;
         }
 
         public static string GetDatabaseFile(string fileNamePrefix)
