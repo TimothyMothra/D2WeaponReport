@@ -24,5 +24,5 @@ Unit tests expect this file.
 
 Run these command using the windows console:
 ```
-dotnet run --project .\src\DestinyLib.Interop\DestinyLib.Interop.csproj
+dotnet run --project .\src\InitEnvironment\InitEnvironment.csproj
 ```
