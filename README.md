@@ -12,3 +12,18 @@
 ## Contributing
 
 Please view the journal  [here](journal/).
+
+
+### Prerequisits
+- .NET v5 SDK (https://dotnet.microsoft.com/download/dotnet/5.0)
+
+### Initialize local environment.
+To get started you must initialze the local environment. 
+This will download the latest manifest db from Bungie.
+Unit tests expect this file.
+
+Run these command using the windows console:
+```
+dotnet build .\src\DestinyLib.Interop\DestinyLib.Interop.csproj --configuration Debug
+.\src\DestinyLib.Interop\bin\Debug\net5.0\DestinyLib.Interop.exe
+```
