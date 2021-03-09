@@ -26,3 +26,10 @@ Run these command using the windows console:
 ```
 dotnet run --project .\src\InitEnvironment\InitEnvironment.csproj
 ```
+
+After initializing, all the tests are expected to pass.
+
+Run this command to execute all tests:
+```
+dotnet test .\src\Tests\Tests.csproj
+```
