@@ -12,7 +12,6 @@ namespace Tests
         /// <summary>
         /// This test checks that the local environment has been initialized. 
         /// If this test fails, run the initialize environment script.
-        /// TODO: WRITE THE INITIALIZE ENVIRONMENT SCRIPT :)
         /// </summary>
         [TestMethod]
         public void VerifyRootMarker()
