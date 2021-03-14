@@ -38,8 +38,15 @@
             };
 
             return weaponDefinition;
-
         }
 
+        /// <remarks>
+        /// Source: (https://stackoverflow.com/questions/1202935/convert-rows-from-a-data-reader-into-typed-results).
+        /// </remarks>
+        /// <returns></returns>
+        public IList<SearchableWeapon> GetSearchableWeapons()
+        {
+            return this.WorldSqlContent.GetRecords(Properties.Resources.WorldSqlContent_GetAllWeapons, SearchableWeapon.Parse);
+        }
     }
 }

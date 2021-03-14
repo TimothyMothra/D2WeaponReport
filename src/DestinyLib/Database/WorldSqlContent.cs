@@ -1,6 +1,8 @@
 ﻿namespace DestinyLib.Database
 {
     using System;
+    using System.Collections.Generic;
+    using System.Data;
 
     using Microsoft.Data.Sqlite;
 
@@ -33,6 +35,27 @@
             }
 
             throw new Exception("Sqlite query returned no results.");
+        }
+
+        public IList<T> GetRecords<T>(string commandText, Func<IDataRecord, T> BuildObject)
+        {
+            var list = new List<T>();
+
+            using (var connection = new SqliteConnection(this.connectionString))
+            {
+                connection.Open();
+                var command = connection.CreateCommand();
+                command.CommandText = commandText;
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        list.Add(BuildObject(reader));
+                    }
+                }
+            }
+
+            return list;
         }
     }
 }

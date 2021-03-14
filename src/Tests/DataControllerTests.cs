@@ -1,6 +1,7 @@
 ﻿namespace Tests
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     using DestinyLib;
     using DestinyLib.Database;
@@ -47,5 +48,14 @@
 
             weaponDefiniton.Should().BeEquivalentTo(expected);
         }
+
+        [TestMethod]
+        public void TestGetSearchableWeapons()
+        {
+            var weapons = this.DataController.GetSearchableWeapons();
+            Assert.IsTrue(weapons.Any());
+            Assert.IsTrue(weapons.Count > 800);
+        }
+
     }
 }
