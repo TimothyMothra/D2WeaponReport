@@ -56,6 +56,5 @@
             Assert.IsTrue(weapons.Any());
             Assert.IsTrue(weapons.Count > 800);
         }
-
     }
 }
