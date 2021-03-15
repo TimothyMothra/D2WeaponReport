@@ -6,6 +6,8 @@
     using System.Net.Http;
     using System.Threading.Tasks;
 
+    using DestinyLib.Database;
+
     using Newtonsoft.Json;
 
     public class Manifest
@@ -50,6 +52,16 @@
                 await DownloadFile(uri, downloadFilePath);
 
                 UnzipContent(downloadFilePath, directory);
+
+                // As of today, the contents of the zip file match the file name of the downloaded zip. This could change in the future.
+                var assumedFilePath = Path.Combine(directory, fileName);
+                if (File.Exists(assumedFilePath))
+                {
+                    if (!Database.TestConnection(assumedFilePath))
+                    {
+                        throw new Exception("Test Connection failed");
+                    }
+                }
             }
             catch(HttpRequestException ex)
             {
@@ -77,6 +89,11 @@
         public void UnzipContent(string filePath, string outputDirectory)
         {
             ZipFile.ExtractToDirectory(filePath, outputDirectory);
+        }
+
+        private void TestConnection(string filePath)
+        {
+
         }
     }
 }
