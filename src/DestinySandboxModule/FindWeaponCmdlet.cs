@@ -17,7 +17,7 @@
         public FindWeaponCmdlet()
         {
             var dbPath = LibEnvironment.GetDatabaseFile("world_sql_content");
-            this.ConnectionString = $"Data Source={dbPath}";
+            this.ConnectionString = Database.MakeConnectionString(dbPath);
 
             var worldSqlContent = new WorldSqlContent(connectionString: this.ConnectionString);
             this.AnalysisController = new AnalysisController(worldSqlContent);

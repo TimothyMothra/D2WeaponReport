@@ -16,8 +16,7 @@
         public AnalysisControllerTests()
         {
             var dbPath = LibEnvironment.GetDatabaseFile("world_sql_content");
-            var connStr = $"Data Source={dbPath}";
-            var worldSqlContent = new WorldSqlContent(connectionString: connStr);
+            var worldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath););
 
             this.AnalysisController = new AnalysisController(worldSqlContent);
         }
