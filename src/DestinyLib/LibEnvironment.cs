@@ -7,7 +7,7 @@
     /// <summary>
     /// This class encapsulates the local file IO necessary to run this application.
     /// </summary>
-    public static class Environment
+    public static class LibEnvironment
     {
         private const string markerFileName = "root.marker"; // this file marks the root of the repo.
         private const string environmentDirectoryName = "environment";
@@ -15,7 +15,7 @@
         
         public static readonly string EnvironmentDirectory;
 
-        static Environment()
+        static LibEnvironment()
         {
             rootDirectory = GetRootDirectory();
             EnvironmentDirectory = GetEnvironmentDirectory();

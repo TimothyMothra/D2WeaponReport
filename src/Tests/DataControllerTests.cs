@@ -18,7 +18,7 @@
 
         public DataControllerTests()
         {
-            var dbPath = Environment.GetDatabaseFile("world_sql_content");
+            var dbPath = LibEnvironment.GetDatabaseFile("world_sql_content");
             var connStr = $"Data Source={dbPath}";
             var worldSqlContent = new WorldSqlContent(connectionString: connStr);
             this.DataController = new DataController(worldSqlContent);

@@ -4,7 +4,7 @@
 
     using DestinyLib.Api;
 
-    using Environment = DestinyLib.Environment;
+    using LibEnvironment = DestinyLib.LibEnvironment;
 
     /// <summary>
     /// This class is to be called from the init-environment.ps1 PowerShell script.
@@ -13,7 +13,7 @@
     {
         public static async Task Run()
         {
-            var environmentDirectory = Environment.EnvironmentDirectory;
+            var environmentDirectory = LibEnvironment.EnvironmentDirectory;
 
             var manifest = new Manifest();
             await manifest.DownloadWorldSqlContent(environmentDirectory);
