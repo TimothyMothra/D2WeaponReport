@@ -2,9 +2,7 @@
 {
     using System.Linq;
 
-    using DestinyLib;
     using DestinyLib.Scenarios;
-    using DestinyLib.Database;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

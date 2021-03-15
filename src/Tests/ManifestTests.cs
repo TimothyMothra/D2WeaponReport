@@ -2,7 +2,6 @@
 {
     using System.Threading.Tasks;
 
-    using DestinyLib;
     using DestinyLib.Api;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;

@@ -2,27 +2,13 @@
 {
     using System.Management.Automation;
 
-    using DestinyLib;
-    using DestinyLib.Scenarios;
-    using DestinyLib.Database;
     using DestinyLib.DataContract;
+    using DestinyLib.Scenarios;
 
     [Cmdlet(VerbsCommon.Find, "WeaponCmdlet")]
     [OutputType(typeof(SearchableWeaponRecord))]
     public class FindWeaponCmdlet : PSCmdlet
     {
-        //private readonly string ConnectionString;
-        //private readonly SearchForWeaponScenario SearchForWeaponScenario;
-
-        public FindWeaponCmdlet()
-        {
-            //var dbPath = LibEnvironment.GetDatabaseFile("world_sql_content");
-            //this.ConnectionString = Database.MakeConnectionString(dbPath);
-
-            //var worldSqlContent = new WorldSqlContent(connectionString: this.ConnectionString);
-            //this.SearchForWeaponScenario = new SearchForWeaponScenario(worldSqlContent);
-        }
-
         [Parameter(
             Mandatory = true,
             Position = 0,
