@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InitEnvironment", "InitEnvi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConsoleApps", "ConsoleApps", "{2217BBF9-AA3F-4114-B14F-4276E9797868}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DestinySandboxModule", "DestinySandboxModule\DestinySandboxModule.csproj", "{53ED1B8D-8684-4770-8BD5-113736B0B480}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,12 +31,17 @@ Global
 		{26222301-9767-4C6D-A57B-CEDAE260E681}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26222301-9767-4C6D-A57B-CEDAE260E681}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26222301-9767-4C6D-A57B-CEDAE260E681}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53ED1B8D-8684-4770-8BD5-113736B0B480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53ED1B8D-8684-4770-8BD5-113736B0B480}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53ED1B8D-8684-4770-8BD5-113736B0B480}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53ED1B8D-8684-4770-8BD5-113736B0B480}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{26222301-9767-4C6D-A57B-CEDAE260E681} = {2217BBF9-AA3F-4114-B14F-4276E9797868}
+		{53ED1B8D-8684-4770-8BD5-113736B0B480} = {2217BBF9-AA3F-4114-B14F-4276E9797868}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {15FD7C08-8067-498D-8915-6AB90E53EDF3}
