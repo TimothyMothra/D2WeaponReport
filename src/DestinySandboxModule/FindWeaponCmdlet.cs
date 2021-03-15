@@ -11,16 +11,16 @@
     [OutputType(typeof(SearchableWeaponRecord))]
     public class FindWeaponCmdlet : PSCmdlet
     {
-        private readonly string ConnectionString;
-        private readonly SearchForWeaponScenario SearchForWeaponScenario;
+        //private readonly string ConnectionString;
+        //private readonly SearchForWeaponScenario SearchForWeaponScenario;
 
         public FindWeaponCmdlet()
         {
-            var dbPath = LibEnvironment.GetDatabaseFile("world_sql_content");
-            this.ConnectionString = Database.MakeConnectionString(dbPath);
+            //var dbPath = LibEnvironment.GetDatabaseFile("world_sql_content");
+            //this.ConnectionString = Database.MakeConnectionString(dbPath);
 
-            var worldSqlContent = new WorldSqlContent(connectionString: this.ConnectionString);
-            this.SearchForWeaponScenario = new SearchForWeaponScenario(worldSqlContent);
+            //var worldSqlContent = new WorldSqlContent(connectionString: this.ConnectionString);
+            //this.SearchForWeaponScenario = new SearchForWeaponScenario(worldSqlContent);
         }
 
         [Parameter(
@@ -42,7 +42,7 @@
         {
             WriteObject("hello world");
 
-            var results = this.SearchForWeaponScenario.Run(this.SearchString, SearchForWeaponScenario.SearchType.Regex);
+            var results = SearchForWeaponScenario.Run(this.SearchString, SearchForWeaponScenario.SearchType.Regex);
             
             this.WriteObject(results, true);
         }

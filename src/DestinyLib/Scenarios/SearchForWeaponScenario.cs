@@ -8,18 +8,22 @@
     using DestinyLib.Database;
     using DestinyLib.DataContract;
 
-    public class SearchForWeaponScenario
+    public static class SearchForWeaponScenario
     {
-        public readonly WorldSqlContent WorldSqlContent; //TODO: WHY BOTH OF THESE?
-        public readonly DataController DataController;
-
-        private readonly IList<SearchableWeaponRecord> searchableWeapons;
-
-        public SearchForWeaponScenario(WorldSqlContent worldSqlContent)
+        public enum SearchType
         {
-            this.WorldSqlContent = worldSqlContent;
-            this.DataController = new DataController(worldSqlContent);
-            this.searchableWeapons = this.DataController.GetSearchableWeapons();
+            StringContains,
+            Regex
+        }
+
+        private static IList<SearchableWeaponRecord> searchableWeapons;
+
+        static SearchForWeaponScenario()
+        {
+            var dbPath = LibEnvironment.GetDatabaseFile("world_sql_content");
+            var worldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));
+            var WorldSqlContentProvider = new WorldSqlContentProvider(worldSqlContent);
+            searchableWeapons = WorldSqlContentProvider.GetSearchableWeapons();
         }
 
         /// <summary>
@@ -32,7 +36,7 @@
         /// (https://docs.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-options).
         /// </remarks>
         /// <returns></returns>
-        public IList<SearchableWeaponRecord> Run(string pattern, SearchType searchType) //TODO: MOVE PARAMS TO PROPERTIES
+        public static IList<SearchableWeaponRecord> Run(string pattern, SearchType searchType)
         {
             if (string.IsNullOrEmpty(pattern))
             {
@@ -45,7 +49,7 @@
 
             if (searchType == SearchType.StringContains)
             {
-                return this.searchableWeapons.Where(x => x.Name.Contains(pattern, System.StringComparison.InvariantCultureIgnoreCase)).ToList();
+                return searchableWeapons.Where(x => x.Name.Contains(pattern, System.StringComparison.InvariantCultureIgnoreCase)).ToList();
             }
             else if (searchType == SearchType.Regex)
             {
@@ -59,19 +63,12 @@
 
                 var regex = new Regex(pattern: regexPattern, options: RegexOptions.IgnoreCase);
 
-                return this.searchableWeapons.Where(x => regex.IsMatch(x.Name)).ToList();
+                return searchableWeapons.Where(x => regex.IsMatch(x.Name)).ToList();
             }
             else
             {
                 throw new NotImplementedException();
             }
-        }
-
-
-        public enum SearchType
-        {
-            StringContains,
-            Regex
         }
     }
 }

@@ -12,15 +12,15 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    public class DataControllerTests
+    public class WorldSqlContentProviderTests
     {
-        private readonly DataController DataController;
+        private readonly WorldSqlContentProvider WorldSqlContentProvider;
 
-        public DataControllerTests()
+        public WorldSqlContentProviderTests()
         {
             var dbPath = LibEnvironment.GetDatabaseFile("world_sql_content");
             var worldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));
-            this.DataController = new DataController(worldSqlContent);
+            this.WorldSqlContentProvider = new WorldSqlContentProvider(worldSqlContent);
         }
 
         [TestMethod]
@@ -28,7 +28,7 @@
         {
             var id_gnawingHunger = 821154603;
 
-            var weaponDefiniton = this.DataController.GetWeaponDefinition(id_gnawingHunger);
+            var weaponDefiniton = this.WorldSqlContentProvider.GetWeaponDefinition(id_gnawingHunger);
 
             var expected = new WeaponDefinition
             {
@@ -51,7 +51,7 @@
         [TestMethod]
         public void TestGetSearchableWeapons()
         {
-            var weapons = this.DataController.GetSearchableWeapons();
+            var weapons = this.WorldSqlContentProvider.GetSearchableWeapons();
             Assert.IsTrue(weapons.Any());
             Assert.IsTrue(weapons.Count > 800);
         }

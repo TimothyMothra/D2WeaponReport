@@ -10,6 +10,9 @@
     [TestClass]
     public class ManifestTests
     {
+        /// <summary>
+        /// This test verifies that the BungieAPI is available and tests provides the address to the WorldSqlContent sqlite database.
+        /// If this test fails, the BungieApi might not be available.
         [TestMethod]
         public async Task VerifyGetWorldSqlContent()
         {

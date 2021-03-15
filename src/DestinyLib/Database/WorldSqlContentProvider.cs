@@ -6,14 +6,11 @@
 
     using Newtonsoft.Json;
 
-    public class DataController
+    public class WorldSqlContentProvider
     {
         public readonly WorldSqlContent WorldSqlContent;
 
-        public DataController(WorldSqlContent worldSqlContent)
-        {
-            this.WorldSqlContent = worldSqlContent;
-        }
+        public WorldSqlContentProvider(WorldSqlContent worldSqlContent) => this.WorldSqlContent = worldSqlContent;
 
         public WeaponDefinition GetWeaponDefinition(int id)
         {

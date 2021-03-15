@@ -11,29 +11,28 @@
     [TestClass]
     public class SearchForWeaponScenarioTests
     {
-        private readonly SearchForWeaponScenario SearchForWeaponScenario;
+        //private readonly SearchForWeaponScenario SearchForWeaponScenario;
 
-        public SearchForWeaponScenarioTests()
-        {
-            var dbPath = LibEnvironment.GetDatabaseFile("world_sql_content");
-            var worldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));
+        //public SearchForWeaponScenarioTests()
+        //{
+        //    var dbPath = LibEnvironment.GetDatabaseFile("world_sql_content");
+        //    var worldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));
 
-            this.SearchForWeaponScenario = new SearchForWeaponScenario(worldSqlContent);
-        }
+        //    this.SearchForWeaponScenario = new SearchForWeaponScenario(worldSqlContent);
+        //}
 
         [TestMethod]
         public void VerifySearch_StringContains()
         {
-            var results = this.SearchForWeaponScenario.Run("gn", SearchForWeaponScenario.SearchType.StringContains);
+            var results = SearchForWeaponScenario.Run("gn", SearchForWeaponScenario.SearchType.StringContains);
 
             Assert.IsTrue(results.Any());
         }
 
-
         [TestMethod]
         public void VerifySearch_Regex()
         {
-            var results = this.SearchForWeaponScenario.Run("gnw", SearchForWeaponScenario.SearchType.Regex);
+            var results = SearchForWeaponScenario.Run("gnw", SearchForWeaponScenario.SearchType.Regex);
 
             Assert.IsTrue(results.Any());
         }
