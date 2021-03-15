@@ -1,15 +1,13 @@
-﻿namespace DestinyLib.Interop
+﻿namespace DestinyLib.Scenarios
 {
     using System.Threading.Tasks;
 
     using DestinyLib.Api;
 
-    using LibEnvironment = DestinyLib.LibEnvironment;
-
     /// <summary>
     /// This class is to be called from the init-environment.ps1 PowerShell script.
     /// </summary>
-    public class InitializeEnvironment
+    public class InitializeEnvironmentScenario
     {
         public static async Task Run()
         {
@@ -23,6 +21,5 @@
         {
             return "Hello World";
         }
-
     }
 }

@@ -83,10 +83,5 @@
         {
             ZipFile.ExtractToDirectory(filePath, outputDirectory);
         }
-
-        private void TestConnection(string filePath)
-        {
-
-        }
     }
 }

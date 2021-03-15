@@ -1,4 +1,4 @@
-﻿namespace DestinyLib.Analysis
+﻿namespace DestinyLib.Scenarios
 {
     using System;
     using System.Collections.Generic;
@@ -8,14 +8,14 @@
     using DestinyLib.Database;
     using DestinyLib.DataContract;
 
-    public class AnalysisController
+    public class SearchForWeaponScenario
     {
-        public readonly WorldSqlContent WorldSqlContent;
+        public readonly WorldSqlContent WorldSqlContent; //TODO: WHY BOTH OF THESE?
         public readonly DataController DataController;
 
-        private readonly IList<SearchableWeapon> searchableWeapons;
+        private readonly IList<SearchableWeaponRecord> searchableWeapons;
 
-        public AnalysisController(WorldSqlContent worldSqlContent)
+        public SearchForWeaponScenario(WorldSqlContent worldSqlContent)
         {
             this.WorldSqlContent = worldSqlContent;
             this.DataController = new DataController(worldSqlContent);
@@ -32,7 +32,7 @@
         /// (https://docs.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-options).
         /// </remarks>
         /// <returns></returns>
-        public IList<SearchableWeapon> Search(string pattern, SearchType searchType)
+        public IList<SearchableWeaponRecord> Run(string pattern, SearchType searchType) //TODO: MOVE PARAMS TO PROPERTIES
         {
             if (string.IsNullOrEmpty(pattern))
             {
@@ -52,7 +52,7 @@
                 string wildcard = ".*";
 
                 string regexPattern = wildcard;
-                foreach(char c in pattern)
+                foreach (char c in pattern)
                 {
                     regexPattern += c + wildcard;
                 }
@@ -67,26 +67,6 @@
             }
         }
 
-        //public WeaponDefinition GetWeaponDefinition(int id)
-        //{
-        //    var record = this.WorldSqlContent.GetWeaponItemDefinition(id);
-
-
-        //    var weapon = new WeaponDefinition
-        //    {
-        //        MetaData = new WeaponDefinition.WeaponMetaData
-        //        { 
-        //            Name = record.Name,
-        //            AmmoTypeName = record.AmmoType.ToString(), //TODO: THIS
-        //        },
-        //        Stats = new List<WeaponDefinition.WeaponStat>(),
-        //        PerkSets = new List<WeaponDefinition.PerkSet>(),
-        //    };
-
-
-
-        //    return weapon;
-        //}
 
         public enum SearchType
         {

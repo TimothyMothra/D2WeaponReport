@@ -3,16 +3,16 @@
     using System.Management.Automation;
 
     using DestinyLib;
-    using DestinyLib.Analysis;
+    using DestinyLib.Scenarios;
     using DestinyLib.Database;
     using DestinyLib.DataContract;
 
     [Cmdlet(VerbsCommon.Find, "WeaponCmdlet")]
-    [OutputType(typeof(SearchableWeapon))]
+    [OutputType(typeof(SearchableWeaponRecord))]
     public class FindWeaponCmdlet : PSCmdlet
     {
         private readonly string ConnectionString;
-        private readonly AnalysisController AnalysisController;
+        private readonly SearchForWeaponScenario SearchForWeaponScenario;
 
         public FindWeaponCmdlet()
         {
@@ -20,7 +20,7 @@
             this.ConnectionString = Database.MakeConnectionString(dbPath);
 
             var worldSqlContent = new WorldSqlContent(connectionString: this.ConnectionString);
-            this.AnalysisController = new AnalysisController(worldSqlContent);
+            this.SearchForWeaponScenario = new SearchForWeaponScenario(worldSqlContent);
         }
 
         [Parameter(
@@ -42,7 +42,7 @@
         {
             WriteObject("hello world");
 
-            var results = this.AnalysisController.Search(this.SearchString, AnalysisController.SearchType.Regex);
+            var results = this.SearchForWeaponScenario.Run(this.SearchString, SearchForWeaponScenario.SearchType.Regex);
             
             this.WriteObject(results, true);
         }

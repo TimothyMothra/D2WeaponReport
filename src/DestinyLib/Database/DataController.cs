@@ -1,8 +1,8 @@
-﻿namespace DestinyLib.DataContract
+﻿namespace DestinyLib.Database
 {
     using System.Collections.Generic;
 
-    using DestinyLib.Database;
+    using DestinyLib.DataContract;
 
     using Newtonsoft.Json;
 
@@ -44,9 +44,9 @@
         /// Source: (https://stackoverflow.com/questions/1202935/convert-rows-from-a-data-reader-into-typed-results).
         /// </remarks>
         /// <returns></returns>
-        public IList<SearchableWeapon> GetSearchableWeapons()
+        public IList<SearchableWeaponRecord> GetSearchableWeapons()
         {
-            return this.WorldSqlContent.GetRecords(Properties.Resources.WorldSqlContent_GetAllWeapons, SearchableWeapon.Parse);
+            return this.WorldSqlContent.GetRecords(Properties.Resources.WorldSqlContent_GetAllWeapons, SearchableWeaponRecord.Parse);
         }
     }
 }

@@ -2,16 +2,16 @@
 {
     using System.Data;
 
-    public class SearchableWeapon
+    public class SearchableWeaponRecord
     {
         public long Id { get; set; }
         public string Name { get; set; }
 
         public string ItemType { get; set; }
 
-        public static SearchableWeapon Parse(IDataRecord record)
+        public static SearchableWeaponRecord Parse(IDataRecord record)
         {
-            return new SearchableWeapon
+            return new SearchableWeaponRecord
             {
                 Id = record.GetInt64(0),
                 Name = record.GetString(1),
