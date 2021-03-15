@@ -4,9 +4,6 @@
 
     using Microsoft.Data.Sqlite;
 
-    /// <remarks>
-    /// Default connection string = $"Data Source={dbPath}".
-    /// </remarks>
     public class WorldSqlContent : Database
     {
         public WorldSqlContent(string connectionString) : base(connectionString) { }

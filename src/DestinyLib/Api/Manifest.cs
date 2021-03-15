@@ -53,15 +53,8 @@
 
                 UnzipContent(downloadFilePath, directory);
 
-                // As of today, the contents of the zip file match the file name of the downloaded zip. This could change in the future.
                 var assumedFilePath = Path.Combine(directory, fileName);
-                if (File.Exists(assumedFilePath))
-                {
-                    if (!Database.TestConnection(assumedFilePath))
-                    {
-                        throw new Exception("Test Connection failed");
-                    }
-                }
+                Database.TestConnection(assumedFilePath);
             }
             catch(HttpRequestException ex)
             {

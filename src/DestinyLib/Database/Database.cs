@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.IO;
 
     using Microsoft.Data.Sqlite;
 
@@ -12,10 +13,30 @@
 
         public Database(string connectionString) => this.ConnectionString = connectionString;
 
-        public static bool TestConnection(string fileName)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// As of today, the contents of the zip file match the file name of the downloaded zip. This could change in the future.
+        /// </remarks>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public static void TestConnection(string fileName)
         {
-            var connectionString = MakeConnectionString(fileName);
+            if (!File.Exists(fileName))
+            {
+                throw new IOException($"File does not exist: '{fileName}'");
+            }
 
+            var connectionString = MakeConnectionString(fileName);
+            if (!TestConnectionInternal(connectionString))
+            {
+                throw new SystemException($"Test connection to database failed: {fileName}");
+            }
+        }
+
+        private static bool TestConnectionInternal(string connectionString)
+        {
             using (var connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
