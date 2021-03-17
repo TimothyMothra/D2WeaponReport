@@ -9,10 +9,15 @@
         public IList<WeaponStat> Stats { get; set; }
         public IList<PerkSet> PerkSets { get; set; }
 
+        public override string ToString()
+        {
+            return $"[{this.MetaData.Id}] {this.MetaData.Name} (ItemType)";
+        }
+
         public class WeaponMetaData
         {
             public string Name { get; set; }
-            public int Id { get; set; }
+            public long Id { get; set; }
             public string AmmoTypeName { get; set; }
             public string TypeName { get; set; }
             public string FrameName { get; set; }

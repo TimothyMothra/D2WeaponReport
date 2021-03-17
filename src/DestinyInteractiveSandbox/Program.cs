@@ -98,7 +98,7 @@ namespace DestinyInteractiveSandbox
             app.Command("search", searchCmd =>
             {
                 searchCmd.Description = "Search for a weapon.";
-                var searchString = searchCmd.Argument("searchString", "Search for a weapon. Uses wildcards by default.").IsRequired();
+                var searchString = searchCmd.Argument("searchString", "Search string for a weapon. Uses wildcards by default.").IsRequired();
                 var exact = searchCmd.Option("--exact", "Exact match.", CommandOptionType.NoValue);
 
                 searchCmd.OnExecute(() =>
@@ -109,6 +109,19 @@ namespace DestinyInteractiveSandbox
                     {
                         Console.WriteLine(w);
                     }
+                });
+            });
+
+            app.Command("weapon", weaponCmd =>
+            {
+                weaponCmd.Description = "Get a weapon's details.";
+                var weaponId = weaponCmd.Argument<long>("weaponId", "Id of a weapon.").IsRequired();
+
+                weaponCmd.OnExecute(() =>
+                {
+                    // TODO: WHAT IF ID DOES NOT EXIST?
+                    var weapon = GetWeaponDefinitionScenario.Run(weaponId.ParsedValue);
+                    Console.Write(weapon);
                 });
             });
 

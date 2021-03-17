@@ -8,9 +8,9 @@
     {
         public WorldSqlContent(string connectionString) : base(connectionString) { }
 
-        public string GetDestinyInventoryItemDefinition(int id) => GetJsonRecord("DestinyInventoryItemDefinition", id);
+        public string GetDestinyInventoryItemDefinition(long id) => GetJsonRecord("DestinyInventoryItemDefinition", id);
 
-        public string GetJsonRecord(string tableName, int id)
+        public string GetJsonRecord(string tableName, long id)
         {
             using (var connection = new SqliteConnection(this.ConnectionString))
             {

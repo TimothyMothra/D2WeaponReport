@@ -12,7 +12,7 @@
 
         public WorldSqlContentProvider(WorldSqlContent worldSqlContent) => this.WorldSqlContent = worldSqlContent;
 
-        public WeaponDefinition GetWeaponDefinition(int id)
+        public WeaponDefinition GetWeaponDefinition(long id)
         {
             var record = this.WorldSqlContent.GetDestinyInventoryItemDefinition(id);
             
