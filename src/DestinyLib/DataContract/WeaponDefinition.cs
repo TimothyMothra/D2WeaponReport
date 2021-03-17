@@ -11,7 +11,7 @@
 
         public override string ToString()
         {
-            return $"[{this.MetaData.Id}] {this.MetaData.Name} (ItemType)";
+            return $"[{this.MetaData.Id}] {this.MetaData.Name} (xxxItemType)";
         }
 
         public class WeaponMetaData

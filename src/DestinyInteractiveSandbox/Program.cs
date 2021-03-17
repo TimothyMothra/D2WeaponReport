@@ -27,10 +27,17 @@ namespace DestinyInteractiveSandbox
 
                 while (true)
                 {
-                    Console.WriteLine();
-                    var input = Prompt.GetString(">");
-                    var inputArgs = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-                    app.Execute(inputArgs);
+                    try
+                    {
+                        Console.WriteLine();
+                        var input = Prompt.GetString(">");
+                        var inputArgs = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                        app.Execute(inputArgs);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                    }
                 }
             }
             else
@@ -115,7 +122,7 @@ namespace DestinyInteractiveSandbox
             app.Command("weapon", weaponCmd =>
             {
                 weaponCmd.Description = "Get a weapon's details.";
-                var weaponId = weaponCmd.Argument<long>("weaponId", "Id of a weapon.").IsRequired();
+                var weaponId = weaponCmd.Option<long>("--id", "Id of a weapon", CommandOptionType.SingleValue).IsRequired();
 
                 weaponCmd.OnExecute(() =>
                 {
