@@ -98,11 +98,13 @@ namespace DestinyInteractiveSandbox
             app.Command("search", searchCmd =>
             {
                 searchCmd.Description = "Search for a weapon.";
-                var searchString = searchCmd.Argument("searchString", "Name of the config.").IsRequired();
+                var searchString = searchCmd.Argument("searchString", "Search for a weapon. Uses wildcards by default.").IsRequired();
+                var exact = searchCmd.Option("--exact", "Exact match.", CommandOptionType.NoValue);
 
                 searchCmd.OnExecute(() =>
                 {
-                    var weapons = SearchForWeaponScenario.Run(searchString.Value, SearchForWeaponScenario.SearchType.Regex);
+                    var searchType = exact.HasValue() ? SearchForWeaponScenario.SearchType.StringContains : SearchForWeaponScenario.SearchType.Regex;
+                    var weapons = SearchForWeaponScenario.Run(searchString.Value, searchType);
                     foreach (var w in weapons)
                     {
                         Console.WriteLine(w);
