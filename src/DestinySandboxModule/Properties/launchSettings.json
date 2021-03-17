@@ -1,9 +1,0 @@
-{
-  "profiles": {
-    "DestinySandboxModule": {
-      "commandName": "Executable",
-      "executablePath": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
-      "commandLineArgs": "-NoExit -Command \"& Import-Module .\\DestinySandboxModule.dll\" -Verbose;"
-    }
-  }
-}

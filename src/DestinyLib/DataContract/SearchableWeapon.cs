@@ -21,7 +21,7 @@
 
         public override string ToString()
         {
-            return $"{Id}_{Name}_{ItemType}";
+            return $"[{Id}] {Name} ({ItemType})";
         }
     }
 }
