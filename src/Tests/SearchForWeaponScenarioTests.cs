@@ -9,16 +9,6 @@
     [TestClass]
     public class SearchForWeaponScenarioTests
     {
-        //private readonly SearchForWeaponScenario SearchForWeaponScenario;
-
-        //public SearchForWeaponScenarioTests()
-        //{
-        //    var dbPath = LibEnvironment.GetDatabaseFile("world_sql_content");
-        //    var worldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));
-
-        //    this.SearchForWeaponScenario = new SearchForWeaponScenario(worldSqlContent);
-        //}
-
         [TestMethod]
         public void VerifySearch_StringContains()
         {

@@ -19,14 +19,17 @@
             // TODO: NULL CHECK
             dynamic jsonDynamic = JsonConvert.DeserializeObject(record);
 
+            //dynamic test = jsonDynamic.stats.stats;
+
             var weaponDefinition = new WeaponDefinition
             {
                 MetaData = new WeaponDefinition.WeaponMetaData
                 {
                     Id = jsonDynamic.hash,
                     Name = jsonDynamic.displayProperties.name,
-                    AmmoTypeName = jsonDynamic.equippingBlock.ammoType.ToString(), //TODO: THIS
+                    AmmoTypeId = jsonDynamic.equippingBlock.ammoType.ToString(), //TODO: THIS
                     TierTypeName = jsonDynamic.inventory.tierTypeName,
+                    DefaultDamageTypeId = jsonDynamic.defaultDamageType,
                     DefaultDamageTypeHash = jsonDynamic.defaultDamageTypeHash,
                     FlavorText = jsonDynamic.flavorText,
                 },

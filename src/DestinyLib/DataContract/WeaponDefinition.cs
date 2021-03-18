@@ -18,10 +18,11 @@
         {
             public string Name { get; set; }
             public long Id { get; set; }
-            public string AmmoTypeName { get; set; }
+            public string AmmoTypeId { get; set; }
             public string TypeName { get; set; }
             public string FrameName { get; set; }
             public string FlavorText { get; set; }
+            public string DefaultDamageTypeId { get; set; }
             public string DefaultDamageTypeHash { get; set; }
             
             /// <summary>
