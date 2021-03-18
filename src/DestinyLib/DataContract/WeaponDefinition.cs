@@ -19,6 +19,7 @@
             public string Name { get; set; }
             public long Id { get; set; }
             public string AmmoTypeId { get; set; }
+            public string ItemTypeId { get; set; }
             public string TypeName { get; set; }
             public string FrameName { get; set; }
             public string FlavorText { get; set; }
@@ -34,10 +35,19 @@
 
         public class WeaponStat
         {
+            public string StatHash { get; set; }
             public string Name { get; set; }
+            public string Description { get; set; }
             public int Value { get; set; }
             public int MaxValue { get; set; }
-            public bool IsHidden { get; set; }
+            public int MinValue { get; set; }
+            public int DisplayMaximum { get; set; }
+            //public bool IsHidden { get; set; }
+
+            public override string ToString()
+            {
+                return $"[{StatHash}] {Name}";
+            }
         }
 
         public class PerkSet

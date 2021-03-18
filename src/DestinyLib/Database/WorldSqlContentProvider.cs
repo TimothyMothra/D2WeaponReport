@@ -19,7 +19,6 @@
             // TODO: NULL CHECK
             dynamic jsonDynamic = JsonConvert.DeserializeObject(record);
 
-            //dynamic test = jsonDynamic.stats.stats;
 
             var weaponDefinition = new WeaponDefinition
             {
@@ -32,10 +31,28 @@
                     DefaultDamageTypeId = jsonDynamic.defaultDamageType,
                     DefaultDamageTypeHash = jsonDynamic.defaultDamageTypeHash,
                     FlavorText = jsonDynamic.flavorText,
+                    ItemTypeId = jsonDynamic.itemSubType, //TODO: THIS
                 },
                 Stats = new List<WeaponDefinition.WeaponStat>(),
                 PerkSets = new List<WeaponDefinition.PerkSet>(),
             };
+
+
+            var statCollectionDynamic = jsonDynamic.stats.stats;
+            foreach (var statDynamic in statCollectionDynamic)
+            {
+                var stat = new WeaponDefinition.WeaponStat
+                {
+                    Name = "xxx", // TODO: This is in the DestinyStatDefinition table.
+                    Description = "xxx", // TODO: This is in the DestinyStatDefinition table.
+                    StatHash = statDynamic.Value.statHash,
+                    Value = statDynamic.Value.value,
+                    MinValue = statDynamic.Value.minimum,
+                    MaxValue = statDynamic.Value.maximum,
+                    DisplayMaximum = statDynamic.Value.displayMaximum,
+                };
+                weaponDefinition.Stats.Add(stat);
+            }
 
             return weaponDefinition;
         }
