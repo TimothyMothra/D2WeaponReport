@@ -12,6 +12,7 @@ First goto the socketCategories and find the socketIndexes for perks.
 - Magazines 3815406785
 - Barrel 3362409147
 - Trait 2614797986
+- Tracker 1282012138 (will ignore this)
 
 
 
