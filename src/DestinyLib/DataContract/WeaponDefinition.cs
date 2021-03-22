@@ -52,7 +52,9 @@
 
         public class PerkSet
         {
-            public int Index { get; set; }
+            public int SocketIndex { get; set; }
+            public long SocketTypeHash { get; set; }
+            public long PlugSetHash { get; set; }
             public IList<Perk> Perks;
         }
 

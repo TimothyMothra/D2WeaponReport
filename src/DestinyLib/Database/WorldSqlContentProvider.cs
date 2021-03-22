@@ -1,5 +1,6 @@
 ﻿namespace DestinyLib.Database
 {
+    using System;
     using System.Collections.Generic;
 
     using DestinyLib.DataContract;
@@ -19,7 +20,6 @@
             // TODO: NULL CHECK
             dynamic jsonDynamic = JsonConvert.DeserializeObject(record);
 
-
             var weaponDefinition = new WeaponDefinition
             {
                 MetaData = new WeaponDefinition.WeaponMetaData
@@ -37,7 +37,7 @@
                 PerkSets = new List<WeaponDefinition.PerkSet>(),
             };
 
-
+            // Stats
             var statCollectionDynamic = jsonDynamic.stats.stats;
             foreach (var statDynamic in statCollectionDynamic)
             {
@@ -52,6 +52,36 @@
                     DisplayMaximum = statDynamic.Value.displayMaximum,
                 };
                 weaponDefinition.Stats.Add(stat);
+            }
+
+            // Perks
+            var socketCategoriesDynamic = jsonDynamic.sockets.socketCategories;
+            var weaponPerkIndexes = Array.Empty<int>();
+            foreach (var category in socketCategoriesDynamic)
+            {
+                if (category.socketCategoryHash == 4241085061)
+                {
+                    weaponPerkIndexes = category.socketIndexes.ToObject<int[]>();
+                }
+            }
+
+            var socketEntriesDynamic = jsonDynamic.sockets.socketEntries;
+            foreach(var i in weaponPerkIndexes)
+            {
+                var socketEntry = socketEntriesDynamic[i];
+                if (socketEntry.socketTypeHash == 1282012138) // ignore Tracker
+                {
+                    continue;
+                }
+
+                var perkset = new WeaponDefinition.PerkSet
+                {
+                    SocketIndex = i,
+                    SocketTypeHash = socketEntry.socketTypeHash,
+                    PlugSetHash = socketEntry.randomizedPlugSetHash
+                };
+                weaponDefinition.PerkSets.Add(perkset);
+                // TODO: Perks are in the DestinyPlugSetDefinition table.
             }
 
             return weaponDefinition;

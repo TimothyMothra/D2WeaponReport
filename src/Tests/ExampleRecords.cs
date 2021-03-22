@@ -172,6 +172,37 @@
 
             #endregion
 
+            #region Perks
+            gnawingHunger.PerkSets.Add(new WeaponDefinition.PerkSet
+            {
+                SocketIndex = 1,
+                SocketTypeHash = 3362409147,
+                PlugSetHash = 295878355,
+            });
+            gnawingHunger.PerkSets.Add(new WeaponDefinition.PerkSet
+            {
+                SocketIndex = 2,
+                SocketTypeHash = 3815406785,
+                PlugSetHash = 3964805173,
+            });
+            gnawingHunger.PerkSets.Add(new WeaponDefinition.PerkSet
+            {
+                SocketIndex = 3,
+                SocketTypeHash = 2614797986,
+                PlugSetHash = 2297212861,
+            });
+            gnawingHunger.PerkSets.Add(new WeaponDefinition.PerkSet
+            {
+                SocketIndex = 4,
+                SocketTypeHash = 2614797986,
+                PlugSetHash = 1853656119,
+            });
+
+
+            #endregion
+
+
+
             return gnawingHunger;
         }
     }
