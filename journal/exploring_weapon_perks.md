@@ -20,7 +20,8 @@ First goto the socketCategories and find the socketIndexes for perks.
 
 ### Gnawing Hunger
 
-	sockets > socketCategories > socketCategoryHash:4241085061 // Weapon Perks socketIndexes:[1,2,3,4,8]
+	sockets > socketCategories > socketCategoryHash:4241085061 // <SocketCategory "WEAPON PERKS">
+	sockets > socketCategories > socketIndexes:[1,2,3,4,8]
 
 	sockets > socketEntries
 	1.
@@ -57,7 +58,8 @@ First goto the socketCategories and find the socketIndexes for perks.
 
 ### Igneous Hammer
 
-	sockets > socketCategories > socketCategoryHash:4241085061 // <SocketCategory "WEAPON PERKS"> socketIndexes:[1,2,3,4,9]
+	sockets > socketCategories > socketCategoryHash:4241085061 // <SocketCategory "WEAPON PERKS">
+	sockets > socketCategories > socketIndexes:[1,2,3,4,9]
 	
 	sockets > socketEntries
 	1.
@@ -99,7 +101,8 @@ First goto the socketCategories and find the socketIndexes for perks.
 
 ### Eternal Blazon
 
-	sockets > socketCategories > socketCategoryHash:4241085061 // <SocketCategory "WEAPON PERKS"> socketIndexes:[1,2,3,4,9]
+	sockets > socketCategories > socketCategoryHash:4241085061 // <SocketCategory "WEAPON PERKS">
+	sockets > socketCategories > socketIndexes:[1,2,3,4,9]
 	
 	sockets > socketEntries
 	1.
