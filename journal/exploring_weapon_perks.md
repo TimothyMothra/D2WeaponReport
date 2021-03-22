@@ -3,6 +3,10 @@ Perks such as Barrels, Scopes, and Magazines are all stored as "sockets". For th
 First goto the socketCategories and find the socketIndexes for perks.
 
 
+
+### SocketCategoryHash
+- Weapon Perks 4241085061
+
 ### SocketTypeHash
 - Scopes 1283453667
 - Magazines 3815406785
