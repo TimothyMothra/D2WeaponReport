@@ -1,4 +1,4 @@
-Perks such as Barrels, Scopes, and Magazines are all stored as "sockets". For the sake of conversation, Perks such as Rampage or Kill Clip will be called Traits
+Perks such as Barrels, Scopes, and Magazines are all stored as "sockets". Perks such as Rampage or Kill Clip are called Traits
 
 First goto the socketCategories and find the socketIndexes for perks.
 
