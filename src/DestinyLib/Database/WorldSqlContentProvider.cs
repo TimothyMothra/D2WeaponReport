@@ -13,7 +13,7 @@
 
         public WorldSqlContentProvider(WorldSqlContent worldSqlContent) => this.WorldSqlContent = worldSqlContent;
 
-        public WeaponDefinition GetWeaponDefinition(long id)
+        public WeaponDefinition GetWeaponDefinition(uint id)
         {
             var record = this.WorldSqlContent.GetDestinyInventoryItemDefinition(id);
             
@@ -59,7 +59,7 @@
             var weaponPerkIndexes = Array.Empty<int>();
             foreach (var category in socketCategoriesDynamic)
             {
-                if (category.socketCategoryHash == 4241085061)
+                if (category.socketCategoryHash == (uint)4241085061)
                 {
                     weaponPerkIndexes = category.socketIndexes.ToObject<int[]>();
                 }
@@ -69,19 +69,42 @@
             foreach(var i in weaponPerkIndexes)
             {
                 var socketEntry = socketEntriesDynamic[i];
-                if (socketEntry.socketTypeHash == 1282012138) // ignore Tracker
+                if (socketEntry.socketTypeHash == (uint)1282012138) // ignore Tracker
                 {
                     continue;
                 }
 
-                var perkset = new WeaponDefinition.PerkSet
+                var perkSet = new WeaponDefinition.PerkSet
                 {
                     SocketIndex = i,
                     SocketTypeHash = socketEntry.socketTypeHash,
-                    PlugSetHash = socketEntry.randomizedPlugSetHash
+                    PlugSetHash = socketEntry.randomizedPlugSetHash,
+                    //Perks = new List<WeaponDefinition.Perk>(),
                 };
-                weaponDefinition.PerkSets.Add(perkset);
+
+                var plugSetDefinitionRecord = this.WorldSqlContent.GetDestinyPlugSetDefinition(perkSet.PlugSetHash);
+                dynamic plugSetDefinitionDynamic = JsonConvert.DeserializeObject(plugSetDefinitionRecord);
+                foreach (var plug in plugSetDefinitionDynamic.reusablePlugItems)
+                {
+                    uint plugItemHash = plug.plugItemHash;
+
+                    var perkRecord = this.WorldSqlContent.GetDestinyInventoryItemDefinition(plugItemHash);
+                    dynamic perkDynamic = JsonConvert.DeserializeObject(perkRecord);
+                    var perk = new WeaponDefinition.Perk
+                    {
+                        Id = plugItemHash,
+                        Name = perkDynamic.displayProperties.name,
+                        Description = perkDynamic.displayProperties.description
+                    };
+                    //perkSet.Perks.Add(perk);
+                }
+
+                weaponDefinition.PerkSets.Add(perkSet);
                 // TODO: Perks are in the DestinyPlugSetDefinition table.
+
+
+                
+
             }
 
             return weaponDefinition;

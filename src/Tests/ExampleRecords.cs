@@ -33,7 +33,7 @@
             {
                 Name = "xxx", // TODO: This is in the DestinyStatDefinition table.
                 Description = "xxx", // TODO: This is in the DestinyStatDefinition table.
-                StatHash = "1480404414",
+                StatHash = 1480404414,
                 Value = 0,
                 MinValue = 0,
                 MaxValue = 0,
@@ -43,7 +43,7 @@
             {
                 Name = "xxx", // TODO: This is in the DestinyStatDefinition table.
                 Description = "xxx", // TODO: This is in the DestinyStatDefinition table.
-                StatHash = "1935470627",
+                StatHash = 1935470627,
                 Value = 0,
                 MinValue = 0,
                 MaxValue = 0,
@@ -53,7 +53,7 @@
             {
                 Name = "xxx", // TODO: This is in the DestinyStatDefinition table.
                 Description = "xxx", // TODO: This is in the DestinyStatDefinition table.
-                StatHash = "1885944937",
+                StatHash = 1885944937,
                 Value = 0,
                 MinValue = 0,
                 MaxValue = 0,
@@ -63,7 +63,7 @@
             {
                 Name = "xxx", // TODO: This is in the DestinyStatDefinition table.
                 Description = "xxx", // TODO: This is in the DestinyStatDefinition table.
-                StatHash = "3555269338",
+                StatHash = 3555269338,
                 Value = 16,
                 MinValue = 0,
                 MaxValue = 0,
@@ -73,7 +73,7 @@
             {
                 Name = "xxx", // TODO: This is in the DestinyStatDefinition table.
                 Description = "xxx", // TODO: This is in the DestinyStatDefinition table.
-                StatHash = "4284893193",
+                StatHash = 4284893193,
                 Value = 600,
                 MinValue = 0,
                 MaxValue = 0,
@@ -83,7 +83,7 @@
             {
                 Name = "xxx", // TODO: This is in the DestinyStatDefinition table.
                 Description = "xxx", // TODO: This is in the DestinyStatDefinition table.
-                StatHash = "4043523819",
+                StatHash = 4043523819,
                 Value = 21,
                 MinValue = 0,
                 MaxValue = 0,
@@ -93,7 +93,7 @@
             {
                 Name = "xxx", // TODO: This is in the DestinyStatDefinition table.
                 Description = "xxx", // TODO: This is in the DestinyStatDefinition table.
-                StatHash = "1240592695",
+                StatHash = 1240592695,
                 Value = 53,
                 MinValue = 0,
                 MaxValue = 0,
@@ -103,7 +103,7 @@
             {
                 Name = "xxx", // TODO: This is in the DestinyStatDefinition table.
                 Description = "xxx", // TODO: This is in the DestinyStatDefinition table.
-                StatHash = "155624089",
+                StatHash = 155624089,
                 Value = 49,
                 MinValue = 0,
                 MaxValue = 0,
@@ -113,7 +113,7 @@
             {
                 Name = "xxx", // TODO: This is in the DestinyStatDefinition table.
                 Description = "xxx", // TODO: This is in the DestinyStatDefinition table.
-                StatHash = "3871231066",
+                StatHash = 3871231066,
                 Value = 43,
                 MinValue = 0,
                 MaxValue = 0,
@@ -123,7 +123,7 @@
             {
                 Name = "xxx", // TODO: This is in the DestinyStatDefinition table.
                 Description = "xxx", // TODO: This is in the DestinyStatDefinition table.
-                StatHash = "4188031367",
+                StatHash = 4188031367,
                 Value = 61,
                 MinValue = 0,
                 MaxValue = 0,
@@ -133,7 +133,7 @@
             {
                 Name = "xxx", // TODO: This is in the DestinyStatDefinition table.
                 Description = "xxx", // TODO: This is in the DestinyStatDefinition table.
-                StatHash = "1931675084",
+                StatHash = 1931675084,
                 Value = 55,
                 MinValue = 0,
                 MaxValue = 0,
@@ -143,7 +143,7 @@
             {
                 Name = "xxx", // TODO: This is in the DestinyStatDefinition table.
                 Description = "xxx", // TODO: This is in the DestinyStatDefinition table.
-                StatHash = "943549884",
+                StatHash = 943549884,
                 Value = 67,
                 MinValue = 0,
                 MaxValue = 0,
@@ -153,7 +153,7 @@
             {
                 Name = "xxx", // TODO: This is in the DestinyStatDefinition table.
                 Description = "xxx", // TODO: This is in the DestinyStatDefinition table.
-                StatHash = "1345609583",
+                StatHash = 1345609583,
                 Value = 65,
                 MinValue = 0,
                 MaxValue = 0,
@@ -163,7 +163,7 @@
             {
                 Name = "xxx", // TODO: This is in the DestinyStatDefinition table.
                 Description = "xxx", // TODO: This is in the DestinyStatDefinition table.
-                StatHash = "2715839340",
+                StatHash = 2715839340,
                 Value = 54,
                 MinValue = 0,
                 MaxValue = 0,
@@ -178,6 +178,13 @@
                 SocketIndex = 1,
                 SocketTypeHash = 3362409147,
                 PlugSetHash = 295878355,
+                //Perks = new List<WeaponDefinition.Perk>
+                //{
+                //    new WeaponDefinition.Perk
+                //    {
+
+                //    },
+                //}
             });
             gnawingHunger.PerkSets.Add(new WeaponDefinition.PerkSet
             {

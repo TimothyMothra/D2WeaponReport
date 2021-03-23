@@ -17,7 +17,7 @@
         public class WeaponMetaData
         {
             public string Name { get; set; }
-            public long Id { get; set; }
+            public uint Id { get; set; }
             public string AmmoTypeId { get; set; }
             public string ItemTypeId { get; set; }
             public string TypeName { get; set; }
@@ -35,7 +35,7 @@
 
         public class WeaponStat
         {
-            public string StatHash { get; set; }
+            public uint StatHash { get; set; }
             public string Name { get; set; }
             public string Description { get; set; }
             public int Value { get; set; }
@@ -53,8 +53,8 @@
         public class PerkSet
         {
             public int SocketIndex { get; set; }
-            public long SocketTypeHash { get; set; }
-            public long PlugSetHash { get; set; }
+            public uint SocketTypeHash { get; set; }
+            public uint PlugSetHash { get; set; }
             public IList<Perk> Perks;
         }
 
@@ -63,8 +63,9 @@
             public bool IsPerk { get; set; }
             public bool IsMod { get; set; }
             public bool IsMasterwork { get; set; }
-            public int Id { get; set; }
+            public uint Id { get; set; }
             public string Name { get; set; }
+            public string Description { get; set; }
             public int Value { get; set; }
         }
     }

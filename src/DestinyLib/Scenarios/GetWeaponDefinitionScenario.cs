@@ -5,7 +5,7 @@
 
     public static class GetWeaponDefinitionScenario
     {
-        public static WeaponDefinition Run(long id)
+        public static WeaponDefinition Run(uint id)
         {
             var dbPath = LibEnvironment.GetDatabaseFile("world_sql_content");
             var worldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));

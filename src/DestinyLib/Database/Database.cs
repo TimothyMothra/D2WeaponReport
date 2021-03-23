@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Diagnostics;
     using System.IO;
 
     using Microsoft.Data.Sqlite;
@@ -67,6 +68,42 @@
             }
 
             return list;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// In the API, hashes (like item hashes) are can be represented as an "unsigned 32 int". 
+        /// However, in the SQLiteDB, these hashes are represented as a "signed 32 int". 
+        /// The unsigned 32 int overflows what can be stored in SQLite's signed 32 int, 
+        /// so the majority of items in the DB will have negative ids. 
+        /// For example, the item "Vigil of Heroes" with item hash 2592351697 has an ID value of -1702615599 in the definitions SQLite database.
+        /// To query the SQLite DB for a hash, you will need to convert the hash from an "unsigned 32 int" to a "signed 32 int".
+        /// (https://github.com/vpzed/Destiny2-API-Info/wiki/API-Introduction-Part-3-Manifest#converting-hashes-for-the-sqlite-db).
+        /// </remarks>
+        public string GetJsonRecord(string tableName, uint hashId)
+        {
+            var id = unchecked((int)hashId);
+
+            using (var connection = new SqliteConnection(this.ConnectionString))
+            {
+                connection.Open();
+                var command = connection.CreateCommand();
+                command.CommandText = $"SELECT json FROM {tableName} WHERE id = $id";
+                command.Parameters.AddWithValue("$id", id);
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        return reader.GetString(0);
+                    }
+                }
+            }
+
+            Debug.Fail("Sqlite query returned no results.");
+
+            return null;
         }
 
         public static string MakeConnectionString(string filePath) => $"Data Source={filePath}";

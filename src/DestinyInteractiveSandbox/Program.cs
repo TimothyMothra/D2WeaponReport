@@ -122,7 +122,7 @@ namespace DestinyInteractiveSandbox
             app.Command("weapon", weaponCmd =>
             {
                 weaponCmd.Description = "Get a weapon's details.";
-                var weaponId = weaponCmd.Option<long>("--id", "Id of a weapon", CommandOptionType.SingleValue).IsRequired();
+                var weaponId = weaponCmd.Option<uint>("--id", "Id of a weapon", CommandOptionType.SingleValue).IsRequired();
 
                 weaponCmd.OnExecute(() =>
                 {

@@ -12,7 +12,7 @@
         [TestMethod]
         public void VerifyGet()
         {
-            long id_gnawingHunger = 821154603;
+            uint id_gnawingHunger = 821154603;
 
             var result = GetWeaponDefinitionScenario.Run(id_gnawingHunger);
 
