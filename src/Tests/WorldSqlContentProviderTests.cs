@@ -1,5 +1,7 @@
 ﻿namespace Tests
 {
+    using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
 
     using DestinyLib;
@@ -32,6 +34,16 @@
             var weaponDefinition = this.WorldSqlContentProvider.GetWeaponDefinition(id_doubleEdgedAnswer);
 
             Assert.AreEqual("Double-Edged Answer", weaponDefinition.MetaData.Name);
+        }
+
+        [TestMethod]
+        public void TestGetWeapon_TicuusDivination()
+        {
+            uint id_doubleEdgedAnswer = 3260753130;
+
+            var weaponDefinition = this.WorldSqlContentProvider.GetWeaponDefinition(id_doubleEdgedAnswer);
+
+            Assert.AreEqual("Ticuu's Divination", weaponDefinition.MetaData.Name);
         }
 
         [TestMethod]
@@ -69,6 +81,37 @@
             string name = jsonDynamic.displayProperties.name;
 
             Assert.AreEqual("Chambered Compensator", name);
+        }
+
+        /// <summary>
+        /// This test will get all weapons and attempt to parse them.
+        /// If any test fails, likely something breaks the expected data schema.
+        /// </summary>
+        [TestMethod]
+        public void TestCanParseWeapons()
+        {
+            var weapons = this.WorldSqlContentProvider.GetSearchableWeapons();
+
+            var failedIds = new List<uint>();
+
+            foreach(var weapon in weapons)
+            {
+                try
+                {
+                    _ = this.WorldSqlContentProvider.GetWeaponDefinition(weapon.HashId);
+                }
+                catch
+                {
+                    failedIds.Add(weapon.HashId);
+                }
+            }
+
+            if (failedIds.Any())
+            {
+                failedIds.ForEach(x => Debug.WriteLine(x));
+
+                Assert.Fail($"Failed to parse {failedIds.Count} weaponsIds");
+            }
         }
     }
 }

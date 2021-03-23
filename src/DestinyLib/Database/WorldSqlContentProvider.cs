@@ -69,7 +69,11 @@
             foreach(var i in weaponPerkIndexes)
             {
                 var socketEntry = socketEntriesDynamic[i];
-                if (socketEntry.socketTypeHash == (uint)1282012138) // ignore Tracker
+                // TODO: Bungie could introduce new things at anytime that break this.
+                // Instead of identifying types to exclude, should identify types to include.
+                if (socketEntry.socketTypeHash == (uint)1282012138 // ignore Tracker
+                    || socketEntry.socketTypeHash == (uint)2575784089 // ignore Ticuu's Divination "stocks"
+                    ) 
                 {
                     continue;
                 }
