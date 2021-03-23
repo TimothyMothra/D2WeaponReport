@@ -92,7 +92,7 @@
         {
             var weapons = this.WorldSqlContentProvider.GetSearchableWeapons();
 
-            var failedIds = new List<uint>();
+            var failedIds = new List<string>();
 
             foreach(var weapon in weapons)
             {
@@ -102,7 +102,7 @@
                 }
                 catch
                 {
-                    failedIds.Add(weapon.HashId);
+                    failedIds.Add(weapon.ToString());
                 }
             }
 
