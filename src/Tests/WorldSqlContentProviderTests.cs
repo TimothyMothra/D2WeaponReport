@@ -30,6 +30,8 @@
             uint id_doubleEdgedAnswer = 3551104348;
 
             var weaponDefinition = this.WorldSqlContentProvider.GetWeaponDefinition(id_doubleEdgedAnswer);
+
+            Assert.AreEqual("Double-Edged Answer", weaponDefinition.MetaData.Name);
         }
 
         [TestMethod]

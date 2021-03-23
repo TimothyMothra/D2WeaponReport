@@ -78,7 +78,7 @@
                 {
                     SocketIndex = i,
                     SocketTypeHash = socketEntry.socketTypeHash,
-                    PlugSetHash = socketEntry.randomizedPlugSetHash,
+                    PlugSetHash = socketEntry.randomizedPlugSetHash ?? socketEntry.reusablePlugSetHash,
                     //Perks = new List<WeaponDefinition.Perk>(),
                 };
 
