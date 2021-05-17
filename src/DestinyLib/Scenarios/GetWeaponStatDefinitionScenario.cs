@@ -5,7 +5,7 @@
 
     public static class GetWeaponStatDefinitionScenario
     {
-        public static DestinyStatDefinition Run(uint id)
+        public static WeaponStatDefinition Run(uint id)
         {
             var dbPath = LibEnvironment.GetDatabaseFile("world_sql_content");
             var worldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));

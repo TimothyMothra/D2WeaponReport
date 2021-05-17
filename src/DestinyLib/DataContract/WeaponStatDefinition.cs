@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    public class DestinyStatDefinition
+    public class WeaponStatDefinition
     {
         public string Name { get; set; }
         public string Description { get; set; }

@@ -120,7 +120,7 @@
             return weaponDefinition;
         }
 
-        public DestinyStatDefinition GetWeaponStatDefinition(uint id)
+        public WeaponStatDefinition GetWeaponStatDefinition(uint id)
         {
 
             var record = this.WorldSqlContent.GetDestinyStatDefinition(id);
@@ -128,7 +128,7 @@
             // TODO: NULL CHECK
             dynamic jsonDynamic = JsonConvert.DeserializeObject(record);
 
-            var weaponStatDefinition = new DestinyStatDefinition
+            var weaponStatDefinition = new WeaponStatDefinition
             {
                 Id = jsonDynamic.hash,
                 Name = jsonDynamic.displayProperties.name,

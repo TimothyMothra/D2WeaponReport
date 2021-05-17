@@ -17,7 +17,7 @@
 
             var result = GetWeaponStatDefinitionScenario.Run(id_stability);
 
-            var expected = new DestinyStatDefinition
+            var expected = new WeaponStatDefinition
             {
                 Id = 155624089,
                 Name = "Stability",
