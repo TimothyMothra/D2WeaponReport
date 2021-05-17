@@ -51,6 +51,12 @@
                     MaxValue = statDynamic.Value.maximum,
                     DisplayMaximum = statDynamic.Value.displayMaximum,
                 };
+
+                // TODO: These definitions need to be cached.
+                var statDefinition = this.GetWeaponStatDefinition(stat.StatHash);
+                stat.Name = statDefinition.Name;
+                stat.Description = statDefinition.Description;
+
                 weaponDefinition.Stats.Add(stat);
             }
 
@@ -112,6 +118,25 @@
             }
 
             return weaponDefinition;
+        }
+
+        public DestinyStatDefinition GetWeaponStatDefinition(uint id)
+        {
+
+            var record = this.WorldSqlContent.GetDestinyStatDefinition(id);
+
+            // TODO: NULL CHECK
+            dynamic jsonDynamic = JsonConvert.DeserializeObject(record);
+
+            var weaponStatDefinition = new DestinyStatDefinition
+            {
+                Id = jsonDynamic.hash,
+                Name = jsonDynamic.displayProperties.name,
+                Description = jsonDynamic.displayProperties.description,
+                Interpolate =jsonDynamic.interpolate
+            };
+
+            return weaponStatDefinition;
         }
 
         /// <remarks>
