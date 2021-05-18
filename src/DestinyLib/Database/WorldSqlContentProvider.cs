@@ -47,21 +47,20 @@
             var statCollectionDynamic = jsonDynamic.stats.stats;
             foreach (var statDynamic in statCollectionDynamic)
             {
+                uint statHash = statDynamic.Value.statHash;
+
+                var statDefinition = this.GetWeaponStatDefinition(statHash);
+
                 var stat = new WeaponDefinition.WeaponStat
                 {
-                    Name = "xxx", // TODO: This is in the DestinyStatDefinition table.
-                    Description = "xxx", // TODO: This is in the DestinyStatDefinition table.
-                    StatHash = statDynamic.Value.statHash,
+                    Name = statDefinition.Name,
+                    Description = statDefinition.Description,
+                    StatHash = statHash,
                     Value = statDynamic.Value.value,
                     MinValue = statDynamic.Value.minimum,
                     MaxValue = statDynamic.Value.maximum,
                     DisplayMaximum = statDynamic.Value.displayMaximum,
                 };
-
-                // TODO: These definitions need to be cached.
-                var statDefinition = this.GetWeaponStatDefinition(stat.StatHash);
-                stat.Name = statDefinition.Name;
-                stat.Description = statDefinition.Description;
 
                 weaponDefinition.Stats.Add(stat);
             }
@@ -117,15 +116,12 @@
 
                 weaponDefinition.PerkSets.Add(perkSet);
                 // TODO: Perks are in the DestinyPlugSetDefinition table.
-
-
-                
-
             }
 
             return weaponDefinition;
         }
 
+        // TODO: These definitions need to be cached.
         public WeaponStatDefinition GetWeaponStatDefinition(uint id)
         {
             var record = this.WorldSqlContent.GetDestinyStatDefinition(id);

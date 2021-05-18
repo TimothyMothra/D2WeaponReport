@@ -23,7 +23,7 @@
         {
             var dbPath = LibEnvironment.GetDatabaseFile("world_sql_content");
             this.WorldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));
-            this.WorldSqlContentProvider = new WorldSqlContentProvider(this.WorldSqlContent);
+            this.WorldSqlContentProvider = new WorldSqlContentProvider(this.WorldSqlContent, ProviderOptions.ScenarioDefault);
         }
 
         [TestMethod]
