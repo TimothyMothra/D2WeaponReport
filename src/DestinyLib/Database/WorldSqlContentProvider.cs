@@ -65,12 +65,15 @@
                 weaponDefinition.Stats.Add(stat);
             }
 
-            // Perks
+            // PERKS
+            // Perks are stored in SocketEntries.
+            // First, must read SocketCategory to identify which socket indexes hold WeaponPerks.
+            // These are not cached because they are unique for each weapon definition.
             var socketCategoriesDynamic = jsonDynamic.sockets.socketCategories;
             var weaponPerkIndexes = Array.Empty<int>();
             foreach (var category in socketCategoriesDynamic)
             {
-                if (category.socketCategoryHash == (uint)4241085061)
+                if (category.socketCategoryHash == (uint)4241085061) // SocketCategory: "Weapon Perks"
                 {
                     weaponPerkIndexes = category.socketIndexes.ToObject<int[]>();
                 }
@@ -80,11 +83,10 @@
             foreach(var i in weaponPerkIndexes)
             {
                 var socketEntry = socketEntriesDynamic[i];
-                // TODO: Bungie could introduce new things at anytime that break this.
-                // Instead of identifying types to exclude, should identify types to include.
+                // TODO: Bungie could introduce new things at anytime that break parsing.
+                // Instead of referencing types to exclude, should identify types to include.
                 if (socketEntry.socketTypeHash == (uint)1282012138 // ignore Tracker
-                    || socketEntry.socketTypeHash == (uint)2575784089 // ignore Ticuu's Divination "stocks"
-                    ) 
+                    || socketEntry.socketTypeHash == (uint)2575784089) // ignore Ticuu's Divination "stocks"
                 {
                     continue;
                 }
@@ -94,7 +96,7 @@
                     SocketIndex = i,
                     SocketTypeHash = socketEntry.socketTypeHash,
                     PlugSetHash = socketEntry.randomizedPlugSetHash ?? socketEntry.reusablePlugSetHash,
-                    //Perks = new List<WeaponDefinition.Perk>(),
+                    Perks = new List<WeaponDefinition.Perk>(),
                 };
 
                 var plugSetDefinitionRecord = this.WorldSqlContent.GetDestinyPlugSetDefinition(perkSet.PlugSetHash);
@@ -103,15 +105,21 @@
                 {
                     uint plugItemHash = plug.plugItemHash;
 
+                    // TODO, PERK DEFINITIONS NEED TO BE CACHED
                     var perkRecord = this.WorldSqlContent.GetDestinyInventoryItemDefinition(plugItemHash);
                     dynamic perkDynamic = JsonConvert.DeserializeObject(perkRecord);
                     var perk = new WeaponDefinition.Perk
                     {
                         Id = plugItemHash,
                         Name = perkDynamic.displayProperties.name,
-                        Description = perkDynamic.displayProperties.description
+                        Description = perkDynamic.displayProperties.description,
+                        //Value
                     };
-                    //perkSet.Perks.Add(perk);
+
+                    // TODO: THE PERK VALUES ARE STORED IN "investmentStats"
+                    var test_investmentStats = perkDynamic.investmentStats;
+
+                    perkSet.Perks.Add(perk);
                 }
 
                 weaponDefinition.PerkSets.Add(perkSet);
