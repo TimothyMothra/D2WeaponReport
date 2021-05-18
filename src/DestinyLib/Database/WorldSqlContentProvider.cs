@@ -11,7 +11,13 @@
     {
         public readonly WorldSqlContent WorldSqlContent;
 
-        public WorldSqlContentProvider(WorldSqlContent worldSqlContent) => this.WorldSqlContent = worldSqlContent;
+        private readonly ProviderOptions ProviderOptions;
+
+        public WorldSqlContentProvider(WorldSqlContent worldSqlContent, ProviderOptions providerOptions)
+        {
+            this.WorldSqlContent = worldSqlContent; 
+            this.ProviderOptions = providerOptions;
+        }
 
         public WeaponDefinition GetWeaponDefinition(uint id)
         {
@@ -122,7 +128,6 @@
 
         public WeaponStatDefinition GetWeaponStatDefinition(uint id)
         {
-
             var record = this.WorldSqlContent.GetDestinyStatDefinition(id);
 
             // TODO: NULL CHECK

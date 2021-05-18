@@ -1,8 +1,5 @@
 ﻿namespace DestinyLib.DataContract
 {
-    using System;
-    using System.Collections.Generic;
-
     public class WeaponStatDefinition
     {
         public string Name { get; set; }

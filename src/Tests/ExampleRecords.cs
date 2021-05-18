@@ -173,6 +173,7 @@
             #endregion
 
             #region Perks
+            // Perk Sets are the unique collections of Perks that belongs to an individual weapon.
             gnawingHunger.PerkSets.Add(new WeaponDefinition.PerkSet
             {
                 SocketIndex = 1,
