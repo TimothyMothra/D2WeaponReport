@@ -23,6 +23,8 @@
         {
             var dbPath = LibEnvironment.GetDatabaseFile("world_sql_content");
             this.WorldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));
+
+            // TODO: Tests should use their own ProviderOptions. eventually scenarios will use caching.
             this.WorldSqlContentProvider = new WorldSqlContentProvider(this.WorldSqlContent, ProviderOptions.ScenarioDefault);
         }
 

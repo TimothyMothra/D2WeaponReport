@@ -58,8 +58,9 @@
             }
             catch(HttpRequestException ex)
             {
-                // TODO: I'M INFREQUENTLY SEEING 500. I ASSUME THIS COULD BE THROTTLING, BUT I NEED TO SEE THE ACTUAL RESPONSE MESSAGE.
+                // TODO: I'M INFREQUENTLY SEEING 500. I ASSUME THIS IS THROTTLING, BUT I NEED TO SEE THE ACTUAL RESPONSE MESSAGE.
                 ex.ToString();
+                throw;
             }
             catch(Exception)
             {
