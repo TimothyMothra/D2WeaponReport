@@ -1,4 +1,7 @@
+
 # DestinySandbox
+
+![main branch](https://github.com/TimothyMothra/DestinySandbox/actions/workflows/BuildAndTest.yml/badge.svg?branch=main&event=push)
 
 ## Resources
 
