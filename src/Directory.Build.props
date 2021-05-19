@@ -6,6 +6,10 @@
   </Target>
 
  <PropertyGroup>
-   <!-- TODO -->
+    <!-- Locking Packages is required to support caching dependencies in Github Actions. -->
+    <!-- https://docs.github.com/en/actions/guides/caching-dependencies-to-speed-up-workflows -->
+    <!-- https://docs.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files#locking-dependencies -->
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+
  </PropertyGroup>
 </Project>
