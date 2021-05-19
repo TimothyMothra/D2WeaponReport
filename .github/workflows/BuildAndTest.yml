@@ -25,4 +25,3 @@ jobs:
       run: dotnet run --project .\src\InitEnvironment\InitEnvironment.csproj
     - name: Test
       run: dotnet test  ./src/DestinySandbox.sln --no-build --verbosity normal
-
