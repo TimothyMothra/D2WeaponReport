@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     using DestinyLib.DataContract;
 
@@ -102,6 +103,7 @@
                     Perks = new List<WeaponDefinition.Perk>(),
                 };
 
+                // TODO: FETCHING A PERK SHOULD BE A SEPARATE METHOD. EASIER TO TEST
                 var plugSetDefinitionRecord = this.WorldSqlContent.GetDestinyPlugSetDefinition(perkSet.PlugSetHash);
                 dynamic plugSetDefinitionDynamic = JsonConvert.DeserializeObject(plugSetDefinitionRecord);
                 foreach (var plug in plugSetDefinitionDynamic.reusablePlugItems)
@@ -111,16 +113,28 @@
                     // TODO: Perk Definitions need to be cached
                     var perkRecord = this.WorldSqlContent.GetDestinyInventoryItemDefinition(plugItemHash);
                     dynamic perkDynamic = JsonConvert.DeserializeObject(perkRecord);
+                    
+                    dynamic perkValuesDynamic = perkDynamic.investmentStats; // TODO: PARSE THIS COLLECTION
+
+                    var perkValues = new List<WeaponDefinition.PerkValue>();
+                    foreach(var perkValueDynamic in perkValuesDynamic)
+                    {
+                        var perkValue = new WeaponDefinition.PerkValue
+                        {
+                            StatHash = perkValueDynamic.statTypeHash,
+                            Value = perkValueDynamic.value,
+                        };
+
+                        perkValues.Add(perkValue);
+                    }
+
                     var perk = new WeaponDefinition.Perk
                     {
                         Id = plugItemHash,
                         Name = perkDynamic.displayProperties.name,
                         Description = perkDynamic.displayProperties.description,
-                        //Value
+                        PerkValues = perkValues.Any() ? perkValues : null, // some perks may not have values that affect stats (example: Rampage). but others will (example: Field Prep).
                     };
-
-                    // TODO: THE PERK VALUES ARE STORED IN "investmentStats"
-                    var test_investmentStats = perkDynamic.investmentStats;
 
                     perkSet.Perks.Add(perk);
                 }

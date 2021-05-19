@@ -5,7 +5,7 @@
         public WorldSqlContent(string connectionString) : base(connectionString) { }
 
         /// <summary>
-        /// This contains: Weapon definitions.
+        /// This contains: Weapon definitions, Weapon Perk definitions
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
