@@ -6,13 +6,13 @@ on:
   pull_request:
     branches: [ main ]
 
-env:
-  solution: ${{ ./sln/DestinySandbox.sln }}
-
 jobs:
   build:
 
     runs-on: windows-latest
+
+    env:
+      solution: ${{ ./sln/DestinySandbox.sln }}
 
     steps:
     - uses: actions/checkout@v2
