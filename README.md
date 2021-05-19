@@ -34,3 +34,4 @@ Now run this command to execute all tests:
 ```
 dotnet test .\src\Tests\Tests.csproj
 ```
+
