@@ -510,7 +510,7 @@
                     {
                         Id = 1820235745u,
                         Name = "Subsistence",
-                        Description = "Kills partially reload the magazine from reserves, but reserve capacity is reduced.",
+                        Description = "Defeating targets partially reloads the magazine from reserves.",
                         PerkValues = null
                     }, new WeaponDefinition.Perk
                     {
