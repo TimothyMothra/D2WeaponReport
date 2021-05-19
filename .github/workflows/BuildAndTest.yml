@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  build_and_test:
 
     runs-on: windows-latest
 
@@ -20,6 +20,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore ./src/DestinySandbox.sln
     - name: Build
-      run: dotnet build --no-restore ${{ env.solution }}
+      run: dotnet build  ./src/DestinySandbox.sln --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal ${{ env.solution }}
+      run: dotnet test  ./src/DestinySandbox.sln --no-build --verbosity normal
