@@ -1,0 +1,11 @@
+<Project>
+
+  <Target Name="Info_InternalSettings"  BeforeTargets="Build">
+    <!-- The purpose of this message is to announce which projects have loaded this file. -->
+    <Message Text="*Directory.Build.props* SolutionName: $(SolutionName). ProjectName: $(MSBuildProjectName). TargetFramework: $(TargetFramework)." Importance="high"/>
+  </Target>
+
+ <PropertyGroup>
+   <!-- TODO -->
+ </PropertyGroup>
+</Project>
