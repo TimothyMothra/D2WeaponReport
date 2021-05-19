@@ -35,12 +35,12 @@
                 {
                     Id = jsonDynamic.hash,
                     Name = jsonDynamic.displayProperties.name,
-                    AmmoTypeId = jsonDynamic.equippingBlock.ammoType.ToString(), //TODO: THIS
+                    AmmoTypeId = jsonDynamic.equippingBlock.ammoType.ToString(), //TODO: Need to identify Ammo Type (example: ??)
                     TierTypeName = jsonDynamic.inventory.tierTypeName,
                     DefaultDamageTypeId = jsonDynamic.defaultDamageType,
                     DefaultDamageTypeHash = jsonDynamic.defaultDamageTypeHash,
                     FlavorText = jsonDynamic.flavorText,
-                    ItemTypeId = jsonDynamic.itemSubType, //TODO: THIS
+                    ItemTypeId = jsonDynamic.itemSubType, //TODO: Need to identity item Sub Type (example: ??)
                 },
                 Stats = new List<WeaponDefinition.WeaponStat>(),
                 PerkSets = new List<WeaponDefinition.PerkSet>(),
@@ -88,8 +88,8 @@
                 var socketEntry = socketEntriesDynamic[i];
                 // TODO: Bungie could introduce new things at anytime that break parsing.
                 // Instead of referencing types to exclude, should identify types to include.
-                if (socketEntry.socketTypeHash == (uint)1282012138 // ignore Tracker
-                    || socketEntry.socketTypeHash == (uint)2575784089) // ignore Ticuu's Divination "stocks"
+                if (socketEntry.socketTypeHash == (uint)1282012138 // ignore Tracker (example: ??)
+                    || socketEntry.socketTypeHash == (uint)2575784089) // ignore Ticuu's Divination "stocks" (example: ??)
                 {
                     continue;
                 }
