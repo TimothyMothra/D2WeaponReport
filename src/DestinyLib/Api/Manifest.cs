@@ -25,7 +25,7 @@
         public async Task<string> GetManifest()
         {
             // TODO: NEED TO HANDLE TIMEOUTS AND POSSIBLE EXCEPTIONS. 
-
+            // TODO: TEST BY FORCING A SERVER ERROR 500. (GOOGLE)
             return await httpClient.GetStringAsync(ManifestUri);
         }
 
