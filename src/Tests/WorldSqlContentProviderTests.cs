@@ -89,7 +89,7 @@
         /// This test will get all weapons and attempt to parse them.
         /// If any test fails, likely something breaks the expected data schema.
         /// </summary>
-        [Ignore]
+        //[Ignore]
         [TestMethod]
         public void TestCanParseWeapons()
         {
