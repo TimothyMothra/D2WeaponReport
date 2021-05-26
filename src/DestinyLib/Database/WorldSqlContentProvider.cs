@@ -108,34 +108,8 @@
                 dynamic plugSetDefinitionDynamic = JsonConvert.DeserializeObject(plugSetDefinitionRecord);
                 foreach (var plug in plugSetDefinitionDynamic.reusablePlugItems)
                 {
-                    uint plugItemHash = plug.plugItemHash;
-
                     // TODO: Perk Definitions need to be cached
-                    var perkRecord = this.WorldSqlContent.GetDestinyInventoryItemDefinition(plugItemHash);
-                    dynamic perkDynamic = JsonConvert.DeserializeObject(perkRecord);
-                    
-                    dynamic perkValuesDynamic = perkDynamic.investmentStats; // TODO: PARSE THIS COLLECTION
-
-                    var perkValues = new List<WeaponDefinition.PerkValue>();
-                    foreach(var perkValueDynamic in perkValuesDynamic)
-                    {
-                        var perkValue = new WeaponDefinition.PerkValue
-                        {
-                            StatHash = perkValueDynamic.statTypeHash,
-                            Value = perkValueDynamic.value,
-                        };
-
-                        perkValues.Add(perkValue);
-                    }
-
-                    var perk = new WeaponDefinition.Perk
-                    {
-                        Id = plugItemHash,
-                        Name = perkDynamic.displayProperties.name,
-                        Description = perkDynamic.displayProperties.description,
-                        PerkValues = perkValues.Any() ? perkValues : null, // some perks may not have values that affect stats (example: Rampage). but others will (example: Field Prep).
-                    };
-
+                    var perk = this.GetWeaponDefinitionPerk(id: (uint)plug.plugItemHash);
                     perkSet.Perks.Add(perk);
                 }
 
@@ -143,6 +117,35 @@
             }
 
             return weaponDefinition;
+        }
+
+
+        public WeaponDefinition.Perk GetWeaponDefinitionPerk(uint id)
+        {
+            var perkRecord = this.WorldSqlContent.GetDestinyInventoryItemDefinition(id);
+            dynamic perkDynamic = JsonConvert.DeserializeObject(perkRecord);
+
+            dynamic perkValuesDynamic = perkDynamic.investmentStats; // TODO: PARSE THIS COLLECTION
+
+            var perkValues = new List<WeaponDefinition.PerkValue>();
+            foreach (var perkValueDynamic in perkValuesDynamic)
+            {
+                var perkValue = new WeaponDefinition.PerkValue
+                {
+                    StatHash = perkValueDynamic.statTypeHash,
+                    Value = perkValueDynamic.value,
+                };
+
+                perkValues.Add(perkValue);
+            }
+
+            return new WeaponDefinition.Perk
+            {
+                Id = plugItemHash,
+                Name = perkDynamic.displayProperties.name,
+                Description = perkDynamic.displayProperties.description,
+                PerkValues = perkValues.Any() ? perkValues : null, // some perks may not have values that affect stats (example: Rampage). but others will (example: Field Prep).
+            };
         }
 
         // TODO: These definitions need to be cached.
