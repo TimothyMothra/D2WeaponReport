@@ -69,9 +69,11 @@
 
                 weaponDefinition.Stats.Add(stat);
             }
-#endregion
+            #endregion
 
+            
             // PERKS
+            #region WeaponDefinition Perks
             // Perks are stored in SocketEntries.
             // First, must read SocketCategory to identify which socket indexes hold WeaponPerks.
             // These are not cached because they are unique for each weapon definition.
@@ -84,7 +86,7 @@
                     weaponPerkIndexes = category.socketIndexes.ToObject<int[]>();
                 }
             }
-
+            
             var socketEntriesDynamic = jsonDynamic.sockets.socketEntries;
             foreach(var i in weaponPerkIndexes)
             {
@@ -97,6 +99,7 @@
                     continue;
                 }
 
+                //TODO: Are PerkSets ever reused or unique to weapon? I don't think this needs to be cached but might be wrong.
                 var perkSet = new WeaponDefinition.PerkSet
                 {
                     SocketIndex = i,
@@ -108,6 +111,7 @@
 
                 weaponDefinition.PerkSets.Add(perkSet);
             }
+#endregion
 
             return weaponDefinition;
         }
