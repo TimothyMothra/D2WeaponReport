@@ -109,7 +109,7 @@
                 foreach (var plug in plugSetDefinitionDynamic.reusablePlugItems)
                 {
                     // TODO: Perk Definitions need to be cached
-                    var perk = this.GetWeaponDefinitionPerk(id: (uint)plug.plugItemHash);
+                    var perk = this.GetWeaponDefinitionPerk((uint)plug.plugItemHash);
                     perkSet.Perks.Add(perk);
                 }
 
@@ -119,10 +119,9 @@
             return weaponDefinition;
         }
 
-
-        public WeaponDefinition.Perk GetWeaponDefinitionPerk(uint id)
+        public WeaponDefinition.Perk GetWeaponDefinitionPerk(uint plugItemHash)
         {
-            var perkRecord = this.WorldSqlContent.GetDestinyInventoryItemDefinition(id);
+            var perkRecord = this.WorldSqlContent.GetDestinyInventoryItemDefinition(plugItemHash);
             dynamic perkDynamic = JsonConvert.DeserializeObject(perkRecord);
 
             dynamic perkValuesDynamic = perkDynamic.investmentStats; // TODO: PARSE THIS COLLECTION
@@ -149,14 +148,14 @@
         }
 
         // TODO: These definitions need to be cached.
-        public WeaponStatDefinition GetWeaponStatDefinition(uint id)
+        public WeaponStatDefinition GetWeaponStatDefinition(uint statHash)
         {
-            var record = this.WorldSqlContent.GetDestinyStatDefinition(id);
+            var record = this.WorldSqlContent.GetDestinyStatDefinition(statHash);
 
             dynamic jsonDynamic = JsonConvert.DeserializeObject(record);
             if (jsonDynamic == null)
             {
-                throw new Exception($"unexpected null result for {nameof(WorldSqlContent.GetDestinyStatDefinition)} id {id}");
+                throw new Exception($"unexpected null result for {nameof(WorldSqlContent.GetDestinyStatDefinition)} id {statHash}");
             }
 
             var weaponStatDefinition = new WeaponStatDefinition
