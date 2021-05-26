@@ -14,6 +14,9 @@
 
         private readonly ProviderOptions ProviderOptions;
 
+        private readonly Dictionary<uint, WeaponStatDefinition> WeaponStatDefinitionCache = new Dictionary<uint, WeaponStatDefinition>();
+        private readonly Dictionary<uint, WeaponDefinition.Perk> WeaponDefinitionPerkCache = new Dictionary<uint, WeaponDefinition.Perk>();
+
         public WorldSqlContentProvider(WorldSqlContent worldSqlContent, ProviderOptions providerOptions)
         {
             this.WorldSqlContent = worldSqlContent; 
@@ -134,6 +137,12 @@
 
         internal WeaponDefinition.Perk GetWeaponDefinitionPerk(uint plugItemHash)
         {
+            if (this.ProviderOptions.EnableCaching && this.WeaponDefinitionPerkCache.TryGetValue(plugItemHash, out var cachedRecord))
+            {
+                return cachedRecord;
+            }
+
+
             var perkRecord = this.WorldSqlContent.GetDestinyInventoryItemDefinition(plugItemHash);
             dynamic perkDynamic = JsonConvert.DeserializeObject(perkRecord);
 
@@ -151,18 +160,31 @@
                 perkValues.Add(perkValue);
             }
 
-            return new WeaponDefinition.Perk
+            var perk = new WeaponDefinition.Perk
             {
                 Id = plugItemHash,
                 Name = perkDynamic.displayProperties.name,
                 Description = perkDynamic.displayProperties.description,
                 PerkValues = perkValues.Any() ? perkValues : null, // some perks may not have values that affect stats (example: Rampage). but others will (example: Field Prep).
             };
+
+
+            if (this.ProviderOptions.EnableCaching)
+            {
+                this.WeaponDefinitionPerkCache.Add(plugItemHash, perk);
+            }
+
+            return perk;
         }
 
         // TODO: These definitions need to be cached.
         public WeaponStatDefinition GetWeaponStatDefinition(uint statHash)
         {
+            if (this.ProviderOptions.EnableCaching && this.WeaponStatDefinitionCache.TryGetValue(statHash, out var cachedRecord))
+            {
+                return cachedRecord;
+            }
+
             var record = this.WorldSqlContent.GetDestinyStatDefinition(statHash);
 
             dynamic jsonDynamic = JsonConvert.DeserializeObject(record);
@@ -178,6 +200,11 @@
                 Description = jsonDynamic.displayProperties.description,
                 Interpolate =jsonDynamic.interpolate
             };
+
+            if (this.ProviderOptions.EnableCaching)
+            {
+                this.WeaponStatDefinitionCache.Add(statHash, weaponStatDefinition);
+            }
 
             return weaponStatDefinition;
         }
