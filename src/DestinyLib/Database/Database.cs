@@ -22,17 +22,17 @@
         /// </remarks>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public static void TestConnection(string fileName)
+        public static void TestConnection(FileInfo fileName)
         {
-            if (!File.Exists(fileName))
+            if (!fileName.Exists)
             {
-                throw new IOException($"File does not exist: '{fileName}'");
+                throw new IOException($"File does not exist: '{fileName.FullName}'");
             }
 
             var connectionString = MakeConnectionString(fileName);
             if (!TestConnectionInternal(connectionString))
             {
-                throw new SystemException($"Test connection to database failed: {fileName}");
+                throw new SystemException($"Test connection to database failed: {fileName.FullName}");
             }
         }
 
@@ -106,6 +106,6 @@
             return null;
         }
 
-        public static string MakeConnectionString(string filePath) => $"Data Source={filePath}";
+        public static string MakeConnectionString(FileInfo filePath) => $"Data Source={filePath.FullName}";
     }
 }

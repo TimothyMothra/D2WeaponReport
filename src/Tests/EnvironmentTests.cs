@@ -16,7 +16,7 @@ namespace Tests
         [TestMethod]
         public void VerifyRootMarker()
         {
-            var filePath = LibEnvironment.GetDatabaseFile("world_sql_content");
+            var filePath = LibEnvironment.GetDatabaseFilePath("world_sql_content");
             Assert.IsTrue(File.Exists(filePath));
         }
     }

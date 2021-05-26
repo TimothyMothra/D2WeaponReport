@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text.RegularExpressions;
 
@@ -20,7 +21,7 @@
 
         static SearchForWeaponScenario()
         {
-            var dbPath = LibEnvironment.GetDatabaseFile("world_sql_content");
+            var dbPath = new FileInfo(LibEnvironment.GetDatabaseFilePath("world_sql_content"));
             var worldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));
             var WorldSqlContentProvider = new WorldSqlContentProvider(worldSqlContent, ProviderOptions.ScenarioDefault);
             searchableWeapons = WorldSqlContentProvider.GetSearchableWeapons();

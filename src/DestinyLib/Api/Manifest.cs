@@ -53,7 +53,7 @@
 
                 UnzipContent(downloadFilePath, directory);
 
-                var assumedFilePath = Path.Combine(directory, fileName);
+                var assumedFilePath = new FileInfo(Path.Combine(directory, fileName));
                 Database.TestConnection(assumedFilePath);
             }
             catch(HttpRequestException ex)

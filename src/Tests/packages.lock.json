@@ -1083,7 +1083,8 @@
         "dependencies": {
           "Microsoft.Data.Sqlite": "6.0.0-preview.2.21154.2",
           "Microsoft.Data.Sqlite.Core": "6.0.0-preview.2.21154.2",
-          "Newtonsoft.Json": "13.0.1"
+          "Newtonsoft.Json": "13.0.1",
+          "System.IO.FileSystem": "4.3.0"
         }
       }
     }

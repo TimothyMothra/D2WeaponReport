@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.IO;
     using System.Linq;
 
     using DestinyLib;
@@ -21,7 +22,7 @@
 
         public WorldSqlContentProviderTests()
         {
-            var dbPath = LibEnvironment.GetDatabaseFile("world_sql_content");
+            var dbPath = new FileInfo(LibEnvironment.GetDatabaseFilePath("world_sql_content"));
             this.WorldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));
 
             // TODO: Tests should use their own ProviderOptions. eventually scenarios will use caching.

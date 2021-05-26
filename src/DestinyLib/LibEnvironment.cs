@@ -55,7 +55,7 @@
             return environmentDirectory;
         }
 
-        public static string GetDatabaseFile(string fileNamePrefix)
+        public static string GetDatabaseFilePath(string fileNamePrefix)
         {
             DirectoryInfo di = new DirectoryInfo(EnvironmentDirectory);
             FileInfo[] files = di.GetFiles($"{fileNamePrefix}*.content");
