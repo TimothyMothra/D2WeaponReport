@@ -25,9 +25,7 @@
         /// This test will get all weapons and attempt to parse them.
         /// If any test fails, likely something breaks the expected data schema.
         /// </summary>
-#if DEBUG
-        [Ignore] // DISABLE LOCALLY. // TODO: CONVERT TO PARAM-BASED PRE-PROCESSOR https://stackoverflow.com/questions/43836548/define-c-sharp-preprocessor-from-msbuild/51782647
-#endif
+        //[Ignore] // DISABLE LOCALLY. // TODO: CONVERT TO PARAM-BASED PRE-PROCESSOR https://stackoverflow.com/questions/43836548/define-c-sharp-preprocessor-from-msbuild/51782647
         [TestMethod]
         public void TestCanParseWeapons()
         {
