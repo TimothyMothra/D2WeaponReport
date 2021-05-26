@@ -48,7 +48,7 @@
             };
 
             // Stats
-#region Weapon Definition Stats
+            #region Weapon Definition Stats
             var statCollectionDynamic = jsonDynamic.stats.stats;
             foreach (var statDynamic in statCollectionDynamic)
             {
@@ -91,8 +91,8 @@
             foreach(var i in weaponPerkIndexes)
             {
                 var socketEntryDynamic = socketEntriesDynamic[i];
-                // TODO: Bungie could introduce new things at anytime that break parsing.
-                // Instead of referencing types to exclude, should identify types to include.
+                // TODO: Instead of referencing types to exclude, should identify types to include.
+                // Bungie could introduce new things at anytime that break parsing.
                 if (socketEntryDynamic.socketTypeHash == (uint)1282012138 // ignore Tracker (example: ??)
                     || socketEntryDynamic.socketTypeHash == (uint)2575784089) // ignore Ticuu's Divination "stocks" (example: ??)
                 {
@@ -103,7 +103,7 @@
                 var perkSet = new WeaponDefinition.PerkSet
                 {
                     SocketIndex = i,
-                    SocketTypeHash = socketEntryDynamic.socketTypeHash,
+                    SocketTypeHash = socketEntryDynamic.socketTypeHash, //TODO: RELATED TO ABOVE COMMENT. I DON'T KNOW WHAT ALL OF THESE ARE YET.
                     PlugSetHash = socketEntryDynamic.randomizedPlugSetHash ?? socketEntryDynamic.reusablePlugSetHash,
                     Perks = null,
                 };
