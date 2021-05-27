@@ -39,12 +39,12 @@
                 {
                     Id = jsonDynamic.hash,
                     Name = jsonDynamic.displayProperties.name,
-                    AmmoTypeId = jsonDynamic.equippingBlock.ammoType.ToString(), //TODO: Need to identify Ammo Type (example: ??)
+                    AmmoTypeId = jsonDynamic.equippingBlock.ammoType.ToString(), //TODO: Need to identify "" Ammo Type (example: "Energy Weapons")
                     TierTypeName = jsonDynamic.inventory.tierTypeName,
                     DefaultDamageTypeId = jsonDynamic.defaultDamageType,
                     DefaultDamageTypeHash = jsonDynamic.defaultDamageTypeHash,
                     FlavorText = jsonDynamic.flavorText,
-                    ItemTypeId = jsonDynamic.itemSubType, //TODO: Need to identity item Sub Type (example: ??)
+                    ItemTypeId = jsonDynamic.itemSubType, //TODO: Need to identity Weapon Type (example: "enum DestinyItemSubType "AutoRifle"")
                 },
                 Stats = new List<WeaponDefinition.WeaponStat>(),
                 PerkSets = new List<WeaponDefinition.PerkSet>(),
@@ -176,7 +176,6 @@
             return perk;
         }
 
-        // TODO: These definitions need to be cached.
         public WeaponStatDefinition GetWeaponStatDefinition(uint statHash)
         {
             if (this.ProviderOptions.EnableCaching && this.WeaponStatDefinitionCache.TryGetValue(statHash, out var cachedRecord))

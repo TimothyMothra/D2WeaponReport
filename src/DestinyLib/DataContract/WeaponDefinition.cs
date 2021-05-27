@@ -60,7 +60,7 @@
 
         public class Perk
         {
-            // TODO: ICON
+            // TODO: Will need Perk Icon.
             //public bool IsPerk { get; set; }
             //public bool IsMod { get; set; }
             //public bool IsMasterwork { get; set; }

@@ -29,7 +29,7 @@
         [TestMethod]
         public void TestCanParseWeapons()
         {
-            var worldSqlContentProvider = new WorldSqlContentProvider(this.WorldSqlContent, new ProviderOptions { EnableCaching = true });
+            var worldSqlContentProvider = new WorldSqlContentProvider(this.WorldSqlContent, ProviderOptions.TestWithCaching );
 
             var weapons = worldSqlContentProvider.GetSearchableWeapons();
 
