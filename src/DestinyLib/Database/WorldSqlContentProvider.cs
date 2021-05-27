@@ -127,7 +127,6 @@
             dynamic plugSetDefinitionDynamic = JsonConvert.DeserializeObject(plugSetDefinitionRecord);
             foreach (var plug in plugSetDefinitionDynamic.reusablePlugItems)
             {
-                // TODO: Perk Definitions need to be cached
                 var perk = this.GetWeaponDefinitionPerk((uint)plug.plugItemHash);
                 perks.Add(perk);
             }
