@@ -29,7 +29,6 @@
         [TestMethod]
         public void TestCanParseWeapons()
         {
-            // TODO: CONSIDER MOVING THIS METHOD TO A NEW CLASS FOR STRESS TESTS.
             var worldSqlContentProvider = new WorldSqlContentProvider(this.WorldSqlContent, new ProviderOptions { EnableCaching = true });
 
             var weapons = worldSqlContentProvider.GetSearchableWeapons();
