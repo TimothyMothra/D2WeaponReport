@@ -1,5 +1,6 @@
 ﻿namespace Tests
 {
+    using System.Diagnostics;
     using System.IO;
     using System.Linq;
 
@@ -75,6 +76,7 @@
 
             uint hashId = 3661387068;
             int id = unchecked((int)hashId);
+            Debug.WriteLine($"hash: {hashId}; uint: {id}");
 
             var record = this.WorldSqlContent.GetDestinyInventoryItemDefinition(hashId);
             dynamic jsonDynamic = JsonConvert.DeserializeObject(record);

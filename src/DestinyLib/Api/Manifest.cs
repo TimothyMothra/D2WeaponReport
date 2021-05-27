@@ -14,7 +14,7 @@
     {
         private const string BungieHostName = "https://www.bungie.net";
         private const string ManifestUri = "https://www.bungie.net/platform/Destiny2/Manifest";
-        private readonly HttpClient httpClient = new HttpClient();
+        private readonly HttpClient httpClient = new();
         private readonly Uri BungieHostUri;
 
         public Manifest()
@@ -80,7 +80,7 @@
             }
         }
 
-        public void UnzipContent(string filePath, string outputDirectory)
+        public static void UnzipContent(string filePath, string outputDirectory)
         {
             ZipFile.ExtractToDirectory(filePath, outputDirectory);
         }

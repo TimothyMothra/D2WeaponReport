@@ -14,8 +14,8 @@
 
         private readonly ProviderOptions ProviderOptions;
 
-        private readonly Dictionary<uint, WeaponStatDefinition> WeaponStatDefinitionCache = new Dictionary<uint, WeaponStatDefinition>();
-        private readonly Dictionary<uint, WeaponDefinition.Perk> WeaponDefinitionPerkCache = new Dictionary<uint, WeaponDefinition.Perk>();
+        private readonly Dictionary<uint, WeaponStatDefinition> WeaponStatDefinitionCache = new();
+        private readonly Dictionary<uint, WeaponDefinition.Perk> WeaponDefinitionPerkCache = new();
 
         public WorldSqlContentProvider(WorldSqlContent worldSqlContent, ProviderOptions providerOptions)
         {
