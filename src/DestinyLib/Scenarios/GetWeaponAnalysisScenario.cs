@@ -2,19 +2,21 @@
 {
     using System.IO;
 
+    using DestinyLib.Analysis;
     using DestinyLib.Database;
-    using DestinyLib.DataContract;
 
-    // TODO: SCENARIOS WOULD BENEFIT FROM DEPENDENCY INJECTION
-    public static class GetWeaponDefinitionScenario
+    public static class GetWeaponAnalysisScenario
     {
-        public static WeaponDefinition Run(uint id)
+        public static void Run(uint id)
         {
             var dbPath = new FileInfo(LibEnvironment.GetDatabaseFilePath("world_sql_content"));
             var worldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));
             var WorldSqlContentProvider = new WorldSqlContentProvider(worldSqlContent, ProviderOptions.ScenarioDefault);
+
+            // First get WeaponDefinition
             var weaponDefinition = WorldSqlContentProvider.GetWeaponDefinition(id);
-            return weaponDefinition;
+
+            WeaponAnalysis.GetAllPossibleValues(weaponDefinition);
         }
     }
 }
