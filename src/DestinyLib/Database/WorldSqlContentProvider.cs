@@ -145,7 +145,7 @@
             var perkRecord = this.WorldSqlContent.GetDestinyInventoryItemDefinition(plugItemHash);
             dynamic perkDynamic = JsonConvert.DeserializeObject(perkRecord);
 
-            dynamic perkValuesDynamic = perkDynamic.investmentStats; // TODO: PARSE THIS COLLECTION
+            dynamic perkValuesDynamic = perkDynamic.investmentStats;
 
             var perkValues = new List<WeaponDefinition.PerkValue>();
             foreach (var perkValueDynamic in perkValuesDynamic)
