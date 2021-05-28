@@ -7,6 +7,7 @@
 
     using DestinyLib;
     using DestinyLib.Database;
+    using DestinyLib.Scenarios;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -52,6 +53,21 @@
                 failedIds.ForEach(x => Debug.WriteLine(x));
 
                 Assert.Fail($"Failed to parse {failedIds.Count} weaponsIds");
+            }
+        }
+
+        [TestMethod]
+        public void TestAnalysis()
+        {
+            var worldSqlContentProvider = new WorldSqlContentProvider(this.WorldSqlContent, ProviderOptions.TestWithCaching);
+
+            var weapons = worldSqlContentProvider.GetSearchableWeapons();
+
+
+            foreach (var weapon in weapons)
+            {
+                // TODO, NEED TO PASS IN MY OWN PROVIDER.
+                GetWeaponAnalysisScenario.Run(weapon.HashId);
             }
         }
     }

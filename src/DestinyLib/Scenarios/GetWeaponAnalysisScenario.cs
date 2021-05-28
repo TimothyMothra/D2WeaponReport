@@ -7,6 +7,13 @@
 
     public static class GetWeaponAnalysisScenario
     {
+        /// <summary>
+        /// (https://github.com/mathnet/mathnet-numerics).
+        /// (https://numerics.mathdotnet.com/DescriptiveStatistics.html).
+        /// (https://plotly.com/javascript/box-plots/).
+        /// (https://en.wikipedia.org/wiki/Box_plot).
+        /// </summary>
+        /// <param name="id"></param>
         public static void Run(uint id)
         {
             var dbPath = new FileInfo(LibEnvironment.GetDatabaseFilePath("world_sql_content"));
