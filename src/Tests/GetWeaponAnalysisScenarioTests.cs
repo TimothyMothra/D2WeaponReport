@@ -13,10 +13,10 @@
         public void VerifyGet()
         {
             uint id_gnawingHunger = 821154603;
-            uint id_chromaRush = 1119734784;
-            uint id_crownSplitter = 741454304;
+            //uint id_chromaRush = 1119734784;
+            //uint id_crownSplitter = 741454304;
 
-            GetWeaponAnalysisScenario.Run(id_crownSplitter);
+            GetWeaponAnalysisScenario.Run(id_gnawingHunger);
         }
     }
 }
