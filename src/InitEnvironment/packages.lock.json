@@ -2,6 +2,11 @@
   "version": 1,
   "dependencies": {
     ".NETCoreApp,Version=v5.0": {
+      "MathNet.Numerics.Signed": {
+        "type": "Transitive",
+        "resolved": "4.15.0",
+        "contentHash": "LFjukMRatkg9dgRM7U/gM4uKgaWAX7E0lt3fsVDTPdtBIVuh7uPlksDie290br1/tv1a4Ar/Bz9ywCPSL8PhHg=="
+      },
       "Microsoft.Data.Sqlite": {
         "type": "Transitive",
         "resolved": "6.0.0-preview.2.21154.2",
@@ -147,6 +152,7 @@
       "destinylib": {
         "type": "Project",
         "dependencies": {
+          "MathNet.Numerics.Signed": "4.15.0",
           "Microsoft.Data.Sqlite": "6.0.0-preview.2.21154.2",
           "Microsoft.Data.Sqlite.Core": "6.0.0-preview.2.21154.2",
           "Newtonsoft.Json": "13.0.1",
