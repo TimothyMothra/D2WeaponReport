@@ -10,7 +10,7 @@
 
     public static class WeaponAnalysis
     {
-        public static void GetAllPossibleValues(WeaponDefinition weaponDefinition)
+        public static WeaponSummary GetAllPossibleValues(WeaponDefinition weaponDefinition)
         {
             /// TODO: P1: CALCULATE ALL POSSIBLE VALUES --** PICK UP HERE **
             /// Need a holder for the Weapon Stats
@@ -89,29 +89,8 @@
                 }
             }
 
-
-            // now that i have all permutations, calculate percentiles.
-            permutations.Sort();
-
-            var test = string.Join(",", permutations);
-
-
-            var permutationsEnumerable = permutations.AsEnumerable();
-
-            var summary = new WeaponSummary
-            {
-                Base = baseTotalPoints,
-                Minimum = Statistics.Percentile(permutationsEnumerable, 0),
-                FirstQuartile = Statistics.Percentile(permutationsEnumerable, 25),
-                Median = Statistics.Percentile(permutationsEnumerable, 50),
-                ThirdQuartile = Statistics.Percentile(permutationsEnumerable, 75),
-                Maximum = Statistics.Percentile(permutationsEnumerable, 100),
-            };
-
-
-            
-
-
+            var summary = new WeaponSummary(baseTotalPoints, permutations);
+            return summary;
         }
     }
 }

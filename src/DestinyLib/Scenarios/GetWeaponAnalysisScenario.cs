@@ -14,7 +14,7 @@
         /// (https://en.wikipedia.org/wiki/Box_plot).
         /// </summary>
         /// <param name="id"></param>
-        public static void Run(uint id)
+        public static WeaponSummary Run(uint id)
         {
             var dbPath = new FileInfo(LibEnvironment.GetDatabaseFilePath("world_sql_content"));
             var worldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));
@@ -23,7 +23,7 @@
             // First get WeaponDefinition
             var weaponDefinition = WorldSqlContentProvider.GetWeaponDefinition(id);
 
-            WeaponAnalysis.GetAllPossibleValues(weaponDefinition);
+            return WeaponAnalysis.GetAllPossibleValues(weaponDefinition);
         }
     }
 }

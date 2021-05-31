@@ -13,6 +13,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConsoleApps", "ConsoleApps"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DestinyInteractiveSandbox", "DestinyInteractiveSandbox\DestinyInteractiveSandbox.csproj", "{76DB9CE9-6692-416A-A2CE-411B8B76513F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApp", "WebApp", "{29D60823-0D1D-45DD-8CED-EC4F6D774D2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SandboxWeb", "SandboxWeb\SandboxWeb.csproj", "{54C124C5-7913-4BBE-947B-98B69B0DF75F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +39,10 @@ Global
 		{76DB9CE9-6692-416A-A2CE-411B8B76513F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76DB9CE9-6692-416A-A2CE-411B8B76513F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76DB9CE9-6692-416A-A2CE-411B8B76513F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54C124C5-7913-4BBE-947B-98B69B0DF75F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54C124C5-7913-4BBE-947B-98B69B0DF75F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54C124C5-7913-4BBE-947B-98B69B0DF75F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54C124C5-7913-4BBE-947B-98B69B0DF75F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -42,6 +50,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{26222301-9767-4C6D-A57B-CEDAE260E681} = {2217BBF9-AA3F-4114-B14F-4276E9797868}
 		{76DB9CE9-6692-416A-A2CE-411B8B76513F} = {2217BBF9-AA3F-4114-B14F-4276E9797868}
+		{54C124C5-7913-4BBE-947B-98B69B0DF75F} = {29D60823-0D1D-45DD-8CED-EC4F6D774D2E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {15FD7C08-8067-498D-8915-6AB90E53EDF3}

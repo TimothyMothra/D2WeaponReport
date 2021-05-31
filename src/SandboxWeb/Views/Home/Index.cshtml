@@ -1,0 +1,64 @@
+﻿@model SandboxWeb.Models.PermutationsModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+Search
+
+<div class="text-center">
+
+    <a href="Home/Index/2891672170">Xenoclast</a>
+
+</div>
+
+<hr />
+
+Summary
+<div class="text-center">
+
+    <h1 class="display-4">
+        @Html.DisplayFor(x => x.Name)
+    </h1>
+    
+    <p>
+        BaseValue: @Html.DisplayFor(x => x.BaseValue)
+    </p>
+    
+    <p>
+        Number of Permutations @Html.DisplayFor(x => x.PermutationsCount)
+    </p>
+
+    <p id="permutations" style="display:none">
+        @Html.DisplayFor(x => x.Values)
+    </p>
+
+    
+    <div id="plot" style="width:600px;height:500px;"></div>
+    
+
+</div>
+<!-- Latest compiled and minified plotly.js JavaScript -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<script lang="javascript">
+
+var permutations = document.getElementById("permutations").innerText.split(',');
+
+console.log(permutations);
+
+var data = [
+  {
+    //y: [0, 1, 1, 2, 3, 5, 8, 13, 21],
+    y: permutations,
+    boxpoints: 'all',
+    jitter: 0.3,
+    pointpos: -1.8,
+    type: 'box'
+  }
+];
+
+//TESTER = document.getElementById();
+Plotly.newPlot('plot', data);    
+
+</script>

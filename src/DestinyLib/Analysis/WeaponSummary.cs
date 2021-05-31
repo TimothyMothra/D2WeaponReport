@@ -1,10 +1,31 @@
-﻿namespace DestinyLib.Analysis
+﻿using System.Collections.Generic;
+using System.Linq;
+
+using MathNet.Numerics.Statistics;
+
+namespace DestinyLib.Analysis
 {
     /// <summary>
     /// https://en.wikipedia.org/wiki/Box_plot
     /// </summary>
     public class WeaponSummary
     {
+
+        public WeaponSummary(double baseValue, List<double> permutations)
+        {
+            //TODO: UNIT TEST THIS AND CONFIRM IF SORT IS NEEDED
+            permutations.Sort();
+            var permutationsEnumerable = permutations.AsEnumerable();
+
+            this.Base = baseValue;
+            this.Minimum = Statistics.Percentile(permutationsEnumerable, 0);
+            this.FirstQuartile = Statistics.Percentile(permutationsEnumerable, 25);
+            this.Median = Statistics.Percentile(permutationsEnumerable, 50);
+            this.ThirdQuartile = Statistics.Percentile(permutationsEnumerable, 75);
+            this.Maximum = Statistics.Percentile(permutationsEnumerable, 100);
+            this.Permutations = permutations.AsEnumerable();
+        }
+
         /// <summary>
         /// This is the base value of the weapon stats, without perks.
         /// </summary>
@@ -34,5 +55,9 @@
         /// 100th percentile: the largest data point.
         /// </summary>
         public double Maximum { get; set; }
+
+        public IEnumerable<double> Permutations { get; set; }
+
+        public string PermutationsAsString() => string.Join(",", this.Permutations);
     }
 }
