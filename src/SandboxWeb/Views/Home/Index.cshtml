@@ -4,26 +4,42 @@
     ViewData["Title"] = "Home Page";
 }
 
-Search
+@*// Razor Syntax: https://www.tutorialsteacher.com/mvc/razor-syntax*@
 
-<div class="text-center">
+<div>
+    Search by Name
+    <div>
+    <p>// TODO: IMPLEMENT SEARCH BY NAME.</p>
+    </div>
 
-    <a href="Home/Index/2891672170">Xenoclast</a>
+    Search By Id
+    <div>
+    <p>Use https://data.destinysets.com/ to search for a weapon's InventoryId (in the url). </p>
+
+    <input type="text" id="result" size="20">
+    <input type="button" value="Search" name="no" onclick="ButtonClick_Test()"> 
+    </div>
+
+    Examples:
+    <div>
+    <ul>
+        <li><a href="~/Home/Index/2891672170">Xenoclast IV</a></li>
+        <li><a href="~/Home/Index/821154603">Gnawing Hunger</a></li>
+        <li><a href="~/Home/Index/3654674561">Dead Man's Tale</a></li>
+        <li><a href="~/Home/Index/3856705927">Hawkmoon</a></li>
+    </ul>
+    </div>
 
 </div>
 
 <hr />
 
-Summary
-<div class="text-center">
 
-    <h1 class="display-4">
-        @Html.DisplayFor(x => x.Name)
-    </h1>
+@*<div class="text-center">*@
+<div>
+    <h1 class="display-4">@Html.DisplayFor(x => x.Name)</h1>
     
-    <p>
-        BaseValue: @Html.DisplayFor(x => x.BaseValue)
-    </p>
+    <p>BaseValue: @Html.DisplayFor(x => x.BaseValue)</p>
     
     <p>
         Number of Permutations @Html.DisplayFor(x => x.PermutationsCount)
@@ -43,6 +59,9 @@ Summary
 
 <script lang="javascript">
 
+// https://github.com/plotly/plotly.js
+// https://plotly.com/javascript/box-plots/
+
 var permutations = document.getElementById("permutations").innerText.split(',');
 
 console.log(permutations);
@@ -60,5 +79,21 @@ var data = [
 
 //TESTER = document.getElementById();
 Plotly.newPlot('plot', data);    
+
+</script>
+
+<script>
+ // TODO: TYPESCRIPT   
+
+function ButtonClick_Test()
+{
+    var input = document.getElementById("result").value;
+    
+    window.location.href = "/Home/Index/" + input
+
+    
+    
+}
+
 
 </script>
