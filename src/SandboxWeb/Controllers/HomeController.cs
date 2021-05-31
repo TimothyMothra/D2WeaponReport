@@ -3,9 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
 
+    using DestinyLib;
+    using DestinyLib.Database;
     using DestinyLib.Scenarios;
 
     using Microsoft.AspNetCore.Mvc;
@@ -17,9 +20,16 @@
     {
         private readonly ILogger<HomeController> _logger;
 
+        private readonly WorldSqlContentProvider worldSqlContentProvider;
+
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+
+            // TODO: DEPENDENCY INJECTION and CACHING
+            var dbPath = new FileInfo(LibEnvironment.GetDatabaseFilePath("world_sql_content"));
+            var worldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));
+            this.worldSqlContentProvider = new WorldSqlContentProvider(worldSqlContent, ProviderOptions.ScenarioDefault);
         }
 
         /// <summary>
@@ -30,35 +40,48 @@
         /// <returns></returns>
         public IActionResult Index(string id)
         {
-            PermutationsModel model;
+
+            var weapons = this.worldSqlContentProvider.GetSearchableWeapons();
+            var weaponNames = weapons.Select(x => x.Name);
+
+
+            var model = new PermutationsViewModel
+            { 
+                WeaponNames = string.Join(",", weaponNames),
+            };
 
             if (id == null)
             {
-                model = new PermutationsModel { Name = "No id provided" };
+                model.Summary = null;
             }
             else if (UInt32.TryParse(id, out uint hash))
             {
-                try
-                {
-                    var definition = GetWeaponDefinitionScenario.Run(hash);
-                    var weaponSummary = GetWeaponAnalysisScenario.Run(hash);
+                var definition = GetWeaponDefinitionScenario.Run(hash);
+                var weaponSummary = GetWeaponAnalysisScenario.Run(hash);
 
-                    model = new PermutationsModel
-                    {
-                        Name = definition.MetaData.Name,
-                        BaseValue = weaponSummary.Base.ToString(),
-                        Values = weaponSummary.PermutationsAsString(),
-                        PermutationsCount = weaponSummary.Permutations.Count().ToString(),
-                    };
-                }
-                catch (Exception ex)
+                model.Summary = new()
                 {
-                    model = new PermutationsModel { Name = ex.ToString() };
-                }
+                    Name = definition.MetaData.Name,
+                    BaseValue = weaponSummary.Base.ToString(),
+                    Values = weaponSummary.PermutationsAsString(),
+                    PermutationsCount = weaponSummary.Permutations.Count().ToString(),
+                };
             }
             else
             {
-                model = new PermutationsModel { Name = id };
+                var searchRecord = SearchForWeaponScenario.Run(id, SearchForWeaponScenario.SearchType.StringContains).Single();
+                var hashid = searchRecord.HashId;
+
+                var definition = GetWeaponDefinitionScenario.Run(hashid);
+                var weaponSummary = GetWeaponAnalysisScenario.Run(hashid);
+
+                model.Summary = new()
+                {
+                    Name = definition.MetaData.Name,
+                    BaseValue = weaponSummary.Base.ToString(),
+                    Values = weaponSummary.PermutationsAsString(),
+                    PermutationsCount = weaponSummary.Permutations.Count().ToString(),
+                };
             }
 
             return View(model);
