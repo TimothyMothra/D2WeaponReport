@@ -46,55 +46,7 @@
         window.location.href = "/Home/Index/" + input
     }
     </script>
-    </div>
-
-</div>
-
-<hr />
-
-
-
-
-<div>
-@if(this.Model.Summary != null)
-{
-    <h1 class="display-4">@Html.DisplayFor(x => x.Summary.Name)</h1>
     
-    <p>BaseValue: @Html.DisplayFor(x => x.Summary.BaseValue)</p>
-    
-    <p>
-        Number of Permutations @Html.DisplayFor(x => x.Summary.PermutationsCount)
-    </p>
-
-    <p id="permutations" style="display:none">
-        @Html.DisplayFor(x => x.Summary.Values)
-    </p>
-    
-    <div id="plot" style="width:600px;height:500px;"></div>
-}
-    <script lang="javascript">
-    // https://github.com/plotly/plotly.js
-    // https://plotly.com/javascript/box-plots/
-
-    var permutations = document.getElementById("permutations").innerText.split(',');
-    console.log(permutations);
-
-    var data = [
-      {
-        //y: [0, 1, 1, 2, 3, 5, 8, 13, 21],
-        y: permutations,
-        boxpoints: 'all',
-        jitter: 0.3,
-        pointpos: -1.8,
-        type: 'box'
-      }
-    ];
-
-    Plotly.newPlot('plot', data);    
-
-    </script>
-</div>
-
 <script>
     
     var weaponNames = document.getElementById("weaponNames").innerText.split(',');
@@ -129,3 +81,80 @@
 });
 
 </script>
+    </div>
+
+</div>
+
+<hr />
+
+
+<div>
+
+<div>
+@if(this.Model.Summary != null)
+{
+
+    <p>Base Points: @Html.DisplayFor(x => x.Summary.BaseValue)</p>
+    
+    <p>Number of Permutations @Html.DisplayFor(x => x.Summary.PermutationsCount)</p>
+
+    <p id="weaponName" style="display:none">@Html.DisplayFor(x => x.Summary.Name)</p>
+    <p id="permutations" style="display:none">@Html.DisplayFor(x => x.Summary.Values)</p>
+    
+    <div id="plot" style="width:600px;height:500px;"></div>
+}
+    <script lang="javascript">
+    // https://github.com/plotly/plotly.js
+    // https://plotly.com/javascript/box-plots/
+
+    var weaponName = document.getElementById("weaponName").innerText;
+    var permutations = document.getElementById("permutations").innerText.split(',');
+
+    var data = [
+      {
+        type: 'box',
+        y: permutations,
+        name: '+/- points',
+        boxpoints: 'all',
+        jitter: 0.5,
+        whiskerwidth: 0.2,
+        fillcolor: 'cls',
+        marker: {
+            size: 2
+        },
+        line: {
+            width: 1
+        }
+    }
+    ];
+    layout = {
+    title: weaponName,
+    yaxis: {
+        autorange: true,
+        showgrid: true,
+        zeroline: true,
+        dtick: 5,
+        //gridcolor: 'rgb(255, 255, 255)',
+        gridwidth: 1,
+        zerolinecolor: 'rgb(255, 255, 255)',
+        zerolinewidth: 2
+    },
+    margin: {
+        l: 40,
+        r: 30,
+        b: 80,
+        t: 100
+    },
+    paper_bgcolor: 'rgb(243, 243, 243)',
+    plot_bgcolor: 'rgb(243, 243, 243)',
+    showlegend: false
+};
+
+Plotly.newPlot('plot', data, layout);
+
+
+    </script>
+</div>
+
+</div>
+
