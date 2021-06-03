@@ -33,7 +33,7 @@ namespace SandboxWeb
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
+                //app.UseBrowserLink(); // TODO: SETUP BROWSER LINK
             }
             else
             {

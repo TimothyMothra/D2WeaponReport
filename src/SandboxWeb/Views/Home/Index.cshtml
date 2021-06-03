@@ -101,7 +101,7 @@
     <p id="weaponName" style="display:none">@Html.DisplayFor(x => x.Summary.Name)</p>
     <p id="permutations" style="display:none">@Html.DisplayFor(x => x.Summary.Values)</p>
     
-    <div id="plot" style="width:600px;height:500px;"></div>
+    <div id="plotDiv" style="width:600px;height:500px;"></div>
 }
     <script lang="javascript">
     // https://github.com/plotly/plotly.js
@@ -150,10 +150,22 @@
     showlegend: false
 };
 
-Plotly.newPlot('plot', data, layout);
+Plotly.newPlot('plotDiv', data, layout);
 
 
     </script>
+</div>
+
+<div>
+@if(this.Model.Summary != null)
+{
+    <ul>
+        @foreach(var perkName in this.Model.Summary.PerkNames)
+        {
+            <li>@perkName</li>        
+        }
+    </ul>
+}
 </div>
 
 </div>

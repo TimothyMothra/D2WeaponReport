@@ -21,6 +21,7 @@
             public string BaseValue { get; set; }
             public string Values { get; set; }
             public string PermutationsCount { get; set; }
+            public List<string> PerkNames { get; set; }
         }
     }
 }

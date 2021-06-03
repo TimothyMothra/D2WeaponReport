@@ -43,7 +43,7 @@
             {
                 throw new ArgumentNullException(nameof(pattern));
             }
-            else if (!pattern.All(Char.IsLetterOrDigit))
+            else if (!pattern.All(Char.IsLetterOrDigit) || pattern.All(Char.IsWhiteSpace))
             {
                 throw new ArgumentException("must contain only letters or numbers", nameof(pattern));
             }

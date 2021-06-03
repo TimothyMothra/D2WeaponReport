@@ -11,11 +11,16 @@ namespace DestinyLib.Analysis
     public class WeaponSummary
     {
 
-        public WeaponSummary(double baseValue, List<double> permutations)
+        public WeaponSummary(double baseValue, List<WeaponPermutation> permutations)
         {
             //TODO: UNIT TEST THIS AND CONFIRM IF SORT IS NEEDED
-            permutations.Sort();
-            var permutationsEnumerable = permutations.AsEnumerable();
+
+            var values = permutations.Select(x => x.Value).ToList();
+            values.Sort();
+            var permutationsEnumerable = values.AsEnumerable();
+
+            //permutations.Sort();
+            //var permutationsEnumerable = permutations.AsEnumerable();
 
             this.Base = baseValue;
             this.Minimum = Statistics.Percentile(permutationsEnumerable, 0);
@@ -23,7 +28,7 @@ namespace DestinyLib.Analysis
             this.Median = Statistics.Percentile(permutationsEnumerable, 50);
             this.ThirdQuartile = Statistics.Percentile(permutationsEnumerable, 75);
             this.Maximum = Statistics.Percentile(permutationsEnumerable, 100);
-            this.Permutations = permutations.AsEnumerable();
+            this.Permutations = permutations;
         }
 
         /// <summary>
@@ -56,8 +61,8 @@ namespace DestinyLib.Analysis
         /// </summary>
         public double Maximum { get; set; }
 
-        public IEnumerable<double> Permutations { get; set; }
+        public IList<WeaponPermutation> Permutations { get; set; }
 
-        public string PermutationsAsString() => string.Join(",", this.Permutations);
+        public string PermutationsAsString() => string.Join(",", Permutations.Select(x => x.Value).AsEnumerable());
     }
 }

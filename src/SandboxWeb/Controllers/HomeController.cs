@@ -56,35 +56,34 @@
             }
             else if (UInt32.TryParse(id, out uint hash))
             {
-                var definition = GetWeaponDefinitionScenario.Run(hash);
-                var weaponSummary = GetWeaponAnalysisScenario.Run(hash);
-
-                model.Summary = new()
-                {
-                    Name = definition.MetaData.Name,
-                    BaseValue = weaponSummary.Base.ToString(),
-                    Values = weaponSummary.PermutationsAsString(),
-                    PermutationsCount = weaponSummary.Permutations.Count().ToString(),
-                };
+                model.Summary = GetSummaryDetails(hash);
             }
             else
             {
                 var searchRecord = SearchForWeaponScenario.Run(id, SearchForWeaponScenario.SearchType.StringContains).Single();
                 var hashid = searchRecord.HashId;
 
-                var definition = GetWeaponDefinitionScenario.Run(hashid);
-                var weaponSummary = GetWeaponAnalysisScenario.Run(hashid);
-
-                model.Summary = new()
-                {
-                    Name = definition.MetaData.Name,
-                    BaseValue = weaponSummary.Base.ToString(),
-                    Values = weaponSummary.PermutationsAsString(),
-                    PermutationsCount = weaponSummary.Permutations.Count().ToString(),
-                };
+                model.Summary = GetSummaryDetails(hashid);
             }
 
             return View(model);
+        }
+
+        private PermutationsViewModel.SummaryDetails GetSummaryDetails(uint hash)
+        {
+            var definition = GetWeaponDefinitionScenario.Run(hash);
+            var weaponSummary = GetWeaponAnalysisScenario.Run(hash);
+
+            var perkNames = weaponSummary.Permutations.OrderByDescending(x => x.Value).Select(x => x.ToDisplayString()).ToList();
+
+            return new()
+            {
+                Name = definition.MetaData.Name,
+                BaseValue = weaponSummary.Base.ToString(),
+                Values = weaponSummary.PermutationsAsString(),
+                PermutationsCount = weaponSummary.Permutations.Count().ToString(),
+                PerkNames = perkNames,
+            };
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
