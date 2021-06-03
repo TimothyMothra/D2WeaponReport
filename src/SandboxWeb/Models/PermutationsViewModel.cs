@@ -5,10 +5,26 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using DestinyLib.Analysis;
     using DestinyLib.DataContract;
 
     public class PermutationsViewModel
-    {
+    { 
+        // TODO: FINISH THIS
+    //    public PermutationsViewModel(WeaponDefinition weaponDefinition, WeaponSummary weaponSummary)
+    //    {
+    //        var perkNames = weaponSummary.Permutations.OrderByDescending(x => x.Value).Select(x => x.ToDisplayString()).ToList();
+
+    //        this.Summary = new()
+    //        {
+    //            Name = weaponDefinition.MetaData.Name,
+    //            BaseValue = weaponSummary.Base.ToString(),
+    //            Values = weaponSummary.PermutationsAsString(),
+    //            PermutationsCount = weaponSummary.Permutations.Count().ToString(),
+    //            PerkNames = perkNames,
+    //        };
+    //    }
+
 
         // TODO: HOW DO I RETURN AN ARRAY?
         public string WeaponNames { get; set; }

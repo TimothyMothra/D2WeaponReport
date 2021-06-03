@@ -43,6 +43,7 @@
             public int MinValue { get; set; }
             public int DisplayMaximum { get; set; }
             //public bool IsHidden { get; set; }
+            public bool Interpolate { get; set; } // TODO: NEED AN EXAMPLE TO WRITE THIS ALGORITHM
 
             public override string ToString()
             {

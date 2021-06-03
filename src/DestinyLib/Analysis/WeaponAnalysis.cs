@@ -2,19 +2,17 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
 
     using DestinyLib.DataContract;
-
-    using MathNet.Numerics.Statistics;
 
     public static class WeaponAnalysis
     {
         private const bool BehaviorIncludePerksWithNoValue = false;
+        private const bool BehaviorValidatePermutations = true;
 
         public static WeaponSummary GetAllPossibleValues(WeaponDefinition weaponDefinition)
         {
-            // Use Breadth-First traversal to calcualte all possible permutations.
+            // Use Breadth-First traversal to calculate all possible permutations.
 
             /// TODO: P1: CALCULATE ALL POSSIBLE VALUES --** PICK UP HERE **
             /// Need a holder for the Weapon Stats
@@ -33,7 +31,6 @@
 
             var perkSets = weaponDefinition.PerkSets;
 
-
             // BREADTH-FIRST
             List<WeaponPermutation> permutations = null;
 
@@ -46,23 +43,24 @@
                 //inner: Perk: 
                 foreach (var perk in perkSet.Perks)
                 {
-                    string perkName = perk.Name;
-                    double value = 0;
-
                     //inner: Perk.Values (Note: not all perks have values)
-
                     if (!BehaviorIncludePerksWithNoValue && perk.PerkValues == null)
                     {
                         continue;
                     }
-                    
 
 
+                    string perkName = perk.Name;
+                    //double value = 0;
+
+
+                    var perkValuesAsDictionary = new Dictionary<uint, double>();
                     if (perk.PerkValues != null) 
                     {
                         foreach (var values in perk.PerkValues)
                         {
-                            value += values.Value;
+                            perkValuesAsDictionary.CustomAdd(values.StatHash, values.Value);
+                            //value += values.Value;
                         }
                     }
 
@@ -72,16 +70,24 @@
 
                         foreach (var temp in tempPermutations)
                         {
-                            permutations.Add(new WeaponPermutation
+                            var newPermutation = new WeaponPermutation
                             {
                                 PerkNames = temp.PerkNames + $", {perkName}",
-                                Value = temp.Value + value
-                            });
+                                PerkHashAndValues = new Dictionary<uint, double>(temp.PerkHashAndValues.AsEnumerable()), // TODO: THIS IS VERY WASTEFUL
+                                //Value = temp.Value + value
+                            };
+
+                            foreach (var kvp in perkValuesAsDictionary)
+                            {
+                                newPermutation.PerkHashAndValues.CustomAdd(kvp.Key, kvp.Value);
+                            }
+
+                            permutations.Add(newPermutation);
                         }
                     }
                     else
                     {
-                        permutations.Add(new WeaponPermutation { PerkNames = perkName, Value = value });
+                        permutations.Add(new WeaponPermutation { PerkNames = perkName });
                     }
                 }
 
@@ -91,8 +97,25 @@
                 }
             }
 
+            if (BehaviorValidatePermutations)
+            {
+                permutations.ForEach(x => x.Validate(weaponDefinition.Stats));
+            }
+
             var summary = new WeaponSummary(baseTotalPoints, permutations);
             return summary;
+        }
+
+        private static void CustomAdd(this Dictionary<uint, double> dictionary, uint key, double value)
+        {
+            if (dictionary.ContainsKey(key))
+            {
+                dictionary[key] += value;
+            }
+            else
+            {
+                dictionary.Add(key, value);
+            }
         }
     }
 }

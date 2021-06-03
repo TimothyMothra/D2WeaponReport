@@ -1,11 +1,9 @@
 ﻿namespace SandboxWeb.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
-    using System.Threading.Tasks;
 
     using DestinyLib;
     using DestinyLib.Database;
@@ -40,10 +38,8 @@
         /// <returns></returns>
         public IActionResult Index(string id)
         {
-
             var weapons = this.worldSqlContentProvider.GetSearchableWeapons();
             var weaponNames = weapons.Select(x => x.Name);
-
 
             var model = new PermutationsViewModel
             { 
@@ -74,14 +70,14 @@
             var definition = GetWeaponDefinitionScenario.Run(hash);
             var weaponSummary = GetWeaponAnalysisScenario.Run(hash);
 
-            var perkNames = weaponSummary.Permutations.OrderByDescending(x => x.Value).Select(x => x.ToDisplayString()).ToList();
+            var perkNames = weaponSummary.Permutations.OrderByDescending(x => x.PerkSum).Select(x => x.ToDisplayString()).ToList();
 
             return new()
             {
                 Name = definition.MetaData.Name,
                 BaseValue = weaponSummary.Base.ToString(),
                 Values = weaponSummary.PermutationsAsString(),
-                PermutationsCount = weaponSummary.Permutations.Count().ToString(),
+                PermutationsCount = weaponSummary.Permutations.Count.ToString(),
                 PerkNames = perkNames,
             };
         }

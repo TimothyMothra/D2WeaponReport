@@ -11,7 +11,7 @@
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    [Ignore]
+    //[Ignore]
     [TestClass]
     public class StressTests
     {

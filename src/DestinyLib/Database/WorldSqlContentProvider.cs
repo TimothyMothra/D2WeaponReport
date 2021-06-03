@@ -63,6 +63,7 @@
                 {
                     Name = statDefinition.Name,
                     Description = statDefinition.Description,
+                    Interpolate = statDefinition.Interpolate,
                     StatHash = statHash,
                     Value = statDynamic.Value.value,
                     MinValue = statDynamic.Value.minimum,
@@ -196,7 +197,7 @@
                 Id = jsonDynamic.hash,
                 Name = jsonDynamic.displayProperties.name,
                 Description = jsonDynamic.displayProperties.description,
-                Interpolate =jsonDynamic.interpolate
+                Interpolate = jsonDynamic.interpolate
             };
 
             if (this.ProviderOptions.EnableCaching)
