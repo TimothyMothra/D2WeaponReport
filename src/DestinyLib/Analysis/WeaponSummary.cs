@@ -21,7 +21,7 @@ namespace DestinyLib.Analysis
 
             //TODO: UNIT TEST THIS AND CONFIRM IF SORT IS NEEDED
 
-            var values = permutations.Select(x => x.PerkSum).ToList();
+            var values = permutations.Select(x => x.MaxPoints).ToList();
             values.Sort();
             var permutationsEnumerable = values.AsEnumerable();
 
@@ -71,6 +71,6 @@ namespace DestinyLib.Analysis
 
         public IList<PerkPermutation> Permutations { get; set; }
 
-        public string PermutationsAsString() => string.Join(",", Permutations.Select(x => x.PerkSum).AsEnumerable());
+        public string PermutationsAsString() => string.Join(",", Permutations.Select(x => x.MaxPoints).AsEnumerable());
     }
 }

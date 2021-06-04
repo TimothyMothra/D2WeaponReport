@@ -50,6 +50,17 @@
             {
                 return $"[{StatHash}] {Name}";
             }
+
+            public bool IgnoreMaxValue()
+            {
+                // Some stats ignore their defined Max Value.
+                // id '2961396640' name 'Charge Time'
+                // id '4284893193' name 'Rounds Per Minute'
+                // id '447667954' name 'Draw Time'
+                // id '3871231066' name 'Magazine'
+
+                return (this.StatHash == 2961396640u || this.StatHash == 4284893193u || this.StatHash == 447667954u || this.StatHash == 3871231066u);
+            }
         }
 
         public class PerkSet

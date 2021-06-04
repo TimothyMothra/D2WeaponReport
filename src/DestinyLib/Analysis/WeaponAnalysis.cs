@@ -10,7 +10,7 @@
         private const bool BehaviorIncludePerksWithNoValue = false;
         private const bool BehaviorValidatePermutations = true;
 
-        public static WeaponSummary GetAllPossibleValues(WeaponDefinition weaponDefinition)
+        public static WeaponSummary GetWeaponSummary(WeaponDefinition weaponDefinition)
         {
             // Use Breadth-First traversal to calculate all possible permutations.
 

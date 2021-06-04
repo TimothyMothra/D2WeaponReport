@@ -1,10 +1,6 @@
 ﻿namespace Tests
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     using DestinyLib.Analysis;
     using DestinyLib.DataContract;
@@ -32,6 +28,25 @@
             },
         };
 
+        private readonly List<WeaponDefinition.WeaponStat> weirdBowStat = new()
+        {
+            // Draw Time on bows seems to ignore the maxValue
+            new WeaponDefinition.WeaponStat
+            {
+                StatHash = 111,
+                MaxValue = 100,
+                MinValue = 0,
+                Value = 651,
+            },
+            new WeaponDefinition.WeaponStat
+            {
+                StatHash = 222,
+                MaxValue = 50,
+                MinValue = 0,
+                Value = 25,
+            },
+        };
+
         [TestMethod]
         public void ValidateMethod_SinglePerk_IsCorrect()
         {
@@ -43,7 +58,7 @@
 
             perkPermutation.Validate(exampleWeaponStat);
 
-            Assert.AreEqual(4, perkPermutation.PerkSum);
+            Assert.AreEqual(4, perkPermutation.MaxPoints);
         }
 
         [TestMethod]
@@ -56,7 +71,7 @@
             };
 
             perkPermutation.Validate(exampleWeaponStat);
-            Assert.AreEqual(14, perkPermutation.PerkSum);
+            Assert.AreEqual(14, perkPermutation.MaxPoints);
         }
 
         [TestMethod]
@@ -69,7 +84,7 @@
             };
 
             perkPermutation.Validate(exampleWeaponStat);
-            Assert.AreEqual(5, perkPermutation.PerkSum);
+            Assert.AreEqual(5, perkPermutation.MaxPoints);
         }
 
         [TestMethod]
@@ -82,7 +97,7 @@
             };
 
             perkPermutation.Validate(exampleWeaponStat);
-            Assert.AreEqual(-5, perkPermutation.PerkSum);
+            Assert.AreEqual(-5, perkPermutation.MaxPoints);
         }
     }
 }

@@ -15,8 +15,10 @@
             //uint id_gnawingHunger = 821154603;
             //uint id_chromaRush = 1119734784;
             //uint id_crownSplitter = 741454304;
+            uint id_arsenicBite = 720351795;
 
-            var summary = GetWeaponAnalysisScenario.Run(id_deadmanstale);
+            //var summary = GetWeaponAnalysisScenario.Run(id_deadmanstale);
+            var summary = GetWeaponAnalysisScenario.Run(id_arsenicBite);
         }
 
         [TestMethod]

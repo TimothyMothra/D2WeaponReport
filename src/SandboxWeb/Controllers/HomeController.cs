@@ -70,7 +70,7 @@
             var definition = GetWeaponDefinitionScenario.Run(hash);
             var weaponSummary = GetWeaponAnalysisScenario.Run(hash);
 
-            var perkNames = weaponSummary.Permutations.OrderByDescending(x => x.PerkSum).Select(x => x.ToDisplayString()).ToList();
+            var perkNames = weaponSummary.Permutations.OrderByDescending(x => x.MaxPoints).Select(x => x.ToDisplayString()).ToList();
 
             return new()
             {

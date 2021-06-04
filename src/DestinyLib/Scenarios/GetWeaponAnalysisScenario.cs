@@ -23,7 +23,7 @@
             // First get WeaponDefinition
             var weaponDefinition = WorldSqlContentProvider.GetWeaponDefinition(id);
 
-            return WeaponAnalysis.GetAllPossibleValues(weaponDefinition);
+            return WeaponAnalysis.GetWeaponSummary(weaponDefinition);
         }
     }
 }

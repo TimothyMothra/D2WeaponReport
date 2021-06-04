@@ -71,6 +71,12 @@
                     DisplayMaximum = statDynamic.Value.displayMaximum,
                 };
 
+                // ASSUMPTION: MaxValue is never used.
+                if (stat.MaxValue != 0)
+                {
+                    throw new($"weapon id {id} name {weaponDefinition.MetaData.Name} | stat id {stat.StatHash} name {stat.Name} value {stat.Value} max {stat.MaxValue} displayMax {stat.DisplayMaximum}");
+                }
+
                 weaponDefinition.Stats.Add(stat);
             }
             #endregion

@@ -43,8 +43,11 @@
                 {
                     _ = worldSqlContentProvider.GetWeaponDefinition(weapon.HashId);
                 }
-                catch
+                catch(Exception ex)
                 {
+                    Console.WriteLine($"{weapon.HashId} { weapon.Name}");
+                    Console.WriteLine(ex.Message);
+
                     failedIds.Add(weapon.ToString());
                 }
             }
