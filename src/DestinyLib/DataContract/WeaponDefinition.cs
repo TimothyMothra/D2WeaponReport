@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class WeaponDefinition
     {
@@ -57,6 +58,18 @@
             public uint SocketTypeHash { get; set; }
             public uint PlugSetHash { get; set; }
             public IList<Perk> Perks;
+
+            public override string ToString()
+            {
+                if (Perks != null && Perks.Count > 0)
+                {
+                    return $"index {this.SocketIndex} plugsethash {this.PlugSetHash} perks: " + string.Join(",", Perks.Select(x => x.Name));
+                }
+                else
+                {
+                    return "";
+                }
+            }
         }
 
         public class Perk

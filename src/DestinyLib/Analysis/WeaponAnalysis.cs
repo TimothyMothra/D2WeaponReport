@@ -32,13 +32,13 @@
             var perkSets = weaponDefinition.PerkSets;
 
             // BREADTH-FIRST
-            List<WeaponPermutation> permutations = null;
+            List<PerkPermutation> permutations = null;
 
             // outer: PerkSets
             foreach(var perkSet in perkSets)
             {
-                var tempPermutations = permutations ?? new List<WeaponPermutation>();
-                permutations = new List<WeaponPermutation>();
+                var tempPermutations = permutations ?? new List<PerkPermutation>();
+                permutations = new List<PerkPermutation>();
 
                 //inner: Perk: 
                 foreach (var perk in perkSet.Perks)
@@ -49,30 +49,24 @@
                         continue;
                     }
 
-
-                    string perkName = perk.Name;
-                    //double value = 0;
-
-
+                    // convert current perk to dictionary of key/values
                     var perkValuesAsDictionary = new Dictionary<uint, double>();
                     if (perk.PerkValues != null) 
                     {
                         foreach (var values in perk.PerkValues)
                         {
                             perkValuesAsDictionary.CustomAdd(values.StatHash, values.Value);
-                            //value += values.Value;
                         }
                     }
 
                     // combine with temp
                     if (tempPermutations.Any())
                     {
-
                         foreach (var temp in tempPermutations)
                         {
-                            var newPermutation = new WeaponPermutation
+                            var newPermutation = new PerkPermutation
                             {
-                                PerkNames = temp.PerkNames + $", {perkName}",
+                                PerkNames = temp.PerkNames + $", {perk.Name}",
                                 PerkHashAndValues = new Dictionary<uint, double>(temp.PerkHashAndValues.AsEnumerable()), // TODO: THIS IS VERY WASTEFUL
                                 //Value = temp.Value + value
                             };
@@ -87,7 +81,7 @@
                     }
                     else
                     {
-                        permutations.Add(new WeaponPermutation { PerkNames = perkName });
+                        permutations.Add(new PerkPermutation { PerkNames = perk.Name, PerkHashAndValues = new Dictionary<uint, double>(perkValuesAsDictionary) });
                     }
                 }
 
@@ -97,8 +91,17 @@
                 }
             }
 
-            if (BehaviorValidatePermutations)
+            if (permutations == null)
             {
+                // Two weapons do not have perks.
+                // id:1619016919 name:Khvostov 7G-02
+                // id:1744115122 name:Legend of Acrius
+                return new WeaponSummary(baseTotalPoints, null);
+            }
+
+            if (BehaviorValidatePermutations)// && weaponDefinition.Stats.Any()) 
+            {
+                // Note that some expired weapons do not have perks
                 permutations.ForEach(x => x.Validate(weaponDefinition.Stats));
             }
 

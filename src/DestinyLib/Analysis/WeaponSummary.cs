@@ -11,8 +11,14 @@ namespace DestinyLib.Analysis
     public class WeaponSummary
     {
 
-        public WeaponSummary(double baseValue, List<WeaponPermutation> permutations)
+        public WeaponSummary(double baseValue, List<PerkPermutation> permutations)
         {
+            if (permutations == null)
+            {
+                this.HasEmptyPerks = true;
+                return;
+            }
+
             //TODO: UNIT TEST THIS AND CONFIRM IF SORT IS NEEDED
 
             var values = permutations.Select(x => x.PerkSum).ToList();
@@ -30,6 +36,8 @@ namespace DestinyLib.Analysis
             this.Maximum = Statistics.Percentile(permutationsEnumerable, 100);
             this.Permutations = permutations;
         }
+
+        public bool HasEmptyPerks { get; set; }
 
         /// <summary>
         /// This is the base value of the weapon stats, without perks.
@@ -61,7 +69,7 @@ namespace DestinyLib.Analysis
         /// </summary>
         public double Maximum { get; set; }
 
-        public IList<WeaponPermutation> Permutations { get; set; }
+        public IList<PerkPermutation> Permutations { get; set; }
 
         public string PermutationsAsString() => string.Join(",", Permutations.Select(x => x.PerkSum).AsEnumerable());
     }

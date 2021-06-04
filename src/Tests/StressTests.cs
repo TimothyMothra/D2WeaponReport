@@ -1,5 +1,6 @@
 ﻿namespace Tests
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
@@ -11,7 +12,7 @@
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    //[Ignore]
+    //[Ignore] // DISABLE LOCALLY. // TODO: CONVERT TO PARAM-BASED PRE-PROCESSOR https://stackoverflow.com/questions/43836548/define-c-sharp-preprocessor-from-msbuild/51782647
     [TestClass]
     public class StressTests
     {
@@ -27,7 +28,6 @@
         /// This test will get all weapons and attempt to parse them.
         /// If any test fails, likely something breaks the expected data schema.
         /// </summary>
-        //[Ignore] // DISABLE LOCALLY. // TODO: CONVERT TO PARAM-BASED PRE-PROCESSOR https://stackoverflow.com/questions/43836548/define-c-sharp-preprocessor-from-msbuild/51782647
         [TestMethod]
         public void TestCanParseWeapons()
         {
@@ -60,10 +60,6 @@
         [TestMethod]
         public void TestAnalysis()
         {
-            /// TODO: the following weapons fail this test:
-            /// [1619016919] Khvostov 7G-02 (Auto Rifle)
-            /// [1744115122] Legend of Acrius(Shotgun)
-
             var worldSqlContentProvider = new WorldSqlContentProvider(this.WorldSqlContent, ProviderOptions.TestWithCaching);
 
             var weapons = worldSqlContentProvider.GetSearchableWeapons();
@@ -78,8 +74,11 @@
                     // TODO, NEED TO PASS IN MY OWN PROVIDER.
                     _ = GetWeaponAnalysisScenario.Run(weapon.HashId);
                 }
-                catch
+                catch(Exception ex)
                 {
+                    Console.WriteLine($"{weapon.HashId} { weapon.Name}");
+                    Console.WriteLine(ex.Message);
+
                     failedIds.Add(weapon.ToString());
                 }
             }
