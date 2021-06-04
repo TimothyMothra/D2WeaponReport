@@ -43,9 +43,10 @@
             {
                 throw new ArgumentNullException(nameof(pattern));
             }
-            else if (!pattern.All(Char.IsLetterOrDigit) || pattern.All(Char.IsWhiteSpace))
+            else if (pattern.Length > 256)
             {
-                throw new ArgumentException("must contain only letters or numbers", nameof(pattern));
+                // TODO: SHOULD VALIDATE USER INPUT
+                throw new ArgumentException("input is too large", nameof(pattern));
             }
 
             if (searchType == SearchType.StringContains)
@@ -71,5 +72,6 @@
                 throw new NotImplementedException();
             }
         }
+
     }
 }
