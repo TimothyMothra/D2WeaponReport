@@ -27,7 +27,7 @@
 
 
         // TODO: HOW DO I RETURN AN ARRAY?
-        public string WeaponNames { get; set; }
+        public string WeaponNamesForAutoComplete { get; set; }
 
         public SummaryDetails Summary { get; set; }
 
@@ -39,5 +39,7 @@
             public string PermutationsCount { get; set; }
             public List<string> PerkNames { get; set; }
         }
+
+        public string Other { get; set; }
     }
 }

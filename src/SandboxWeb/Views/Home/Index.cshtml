@@ -37,9 +37,15 @@
     </p>
 
     <p id="weaponNames" style="display:none">
-        @Html.DisplayFor(x => x.WeaponNames)
+        @Html.DisplayFor(x => x.WeaponNamesForAutoComplete)
     </p>
 
+    @if(this.Model.Other != null)
+    {
+        <p>
+            @Html.DisplayFor(x => x.Other)
+        </p>
+    }
 
 
     <script>

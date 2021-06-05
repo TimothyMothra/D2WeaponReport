@@ -43,7 +43,7 @@
 
             var model = new PermutationsViewModel
             { 
-                WeaponNames = string.Join(",", weaponNames),
+                WeaponNamesForAutoComplete = string.Join(",", weaponNames),
             };
 
             if (id == null)
@@ -56,10 +56,23 @@
             }
             else
             {
-                var searchRecord = SearchForWeaponScenario.Run(id, SearchForWeaponScenario.SearchType.StringContains).Single();
-                var hashid = searchRecord.HashId;
+                var searchResults = SearchForWeaponScenario.Run(id, SearchForWeaponScenario.SearchType.StringContains).ToList();
+                
+                if (searchResults.Count == 1)
+                {
+                    var hashid = searchResults[0].HashId;
 
-                model.Summary = GetSummaryDetails(hashid);
+                    model.Summary = GetSummaryDetails(hashid);
+                }
+                else if (searchResults.Count > 1 )
+                {
+                    model.Other = string.Join(Environment.NewLine, searchResults.Select(x => $"{x.HashId} {x.Name}"));
+                }
+                else
+                {
+                    model.Other = "No Results Found";
+                }
+                
             }
 
             return View(model);
