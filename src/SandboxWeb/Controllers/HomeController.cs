@@ -1,6 +1,7 @@
 ﻿namespace SandboxWeb.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
@@ -66,11 +67,28 @@
                 }
                 else if (searchResults.Count > 1 )
                 {
-                    model.Other = string.Join(Environment.NewLine, searchResults.Select(x => $"{x.HashId} {x.Name}"));
+                    var displayResults = new List<PermutationsViewModel.SearchResult>(searchResults.Count);
+
+                    foreach(var result in searchResults)
+                    {
+                        // the icon in the Collectible table includes the season watermark. // TODO: WHAT ABOUT EXOTICS?
+                        string iconUri = (result.CollectibleHash != default)
+                            ? this.worldSqlContentProvider.GetWeaponIcon(result.CollectibleHash).AbsoluteUri
+                            : null;
+
+                        displayResults.Add(new PermutationsViewModel.SearchResult
+                        {
+                            Name = result.Name,
+                            Id = result.HashId,
+                            IconUri = iconUri,
+                        });
+                    }
+
+                    model.MultipleResults = displayResults;
                 }
                 else
                 {
-                    model.Other = "No Results Found";
+                    model.Error = "No Results Found";
                 }
                 
             }

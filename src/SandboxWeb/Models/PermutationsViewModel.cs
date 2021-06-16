@@ -40,6 +40,15 @@
             public List<string> PerkNames { get; set; }
         }
 
-        public string Other { get; set; }
+        public string Error { get; set; }
+
+        public List<SearchResult> MultipleResults { get; set; }
+
+        public class SearchResult
+        {
+            public string Name { get; set; }
+            public uint Id { get; set; }
+            public string IconUri { get; set; }
+        }
     }
 }

@@ -61,14 +61,7 @@ namespace DestinyLib.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT 
-        ///    id,
-        ///    json_extract(json, &apos;$.displayProperties.name&apos;) as name,
-        ///    json_extract(json, &apos;$.itemType&apos;) as itemType,
-        ///    json_extract(json, &apos;$.itemTypeDisplayName&apos;) as itemTypeDisplayName
-        ///  FROM DestinyInventoryItemDefinition
-        ///  WHERE 
-        ///  itemType = 3.
+        /// Execute WoldSlqContent.GetAllWeapons.sql
         /// </summary>
         internal static string WorldSqlContent_GetAllWeapons {
             get {

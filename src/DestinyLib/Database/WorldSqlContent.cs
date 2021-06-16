@@ -12,6 +12,13 @@
         public string GetDestinyInventoryItemDefinition(uint id) => GetJsonRecord("DestinyInventoryItemDefinition", id);
 
         /// <summary>
+        /// This contains: weapon icons.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public string GetDestinyCollectibleDefinition(uint id) => GetJsonRecord("DestinyCollectibleDefinition", id);
+
+        /// <summary>
         /// This contains: Weapon Definition "Plugs", which are the unique collection of available perks.
         /// </summary>
         /// <param name="id"></param>

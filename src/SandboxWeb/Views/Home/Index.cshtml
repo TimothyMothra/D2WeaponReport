@@ -40,11 +40,34 @@
         @Html.DisplayFor(x => x.WeaponNamesForAutoComplete)
     </p>
 
-    @if(this.Model.Other != null)
+    @*Display Error*@
+    @if (this.Model.Error != null)
     {
         <p>
-            @Html.DisplayFor(x => x.Other)
+            @Html.DisplayFor(x => x.Error)
         </p>
+    }
+
+    @*Display Multiple Search Results*@
+    @if(this.Model.MultipleResults != null)
+    {
+
+        <p>
+            Multiple results found:
+        </p>
+
+        <ul>
+            @foreach(var result in this.Model.MultipleResults)
+            {
+                <li>
+                    @if (result.IconUri != null)
+                    {
+                        <img src="@Html.Raw(result.IconUri)" alt="icon" width="50" height="50">    
+                    }
+                    <a href="~/Home/Index/@Html.Raw(result.Id)">@Html.Raw($"{@result.Id} {@result.Name}")</a>
+                </li>        
+            }
+        </ul>
     }
 
 
@@ -59,46 +82,43 @@
     }
     </script>
     
-<script>
+    <script>
     
-    var weaponNames = document.getElementById("weaponNames").innerText.split(',');
-    console.log(weaponNames);
+        var weaponNames = document.getElementById("weaponNames").innerText.split(',');
+        console.log(weaponNames);
 
 
-    const autoCompleteJS = new autoComplete({
-    placeHolder: "Search for Weapon by Name or ID...",
-    data: {
-        src: weaponNames,
-        cache: true,
-    },
-    resultsList: {
-        element: (list, data) => {
-            if (!data.results.length) {
-                // Create "No Results" message element
-                const message = document.createElement("div");
-                // Add class to the created element
-                message.setAttribute("class", "no_result");
-                // Add message text content
-                message.innerHTML = `<span>Found No Results for "${data.query}"</span>`;
-                // Append message element to the results list
-                list.prepend(message);
-            }
+        const autoCompleteJS = new autoComplete({
+        placeHolder: "Search for Weapon by Name or ID...",
+        data: {
+            src: weaponNames,
+            cache: true,
         },
-        //noResults: true,
-    },
-    searchEngine: "loose",
-    resultItem: {
-        highlight: true
-    },
-});
+        resultsList: {
+            element: (list, data) => {
+                if (!data.results.length) {
+                    // Create "No Results" message element
+                    const message = document.createElement("div");
+                    // Add class to the created element
+                    message.setAttribute("class", "no_result");
+                    // Add message text content
+                    message.innerHTML = `<span>Found No Results for "${data.query}"</span>`;
+                    // Append message element to the results list
+                    list.prepend(message);
+                }
+            },
+            //noResults: true,
+        },
+        searchEngine: "loose",
+        resultItem: {
+            highlight: true
+        },
+    });
 
-</script>
-    </div>
-
+    </script>
 </div>
 
 <hr />
-
 
 <div>
 

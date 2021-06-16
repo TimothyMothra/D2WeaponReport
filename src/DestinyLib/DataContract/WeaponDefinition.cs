@@ -26,7 +26,9 @@
             public string FlavorText { get; set; }
             public string DefaultDamageTypeId { get; set; }
             public string DefaultDamageTypeHash { get; set; }
-            
+
+            public uint CollectibleHash { get; set; }
+
             /// <summary>
             /// Example: Legendary, Exotic.
             /// </summary>

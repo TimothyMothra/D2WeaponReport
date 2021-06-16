@@ -43,12 +43,21 @@
                     TierTypeName = jsonDynamic.inventory.tierTypeName,
                     DefaultDamageTypeId = jsonDynamic.defaultDamageType,
                     DefaultDamageTypeHash = jsonDynamic.defaultDamageTypeHash,
+                    CollectibleHash = jsonDynamic.collectibleHash ?? default(uint),
                     FlavorText = jsonDynamic.flavorText,
                     ItemTypeId = jsonDynamic.itemSubType, //TODO: Need to identity Weapon Type (example: "enum DestinyItemSubType "AutoRifle"")
+                    
                 },
                 Stats = new List<WeaponDefinition.WeaponStat>(),
                 PerkSets = new List<WeaponDefinition.PerkSet>(),
             };
+
+            // get Weapon Icon
+            if (weaponDefinition.MetaData.CollectibleHash != default)
+            {
+                // the icon in the Collectible table includes the season watermark. // TODO: WHAT ABOUT EXOTICS?
+                weaponDefinition.MetaData.Icon = this.GetWeaponIcon(weaponDefinition.MetaData.CollectibleHash);
+            }
 
             // Stats
             #region Weapon Definition Stats
@@ -124,6 +133,19 @@
 #endregion
 
             return weaponDefinition;
+        }
+
+        public Uri GetWeaponIcon(uint collectibleHash)
+        {
+            // https://bungie.net/common/destiny2_content/icons/48037e6416c3c9da07030a72931e0ca9.jpg
+            // /common/destiny2_content/icons/48037e6416c3c9da07030a72931e0ca9.jpg
+
+            var record =  this.WorldSqlContent.GetDestinyCollectibleDefinition(collectibleHash);
+            dynamic jsonDynamic = JsonConvert.DeserializeObject(record);
+
+            string iconPath = jsonDynamic.displayProperties.icon;
+
+            return new Uri("https://bungie.net" + iconPath);
         }
 
         internal List<WeaponDefinition.Perk> GetWeaponDefinitionPerks(uint plugSetHash)
