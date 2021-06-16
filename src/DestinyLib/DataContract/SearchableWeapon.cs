@@ -29,8 +29,8 @@
 
         public static SearchableWeaponRecord ParseWithIcons(IDataRecord record)
         {
-            // the icon in the Collectible table includes the season watermark. // TODO: WHAT ABOUT EXOTICS?
-            var iconPath = record.IsDBNull(6) ? record.GetString(5) : record.GetString(6);
+            // the icon in the Collectible table includes the season watermark.
+            var iconPath = record.IsDBNull(7) ? record.GetString(6) : record.GetString(7);
 
             return new SearchableWeaponRecord
             {
