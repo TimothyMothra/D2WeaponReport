@@ -39,7 +39,7 @@
                 Name = "Gnawing Hunger",
                 Id = 821154603,
                 HashId = 821154603u,
-                IconUri = null,
+                IconUri = new System.Uri("https://bungie.net/common/destiny2_content/icons/48037e6416c3c9da07030a72931e0ca9.jpg"),
                 CollectibleHash = 1683333367u,
                 ItemTypeDisplayName = "3",
             };
