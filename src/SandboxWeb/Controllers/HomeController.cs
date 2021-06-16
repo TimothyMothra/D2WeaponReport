@@ -69,18 +69,13 @@
                 {
                     var displayResults = new List<PermutationsViewModel.SearchResult>(searchResults.Count);
 
-                    foreach(var result in searchResults)
+                    foreach (var result in searchResults)
                     {
-                        // the icon in the Collectible table includes the season watermark. // TODO: WHAT ABOUT EXOTICS?
-                        string iconUri = (result.CollectibleHash != default)
-                            ? this.worldSqlContentProvider.GetWeaponIcon(result.CollectibleHash).AbsoluteUri
-                            : null;
-
                         displayResults.Add(new PermutationsViewModel.SearchResult
                         {
                             Name = result.Name,
                             Id = result.HashId,
-                            IconUri = iconUri,
+                            IconUri = result.IconUri.AbsoluteUri,
                         });
                     }
 

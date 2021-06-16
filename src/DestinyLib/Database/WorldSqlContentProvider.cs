@@ -145,7 +145,7 @@
 
             string iconPath = jsonDynamic.displayProperties.icon;
 
-            return new Uri("https://bungie.net" + iconPath);
+            return new Uri(LibEnvironment.GetDestinyHost(), iconPath);
         }
 
         internal List<WeaponDefinition.Perk> GetWeaponDefinitionPerks(uint plugSetHash)
@@ -243,6 +243,15 @@
         public IList<SearchableWeaponRecord> GetSearchableWeapons()
         {
             return this.WorldSqlContent.GetRecords(Properties.Resources.WorldSqlContent_GetAllWeapons, SearchableWeaponRecord.Parse);
+        }
+
+        /// <remarks>
+        /// Source: (https://stackoverflow.com/questions/1202935/convert-rows-from-a-data-reader-into-typed-results).
+        /// </remarks>
+        /// <returns></returns>
+        public IList<SearchableWeaponRecord> GetSearchableWeaponsWithIcons()
+        {
+            return this.WorldSqlContent.GetRecords(Properties.Resources.WorldSqlContent_GetAllWeaponsWithIcons, SearchableWeaponRecord.ParseWithIcons);
         }
     }
 }

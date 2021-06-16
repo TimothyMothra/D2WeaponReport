@@ -6,9 +6,11 @@
 
   <ItemGroup>
     <None Remove="Database\WorldSqlContent.GetAllWeapons.sql" />
+    <None Remove="Database\WorldSqlContent.GetAllWeaponsWithIcons.sql" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Database\WorldSqlContent.GetAllWeaponsWithIcons.sql" />
     <EmbeddedResource Include="Database\WorldSqlContent.GetAllWeapons.sql" />
   </ItemGroup>
 

@@ -60,10 +60,7 @@
             @foreach(var result in this.Model.MultipleResults)
             {
                 <li>
-                    @if (result.IconUri != null)
-                    {
-                        <img src="@Html.Raw(result.IconUri)" alt="icon" width="50" height="50">    
-                    }
+                    <img src="@Html.Raw(result.IconUri)" alt="icon" width="50" height="50">    
                     <a href="~/Home/Index/@Html.Raw(result.Id)">@Html.Raw($"{@result.Id} {@result.Name}")</a>
                 </li>        
             }

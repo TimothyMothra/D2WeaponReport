@@ -39,7 +39,7 @@
                 Name = "Gnawing Hunger",
                 Id = 821154603,
                 HashId = 821154603u,
-                Icon = null,
+                IconUri = null,
                 CollectibleHash = 1683333367u,
                 ItemTypeDisplayName = "3",
             };

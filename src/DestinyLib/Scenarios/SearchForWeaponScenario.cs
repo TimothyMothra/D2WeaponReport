@@ -24,7 +24,7 @@
             var dbPath = new FileInfo(LibEnvironment.GetDatabaseFilePath("world_sql_content"));
             var worldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));
             var WorldSqlContentProvider = new WorldSqlContentProvider(worldSqlContent, ProviderOptions.ScenarioDefault);
-            searchableWeapons = WorldSqlContentProvider.GetSearchableWeapons();
+            searchableWeapons = WorldSqlContentProvider.GetSearchableWeaponsWithIcons();
         }
 
         /// <summary>
