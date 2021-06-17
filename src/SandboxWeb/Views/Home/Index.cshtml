@@ -11,201 +11,199 @@
 
 <!--https://tarekraafat.github.io/autoComplete.js/#/installation--> 
 <script src="https://cdn.jsdelivr.net/npm/@@tarekraafat/autocomplete.js@10.0.4/dist/autoComplete.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.1.4/dist/css/autoComplete.01.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tarekraafat/autocomplete.js@10.1.4/dist/css/autoComplete.01.min.css">
 
+
+Examples:
 <div>
-    Examples:
-    <div>
-        <ul>
-            <li><a href="~/Home/Index/2891672170">Xenoclast IV</a></li>
-            <li><a href="~/Home/Index/821154603">Gnawing Hunger</a></li>
-            <li><a href="~/Home/Index/3654674561">Dead Man's Tale</a></li>
-            <li><a href="~/Home/Index/3856705927">Hawkmoon</a></li>
-        </ul>
-    </div>
+    <ul>
+        <li><a href="~/Home/Index/2891672170">Xenoclast IV</a></li>
+        <li><a href="~/Home/Index/821154603">Gnawing Hunger</a></li>
+        <li><a href="~/Home/Index/3654674561">Dead Man's Tale</a></li>
+        <li><a href="~/Home/Index/3856705927">Hawkmoon</a></li>
+    </ul>
+</div>
 
-    @*Search by Name or Id*@
-    <div class="autoComplete_wrapper">
-        <input id="autoComplete" type="search" dir="ltr" spellcheck=false autocorrect="off" autocomplete="off" autocapitalize="off" tabindex="1">
-    </div>
-    <input type="button" value="Search" name="no" onclick="ButtonClick_Search()" tabindex="2"> 
+@*Search by Name or Id*@
+<div class="autoComplete_wrapper">
+    <input id="autoComplete" type="search" dir="ltr" spellcheck=false autocorrect="off" autocomplete="off" autocapitalize="off" tabindex="1">
+</div>
+<input type="button" value="Search" name="no" onclick="ButtonClick_Search()" tabindex="2"> 
 
+<p>
+    // TODO: AutoComplete works with keyboard. Off by one with mouse. Consider switching to jQuery AutoComplete.
+</p>
+
+<p id="weaponNames" style="display:none">
+    @Html.DisplayFor(x => x.WeaponNamesForAutoComplete)
+</p>
+
+@*Display Error*@
+@if (this.Model.Error != null)
+{
     <p>
-        // TODO: AutoComplete works with keyboard. Off by one with mouse. Consider switching to jQuery AutoComplete.
+        @Html.DisplayFor(x => x.Error)
+    </p>
+}
+
+@*Display Multiple Search Results*@
+@if(this.Model.MultipleResults != null)
+{
+    <p>
+        Multiple results found:
     </p>
 
-    <p id="weaponNames" style="display:none">
-        @Html.DisplayFor(x => x.WeaponNamesForAutoComplete)
-    </p>
+    <ul>
+        @foreach(var result in this.Model.MultipleResults)
+        {
+            <li>
+                <img src="@Html.Raw(result.IconUri)" alt="icon" width="50" height="50">    
+                <a href="~/Home/Index/@Html.Raw(result.Id)">@Html.Raw(result.Id)</a> @Html.Raw(result.Name)
+            </li>        
+        }
+    </ul>
+}
 
-    @*Display Error*@
-    @if (this.Model.Error != null)
+<script>
+    // TODO: TYPESCRIPT   
+    function ButtonClick_Search()
     {
-        <p>
-            @Html.DisplayFor(x => x.Error)
-        </p>
+        var input = document.getElementById("autoComplete").value;
+        console.log("test: " + input);
+    
+        window.location.href = "/Home/Index/" + input
     }
 
-    @*Display Multiple Search Results*@
-    @if(this.Model.MultipleResults != null)
-    {
-        <p>
-            Multiple results found:
-        </p>
+    var weaponNames = document.getElementById("weaponNames").innerText.split(',');
+    console.log(weaponNames);
 
-        <ul>
-            @foreach(var result in this.Model.MultipleResults)
-            {
-                <li>
-                    <img src="@Html.Raw(result.IconUri)" alt="icon" width="50" height="50">    
-                    <a href="~/Home/Index/@Html.Raw(result.Id)">@Html.Raw(result.Id)</a> @Html.Raw(result.Name)
-                </li>        
+    const autoCompleteJS = new autoComplete({
+        selector: "#autoComplete",
+        placeHolder: "Search for Weapon by Name or ID...",
+        data: {
+            src: weaponNames,
+            cache: true,
+        },
+        resultsList: {
+            element: (list, data) => {
+                if (!data.results.length) {
+                    // Create "No Results" message element
+                    const message = document.createElement("div");
+                    // Add class to the created element
+                    message.setAttribute("class", "no_result");
+                    // Add message text content
+                    message.innerHTML = `<span>Found No Results for "${data.query}"</span>`;
+                    // Append message element to the results list
+                    list.prepend(message);
+                }
+            },
+            noResults: true,
+        },
+        resultItem: {
+            highlight: true
+        },
+        events: {
+            input: {
+                selection: (event) => {
+                    const selection = event.detail.selection.value;
+                    autoCompleteJS.input.value = selection;
+                }
             }
-        </ul>
-    }
+        },
+        searchEngine: "loose",
+    });
 
-    <script>
-        // TODO: TYPESCRIPT   
-        function ButtonClick_Search()
-        {
-            var input = document.getElementById("autoComplete").value;
-            console.log("test: " + input);
+</script>
+
+
+<hr />
+
+
+@*Summary*@
+<div>
+    @if(this.Model.Summary != null)
+    {
+        @*Summary Header*@
+        <div>
+            <img src="@Html.Raw(this.Model.Summary.ScreenshotUri)" alt="screenshot" width="600" >
+
+            <p>Base Points: @Html.DisplayFor(x => x.Summary.BaseValue)</p>
     
-            window.location.href = "/Home/Index/" + input
-        }
+            <p>Number of Permutations @Html.DisplayFor(x => x.Summary.PermutationsCount)</p>
 
-        var weaponNames = document.getElementById("weaponNames").innerText.split(',');
-        console.log(weaponNames);
-
-        const autoCompleteJS = new autoComplete({
-            selector: "#autoComplete",
-            placeHolder: "Search for Weapon by Name or ID...",
-            data: {
-                src: weaponNames,
-                cache: true,
-            },
-            resultsList: {
-                element: (list, data) => {
-                    if (!data.results.length) {
-                        // Create "No Results" message element
-                        const message = document.createElement("div");
-                        // Add class to the created element
-                        message.setAttribute("class", "no_result");
-                        // Add message text content
-                        message.innerHTML = `<span>Found No Results for "${data.query}"</span>`;
-                        // Append message element to the results list
-                        list.prepend(message);
-                    }
-                },
-                noResults: true,
-            },
-            resultItem: {
-                highlight: true
-            },
-            events: {
-                input: {
-                    selection: (event) => {
-                        const selection = event.detail.selection.value;
-                        autoCompleteJS.input.value = selection;
-                    }
-                }
-            },
-            searchEngine: "loose",
-        });
-
-    </script>
-
-
-    <hr />
-
-
-    @*Summary*@
-    <div>
-        @if(this.Model.Summary != null)
-        {
-            @*Summary Header*@
-            <div>
-                <img src="@Html.Raw(this.Model.Summary.ScreenshotUri)" alt="screenshot" width="600" >
-
-                <p>Base Points: @Html.DisplayFor(x => x.Summary.BaseValue)</p>
+            <p id="weaponName" style="display:none">@Html.DisplayFor(x => x.Summary.Name)</p>
+            <p id="permutations" style="display:none">@Html.DisplayFor(x => x.Summary.Values)</p>
     
-                <p>Number of Permutations @Html.DisplayFor(x => x.Summary.PermutationsCount)</p>
-
-                <p id="weaponName" style="display:none">@Html.DisplayFor(x => x.Summary.Name)</p>
-                <p id="permutations" style="display:none">@Html.DisplayFor(x => x.Summary.Values)</p>
-    
-                <div id="plotDiv" style="width:600px;height:500px;"></div>
+            <div id="plotDiv" style="width:600px;height:500px;"></div>
         
-                <script lang="javascript">
-                // https://github.com/plotly/plotly.js
-                // https://plotly.com/javascript/box-plots/
+            <script lang="javascript">
+            // https://github.com/plotly/plotly.js
+            // https://plotly.com/javascript/box-plots/
 
-                var weaponName = document.getElementById("weaponName").innerText;
-                var permutations = document.getElementById("permutations").innerText.split(',');
+            var weaponName = document.getElementById("weaponName").innerText;
+            var permutations = document.getElementById("permutations").innerText.split(',');
 
-                var data = [
-                  {
-                    type: 'box',
-                    y: permutations,
-                    name: '+/- points',
-                    boxpoints: 'all',
-                    jitter: 0.5,
-                    whiskerwidth: 0.2,
-                    fillcolor: 'cls',
-                    marker: {
-                        size: 2
-                    },
-                    line: {
-                        width: 1
-                    }
-                }
-                ];
-
-                var layout = {
-                    title: weaponName,
-                    yaxis: {
-                        autorange: true,
-                        showgrid: true,
-                        zeroline: true,
-                        dtick: 5,
-                        //gridcolor: 'rgb(255, 255, 255)',
-                        gridwidth: 1,
-                        zerolinecolor: 'rgb(255, 255, 255)',
-                        zerolinewidth: 2
-                    },
-                    margin: {
-                        l: 40,
-                        r: 30,
-                        b: 80,
-                        t: 100
-                    },
-                    paper_bgcolor: 'rgb(243, 243, 243)',
-                    plot_bgcolor: 'rgb(243, 243, 243)',
-                    showlegend: false
-                };
-
-                Plotly.newPlot('plotDiv', data, layout);
-                </script>
-            </div>
-
-            @*Summary Body*@
-            <div>
-                @if(this.Model.Summary != null)
+            var data = [
                 {
-                    <ul>
-                        @foreach(var perkName in this.Model.Summary.PerkNames)
-                        {
-                            <li>@perkName</li>        
-                        }
-                    </ul>
+                type: 'box',
+                y: permutations,
+                name: '+/- points',
+                boxpoints: 'all',
+                jitter: 0.5,
+                whiskerwidth: 0.2,
+                fillcolor: 'cls',
+                marker: {
+                    size: 2
+                },
+                line: {
+                    width: 1
                 }
-            </div>
+            }
+            ];
 
-            @*Summary Footer*@
-            <div>
-                <img src="@Html.Raw(this.Model.Summary.IconUri)" alt="icon" width="50" height="50">    
-            </div>
-        }
-    </div>
+            var layout = {
+                title: weaponName,
+                yaxis: {
+                    autorange: true,
+                    showgrid: true,
+                    zeroline: true,
+                    dtick: 5,
+                    //gridcolor: 'rgb(255, 255, 255)',
+                    gridwidth: 1,
+                    zerolinecolor: 'rgb(255, 255, 255)',
+                    zerolinewidth: 2
+                },
+                margin: {
+                    l: 40,
+                    r: 30,
+                    b: 80,
+                    t: 100
+                },
+                paper_bgcolor: 'rgb(243, 243, 243)',
+                plot_bgcolor: 'rgb(243, 243, 243)',
+                showlegend: false
+            };
 
+            Plotly.newPlot('plotDiv', data, layout);
+            </script>
+        </div>
+
+        @*Summary Body*@
+        <div>
+            @if(this.Model.Summary != null)
+            {
+                <ul>
+                    @foreach(var perkName in this.Model.Summary.PerkNames)
+                    {
+                        <li>@perkName</li>        
+                    }
+                </ul>
+            }
+        </div>
+
+        @*Summary Footer*@
+        <div>
+            <img src="@Html.Raw(this.Model.Summary.IconUri)" alt="icon" width="50" height="50">    
+        </div>
+    }
 </div>
