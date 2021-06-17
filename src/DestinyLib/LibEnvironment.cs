@@ -12,7 +12,8 @@
         private const string markerFileName = "root.marker"; // this file marks the root of the repo.
         private const string environmentDirectoryName = "environment";
         private static readonly string rootDirectory;
-        
+        private static readonly Uri DestinyHost = new Uri("https://bungie.net");
+
         public static readonly string EnvironmentDirectory;
 
         static LibEnvironment()
@@ -20,6 +21,8 @@
             rootDirectory = GetRootDirectory();
             EnvironmentDirectory = GetEnvironmentDirectory();
         }
+
+        public static Uri GetDestinyHost() => DestinyHost;
 
         private static string GetRootDirectory()
         {

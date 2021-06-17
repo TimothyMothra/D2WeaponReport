@@ -22,7 +22,9 @@
                     DefaultDamageTypeId = "4",
                     DefaultDamageTypeHash = "3454344768",
                     FlavorText = "Don't let pride keep you from a good meal.",
-                    ItemTypeId = "6"
+                    ItemTypeId = "6",
+                    CollectibleHash = 1683333367,
+                    Icon = new System.Uri("https://bungie.net/common/destiny2_content/icons/48037e6416c3c9da07030a72931e0ca9.jpg"),
                 },
                 Stats = new List<WeaponDefinition.WeaponStat>(),
                 PerkSets = new List<WeaponDefinition.PerkSet>(),

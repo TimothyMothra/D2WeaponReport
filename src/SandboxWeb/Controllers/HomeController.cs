@@ -1,11 +1,10 @@
 ﻿namespace SandboxWeb.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
-    using System.IO;
     using System.Linq;
 
-    using DestinyLib;
     using DestinyLib.Database;
     using DestinyLib.Scenarios;
 
@@ -16,35 +15,22 @@
 
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeController> logger;
 
         private readonly WorldSqlContentProvider worldSqlContentProvider;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, WorldSqlContentProvider worldSqlContentProvider)
         {
-            _logger = logger;
-
-            // TODO: DEPENDENCY INJECTION and CACHING
-            var dbPath = new FileInfo(LibEnvironment.GetDatabaseFilePath("world_sql_content"));
-            var worldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));
-            this.worldSqlContentProvider = new WorldSqlContentProvider(worldSqlContent, ProviderOptions.ScenarioDefault);
+            this.logger = logger;
+            this.worldSqlContentProvider = worldSqlContentProvider ?? throw new ArgumentNullException(nameof(worldSqlContentProvider));
         }
 
-        /// <summary>
-        /// 
-        /// https://localhost:44365/Home/Index/2891672170
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public IActionResult Index(string id)
         {
             var weapons = this.worldSqlContentProvider.GetSearchableWeapons();
-            var weaponNames = weapons.Select(x => x.Name);
+            var weaponNames = weapons.Select(x => x.Name).ToList();
 
-            var model = new PermutationsViewModel
-            { 
-                WeaponNamesForAutoComplete = string.Join(",", weaponNames),
-            };
+            var model = new PermutationsViewModel(weaponNames);
 
             if (id == null)
             {
@@ -56,7 +42,7 @@
             }
             else
             {
-                var searchResults = SearchForWeaponScenario.Run(id, SearchForWeaponScenario.SearchType.StringContains).ToList();
+                var searchResults = SearchForWeaponScenario.Run(id, SearchForWeaponScenario.SearchType.Regex).ToList();
                 
                 if (searchResults.Count == 1)
                 {
@@ -66,13 +52,24 @@
                 }
                 else if (searchResults.Count > 1 )
                 {
-                    model.Other = string.Join(Environment.NewLine, searchResults.Select(x => $"{x.HashId} {x.Name}"));
+                    var displayResults = new List<PermutationsViewModel.SearchResult>(searchResults.Count);
+
+                    foreach (var result in searchResults)
+                    {
+                        displayResults.Add(new PermutationsViewModel.SearchResult
+                        {
+                            Name = result.Name,
+                            Id = result.HashId,
+                            IconUri = result.GetIconUri().AbsoluteUri,
+                        });
+                    }
+
+                    model.MultipleResults = displayResults;
                 }
                 else
                 {
-                    model.Other = "No Results Found";
+                    model.Error = "No Results Found";
                 }
-                
             }
 
             return View(model);
@@ -88,6 +85,8 @@
             return new()
             {
                 Name = definition.MetaData.Name,
+                IconUri = definition.MetaData.GetIconUri().AbsoluteUri,
+                ScreenshotUri = definition.MetaData.GetScreenshotUri().AbsoluteUri,
                 BaseValue = weaponSummary.Base.ToString(),
                 Values = weaponSummary.PermutationsAsString(),
                 PermutationsCount = weaponSummary.Permutations.Count.ToString(),

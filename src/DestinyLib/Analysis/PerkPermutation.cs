@@ -39,7 +39,7 @@ namespace DestinyLib.Analysis
                 }
                 catch(Exception ex)
                 {
-                    throw new Exception($"This perk was not found in the available stats. names '{PerkNames}', id '{perk.Key}', value '{perk.Value}'");
+                    throw new Exception($"This perk was not found in the available stats. names '{PerkNames}', id '{perk.Key}', value '{perk.Value}'", ex);
                 }
                 
                 perkSum += this.Validate(stat, perk.Value);

@@ -17,14 +17,30 @@
             Regex
         }
 
-        private static IList<SearchableWeaponRecord> searchableWeapons;
+        private static IList<SearchableWeaponRecord> SearchableWeapons;
 
         static SearchForWeaponScenario()
         {
             var dbPath = new FileInfo(LibEnvironment.GetDatabaseFilePath("world_sql_content"));
             var worldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));
             var WorldSqlContentProvider = new WorldSqlContentProvider(worldSqlContent, ProviderOptions.ScenarioDefault);
-            searchableWeapons = WorldSqlContentProvider.GetSearchableWeapons();
+
+            // init
+            var searchableWeapons = WorldSqlContentProvider.GetSearchableWeapons();
+
+            foreach(var searchableWeapon in searchableWeapons)
+            {
+                if (searchableWeapon.CollectibleHash != default)
+                {
+                    var collectibleDefinition = WorldSqlContentProvider.GetDestinyCollectibleDefinitions(searchableWeapon.CollectibleHash);
+                    if (collectibleDefinition != null)
+                    {
+                        searchableWeapon.CollectionDefintitionIconPath = collectibleDefinition.IconPath;
+                    }
+                }
+            }
+
+            SearchableWeapons = searchableWeapons;
         }
 
         /// <summary>
@@ -51,7 +67,7 @@
 
             if (searchType == SearchType.StringContains)
             {
-                return searchableWeapons.Where(x => x.Name.Contains(pattern, System.StringComparison.InvariantCultureIgnoreCase)).ToList();
+                return SearchableWeapons.Where(x => x.Name.Contains(pattern, System.StringComparison.InvariantCultureIgnoreCase)).ToList();
             }
             else if (searchType == SearchType.Regex)
             {
@@ -65,7 +81,7 @@
 
                 var regex = new Regex(pattern: regexPattern, options: RegexOptions.IgnoreCase);
 
-                return searchableWeapons.Where(x => regex.IsMatch(x.Name)).ToList();
+                return SearchableWeapons.Where(x => regex.IsMatch(x.Name)).ToList();
             }
             else
             {

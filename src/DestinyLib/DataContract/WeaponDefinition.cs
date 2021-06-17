@@ -12,7 +12,7 @@
 
         public override string ToString()
         {
-            return $"[{this.MetaData.Id}] {this.MetaData.Name} (xxxItemType)";
+            return $"[{this.MetaData.Id}] {this.MetaData.Name} (xxxItemType)"; // TODO: ITEM TYPE
         }
 
         public class WeaponMetaData
@@ -26,12 +26,22 @@
             public string FlavorText { get; set; }
             public string DefaultDamageTypeId { get; set; }
             public string DefaultDamageTypeHash { get; set; }
-            
+
+            public uint CollectibleHash { get; set; }
+
             /// <summary>
             /// Example: Legendary, Exotic.
             /// </summary>
             public string TierTypeName { get; set; }
-            public Uri Icon { get; set; }
+
+            public string ItemDefinitionIconPath { get; set; }
+            public string ScreenshotPath { get; set; }
+
+            public string CollectionDefintitionIconPath { get; set; }
+
+            public Uri GetIconUri() => new Uri(LibEnvironment.GetDestinyHost(), this.CollectionDefintitionIconPath == null ? this.ItemDefinitionIconPath : CollectionDefintitionIconPath);
+
+            public Uri GetScreenshotUri() => new Uri(LibEnvironment.GetDestinyHost(), this.ScreenshotPath);
         }
 
         public class WeaponStat
@@ -44,7 +54,7 @@
             public int MinValue { get; set; }
             public int DisplayMaximum { get; set; }
             //public bool IsHidden { get; set; }
-            public bool Interpolate { get; set; } // TODO: NEED AN EXAMPLE TO WRITE THIS ALGORITHM
+            public bool Interpolate { get; set; } // TODO: NEED AN EXAMPLE TO WRITE THIS ALGORITHM. See also: https://github.com/TimothyMothra/DestinySandbox/blob/main/journal/getting_started.md#how-to-query-all-available-perks-ex-rampage-outlaw
 
             public override string ToString()
             {

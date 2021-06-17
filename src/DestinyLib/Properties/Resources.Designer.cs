@@ -63,7 +63,10 @@ namespace DestinyLib.Properties {
         /// <summary>
         ///   Looks up a localized string similar to SELECT 
         ///    id,
+        ///    json_extract(json, &apos;$.hash&apos;) as hash,
+        ///    json_extract(json, &apos;$.collectibleHash&apos;) as collectibleHash,
         ///    json_extract(json, &apos;$.displayProperties.name&apos;) as name,
+        ///    json_extract(json, &apos;$.displayProperties.icon&apos;) as icon,
         ///    json_extract(json, &apos;$.itemType&apos;) as itemType,
         ///    json_extract(json, &apos;$.itemTypeDisplayName&apos;) as itemTypeDisplayName
         ///  FROM DestinyInventoryItemDefinition

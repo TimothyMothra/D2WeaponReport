@@ -16,6 +16,7 @@
 
         private readonly Dictionary<uint, WeaponStatDefinition> WeaponStatDefinitionCache = new();
         private readonly Dictionary<uint, WeaponDefinition.Perk> WeaponDefinitionPerkCache = new();
+        private readonly Dictionary<uint, DestinyCollectibleDefinition> DestinyCollectibleDefinitionCache = new();
 
         public WorldSqlContentProvider(WorldSqlContent worldSqlContent, ProviderOptions providerOptions)
         {
@@ -39,16 +40,27 @@
                 {
                     Id = jsonDynamic.hash,
                     Name = jsonDynamic.displayProperties.name,
+                    ItemDefinitionIconPath = jsonDynamic.displayProperties.icon,
+                    ScreenshotPath = jsonDynamic.screenshot,
                     AmmoTypeId = jsonDynamic.equippingBlock.ammoType.ToString(), //TODO: Need to identify Ammo Type (example: "Energy Weapons")
                     TierTypeName = jsonDynamic.inventory.tierTypeName,
                     DefaultDamageTypeId = jsonDynamic.defaultDamageType,
                     DefaultDamageTypeHash = jsonDynamic.defaultDamageTypeHash,
+                    CollectibleHash = jsonDynamic.collectibleHash ?? default(uint),
                     FlavorText = jsonDynamic.flavorText,
                     ItemTypeId = jsonDynamic.itemSubType, //TODO: Need to identity Weapon Type (example: "enum DestinyItemSubType "AutoRifle"")
+                    
                 },
                 Stats = new List<WeaponDefinition.WeaponStat>(),
                 PerkSets = new List<WeaponDefinition.PerkSet>(),
             };
+
+            // check Collection for Seasonal Weapon Icon (Note: does not exist for all weapons).
+            if (weaponDefinition.MetaData.CollectibleHash != default)
+            {
+                var collectibleDefinition = this.GetDestinyCollectibleDefinitions(weaponDefinition.MetaData.CollectibleHash);
+                weaponDefinition.MetaData.CollectionDefintitionIconPath = collectibleDefinition.IconPath;
+            }
 
             // Stats
             #region Weapon Definition Stats
@@ -212,6 +224,37 @@
             }
 
             return weaponStatDefinition;
+        }
+
+        public DestinyCollectibleDefinition GetDestinyCollectibleDefinitions(uint collectibleHash)
+        {
+            if (this.ProviderOptions.EnableCaching && this.DestinyCollectibleDefinitionCache.TryGetValue(collectibleHash, out var cachedRecord))
+            {
+                return cachedRecord;
+            }
+
+            var record = this.WorldSqlContent.GetDestinyCollectibleDefinition(collectibleHash);
+
+            dynamic jsonDynamic = JsonConvert.DeserializeObject(record);
+            if (jsonDynamic == null)
+            {
+                throw new Exception($"unexpected null result for {nameof(WorldSqlContent.GetDestinyCollectibleDefinition)} id {collectibleHash}");
+            }
+
+            var destinyCollectibleDefinition = new DestinyCollectibleDefinition
+            {
+                HashId = jsonDynamic.hash,
+                ItemHash = jsonDynamic.itemHash,
+                Name = jsonDynamic.displayProperties.name,
+                IconPath = jsonDynamic.displayProperties.icon,
+            };
+
+            if (this.ProviderOptions.EnableCaching)
+            {
+                this.DestinyCollectibleDefinitionCache.Add(collectibleHash, destinyCollectibleDefinition);
+            }
+
+            return destinyCollectibleDefinition;
         }
 
         /// <remarks>
