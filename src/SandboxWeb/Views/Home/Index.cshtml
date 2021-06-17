@@ -26,12 +26,12 @@
 
     @*Search by Name or Id*@
     <div class="autoComplete_wrapper">
-        <input id="autoComplete" type="search" dir="ltr" spellcheck=false autocorrect="off" autocomplete="off" autocapitalize="off">
+        <input id="autoComplete" type="search" dir="ltr" spellcheck=false autocorrect="off" autocomplete="off" autocapitalize="off" tabindex="1">
     </div>
-    <input type="button" value="Search" name="no" onclick="ButtonClick_Search()"> 
+    <input type="button" value="Search" name="no" onclick="ButtonClick_Search()" tabindex="2"> 
 
     <p>
-        // TODO: Autocomplete doesn't work. Must click search.
+        // TODO: Autocomplete works with keyboard. Off by one with mouse.
     </p>
 
     <p id="weaponNames" style="display:none">
