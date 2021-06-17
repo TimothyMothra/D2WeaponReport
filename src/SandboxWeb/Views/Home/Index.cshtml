@@ -51,7 +51,6 @@
     @*Display Multiple Search Results*@
     @if(this.Model.MultipleResults != null)
     {
-
         <p>
             Multiple results found:
         </p>
@@ -118,85 +117,90 @@
 <hr />
 
 <div>
+    @if(this.Model.Summary != null)
+    {
+        @*Summary Header*@
+        <div>
+            <img src="@Html.Raw(this.Model.Summary.ScreenshotUri)" alt="screenshot" width="600" >
 
-<div>
-@if(this.Model.Summary != null)
-{
-    <img src="@Html.Raw(this.Model.Summary.IconUri)" alt="icon" >    
-
-    <p>Base Points: @Html.DisplayFor(x => x.Summary.BaseValue)</p>
+            <p>Base Points: @Html.DisplayFor(x => x.Summary.BaseValue)</p>
     
-    <p>Number of Permutations @Html.DisplayFor(x => x.Summary.PermutationsCount)</p>
+            <p>Number of Permutations @Html.DisplayFor(x => x.Summary.PermutationsCount)</p>
 
-    <p id="weaponName" style="display:none">@Html.DisplayFor(x => x.Summary.Name)</p>
-    <p id="permutations" style="display:none">@Html.DisplayFor(x => x.Summary.Values)</p>
+            <p id="weaponName" style="display:none">@Html.DisplayFor(x => x.Summary.Name)</p>
+            <p id="permutations" style="display:none">@Html.DisplayFor(x => x.Summary.Values)</p>
     
-    <div id="plotDiv" style="width:600px;height:500px;"></div>
-}
-    <script lang="javascript">
-    // https://github.com/plotly/plotly.js
-    // https://plotly.com/javascript/box-plots/
+            <div id="plotDiv" style="width:600px;height:500px;"></div>
+        
+            <script lang="javascript">
+            // https://github.com/plotly/plotly.js
+            // https://plotly.com/javascript/box-plots/
 
-    var weaponName = document.getElementById("weaponName").innerText;
-    var permutations = document.getElementById("permutations").innerText.split(',');
+            var weaponName = document.getElementById("weaponName").innerText;
+            var permutations = document.getElementById("permutations").innerText.split(',');
 
-    var data = [
-      {
-        type: 'box',
-        y: permutations,
-        name: '+/- points',
-        boxpoints: 'all',
-        jitter: 0.5,
-        whiskerwidth: 0.2,
-        fillcolor: 'cls',
-        marker: {
-            size: 2
-        },
-        line: {
-            width: 1
-        }
+            var data = [
+              {
+                type: 'box',
+                y: permutations,
+                name: '+/- points',
+                boxpoints: 'all',
+                jitter: 0.5,
+                whiskerwidth: 0.2,
+                fillcolor: 'cls',
+                marker: {
+                    size: 2
+                },
+                line: {
+                    width: 1
+                }
+            }
+            ];
+
+            var layout = {
+                title: weaponName,
+                yaxis: {
+                    autorange: true,
+                    showgrid: true,
+                    zeroline: true,
+                    dtick: 5,
+                    //gridcolor: 'rgb(255, 255, 255)',
+                    gridwidth: 1,
+                    zerolinecolor: 'rgb(255, 255, 255)',
+                    zerolinewidth: 2
+                },
+                margin: {
+                    l: 40,
+                    r: 30,
+                    b: 80,
+                    t: 100
+                },
+                paper_bgcolor: 'rgb(243, 243, 243)',
+                plot_bgcolor: 'rgb(243, 243, 243)',
+                showlegend: false
+            };
+
+            Plotly.newPlot('plotDiv', data, layout);
+            </script>
+        </div>
+
+        @*Summary Body*@
+        <div>
+            @if(this.Model.Summary != null)
+            {
+                <ul>
+                    @foreach(var perkName in this.Model.Summary.PerkNames)
+                    {
+                        <li>@perkName</li>        
+                    }
+                </ul>
+            }
+        </div>
+
+        @*Summary Footer*@
+        <div>
+            <img src="@Html.Raw(this.Model.Summary.IconUri)" alt="icon" width="50" height="50">    
+        </div>
     }
-    ];
-    layout = {
-    title: weaponName,
-    yaxis: {
-        autorange: true,
-        showgrid: true,
-        zeroline: true,
-        dtick: 5,
-        //gridcolor: 'rgb(255, 255, 255)',
-        gridwidth: 1,
-        zerolinecolor: 'rgb(255, 255, 255)',
-        zerolinewidth: 2
-    },
-    margin: {
-        l: 40,
-        r: 30,
-        b: 80,
-        t: 100
-    },
-    paper_bgcolor: 'rgb(243, 243, 243)',
-    plot_bgcolor: 'rgb(243, 243, 243)',
-    showlegend: false
-};
-
-Plotly.newPlot('plotDiv', data, layout);
-
-
-    </script>
-</div>
-
-<div>
-@if(this.Model.Summary != null)
-{
-    <ul>
-        @foreach(var perkName in this.Model.Summary.PerkNames)
-        {
-            <li>@perkName</li>        
-        }
-    </ul>
-}
-</div>
-
 </div>
 

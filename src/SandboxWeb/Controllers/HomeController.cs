@@ -86,6 +86,7 @@
             {
                 Name = definition.MetaData.Name,
                 IconUri = definition.MetaData.GetIconUri().AbsoluteUri,
+                ScreenshotUri = definition.MetaData.GetScreenshotUri().AbsoluteUri,
                 BaseValue = weaponSummary.Base.ToString(),
                 Values = weaponSummary.PermutationsAsString(),
                 PermutationsCount = weaponSummary.Permutations.Count.ToString(),

@@ -35,11 +35,13 @@
             public string TierTypeName { get; set; }
 
             public string ItemDefinitionIconPath { get; set; }
+            public string ScreenshotPath { get; set; }
 
             public string CollectionDefintitionIconPath { get; set; }
 
-            public Uri GetIconUri() => new Uri(LibEnvironment.GetDestinyHost(), CollectionDefintitionIconPath == null ? ItemDefinitionIconPath : CollectionDefintitionIconPath);
+            public Uri GetIconUri() => new Uri(LibEnvironment.GetDestinyHost(), this.CollectionDefintitionIconPath == null ? this.ItemDefinitionIconPath : CollectionDefintitionIconPath);
 
+            public Uri GetScreenshotUri() => new Uri(LibEnvironment.GetDestinyHost(), this.ScreenshotPath);
         }
 
         public class WeaponStat

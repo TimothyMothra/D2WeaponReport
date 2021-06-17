@@ -26,6 +26,8 @@
         {
             public string Name { get; set; }
             public string IconUri { get; set; }
+            public string ScreenshotUri { get; set; }
+            
             public string BaseValue { get; set; }
             public string Values { get; set; }
             public string PermutationsCount { get; set; }

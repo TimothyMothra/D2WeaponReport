@@ -41,6 +41,7 @@
                     Id = jsonDynamic.hash,
                     Name = jsonDynamic.displayProperties.name,
                     ItemDefinitionIconPath = jsonDynamic.displayProperties.icon,
+                    ScreenshotPath = jsonDynamic.screenshot,
                     AmmoTypeId = jsonDynamic.equippingBlock.ammoType.ToString(), //TODO: Need to identify Ammo Type (example: "Energy Weapons")
                     TierTypeName = jsonDynamic.inventory.tierTypeName,
                     DefaultDamageTypeId = jsonDynamic.defaultDamageType,
