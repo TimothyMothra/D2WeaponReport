@@ -3,10 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.IO;
     using System.Linq;
 
-    using DestinyLib;
     using DestinyLib.Database;
     using DestinyLib.Scenarios;
 
@@ -17,26 +15,16 @@
 
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeController> logger;
 
         private readonly WorldSqlContentProvider worldSqlContentProvider;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, WorldSqlContentProvider worldSqlContentProvider)
         {
-            _logger = logger;
-
-            // TODO: DEPENDENCY INJECTION and CACHING
-            var dbPath = new FileInfo(LibEnvironment.GetDatabaseFilePath("world_sql_content"));
-            var worldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));
-            this.worldSqlContentProvider = new WorldSqlContentProvider(worldSqlContent, ProviderOptions.ScenarioDefault);
+            this.logger = logger;
+            this.worldSqlContentProvider = worldSqlContentProvider ?? throw new ArgumentNullException(nameof(worldSqlContentProvider));
         }
 
-        /// <summary>
-        /// 
-        /// https://localhost:44365/Home/Index/2891672170
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public IActionResult Index(string id)
         {
             var weapons = this.worldSqlContentProvider.GetSearchableWeapons();
@@ -85,7 +73,6 @@
                 {
                     model.Error = "No Results Found";
                 }
-                
             }
 
             return View(model);

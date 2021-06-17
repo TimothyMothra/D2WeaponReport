@@ -2,8 +2,12 @@ namespace SandboxWeb
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
+
+    using DestinyLib;
+    using DestinyLib.Database;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -25,6 +29,8 @@ namespace SandboxWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            this.ConfigureDestinyLib(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +60,15 @@ namespace SandboxWeb
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        public void ConfigureDestinyLib(IServiceCollection services)
+        {
+            var dbPath = new FileInfo(LibEnvironment.GetDatabaseFilePath("world_sql_content"));
+            var worldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));
+            var worldSqlContentProvider = new WorldSqlContentProvider(worldSqlContent, new ProviderOptions { EnableCaching = true });
+
+            services.AddSingleton<WorldSqlContentProvider>(worldSqlContentProvider);
         }
     }
 }
