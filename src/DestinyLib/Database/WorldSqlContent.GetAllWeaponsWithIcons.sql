@@ -11,7 +11,7 @@
 FROM DestinyInventoryItemDefinition
   
 LEFT JOIN DestinyCollectibleDefinition ON 
-    DestinyCollectibleDefinition.id = json_extract(DestinyInventoryItemDefinition.json, '$.collectibleHash')
+    json_extract(DestinyCollectibleDefinition.json, '$.hash') = json_extract(DestinyInventoryItemDefinition.json, '$.collectibleHash')
     
 WHERE 
     itemType = 3

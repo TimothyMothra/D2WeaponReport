@@ -39,9 +39,10 @@
                 Name = "Gnawing Hunger",
                 Id = 821154603,
                 HashId = 821154603u,
-                IconUri = new System.Uri("https://bungie.net/common/destiny2_content/icons/48037e6416c3c9da07030a72931e0ca9.jpg"),
+                CollectionDefintitionIconPath = "/common/destiny2_content/icons/48037e6416c3c9da07030a72931e0ca9.jpg",
+                ItemDefinitionIconPath = "/common/destiny2_content/icons/c4509acb76551495deac51bb29b61248.jpg",
                 CollectibleHash = 1683333367u,
-                ItemTypeDisplayName = "3",
+                ItemTypeDisplayName = "Auto Rifle",
             };
 
             record.Should().BeEquivalentTo(expected);

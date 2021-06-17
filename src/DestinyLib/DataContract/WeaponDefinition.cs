@@ -12,7 +12,7 @@
 
         public override string ToString()
         {
-            return $"[{this.MetaData.Id}] {this.MetaData.Name} (xxxItemType)";
+            return $"[{this.MetaData.Id}] {this.MetaData.Name} (xxxItemType)"; // TODO: ITEM TYPE
         }
 
         public class WeaponMetaData
@@ -46,7 +46,7 @@
             public int MinValue { get; set; }
             public int DisplayMaximum { get; set; }
             //public bool IsHidden { get; set; }
-            public bool Interpolate { get; set; } // TODO: NEED AN EXAMPLE TO WRITE THIS ALGORITHM
+            public bool Interpolate { get; set; } // TODO: NEED AN EXAMPLE TO WRITE THIS ALGORITHM. See also: https://github.com/TimothyMothra/DestinySandbox/blob/main/journal/getting_started.md#how-to-query-all-available-perks-ex-rampage-outlaw
 
             public override string ToString()
             {

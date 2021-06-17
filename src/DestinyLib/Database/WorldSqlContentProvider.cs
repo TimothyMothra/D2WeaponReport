@@ -16,6 +16,7 @@
 
         private readonly Dictionary<uint, WeaponStatDefinition> WeaponStatDefinitionCache = new();
         private readonly Dictionary<uint, WeaponDefinition.Perk> WeaponDefinitionPerkCache = new();
+        private readonly Dictionary<uint, DestinyCollectibleDefinition> DestinyCollectibleDefinitionCache = new();
 
         public WorldSqlContentProvider(WorldSqlContent worldSqlContent, ProviderOptions providerOptions)
         {
@@ -236,6 +237,37 @@
             return weaponStatDefinition;
         }
 
+        public DestinyCollectibleDefinition GetDestinyCollectibleDefinitions(uint collectibleHash)
+        {
+            if (this.ProviderOptions.EnableCaching && this.DestinyCollectibleDefinitionCache.TryGetValue(collectibleHash, out var cachedRecord))
+            {
+                return cachedRecord;
+            }
+
+            var record = this.WorldSqlContent.GetDestinyCollectibleDefinition(collectibleHash);
+
+            dynamic jsonDynamic = JsonConvert.DeserializeObject(record);
+            if (jsonDynamic == null)
+            {
+                throw new Exception($"unexpected null result for {nameof(WorldSqlContent.GetDestinyCollectibleDefinition)} id {collectibleHash}");
+            }
+
+            var destinyCollectibleDefinition = new DestinyCollectibleDefinition
+            {
+                HashId = jsonDynamic.hash,
+                ItemHash = jsonDynamic.itemHash,
+                Name = jsonDynamic.displayProperties.name,
+                IconPath = jsonDynamic.displayProperties.icon,
+            };
+
+            if (this.ProviderOptions.EnableCaching)
+            {
+                this.DestinyCollectibleDefinitionCache.Add(collectibleHash, destinyCollectibleDefinition);
+            }
+
+            return destinyCollectibleDefinition;
+        }
+
         /// <remarks>
         /// Source: (https://stackoverflow.com/questions/1202935/convert-rows-from-a-data-reader-into-typed-results).
         /// </remarks>
@@ -249,9 +281,9 @@
         /// Source: (https://stackoverflow.com/questions/1202935/convert-rows-from-a-data-reader-into-typed-results).
         /// </remarks>
         /// <returns></returns>
-        public IList<SearchableWeaponRecord> GetSearchableWeaponsWithIcons()
-        {
-            return this.WorldSqlContent.GetRecords(Properties.Resources.WorldSqlContent_GetAllWeaponsWithIcons, SearchableWeaponRecord.ParseWithIcons);
-        }
+        //public IList<SearchableWeaponRecord> GetSearchableWeaponsWithIcons()
+        //{
+        //    return this.WorldSqlContent.GetRecords(Properties.Resources.WorldSqlContent_GetAllWeaponsWithIcons, SearchableWeaponRecord.ParseWithIcons);
+        //}
     }
 }

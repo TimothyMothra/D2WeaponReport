@@ -57,7 +57,7 @@
             }
             else
             {
-                var searchResults = SearchForWeaponScenario.Run(id, SearchForWeaponScenario.SearchType.StringContains).ToList();
+                var searchResults = SearchForWeaponScenario.Run(id, SearchForWeaponScenario.SearchType.Regex).ToList();
                 
                 if (searchResults.Count == 1)
                 {
@@ -75,7 +75,7 @@
                         {
                             Name = result.Name,
                             Id = result.HashId,
-                            IconUri = result.IconUri.AbsoluteUri,
+                            IconUri = result.GetIconUri().AbsoluteUri,
                         });
                     }
 
