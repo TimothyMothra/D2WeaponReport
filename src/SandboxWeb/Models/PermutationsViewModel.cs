@@ -9,31 +9,23 @@
     using DestinyLib.DataContract;
 
     public class PermutationsViewModel
-    { 
-        // TODO: FINISH THIS
-    //    public PermutationsViewModel(WeaponDefinition weaponDefinition, WeaponSummary weaponSummary)
-    //    {
-    //        var perkNames = weaponSummary.Permutations.OrderByDescending(x => x.Value).Select(x => x.ToDisplayString()).ToList();
+    {
+        public PermutationsViewModel(List<string> weaponNames)
+        {
+            this.WeaponNamesForAutoComplete = string.Join(",", weaponNames);
 
-    //        this.Summary = new()
-    //        {
-    //            Name = weaponDefinition.MetaData.Name,
-    //            BaseValue = weaponSummary.Base.ToString(),
-    //            Values = weaponSummary.PermutationsAsString(),
-    //            PermutationsCount = weaponSummary.Permutations.Count().ToString(),
-    //            PerkNames = perkNames,
-    //        };
-    //    }
-
+            // TODO: OFFLOAD LOGIC FROM CONTROLLER TO HERE.
+        }
 
         // TODO: HOW DO I RETURN AN ARRAY?
-        public string WeaponNamesForAutoComplete { get; set; }
+        public string WeaponNamesForAutoComplete { get; private set; }
 
         public SummaryDetails Summary { get; set; }
 
         public class SummaryDetails
         {
             public string Name { get; set; }
+            public string IconUri { get; set; }
             public string BaseValue { get; set; }
             public string Values { get; set; }
             public string PermutationsCount { get; set; }

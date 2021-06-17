@@ -40,6 +40,7 @@
                 {
                     Id = jsonDynamic.hash,
                     Name = jsonDynamic.displayProperties.name,
+                    ItemDefinitionIconPath = jsonDynamic.displayProperties.icon,
                     AmmoTypeId = jsonDynamic.equippingBlock.ammoType.ToString(), //TODO: Need to identify Ammo Type (example: "Energy Weapons")
                     TierTypeName = jsonDynamic.inventory.tierTypeName,
                     DefaultDamageTypeId = jsonDynamic.defaultDamageType,
@@ -53,11 +54,11 @@
                 PerkSets = new List<WeaponDefinition.PerkSet>(),
             };
 
-            // get Weapon Icon
+            // check Collection for Seasonal Weapon Icon (Note: does not exist for all weapons).
             if (weaponDefinition.MetaData.CollectibleHash != default)
             {
-                // the icon in the Collectible table includes the season watermark. // TODO: WHAT ABOUT EXOTICS?
-                weaponDefinition.MetaData.Icon = this.GetWeaponIcon(weaponDefinition.MetaData.CollectibleHash);
+                var collectibleDefinition = this.GetDestinyCollectibleDefinitions(weaponDefinition.MetaData.CollectibleHash);
+                weaponDefinition.MetaData.CollectionDefintitionIconPath = collectibleDefinition.IconPath;
             }
 
             // Stats
@@ -134,19 +135,6 @@
 #endregion
 
             return weaponDefinition;
-        }
-
-        public Uri GetWeaponIcon(uint collectibleHash)
-        {
-            // https://bungie.net/common/destiny2_content/icons/48037e6416c3c9da07030a72931e0ca9.jpg
-            // /common/destiny2_content/icons/48037e6416c3c9da07030a72931e0ca9.jpg
-
-            var record =  this.WorldSqlContent.GetDestinyCollectibleDefinition(collectibleHash);
-            dynamic jsonDynamic = JsonConvert.DeserializeObject(record);
-
-            string iconPath = jsonDynamic.displayProperties.icon;
-
-            return new Uri(LibEnvironment.GetDestinyHost(), iconPath);
         }
 
         internal List<WeaponDefinition.Perk> GetWeaponDefinitionPerks(uint plugSetHash)

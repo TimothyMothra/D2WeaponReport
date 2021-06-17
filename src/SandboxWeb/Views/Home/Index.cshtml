@@ -61,7 +61,7 @@
             {
                 <li>
                     <img src="@Html.Raw(result.IconUri)" alt="icon" width="50" height="50">    
-                    <a href="~/Home/Index/@Html.Raw(result.Id)">@Html.Raw($"{@result.Id} {@result.Name}")</a>
+                    <a href="~/Home/Index/@Html.Raw(result.Id)">@Html.Raw(result.Id)</a> @Html.Raw(result.Name)
                 </li>        
             }
         </ul>
@@ -122,6 +122,7 @@
 <div>
 @if(this.Model.Summary != null)
 {
+    <img src="@Html.Raw(this.Model.Summary.IconUri)" alt="icon" >    
 
     <p>Base Points: @Html.DisplayFor(x => x.Summary.BaseValue)</p>
     

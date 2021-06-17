@@ -33,7 +33,13 @@
             /// Example: Legendary, Exotic.
             /// </summary>
             public string TierTypeName { get; set; }
-            public Uri Icon { get; set; }
+
+            public string ItemDefinitionIconPath { get; set; }
+
+            public string CollectionDefintitionIconPath { get; set; }
+
+            public Uri GetIconUri() => new Uri(LibEnvironment.GetDestinyHost(), CollectionDefintitionIconPath == null ? ItemDefinitionIconPath : CollectionDefintitionIconPath);
+
         }
 
         public class WeaponStat

@@ -28,12 +28,9 @@
         public IActionResult Index(string id)
         {
             var weapons = this.worldSqlContentProvider.GetSearchableWeapons();
-            var weaponNames = weapons.Select(x => x.Name);
+            var weaponNames = weapons.Select(x => x.Name).ToList();
 
-            var model = new PermutationsViewModel
-            { 
-                WeaponNamesForAutoComplete = string.Join(",", weaponNames),
-            };
+            var model = new PermutationsViewModel(weaponNames);
 
             if (id == null)
             {
@@ -88,6 +85,7 @@
             return new()
             {
                 Name = definition.MetaData.Name,
+                IconUri = definition.MetaData.GetIconUri().AbsoluteUri,
                 BaseValue = weaponSummary.Base.ToString(),
                 Values = weaponSummary.PermutationsAsString(),
                 PermutationsCount = weaponSummary.Permutations.Count.ToString(),
