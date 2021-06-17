@@ -77,7 +77,6 @@
         var weaponNames = document.getElementById("weaponNames").innerText.split(',');
         console.log(weaponNames);
 
-
         const autoCompleteJS = new autoComplete({
             selector: "#autoComplete",
             placeHolder: "Search for Weapon by Name or ID...",
@@ -98,14 +97,20 @@
                         list.prepend(message);
                     }
                 },
-                //noResults: true,
+                noResults: true,
             },
-            searchEngine: "loose",
             resultItem: {
-                highlight: {
-                    render: true
+                highlight: true
+            },
+            events: {
+                input: {
+                    selection: (event) => {
+                        const selection = event.detail.selection.value;
+                        autoCompleteJS.input.value = selection;
+                    }
                 }
             },
+            searchEngine: "loose",
         });
 
     </script>
