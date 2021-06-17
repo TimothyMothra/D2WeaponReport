@@ -66,6 +66,7 @@ namespace DestinyLib.Properties {
         ///    json_extract(json, &apos;$.hash&apos;) as hash,
         ///    json_extract(json, &apos;$.collectibleHash&apos;) as collectibleHash,
         ///    json_extract(json, &apos;$.displayProperties.name&apos;) as name,
+        ///    json_extract(json, &apos;$.displayProperties.icon&apos;) as icon,
         ///    json_extract(json, &apos;$.itemType&apos;) as itemType,
         ///    json_extract(json, &apos;$.itemTypeDisplayName&apos;) as itemTypeDisplayName
         ///  FROM DestinyInventoryItemDefinition
@@ -75,22 +76,6 @@ namespace DestinyLib.Properties {
         internal static string WorldSqlContent_GetAllWeapons {
             get {
                 return ResourceManager.GetString("WorldSqlContent_GetAllWeapons", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to SELECT 
-        ///    id,
-        ///    json_extract(DestinyInventoryItemDefinition.json, &apos;$.hash&apos;) as hash,
-        ///    json_extract(DestinyInventoryItemDefinition.json, &apos;$.collectibleHash&apos;) as collectibleHash,
-        ///    json_extract(DestinyInventoryItemDefinition.json, &apos;$.displayProperties.name&apos;) as name,
-        ///    json_extract(DestinyInventoryItemDefinition.json, &apos;$.itemType&apos;) as itemType,
-        ///    json_extract(DestinyInventoryItemDefinition.json, &apos;$.itemTypeDisplayName&apos;) as itemTypeDisplayName,
-        ///    json_extract(DestinyInventoryItemDefinitio [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string WorldSqlContent_GetAllWeaponsWithIcons {
-            get {
-                return ResourceManager.GetString("WorldSqlContent_GetAllWeaponsWithIcons", resourceCulture);
             }
         }
     }

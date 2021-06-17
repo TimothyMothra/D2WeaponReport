@@ -121,7 +121,4 @@
   <data name="WorldSqlContent_GetAllWeapons" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Database\WorldSqlContent.GetAllWeapons.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="WorldSqlContent_GetAllWeaponsWithIcons" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Database\WorldSqlContent.GetAllWeaponsWithIcons.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
 </root>
