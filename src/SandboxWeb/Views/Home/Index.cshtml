@@ -120,110 +120,110 @@ Examples:
 
 
 @*WeaponDetails *@
-<div>
 @if (this.Model.WeaponDetails != null)
 {
-
-@*WeaponDetails Header: MetaData *@
-<div>
-    <img src="@Html.Raw(this.Model.WeaponDetails.MetaData.ScreenshotUri)" alt="screenshot" width="600">
-
-    <p>Base Points: @Html.DisplayFor(x => x.WeaponDetails.BaseValue)</p>
-
-    <p>Number of Permutations @Html.DisplayFor(x => x.WeaponDetails.PermutationsCount)</p>
-
-    <p id="weaponName" style="display:none">@Html.DisplayFor(x => x.WeaponDetails.MetaData.Name)</p>
-    <p id="permutations" style="display:none">@Html.DisplayFor(x => x.WeaponDetails.PermutationValues)</p>
-
-</div>
-
-@*WeaponDetails Body: Perks *@
-@foreach (var perkTable in this.Model.WeaponDetails.PerkTables)
-{
     <div>
-        <p>Name: @perkTable.TableDisplayName </p>
 
-        <table>
-            @foreach (var row in perkTable.Rows)
-            {
-                <tr style="border: 1px solid black;">
-                    @foreach (var cell in row)
+        @*WeaponDetails Header: MetaData *@
+        <div>
+            <img src="@Html.Raw(this.Model.WeaponDetails.MetaData.ScreenshotUri)" alt="screenshot" width="600">
+
+            <p>Base Points: @Html.DisplayFor(x => x.WeaponDetails.BaseValue)</p>
+
+            <p>Number of Permutations @Html.DisplayFor(x => x.WeaponDetails.PermutationsCount)</p>
+
+            <p id="weaponName" style="display:none">@Html.DisplayFor(x => x.WeaponDetails.MetaData.Name)</p>
+            <p id="permutations" style="display:none">@Html.DisplayFor(x => x.WeaponDetails.PermutationValues)</p>
+
+        </div>
+
+        @*WeaponDetails Body: Perks *@
+        @foreach (var perkTable in this.Model.WeaponDetails.PerkTables)
+        {
+            <div>
+                <p>Name: @perkTable.TableDisplayName </p>
+
+                <table>
+                    @foreach (var row in perkTable.Rows)
                     {
-                        <td>@cell</td>
+                        <tr style="border: 1px solid black;">
+                            @foreach (var cell in row)
+                            {
+                                <td>@cell</td>
+                            }
+                        </tr>
                     }
-                </tr>
-            }
-        </table>
-    </div>
+                </table>
+            </div>
 
-    <br />
-}
+            <br />
+        }
 
-@*WeaponDetails Body: Permutations *@
-    <div>
-        <div id="plotDiv" style="width:600px;height:500px;"></div>
+        @*WeaponDetails Body: Permutations *@
+        <div>
+            <div id="plotDiv" style="width:600px;height:500px;"></div>
 
-        <script lang="javascript">
-            // https://github.com/plotly/plotly.js
-            // https://plotly.com/javascript/box-plots/
+            <script lang="javascript">
+                // https://github.com/plotly/plotly.js
+                // https://plotly.com/javascript/box-plots/
 
-            var weaponName = document.getElementById("weaponName").innerText;
-            var permutations = document.getElementById("permutations").innerText.split(',');
+                var weaponName = document.getElementById("weaponName").innerText;
+                var permutations = document.getElementById("permutations").innerText.split(',');
 
-            var data = [
-                {
-                    type: 'box',
-                    y: permutations,
-                    name: '+/- points',
-                    boxpoints: 'all',
-                    jitter: 0.5,
-                    whiskerwidth: 0.2,
-                    fillcolor: 'cls',
-                    marker: {
-                        size: 2
+                var data = [
+                    {
+                        type: 'box',
+                        y: permutations,
+                        name: '+/- points',
+                        boxpoints: 'all',
+                        jitter: 0.5,
+                        whiskerwidth: 0.2,
+                        fillcolor: 'cls',
+                        marker: {
+                            size: 2
+                        },
+                        line: {
+                            width: 1
+                        }
+                    }
+                ];
+
+                var layout = {
+                    title: weaponName,
+                    yaxis: {
+                        autorange: true,
+                        showgrid: true,
+                        zeroline: true,
+                        dtick: 5,
+                        //gridcolor: 'rgb(255, 255, 255)',
+                        gridwidth: 1,
+                        zerolinecolor: 'rgb(255, 255, 255)',
+                        zerolinewidth: 2
                     },
-                    line: {
-                        width: 1
-                    }
+                    margin: {
+                        l: 40,
+                        r: 30,
+                        b: 80,
+                        t: 100
+                    },
+                    paper_bgcolor: 'rgb(243, 243, 243)',
+                    plot_bgcolor: 'rgb(243, 243, 243)',
+                    showlegend: false
+                };
+
+                Plotly.newPlot('plotDiv', data, layout);
+            </script>
+            <ul>
+                @foreach (var perkName in this.Model.WeaponDetails.PerkNames)
+                {
+                    <li>@perkName</li>
                 }
-            ];
+            </ul>
+        </div>
 
-            var layout = {
-                title: weaponName,
-                yaxis: {
-                    autorange: true,
-                    showgrid: true,
-                    zeroline: true,
-                    dtick: 5,
-                    //gridcolor: 'rgb(255, 255, 255)',
-                    gridwidth: 1,
-                    zerolinecolor: 'rgb(255, 255, 255)',
-                    zerolinewidth: 2
-                },
-                margin: {
-                    l: 40,
-                    r: 30,
-                    b: 80,
-                    t: 100
-                },
-                paper_bgcolor: 'rgb(243, 243, 243)',
-                plot_bgcolor: 'rgb(243, 243, 243)',
-                showlegend: false
-            };
-
-            Plotly.newPlot('plotDiv', data, layout);
-        </script>
-        <ul>
-            @foreach (var perkName in this.Model.WeaponDetails.PerkNames)
-            {
-                <li>@perkName</li>
-            }
-        </ul>
-    </div>
-
-@*WeaponDetails Footer *@
-    <div>
-        <img src="@Html.Raw(this.Model.WeaponDetails.MetaData.IconUri)" alt="icon" width="50" height="50">
+        @*WeaponDetails Footer *@
+        <div>
+            <img src="@Html.Raw(this.Model.WeaponDetails.MetaData.IconUri)" alt="icon" width="50" height="50">
+        </div>
     </div>
 }
-</div>

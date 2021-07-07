@@ -95,7 +95,7 @@
 
         public class Perk
         {
-            // TODO: Will need Perk Icon.
+            // TODO: Will need Perk Icon to display in Table
             //public bool IsPerk { get; set; }
             //public bool IsMod { get; set; }
             //public bool IsMasterwork { get; set; }

@@ -31,6 +31,7 @@
             {
                 public string TableDisplayName { get; set; }
                 public List<List<string>> Rows { get; set; }
+                // TODO: Need Perk Icons in here
             }
 
             public class MetaDataViewModel
