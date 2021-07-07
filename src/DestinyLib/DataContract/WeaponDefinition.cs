@@ -8,6 +8,7 @@
     {
         public WeaponMetaData MetaData { get; set; }
         public IList<WeaponStat> Stats { get; set; }
+        public IList<PerkTable> PerkTables { get; set; }
         public IList<PerkSet> PerkSets { get; set; }
 
         public override string ToString()
@@ -71,6 +72,11 @@
 
                 return (this.StatHash == 2961396640u || this.StatHash == 4284893193u || this.StatHash == 447667954u || this.StatHash == 3871231066u);
             }
+        }
+
+        public class PerkTable
+        {
+            // TODO: THIS
         }
 
         public class PerkSet

@@ -1,4 +1,4 @@
-﻿@model SandboxWeb.Models.PermutationsViewModel
+﻿@model SandboxWeb.Models.HomeViewModel
 
 @{
     ViewData["Title"] = "DestinySandbox";
@@ -9,7 +9,7 @@
 <!-- Latest compiled and minified plotly.js JavaScript -->
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
-<!--https://tarekraafat.github.io/autoComplete.js/#/installation--> 
+<!--https://tarekraafat.github.io/autoComplete.js/#/installation-->
 <script src="https://cdn.jsdelivr.net/npm/@@tarekraafat/autocomplete.js@10.0.4/dist/autoComplete.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tarekraafat/autocomplete.js@10.1.4/dist/css/autoComplete.01.min.css">
 
@@ -28,7 +28,7 @@ Examples:
 <div class="autoComplete_wrapper">
     <input id="autoComplete" type="search" dir="ltr" spellcheck=false autocorrect="off" autocomplete="off" autocapitalize="off" tabindex="1">
 </div>
-<input type="button" value="Search" name="no" onclick="ButtonClick_Search()" tabindex="2"> 
+<input type="button" value="Search" name="no" onclick="ButtonClick_Search()" tabindex="2">
 
 <p>
     // TODO: AutoComplete works with keyboard. Off by one with mouse. Consider switching to jQuery AutoComplete.
@@ -39,38 +39,38 @@ Examples:
 </p>
 
 @*Display Error*@
-@if (this.Model.Error != null)
+@if (this.Model.ErrorMessage != null)
 {
     <p>
-        @Html.DisplayFor(x => x.Error)
+        @Html.DisplayFor(x => x.ErrorMessage)
     </p>
 }
 
 @*Display Multiple Search Results*@
-@if(this.Model.MultipleResults != null)
+@if (this.Model.MultipleSearchResults != null)
 {
     <p>
         Multiple results found:
     </p>
 
     <ul>
-        @foreach(var result in this.Model.MultipleResults)
+        @foreach (var result in this.Model.MultipleSearchResults)
         {
             <li>
-                <img src="@Html.Raw(result.IconUri)" alt="icon" width="50" height="50">    
+                <img src="@Html.Raw(result.IconUri)" alt="icon" width="50" height="50">
                 <a href="~/Home/Index/@Html.Raw(result.Id)">@Html.Raw(result.Id)</a> @Html.Raw(result.Name)
-            </li>        
+            </li>
+
         }
     </ul>
 }
 
 <script>
-    // TODO: TYPESCRIPT   
-    function ButtonClick_Search()
-    {
+    // TODO: TYPESCRIPT
+    function ButtonClick_Search() {
         var input = document.getElementById("autoComplete").value;
         console.log("test: " + input);
-    
+
         window.location.href = "/Home/Index/" + input
     }
 
@@ -119,32 +119,56 @@ Examples:
 <hr />
 
 
-@*Summary*@
+@*WeaponDetails *@
 <div>
-    @if(this.Model.Summary != null)
+    @if (this.Model.WeaponDetails != null)
     {
-        @*Summary Header*@
+        @*WeaponDetails Header: MetaData *@
         <div>
-            <img src="@Html.Raw(this.Model.Summary.ScreenshotUri)" alt="screenshot" width="600" >
+            <img src="@Html.Raw(this.Model.WeaponDetails.MetaData.ScreenshotUri)" alt="screenshot" width="600">
 
-            <p>Base Points: @Html.DisplayFor(x => x.Summary.BaseValue)</p>
-    
-            <p>Number of Permutations @Html.DisplayFor(x => x.Summary.PermutationsCount)</p>
+            <p>Base Points: @Html.DisplayFor(x => x.WeaponDetails.BaseValue)</p>
 
-            <p id="weaponName" style="display:none">@Html.DisplayFor(x => x.Summary.Name)</p>
-            <p id="permutations" style="display:none">@Html.DisplayFor(x => x.Summary.Values)</p>
-    
-            <div id="plotDiv" style="width:600px;height:500px;"></div>
-        
-            <script lang="javascript">
-            // https://github.com/plotly/plotly.js
-            // https://plotly.com/javascript/box-plots/
+            <p>Number of Permutations @Html.DisplayFor(x => x.WeaponDetails.PermutationsCount)</p>
 
-            var weaponName = document.getElementById("weaponName").innerText;
-            var permutations = document.getElementById("permutations").innerText.split(',');
+            <p id="weaponName" style="display:none">@Html.DisplayFor(x => x.WeaponDetails.MetaData.Name)</p>
+            <p id="permutations" style="display:none">@Html.DisplayFor(x => x.WeaponDetails.PermutationValues)</p>
 
-            var data = [
-                {
+        </div>
+
+        @*WeaponDetails Body: Perks *@
+        @foreach (var perkTable in this.Model.WeaponDetails.PerkTables)
+        {
+            <div>
+                <p>Name: @perkTable.TableDisplayName </p>
+
+                <table>
+                    @foreach (var row in perkTable.Rows)
+                    {
+                        <tr>
+                            @foreach(var cell in row)
+                            {
+                                <td>@cell</td>
+                            }
+                        </tr>
+                    }
+                </table>
+            </div>
+        }
+
+        @*WeaponDetails Body: Permutations *@
+<div>
+    <div id="plotDiv" style="width:600px;height:500px;"></div>
+
+    <script lang="javascript">
+        // https://github.com/plotly/plotly.js
+        // https://plotly.com/javascript/box-plots/
+
+        var weaponName = document.getElementById("weaponName").innerText;
+        var permutations = document.getElementById("permutations").innerText.split(',');
+
+        var data = [
+            {
                 type: 'box',
                 y: permutations,
                 name: '+/- points',
@@ -159,51 +183,44 @@ Examples:
                     width: 1
                 }
             }
-            ];
+        ];
 
-            var layout = {
-                title: weaponName,
-                yaxis: {
-                    autorange: true,
-                    showgrid: true,
-                    zeroline: true,
-                    dtick: 5,
-                    //gridcolor: 'rgb(255, 255, 255)',
-                    gridwidth: 1,
-                    zerolinecolor: 'rgb(255, 255, 255)',
-                    zerolinewidth: 2
-                },
-                margin: {
-                    l: 40,
-                    r: 30,
-                    b: 80,
-                    t: 100
-                },
-                paper_bgcolor: 'rgb(243, 243, 243)',
-                plot_bgcolor: 'rgb(243, 243, 243)',
-                showlegend: false
-            };
+        var layout = {
+            title: weaponName,
+            yaxis: {
+                autorange: true,
+                showgrid: true,
+                zeroline: true,
+                dtick: 5,
+                //gridcolor: 'rgb(255, 255, 255)',
+                gridwidth: 1,
+                zerolinecolor: 'rgb(255, 255, 255)',
+                zerolinewidth: 2
+            },
+            margin: {
+                l: 40,
+                r: 30,
+                b: 80,
+                t: 100
+            },
+            paper_bgcolor: 'rgb(243, 243, 243)',
+            plot_bgcolor: 'rgb(243, 243, 243)',
+            showlegend: false
+        };
 
-            Plotly.newPlot('plotDiv', data, layout);
-            </script>
-        </div>
+        Plotly.newPlot('plotDiv', data, layout);
+    </script>
+    <ul>
+        @foreach (var perkName in this.Model.WeaponDetails.PerkNames)
+        {
+            <li>@perkName</li>
+        }
+    </ul>
+</div>
 
-        @*Summary Body*@
+        @*WeaponDetails Footer *@
         <div>
-            @if(this.Model.Summary != null)
-            {
-                <ul>
-                    @foreach(var perkName in this.Model.Summary.PerkNames)
-                    {
-                        <li>@perkName</li>        
-                    }
-                </ul>
-            }
-        </div>
-
-        @*Summary Footer*@
-        <div>
-            <img src="@Html.Raw(this.Model.Summary.IconUri)" alt="icon" width="50" height="50">    
+            <img src="@Html.Raw(this.Model.WeaponDetails.MetaData.IconUri)" alt="icon" width="50" height="50">
         </div>
     }
 </div>

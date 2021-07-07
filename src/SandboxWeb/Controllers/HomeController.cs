@@ -31,31 +31,31 @@
             var weapons = this.worldSqlContentProvider.GetSearchableWeapons();
             var weaponNames = weapons.Select(x => x.Name).ToList();
 
-            var model = new PermutationsViewModel(weaponNames);
+            var model = new HomeViewModel(weaponNames);
 
             if (id == null)
             {
-                model.Summary = null;
+                model.WeaponDetails = null;
             }
             else if (UInt32.TryParse(id, out uint hash))
             {
-                model.Summary = GetSummaryDetails(hash);
+                model.WeaponDetails = GetSummaryDetails(hash);
             }
             else
             {
                 var searchResults = SearchForWeaponScenario.Run(id, SearchForWeaponScenario.SearchType.Regex);
-                
+
                 if (searchResults.Count == 1)
                 {
-                    model.Summary = GetSummaryDetails(searchResults[0].HashId);
+                    model.WeaponDetails = GetSummaryDetails(searchResults[0].HashId);
                 }
                 else if (searchResults.Count > 1 )
                 {
-                    model.MultipleResults = this.GetMultipleResults(searchResults);
+                    model.MultipleSearchResults = GetMultipleResults(searchResults);
                 }
                 else
                 {
-                    model.Error = "No Results Found";
+                    model.ErrorMessage = "No Results Found";
                 }
             }
 
@@ -67,13 +67,13 @@
         /// </summary>
         /// <param name="searchableWeaponRecords"></param>
         /// <returns></returns>
-        private List<PermutationsViewModel.SearchResult> GetMultipleResults(IList<SearchableWeaponRecord> searchableWeaponRecords)
+        private static List<HomeViewModel.SearchResultViewModel> GetMultipleResults(IList<SearchableWeaponRecord> searchableWeaponRecords)
         {
-            var displayResults = new List<PermutationsViewModel.SearchResult>(searchableWeaponRecords.Count);
+            var displayResults = new List<HomeViewModel.SearchResultViewModel>(searchableWeaponRecords.Count);
 
             foreach (var searchableWeaponRecord in searchableWeaponRecords)
             {
-                displayResults.Add(new PermutationsViewModel.SearchResult
+                displayResults.Add(new HomeViewModel.SearchResultViewModel
                 {
                     Name = searchableWeaponRecord.Name,
                     Id = searchableWeaponRecord.HashId,
@@ -84,7 +84,7 @@
             return displayResults;
         }
 
-        private PermutationsViewModel.SummaryDetails GetSummaryDetails(uint hash)
+        private static HomeViewModel.WeaponDetailsViewModel GetSummaryDetails(uint hash)
         {
             var definition = GetWeaponDefinitionScenario.Run(hash);
             var weaponSummary = GetWeaponAnalysisScenario.Run(hash);
@@ -93,11 +93,36 @@
 
             return new()
             {
-                Name = definition.MetaData.Name,
-                IconUri = definition.MetaData.GetIconUri().AbsoluteUri,
-                ScreenshotUri = definition.MetaData.GetScreenshotUri().AbsoluteUri,
+                MetaData = new()
+                {
+                    Name = definition.MetaData.Name,
+                    IconUri = definition.MetaData.GetIconUri().AbsoluteUri,
+                    ScreenshotUri = definition.MetaData.GetScreenshotUri().AbsoluteUri,
+                },
+
+                PerkTables = new()
+                {
+                    new () 
+                    { 
+                        TableDisplayName = "Test DisplayName", 
+                        Rows = new() 
+                        { 
+                            new ()
+                            {
+                                "One", "Two", "Three"
+                            },
+                            new()
+                            {
+                                null,
+                                "x",
+                                null
+                            },
+                        }
+                    } // TOOD: THIS
+                },
+
                 BaseValue = weaponSummary.Base.ToString(),
-                Values = weaponSummary.PermutationsAsString(),
+                PermutationValues = weaponSummary.PermutationsAsString(),
                 PermutationsCount = weaponSummary.Permutations.Count.ToString(),
                 PerkNames = perkNames,
             };
