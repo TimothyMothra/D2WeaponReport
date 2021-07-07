@@ -10,15 +10,15 @@
         [TestMethod]
         public void VerifyGet()
         {
-            uint id_deadmanstale = 3654674561;
-            //uint id_xenoclast = 2891672170;
-            //uint id_gnawingHunger = 821154603;
-            //uint id_chromaRush = 1119734784;
-            //uint id_crownSplitter = 741454304;
-            uint id_arsenicBite = 720351795;
+            //uint id = 3654674561; // DeadMansTale
+            //uint id = 2891672170; // Xenoclast
+            uint id = 821154603; // GnawingHunger
+            //uint id = 1119734784; // ChromaRush
+            //uint id = 741454304; // CrownSplitter
+            //uint id = 720351795; // ArsenicBite
 
-            //var summary = GetWeaponAnalysisScenario.Run(id_deadmanstale);
-            var summary = GetWeaponAnalysisScenario.Run(id_arsenicBite);
+            var summary = GetWeaponAnalysisScenario.Run(id);
+            Assert.IsNotNull(summary);
         }
 
         [TestMethod]
