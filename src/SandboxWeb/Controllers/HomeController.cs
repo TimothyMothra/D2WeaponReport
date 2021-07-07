@@ -102,23 +102,15 @@
 
                 PerkTables = new()
                 {
-                    new () 
-                    { 
-                        TableDisplayName = "Test DisplayName", 
-                        Rows = new() 
-                        { 
-                            new ()
-                            {
-                                "One", "Two", "Three"
-                            },
-                            new()
-                            {
-                                null,
-                                "x",
-                                null
-                            },
+                    new()
+                    {
+                        TableDisplayName = "Test Perks",
+                        Rows = new()
+                        {
+                            new() { null, "One", "Two", "Three" },
+                            new() { "AAA", null, "+5", null },
                         }
-                    } // TOOD: THIS
+                    }
                 },
 
                 BaseValue = weaponSummary.Base.ToString(),
