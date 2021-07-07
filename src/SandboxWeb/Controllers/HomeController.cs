@@ -113,7 +113,7 @@
                     }
                 },
 
-                BaseValue = weaponSummary.Base.ToString(),
+                BaseValue = weaponSummary.Statistics.Base.ToString(),
                 PermutationValues = weaponSummary.PermutationsAsString(),
                 PermutationsCount = weaponSummary.Permutations.Count.ToString(),
                 PerkNames = perkNames,
