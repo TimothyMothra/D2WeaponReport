@@ -6,6 +6,7 @@
     using System.Linq;
 
     using DestinyLib.Database;
+    using DestinyLib.DataContract;
     using DestinyLib.Scenarios;
 
     using Microsoft.AspNetCore.Mvc;
@@ -42,29 +43,15 @@
             }
             else
             {
-                var searchResults = SearchForWeaponScenario.Run(id, SearchForWeaponScenario.SearchType.Regex).ToList();
+                var searchResults = SearchForWeaponScenario.Run(id, SearchForWeaponScenario.SearchType.Regex);
                 
                 if (searchResults.Count == 1)
                 {
-                    var hashid = searchResults[0].HashId;
-
-                    model.Summary = GetSummaryDetails(hashid);
+                    model.Summary = GetSummaryDetails(searchResults[0].HashId);
                 }
                 else if (searchResults.Count > 1 )
                 {
-                    var displayResults = new List<PermutationsViewModel.SearchResult>(searchResults.Count);
-
-                    foreach (var result in searchResults)
-                    {
-                        displayResults.Add(new PermutationsViewModel.SearchResult
-                        {
-                            Name = result.Name,
-                            Id = result.HashId,
-                            IconUri = result.GetIconUri().AbsoluteUri,
-                        });
-                    }
-
-                    model.MultipleResults = displayResults;
+                    model.MultipleResults = this.GetMultipleResults(searchResults);
                 }
                 else
                 {
@@ -73,6 +60,23 @@
             }
 
             return View(model);
+        }
+
+        private List<PermutationsViewModel.SearchResult> GetMultipleResults(IList<SearchableWeaponRecord> searchableWeaponRecords)
+        {
+            var displayResults = new List<PermutationsViewModel.SearchResult>(searchableWeaponRecords.Count);
+
+            foreach (var searchableWeaponRecord in searchableWeaponRecords)
+            {
+                displayResults.Add(new PermutationsViewModel.SearchResult
+                {
+                    Name = searchableWeaponRecord.Name,
+                    Id = searchableWeaponRecord.HashId,
+                    IconUri = searchableWeaponRecord.GetIconUri().AbsoluteUri,
+                });
+            }
+
+            return displayResults;
         }
 
         private PermutationsViewModel.SummaryDetails GetSummaryDetails(uint hash)
