@@ -39,7 +39,7 @@
             }
             else if (UInt32.TryParse(id, out uint hash))
             {
-                model.WeaponDetails = GetSummaryDetails(hash);
+                model.WeaponDetails = GetWeaponDetails(hash);
             }
             else
             {
@@ -47,7 +47,7 @@
 
                 if (searchResults.Count == 1)
                 {
-                    model.WeaponDetails = GetSummaryDetails(searchResults[0].HashId);
+                    model.WeaponDetails = GetWeaponDetails(searchResults[0].HashId);
                 }
                 else if (searchResults.Count > 1 )
                 {
@@ -84,7 +84,7 @@
             return displayResults;
         }
 
-        private static HomeViewModel.WeaponDetailsViewModel GetSummaryDetails(uint hash)
+        private static HomeViewModel.WeaponDetailsViewModel GetWeaponDetails(uint hash)
         {
             var definition = GetWeaponDefinitionScenario.Run(hash);
             var weaponSummary = GetWeaponAnalysisScenario.Run(hash);
