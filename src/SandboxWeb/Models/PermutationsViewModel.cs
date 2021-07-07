@@ -1,12 +1,8 @@
 ﻿namespace SandboxWeb.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-
-    using DestinyLib.Analysis;
     using DestinyLib.DataContract;
+
+    using System.Collections.Generic;
 
     public class HomeViewModel
     {

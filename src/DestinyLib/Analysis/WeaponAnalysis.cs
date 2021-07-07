@@ -13,14 +13,6 @@
         public static WeaponSummary GetWeaponSummary(WeaponDefinition weaponDefinition)
         {
             // Use Breadth-First traversal to calculate all possible permutations.
-
-            /// TODO: P1: CALCULATE ALL POSSIBLE VALUES --** PICK UP HERE **
-            /// Need a holder for the Weapon Stats
-            /// Need to foreach all combinations of Perks and add to the Stats.
-            /// 
-            /// With all combinations, need to sort min-max.
-            /// Then calculate the <see cref="WeaponSummary"/>.
-
             var stats = weaponDefinition.Stats;
 
             var baseTotalPoints = 0;

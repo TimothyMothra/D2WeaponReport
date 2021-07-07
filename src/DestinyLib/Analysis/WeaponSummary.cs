@@ -37,6 +37,10 @@ namespace DestinyLib.Analysis
             this.Permutations = permutations;
         }
 
+
+        //public IList<PerkTable> PerkTables { get; set; } // TODO: MOVE OUT OF DEFINITION
+
+
         public bool HasEmptyPerks { get; set; }
 
         /// <summary>
@@ -72,5 +76,12 @@ namespace DestinyLib.Analysis
         public IList<PerkPermutation> Permutations { get; set; }
 
         public string PermutationsAsString() => string.Join(",", Permutations.Select(x => x.MaxPoints).AsEnumerable());
+
+
+        //public class PerkTable
+        //{
+        //    // TODO: THIS
+        //}
+
     }
 }
