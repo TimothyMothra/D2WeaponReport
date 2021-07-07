@@ -62,6 +62,11 @@
             return View(model);
         }
 
+        /// <summary>
+        /// Given a list of multple search results, return a list of the data needed to display.
+        /// </summary>
+        /// <param name="searchableWeaponRecords"></param>
+        /// <returns></returns>
         private List<PermutationsViewModel.SearchResult> GetMultipleResults(IList<SearchableWeaponRecord> searchableWeaponRecords)
         {
             var displayResults = new List<PermutationsViewModel.SearchResult>(searchableWeaponRecords.Count);
