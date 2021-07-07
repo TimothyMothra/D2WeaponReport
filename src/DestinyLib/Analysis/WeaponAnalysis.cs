@@ -10,7 +10,7 @@
         private const bool BehaviorIncludePerksWithNoValue = false;
         private const bool BehaviorValidatePermutations = true;
 
-        public static WeaponSummary GetWeaponSummary(WeaponDefinition weaponDefinition)
+        public static WeaponAnalysisSummary GetWeaponAnalysisSummary(WeaponDefinition weaponDefinition)
         {
             var stats = weaponDefinition.Stats;
             var perkSets = weaponDefinition.PerkSets;
@@ -24,7 +24,7 @@
                 // Two weapons do not have perks.
                 // id:1619016919 name:Khvostov 7G-02
                 // id:1744115122 name:Legend of Acrius
-                return new WeaponSummary(baseTotalPoints, null);
+                return new WeaponAnalysisSummary(baseTotalPoints, null);
             }
 
             if (BehaviorValidatePermutations)// && weaponDefinition.Stats.Any()) // TODO: WHAT WAS I DOING HERE?
@@ -33,7 +33,7 @@
                 permutations.ForEach(x => x.Validate(weaponDefinition.Stats));
             }
 
-            var summary = new WeaponSummary(baseTotalPoints, permutations);
+            var summary = new WeaponAnalysisSummary(baseTotalPoints, permutations);
             return summary;
         }
 

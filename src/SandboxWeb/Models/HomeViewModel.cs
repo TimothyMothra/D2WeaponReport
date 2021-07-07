@@ -1,6 +1,5 @@
 ﻿namespace SandboxWeb.Models
 {
-    using DestinyLib.DataContract;
 
     using System.Collections.Generic;
 

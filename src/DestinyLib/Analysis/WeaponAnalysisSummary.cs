@@ -8,10 +8,10 @@ namespace DestinyLib.Analysis
     /// <summary>
     /// https://en.wikipedia.org/wiki/Box_plot
     /// </summary>
-    public class WeaponSummary
+    public class WeaponAnalysisSummary
     {
 
-        public WeaponSummary(double baseValue, List<PerkPermutation> permutations)
+        public WeaponAnalysisSummary(double baseValue, List<PerkPermutation> permutations)
         {
             if (permutations == null)
             {
