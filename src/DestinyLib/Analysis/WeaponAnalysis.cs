@@ -24,7 +24,7 @@
                 // Two weapons do not have perks.
                 // id:1619016919 name:Khvostov 7G-02
                 // id:1744115122 name:Legend of Acrius
-                return new WeaponAnalysisSummary(baseTotalPoints, null);
+                return new WeaponAnalysisSummary();
             }
 
             if (BehaviorValidatePermutations)// && weaponDefinition.Stats.Any()) // TODO: WHAT WAS I DOING HERE?
@@ -33,7 +33,9 @@
                 permutations.ForEach(x => x.Validate(weaponDefinition.Stats));
             }
 
-            var summary = new WeaponAnalysisSummary(baseTotalPoints, permutations);
+            List<PerkTable> perkTables = GetPerkTables(weaponDefinition);
+
+            var summary = new WeaponAnalysisSummary(baseTotalPoints, permutations, perkTables);
             return summary;
         }
 
@@ -116,6 +118,20 @@
             }
 
             return permutations;
+        }
+
+        private static List<PerkTable> GetPerkTables(WeaponDefinition weaponDefinition)
+        {
+            var stats = weaponDefinition.Stats;
+            var perkSets = weaponDefinition.PerkSets;
+
+            var perkTables = new List<PerkTable>(perkSets.Count);
+            foreach (var perkSet in perkSets)
+            {
+                perkTables.Add(new PerkTable(stats, perkSet));
+            }
+
+            return perkTables;
         }
 
         private static void CustomAdd(this Dictionary<uint, double> dictionary, uint key, double value)

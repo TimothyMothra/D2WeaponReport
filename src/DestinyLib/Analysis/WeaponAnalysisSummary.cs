@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using StatisticsApi = MathNet.Numerics.Statistics.Statistics;
@@ -10,22 +11,19 @@ namespace DestinyLib.Analysis
     /// </summary>
     public class WeaponAnalysisSummary
     {
-
-        public WeaponAnalysisSummary(double baseValue, List<PerkPermutation> permutations)
+        public WeaponAnalysisSummary()
         {
-            if (permutations == null)
-            {
-                this.HasEmptyPerks = true;
-                return;
-            }
+            this.HasEmptyPerks = true;
+        }
 
-            this.Permutations = permutations;
+        public WeaponAnalysisSummary(double baseValue, List<PerkPermutation> permutations, List<PerkTable> perkTables)
+        {
+            this.Permutations = permutations ?? throw new ArgumentNullException(nameof(permutations));
 
-            var values = permutations.Select(x => x.MaxPoints).ToList();
-            values.Sort();
-            var permutationsEnumerable = values.AsEnumerable();
-
+            var permutationsEnumerable = permutations.Select(x => x.MaxPoints).OrderByDescending(x => x).AsEnumerable();
             this.Statistics = new PermutationStatistics(baseValue, permutationsEnumerable);
+
+            this.PerkTables = perkTables;
         }
 
         public PermutationStatistics Statistics { get; set; }
@@ -74,21 +72,12 @@ namespace DestinyLib.Analysis
 
         }
 
-
         public IList<PerkTable> PerkTables { get; set; }
-
 
         public bool HasEmptyPerks { get; set; }
 
         public IList<PerkPermutation> Permutations { get; set; }
 
         public string PermutationsAsString() => string.Join(",", Permutations.Select(x => x.MaxPoints).AsEnumerable());
-
-
-        public class PerkTable
-        {
-            // TODO: THIS
-        }
-
     }
 }
