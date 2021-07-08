@@ -141,7 +141,7 @@ Examples:
         @foreach (var perkTable in this.Model.WeaponDetails.PerkTables)
         {
             <div>
-                <p>Name: @perkTable.TableDisplayName </p>
+                <p>@perkTable.TableDisplayName </p>
 
                 <table>
                     @foreach (var row in perkTable.Rows)
