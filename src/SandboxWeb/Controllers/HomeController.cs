@@ -5,6 +5,7 @@
     using System.Diagnostics;
     using System.Linq;
 
+    using DestinyLib.Analysis;
     using DestinyLib.Database;
     using DestinyLib.DataContract;
     using DestinyLib.Scenarios;
@@ -13,6 +14,8 @@
     using Microsoft.Extensions.Logging;
 
     using SandboxWeb.Models;
+
+    using static SandboxWeb.Models.HomeViewModel.WeaponDetailsViewModel;
 
     public class HomeController : Controller
     {
@@ -89,6 +92,8 @@
             var definition = GetWeaponDefinitionScenario.Run(hash);
             var weaponSummary = GetWeaponAnalysisScenario.Run(hash);
 
+            var perktables = GetPerkTableViewModel(weaponSummary);
+
             var perkNames = weaponSummary.Permutations.OrderByDescending(x => x.MaxPoints).Select(x => x.ToDisplayString()).ToList();
 
             return new()
@@ -100,24 +105,30 @@
                     ScreenshotUri = definition.MetaData.GetScreenshotUri().AbsoluteUri,
                 },
 
-                PerkTables = new()
-                {
-                    new()
-                    {
-                        TableDisplayName = "Test Perks",
-                        Rows = new()
-                        {
-                            new() { null, "One", "Two", "Three" },
-                            new() { "AAA", null, "+5", null },
-                        }
-                    }
-                },
+                PerkTables = perktables,
 
                 BaseValue = weaponSummary.Statistics.Base.ToString(),
                 PermutationValues = weaponSummary.PermutationsAsString(),
                 PermutationsCount = weaponSummary.Permutations.Count.ToString(),
+
                 PerkNames = perkNames,
             };
+        }
+
+        private static List<PerkTableViewModel> GetPerkTableViewModel(WeaponAnalysisSummary weaponAnalysisSummary)
+        {
+            var perkTableViewModel = new List<PerkTableViewModel>(weaponAnalysisSummary.PerkTables.Count);
+
+            foreach(var analysisPerkTable in weaponAnalysisSummary.PerkTables)
+            {
+                perkTableViewModel.Add(new PerkTableViewModel
+                {
+                    TableDisplayName = analysisPerkTable.ToDisplayName(),
+                    Rows = analysisPerkTable.ToDisplayTable(),
+                });
+            }
+
+            return perkTableViewModel;
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

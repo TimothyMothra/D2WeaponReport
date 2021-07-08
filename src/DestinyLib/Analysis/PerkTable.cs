@@ -20,6 +20,18 @@
 
         public PerkSet PerkSet { get; set; }
 
+        public string ToDisplayName()
+        {
+            return "Test Perks";
+        }
 
+        public List<List<string>> ToDisplayTable()
+        {
+            return new()
+            {
+                new() { null, "One", "Two", "Three" },
+                new() { "AAA", null, "+5", null },
+            };
+        }
     }
 }
