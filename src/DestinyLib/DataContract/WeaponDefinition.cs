@@ -103,6 +103,7 @@
             public string Name { get; set; }
             public string Description { get; set; }
             public IList<PerkValue> PerkValues { get; set; }
+            public string IconPath { get; set; }
         }
 
         public class PerkValue

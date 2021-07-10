@@ -29,8 +29,9 @@
             public class PerkTableViewModel
             {
                 public string TableDisplayName { get; set; }
+                public List<string> HeaderRow { get; set; }
+                public List<string> IconUris { get; set; }
                 public List<List<string>> Rows { get; set; }
-                // TODO: Need Perk Icons in here
             }
 
             public class MetaDataViewModel

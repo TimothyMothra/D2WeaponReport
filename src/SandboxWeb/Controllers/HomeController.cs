@@ -123,8 +123,10 @@
             {
                 perkTableViewModel.Add(new PerkTableViewModel
                 {
-                    TableDisplayName = analysisPerkTable.ToDisplayName(),
-                    Rows = analysisPerkTable.ToDisplayTable(),
+                    TableDisplayName = analysisPerkTable.GetDisplayName(),
+                    HeaderRow = analysisPerkTable.GetHeaderRow(),
+                    Rows = analysisPerkTable.GetDataDisplayTable(),
+                    IconUris = analysisPerkTable.GetIconUris(),
                 });
             }
 

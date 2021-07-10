@@ -20,14 +20,25 @@
 
         public PerkSet PerkSet { get; set; }
 
-        public string ToDisplayName()
+        public string GetDisplayName()
         {
             return $"SocketIndex: {this.PerkSet.SocketIndex} SocketTypeHash: {this.PerkSet.SocketTypeHash} PlugSetHash: {this.PerkSet.PlugSetHash}";
         }
 
-        public List<List<string>> ToDisplayTable()
+        public List<string> GetIconUris()
+        {
+            List<string> iconUris = new List<string>(this.PerkSet.Perks.Count);
+            foreach(var perk in this.PerkSet.Perks)
+            {
+                iconUris.Add(new Uri(LibEnvironment.GetDestinyHost(), perk.IconPath).AbsoluteUri);
+            }
+            return iconUris;
+        }
+
+        public List<string> GetHeaderRow()
         {
             int numberOfColumns = this.Stats.Count + 1;
+
 
             // make header row. record column index of each stat
             var headerRow = new List<string>(numberOfColumns);
@@ -37,6 +48,20 @@
             foreach (var stat in this.Stats)
             {
                 headerRow.Add(string.IsNullOrEmpty(stat.Name) ? "-" : stat.Name);
+                statsToColumnIndex.Add(stat.StatHash, columnIndex++);
+            }
+
+            return headerRow;
+        }
+
+        public List<List<string>> GetDataDisplayTable()
+        {
+            int numberOfColumns = this.Stats.Count + 1;
+
+            var statsToColumnIndex = new Dictionary<uint, int>();
+            int columnIndex = 1;
+            foreach (var stat in this.Stats)
+            {
                 statsToColumnIndex.Add(stat.StatHash, columnIndex++);
             }
 
@@ -64,7 +89,6 @@
             // export as rows of strings
             var exportTable = new List<List<string>>
             {
-                headerRow
             };
 
             exportTable.AddRange(rows);

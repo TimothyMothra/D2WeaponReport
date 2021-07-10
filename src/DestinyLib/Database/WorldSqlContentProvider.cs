@@ -183,6 +183,7 @@
                 Id = plugItemHash,
                 Name = perkDynamic.displayProperties.name,
                 Description = perkDynamic.displayProperties.description,
+                IconPath = perkDynamic.displayProperties.icon,
                 PerkValues = perkValues.Any() ? perkValues : null, // some perks may not have values that affect stats (example: Rampage). but others will (example: Field Prep).
             };
 

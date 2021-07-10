@@ -144,10 +144,29 @@ Examples:
                 <p>@perkTable.TableDisplayName </p>
 
                 <table>
-                    @foreach (var row in perkTable.Rows)
+                    <tr style="border: 1px solid white;">
+                        <td></td> @*empty for icons*@
+                            @foreach (var cell in perkTable.HeaderRow)
+                            {
+                                <td>@cell</td>
+                            }
+</tr>
+
+
+
+                    @for (int i = 0; i < perkTable.Rows.Count; i++)
                     {
-                        <tr style="border: 1px solid black;">
-                            @foreach (var cell in row)
+
+<tr style="border: 1px solid white;">
+
+
+                                <td>
+                                    
+            <img src="@Html.Raw(perkTable.IconUris[i])" alt="icon" width="50" >
+
+                                    </td>
+
+                            @foreach (var cell in perkTable.Rows[i])
                             {
                                 <td>@cell</td>
                             }
