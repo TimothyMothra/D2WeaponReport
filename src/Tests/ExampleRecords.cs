@@ -191,6 +191,7 @@
                         Id = 839105230u,
                         Name = "Arrowhead Brake",
                         Description = "Lightly vented barrel.\n  •  Greatly controls recoil\n  •  Increases handling speed",
+                        IconPath = "/common/destiny2_content/icons/7a0a23f9622636cea92387d50d368333.png",
                         PerkValues = new List<WeaponDefinition.PerkValue>
                         {
                             new WeaponDefinition.PerkValue
@@ -210,6 +211,7 @@
                         Id = 3661387068u,
                         Name = "Chambered Compensator",
                         Description = "Stable barrel attachment.\n  •  Increases stability\n  •  Moderately controls recoil\n  •  Slightly decreases handling speed",
+                        IconPath = "/common/destiny2_content/icons/376aa9bd8c392567f501012fc3b3d4d0.png",
                         PerkValues = new List<WeaponDefinition.PerkValue>
                         {
                             new WeaponDefinition.PerkValue
@@ -234,21 +236,22 @@
                         Id = 4090651448u,
                         Name = "Corkscrew Rifling",
                         Description = "Balanced barrel. \n  •  Slightly increases range and stability\n  •  Slightly increases handling speed",
+                        IconPath = "/common/destiny2_content/icons/18cc75bf9a17bb80b5109f1b8909521f.png",
                         PerkValues = new List<WeaponDefinition.PerkValue>
                         {
                             new WeaponDefinition.PerkValue
-             {
-                StatHash = 155624089u,
-                Value = 5,
-             }, new WeaponDefinition.PerkValue
-             {
-                StatHash = 1240592695u,
-                Value = 5,
-             }, new WeaponDefinition.PerkValue
-             {
-                StatHash = 943549884u,
-                Value = 5,
-             }
+                             {
+                                StatHash = 155624089u,
+                                Value = 5,
+                             }, new WeaponDefinition.PerkValue
+                             {
+                                StatHash = 1240592695u,
+                                Value = 5,
+                             }, new WeaponDefinition.PerkValue
+                             {
+                                StatHash = 943549884u,
+                                Value = 5,
+                             }
                         }
                     },
                     new WeaponDefinition.Perk
@@ -256,6 +259,7 @@
                         Id = 1467527085u,
                         Name = "Extended Barrel",
                         Description = "Weighty barrel extension.\n  •  Increases range\n  •  Decreases handling speed\n  •  Moderately controls recoil",
+                        IconPath = "/common/destiny2_content/icons/7c81469db03f7111f8d248b54c83d7cf.png",
                         PerkValues = new List<WeaponDefinition.PerkValue>
                         {
                             new WeaponDefinition.PerkValue
@@ -278,6 +282,7 @@
                         Id = 1840239774u,
                         Name = "Fluted Barrel",
                         Description = "Ultra-light barrel. \n  •  Greatly increases handling speed\n  •  Slightly increases stability",
+                        IconPath = "/common/destiny2_content/icons/c2a4355c8db7eac12d6dec52d09a20fe.png",
                         PerkValues = new List<WeaponDefinition.PerkValue>
                         {
                             new WeaponDefinition.PerkValue
@@ -296,6 +301,7 @@
                         Id = 202670084u,
                         Name = "Full Bore",
                         Description = "Barrel optimized for distance.\n  •  Greatly increases range\n  •  Decreases stability\n  •  Slightly decreases handling speed",
+                        IconPath = "/common/destiny2_content/icons/9307c5604f995d90ad5ed65281b64772.png",
                         PerkValues = new List<WeaponDefinition.PerkValue>
                         {
                             new WeaponDefinition.PerkValue
@@ -318,6 +324,7 @@
                         Id = 3250034553u,
                         Name = "Hammer-Forged Rifling",
                         Description = "Durable ranged barrel.\n  •  Increases range",
+                        IconPath = "/common/destiny2_content/icons/9acb073d4e85160f66f0d617d210cf61.png",
                         PerkValues = new List<WeaponDefinition.PerkValue>
                         {
                             new WeaponDefinition.PerkValue
@@ -332,6 +339,7 @@
                         Id = 1392496348u,
                         Name = "Polygonal Rifling",
                         Description = "Barrel optimized for recoil reduction.\n  •  Increases stability",
+                        IconPath = "/common/destiny2_content/icons/7cadd68b66ffd3bbedc09aa9c7ba6e03.png",
                         PerkValues = new List<WeaponDefinition.PerkValue>
                         {
                             new WeaponDefinition.PerkValue
@@ -346,6 +354,7 @@
                         Id = 1482024992u,
                         Name = "Smallbore",
                         Description = "Dual strength barrel.\n  •  Increases range\n  •  Increases stability",
+                        IconPath = "/common/destiny2_content/icons/bc3d5d36c6b4627bdb8d37cd52711cf4.png",
                         PerkValues = new List<WeaponDefinition.PerkValue>
                         {
                             new WeaponDefinition.PerkValue
@@ -374,6 +383,7 @@
                         Id = 3142289711u,
                         Name = "Accurized Rounds",
                         Description = "This weapon can fire longer distances.\n  •  Increases range",
+                        IconPath = "/common/destiny2_content/icons/05e357cd152eb0f665ee986aaa3edc56.png",
                         PerkValues = new List<WeaponDefinition.PerkValue>
                         {
                             new WeaponDefinition.PerkValue
@@ -388,6 +398,7 @@
                         Id = 4134353779u,
                         Name = "Drop Mag",
                         Description = "Magazine drops on reload, wasting ammunition but greatly increasing reload speed.",
+                        IconPath = "/common/destiny2_content/icons/d316be9e70844427e69034b0f06bec75.png",
                         PerkValues = new List<WeaponDefinition.PerkValue>
                         {
                             new WeaponDefinition.PerkValue
@@ -402,6 +413,7 @@
                         Id = 1087426260u,
                         Name = "Appended Mag",
                         Description = "This weapon's magazine is built for higher capacity.\n  •  Increases magazine size",
+                        IconPath = "/common/destiny2_content/icons/9d8a7be4c2fef471a6fde38d02ab8dae.png",
                         PerkValues = new List<WeaponDefinition.PerkValue>
                         {
                             new WeaponDefinition.PerkValue
@@ -416,6 +428,7 @@
                         Id = 106909392u,
                         Name = "Tactical Mag",
                         Description = "This weapon has multiple tactical improvements.\n  •  Slightly increases stability\n  •  Increases reload speed\n  •  Slightly increases magazine size",
+                        IconPath = "/common/destiny2_content/icons/9711e6d3de7a9cf2f844752992390a63.png",
                         PerkValues = new List<WeaponDefinition.PerkValue>
                         {
                             new WeaponDefinition.PerkValue
@@ -438,6 +451,7 @@
                         Id = 2420895100u,
                         Name = "Extended Mag",
                         Description = "This weapon has a greatly increased magazine size, but reloads much slower.\n  •  Greatly increases magazine size\n  •  Greatly decreases reload speed",
+                        IconPath = "/common/destiny2_content/icons/4cd73ae5b1bc1ae0afc7adb34c2f2df6.png",
                         PerkValues = new List<WeaponDefinition.PerkValue>
                         {
                             new WeaponDefinition.PerkValue
@@ -456,6 +470,7 @@
                         Id = 3177308360u,
                         Name = "Steady Rounds",
                         Description = "This magazine is optimized for recoil control.\n  •  Greatly increases stability \n  •  Slightly decreases range",
+                        IconPath = "/common/destiny2_content/icons/adaf4315dab749519c41a233e9954598.png",
                         PerkValues = new List<WeaponDefinition.PerkValue>
                         {
                             new WeaponDefinition.PerkValue
@@ -474,6 +489,7 @@
                         Id = 1431678320u,
                         Name = "Alloy Magazine",
                         Description = "Faster reloads when the magazine is empty.",
+                        IconPath = "/common/destiny2_content/icons/932e7b84c233c6cc49a58058f8c5144d.png",
                         PerkValues = null,
                     },
                     new WeaponDefinition.Perk
@@ -481,6 +497,7 @@
                         Id = 3230963543u,
                         Name = "Flared Magwell",
                         Description = "Optimized for fast reloading.\n  •  Slightly increases stability\n  •  Greatly increases reload speed",
+                        IconPath = "/common/destiny2_content/icons/ec1bca64fc9709678ea5c297c0e64c19.png",
                         PerkValues = new List<WeaponDefinition.PerkValue>
                         {
                             new WeaponDefinition.PerkValue
@@ -509,24 +526,28 @@
                         Id = 1890422124u,
                         Name = "Tap the Trigger",
                         Description = "Grants a short period of increased stability and accuracy on initial trigger pull.",
+                        IconPath = "/common/destiny2_content/icons/8e910e56aa6e36b2c406804e1d78d04f.png",
                         PerkValues = null
                     }, new WeaponDefinition.Perk
                     {
                         Id = 1820235745u,
                         Name = "Subsistence",
                         Description = "Defeating targets partially reloads the magazine from reserves.",
+                        IconPath = "/common/destiny2_content/icons/03d774525048e5eb5b6899b37d418920.png",
                         PerkValues = null
                     }, new WeaponDefinition.Perk
                     {
                         Id = 2387244414u,
                         Name = "Zen Moment",
                         Description = "Causing damage with this weapon increases its stability.",
+                        IconPath = "/common/destiny2_content/icons/49958f356ea1df930888d15fe6539fe1.png",
                         PerkValues = null
                     }, new WeaponDefinition.Perk
                     {
                         Id = 2869569095u,
                         Name = "Field Prep",
                         Description = "Increased ammo reserves. Faster reload, stow, and ready when you're crouching.",
+                        IconPath = "/common/destiny2_content/icons/fd815414532978ad2e5decbfc416b9e4.png",
                         PerkValues = new List<WeaponDefinition.PerkValue>
                         {
                             new WeaponDefinition.PerkValue
@@ -540,6 +561,7 @@
                         Id = 3300816228u,
                         Name = "Auto-Loading Holster",
                         Description = "The holstered weapon is automatically reloaded after a short period of time.",
+                        IconPath = "/common/destiny2_content/icons/d355b1117307c9f187729249361cecc3.png",
                         PerkValues = null
                     }
                 }
@@ -557,30 +579,35 @@
                       Id = 3425386926u,
                       Name = "Rampage",
                       Description = "Kills with this weapon temporarily grant increased damage. Stacks 3x.",
+                        IconPath = "/common/destiny2_content/icons/e9aa2f479812bfabc8d48effde384737.png",
                         PerkValues = null
                    }, new WeaponDefinition.Perk
                    {
                       Id = 1015611457u,
                       Name = "Kill Clip",
                       Description = "Reloading after a kill grants increased damage.",
+                        IconPath = "/common/destiny2_content/icons/03e17b5e24aa08bebda6bcbd405b8ada.png",
                         PerkValues = null
                    }, new WeaponDefinition.Perk
                    {
                       Id = 2458213969u,
                       Name = "Multikill Clip",
                       Description = "Reloading grants increased damage based on the number of rapid kills made beforehand.",
+                        IconPath = "/common/destiny2_content/icons/a610c14dcf450e8c5b0c0903d5b05965.png",
                         PerkValues = null
                    }, new WeaponDefinition.Perk
                    {
                       Id = 3523296417u,
                       Name = "Demolitionist",
                       Description = "Kills with this weapon generate grenade energy. Activating your grenade ability reloads this weapon from reserves.",
+                        IconPath = "/common/destiny2_content/icons/53ead908917c9156457c7c9dd453d649.png",
                         PerkValues = null
                    }, new WeaponDefinition.Perk
                     {
                         Id = 4082225868u,
                         Name = "Swashbuckler",
                         Description = "This weapon gains increased damage from melee kills and kills with this weapon.",
+                        IconPath = "/common/destiny2_content/icons/ef89b89410de618e9cfa353ff35125d8.png",
                         PerkValues = null
                     },
                 }
