@@ -6,6 +6,12 @@
   </Target>
 
   <PropertyGroup>
+    <!-- RootMarker identifies the root directory of the repo and is used to dermine all other relative paths. -->
+    <RootMarker>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildProjectDirectory), 'root.marker'))</RootMarker>
+    <SourceRoot>$(RootMarker)/src</SourceRoot>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <!-- Locking Packages is required to support caching dependencies in Github Actions. -->
     <!-- https://docs.github.com/en/actions/guides/caching-dependencies-to-speed-up-workflows -->
     <!-- https://docs.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files#locking-dependencies -->
@@ -22,7 +28,7 @@
 
   <PropertyGroup>
     <!-- Analyzer Settings -->
-    <CodeAnalysisRuleSet>C:\REPOS\DestinySandbox\src\Analysis.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>$(SourceRoot)\Analysis.ruleset</CodeAnalysisRuleSet>
 
     <!-- This should enable the Microsoft.CodeAnalysis.NetAnalyzers (https://github.com/dotnet/roslyn-analyzers). -->
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
