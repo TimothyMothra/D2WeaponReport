@@ -39,12 +39,19 @@
 
         public enum SearchType
         {
+            /// <summary>
+            /// Search using literal string compare.
+            /// </summary>
             StringContains,
+
+            /// <summary>
+            /// Search using regex string contains.
+            /// </summary>
             Regex,
         }
 
         /// <summary>
-        ///
+        /// Search for weapons where the name matches the search pattern.
         /// </summary>
         /// <param name="pattern"></param>
         /// <param name="searchType"></param>

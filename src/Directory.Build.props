@@ -35,9 +35,13 @@
     <!-- Analyzer Settings -->
     <CodeAnalysisRuleSet>C:\REPOS\DestinySandbox\src\Analysis.ruleset</CodeAnalysisRuleSet>
 
+    <!-- This should enable the Microsoft.CodeAnalysis.NetAnalyzers (https://github.com/dotnet/roslyn-analyzers). -->
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+
+    <!-- All warnings should fail in Release configuration. -->
     <TreatWarningsAsErrors Condition=" '$(Configuration)' == 'Release' ">true</TreatWarningsAsErrors>
     <TreatWarningsAsErrors Condition=" '$(Configuration)' != 'Release' ">false</TreatWarningsAsErrors>
-
     <StyleCopTreatErrorsAsWarnings Condition=" '$(Configuration)' == 'Release' ">true</StyleCopTreatErrorsAsWarnings>
     <StyleCopTreatErrorsAsWarnings Condition=" '$(Configuration)' != 'Release' ">false</StyleCopTreatErrorsAsWarnings>
   </PropertyGroup>
