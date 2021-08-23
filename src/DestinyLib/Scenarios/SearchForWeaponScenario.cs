@@ -11,7 +11,7 @@
 
     public static class SearchForWeaponScenario
     {
-        private static IList<SearchableWeaponRecord> searchableWeapons;
+        private static readonly IList<SearchableWeaponRecord> SearchableWeapons;
 
         static SearchForWeaponScenario()
         {
@@ -34,7 +34,7 @@
                 }
             }
 
-            SearchForWeaponScenario.searchableWeapons = searchableWeapons;
+            SearchForWeaponScenario.SearchableWeapons = searchableWeapons;
         }
 
         public enum SearchType
@@ -74,7 +74,7 @@
 
             if (searchType == SearchType.StringContains)
             {
-                return searchableWeapons.Where(x => x.Name.Contains(pattern, System.StringComparison.InvariantCultureIgnoreCase)).ToList();
+                return SearchableWeapons.Where(x => x.Name.Contains(pattern, System.StringComparison.InvariantCultureIgnoreCase)).ToList();
             }
             else if (searchType == SearchType.Regex)
             {
@@ -88,7 +88,7 @@
 
                 var regex = new Regex(pattern: regexPattern, options: RegexOptions.IgnoreCase);
 
-                return searchableWeapons.Where(x => regex.IsMatch(x.Name)).ToList();
+                return SearchableWeapons.Where(x => regex.IsMatch(x.Name)).ToList();
             }
             else
             {

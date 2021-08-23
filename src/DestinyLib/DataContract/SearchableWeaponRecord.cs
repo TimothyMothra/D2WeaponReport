@@ -32,7 +32,7 @@
             };
         }
 
-        public Uri GetIconUri() => new Uri(LibEnvironment.GetDestinyHost(), this.CollectionDefintitionIconPath == null ? this.ItemDefinitionIconPath : this.CollectionDefintitionIconPath);
+        public Uri GetIconUri() => new Uri(LibEnvironment.GetDestinyHost(), this.CollectionDefintitionIconPath ?? this.ItemDefinitionIconPath);
 
         //public static SearchableWeaponRecord ParseWithIcons(IDataRecord record)
         //{
