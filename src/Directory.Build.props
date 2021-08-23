@@ -18,7 +18,6 @@
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
   </PropertyGroup>
 
-  <!-- <ItemGroup Condition=" $(OS) == 'Windows_NT'"> -->
   <ItemGroup>
     <!-- Analyzers -->
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
