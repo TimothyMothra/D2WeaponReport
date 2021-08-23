@@ -2,8 +2,8 @@
 {
     using System.Threading.Tasks;
 
-    class Program
+    public class Program
     {
-        static async Task Main(string[] arg_s) => await DestinyLib.Scenarios.InitializeEnvironmentScenario.Run();
+        public static async Task Main(string[] arg_s) => await DestinyLib.Scenarios.InitializeEnvironmentScenario.Run();
     }
 }

@@ -10,18 +10,17 @@
 
     public abstract class Database
     {
-        public readonly string ConnectionString;
+        private readonly string connectionString;
 
-        public Database(string connectionString) => this.ConnectionString = connectionString;
+        public Database(string connectionString) => this.connectionString = connectionString;
 
         /// <summary>
-        /// 
+        /// Test that a connection can be made to a provided database file.
         /// </summary>
         /// <remarks>
         /// As of today, the contents of the zip file match the file name of the downloaded zip. This could change in the future.
         /// </remarks>
         /// <param name="fileName"></param>
-        /// <returns></returns>
         public static void TestConnection(FileInfo fileName)
         {
             if (!fileName.Exists)
@@ -36,24 +35,13 @@
             }
         }
 
-        private static bool TestConnectionInternal(string connectionString)
-        {
-            using (var connection = new SqliteConnection(connectionString))
-            {
-                connection.Open();
-                var command = connection.CreateCommand();
-                command.CommandText = "SELECT date('now')";
-                var result = command.ExecuteScalar();
+        public static string MakeConnectionString(FileInfo filePath) => $"Data Source={filePath.FullName}";
 
-                return DateTime.TryParse(result.ToString(), out _);
-            }
-        }
-
-        public IList<T> GetRecords<T>(string commandText, Func<IDataRecord, T> BuildObject)
+        public IList<T> GetRecords<T>(string commandText, Func<IDataRecord, T> buildObject)
         {
             var list = new List<T>();
 
-            using (var connection = new SqliteConnection(this.ConnectionString))
+            using (var connection = new SqliteConnection(this.connectionString))
             {
                 connection.Open();
                 var command = connection.CreateCommand();
@@ -62,7 +50,7 @@
                 {
                     while (reader.Read())
                     {
-                        list.Add(BuildObject(reader));
+                        list.Add(buildObject(reader));
                     }
                 }
             }
@@ -71,13 +59,13 @@
         }
 
         /// <summary>
-        /// 
+        /// Get the Json record from the provided tableName and hashId.
         /// </summary>
         /// <remarks>
-        /// In the API, hashes (like item hashes) are can be represented as an "unsigned 32 int". 
-        /// However, in the SQLiteDB, these hashes are represented as a "signed 32 int". 
-        /// The unsigned 32 int overflows what can be stored in SQLite's signed 32 int, 
-        /// so the majority of items in the DB will have negative ids. 
+        /// In the API, hashes (like item hashes) are can be represented as an "unsigned 32 int".
+        /// However, in the SQLiteDB, these hashes are represented as a "signed 32 int".
+        /// The unsigned 32 int overflows what can be stored in SQLite's signed 32 int,
+        /// so the majority of items in the DB will have negative ids.
         /// For example, the item "Vigil of Heroes" with item hash 2592351697 has an ID value of -1702615599 in the definitions SQLite database.
         /// To query the SQLite DB for a hash, you will need to convert the hash from an "unsigned 32 int" to a "signed 32 int".
         /// (https://github.com/vpzed/Destiny2-API-Info/wiki/API-Introduction-Part-3-Manifest#converting-hashes-for-the-sqlite-db).
@@ -86,7 +74,7 @@
         {
             var id = unchecked((int)hashId);
 
-            using (var connection = new SqliteConnection(this.ConnectionString))
+            using (var connection = new SqliteConnection(this.connectionString))
             {
                 connection.Open();
                 var command = connection.CreateCommand();
@@ -106,6 +94,17 @@
             return null;
         }
 
-        public static string MakeConnectionString(FileInfo filePath) => $"Data Source={filePath.FullName}";
+        private static bool TestConnectionInternal(string connectionString)
+        {
+            using (var connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                var command = connection.CreateCommand();
+                command.CommandText = "SELECT date('now')";
+                var result = command.ExecuteScalar();
+
+                return DateTime.TryParse(result.ToString(), out _);
+            }
+        }
     }
 }

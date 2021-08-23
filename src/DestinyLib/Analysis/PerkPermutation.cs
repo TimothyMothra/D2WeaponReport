@@ -14,16 +14,16 @@ namespace DestinyLib.Analysis
 
         public string PerkNames { get; set; }
 
-        public string ToDisplayString() => $"{MaxPoints}: {PerkNames}";
-
         // TODO: THIS IS VERY WASTEFUL.
         public Dictionary<uint, double> PerkHashAndValues { get; set; } = new Dictionary<uint, double>();
+
+        public string ToDisplayString() => $"{this.MaxPoints}: {this.PerkNames}";
 
         public void Validate(IList<WeaponDefinition.WeaponStat> weaponStats)
         {
             double perkSum = 0;
 
-            foreach(var perk in PerkHashAndValues)
+            foreach (var perk in this.PerkHashAndValues)
             {
                 WeaponDefinition.WeaponStat stat = null;
 
@@ -37,11 +37,11 @@ namespace DestinyLib.Analysis
                         continue;
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    throw new Exception($"This perk was not found in the available stats. names '{PerkNames}', id '{perk.Key}', value '{perk.Value}'", ex);
+                    throw new Exception($"This perk was not found in the available stats. names '{this.PerkNames}', id '{perk.Key}', value '{perk.Value}'", ex);
                 }
-                
+
                 perkSum += this.Validate(stat, perk.Value);
             }
 
@@ -60,6 +60,7 @@ namespace DestinyLib.Analysis
             {
                 throw new Exception($"This stat breaks an assumption. id '{stat.StatHash}' name '{stat.Name}' maxValue '{stat.MaxValue}' DisplayMax '{stat.DisplayMaximum}'");
             }
+
             var statAssumedMax = stat.MaxValue != 0 ? stat.MaxValue : stat.DisplayMaximum;
 
             // ASSUMPTION: It is assumed that a stat value can never be negative.

@@ -16,12 +16,12 @@
     [TestClass]
     public class StressTests
     {
-        private readonly WorldSqlContent WorldSqlContent;
+        private readonly WorldSqlContent worldSqlContent;
 
         public StressTests()
         {
             var dbPath = new FileInfo(LibEnvironment.GetDatabaseFilePath("world_sql_content"));
-            this.WorldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));
+            this.worldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));
         }
 
         /// <summary>
@@ -31,7 +31,7 @@
         [TestMethod]
         public void TestCanParseWeapons()
         {
-            var worldSqlContentProvider = new WorldSqlContentProvider(this.WorldSqlContent, ProviderOptions.TestWithCaching );
+            var worldSqlContentProvider = new WorldSqlContentProvider(this.worldSqlContent, ProviderOptions.TestWithCaching);
 
             var weapons = worldSqlContentProvider.GetSearchableWeapons();
 
@@ -43,9 +43,9 @@
                 {
                     _ = worldSqlContentProvider.GetWeaponDefinition(weapon.HashId);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    Console.WriteLine($"{weapon.HashId} { weapon.Name}");
+                    Console.WriteLine($"{weapon.HashId} {weapon.Name}");
                     Console.WriteLine(ex.Message);
 
                     failedIds.Add(weapon.ToString());
@@ -63,7 +63,7 @@
         [TestMethod]
         public void TestAnalysis()
         {
-            var worldSqlContentProvider = new WorldSqlContentProvider(this.WorldSqlContent, ProviderOptions.TestWithCaching);
+            var worldSqlContentProvider = new WorldSqlContentProvider(this.worldSqlContent, ProviderOptions.TestWithCaching);
 
             var weapons = worldSqlContentProvider.GetSearchableWeapons();
 
@@ -73,13 +73,13 @@
             {
                 try
                 {
-
                     // TODO, NEED TO PASS IN MY OWN PROVIDER.
-                    _ = GetWeaponAnalysisScenario.Run(weapon.HashId);
+                    var result = GetWeaponAnalysisScenario.Run(weapon.HashId);
+                    //result.
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    Console.WriteLine($"{weapon.HashId} { weapon.Name}");
+                    Console.WriteLine($"{weapon.HashId} {weapon.Name}");
                     Console.WriteLine(ex.Message);
 
                     failedIds.Add(weapon.ToString());

@@ -11,28 +11,22 @@
 
     public static class SearchForWeaponScenario
     {
-        public enum SearchType
-        {
-            StringContains,
-            Regex
-        }
-
-        private static IList<SearchableWeaponRecord> SearchableWeapons;
+        private static IList<SearchableWeaponRecord> searchableWeapons;
 
         static SearchForWeaponScenario()
         {
             var dbPath = new FileInfo(LibEnvironment.GetDatabaseFilePath("world_sql_content"));
             var worldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));
-            var WorldSqlContentProvider = new WorldSqlContentProvider(worldSqlContent, ProviderOptions.ScenarioDefault);
+            var worldSqlContentProvider = new WorldSqlContentProvider(worldSqlContent, ProviderOptions.ScenarioDefault);
 
             // init
-            var searchableWeapons = WorldSqlContentProvider.GetSearchableWeapons();
+            var searchableWeapons = worldSqlContentProvider.GetSearchableWeapons();
 
-            foreach(var searchableWeapon in searchableWeapons)
+            foreach (var searchableWeapon in searchableWeapons)
             {
                 if (searchableWeapon.CollectibleHash != default)
                 {
-                    var collectibleDefinition = WorldSqlContentProvider.GetDestinyCollectibleDefinitions(searchableWeapon.CollectibleHash);
+                    var collectibleDefinition = worldSqlContentProvider.GetDestinyCollectibleDefinitions(searchableWeapon.CollectibleHash);
                     if (collectibleDefinition != null)
                     {
                         searchableWeapon.CollectionDefintitionIconPath = collectibleDefinition.IconPath;
@@ -40,11 +34,17 @@
                 }
             }
 
-            SearchableWeapons = searchableWeapons;
+            SearchForWeaponScenario.searchableWeapons = searchableWeapons;
+        }
+
+        public enum SearchType
+        {
+            StringContains,
+            Regex,
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pattern"></param>
         /// <param name="searchType"></param>
@@ -67,7 +67,7 @@
 
             if (searchType == SearchType.StringContains)
             {
-                return SearchableWeapons.Where(x => x.Name.Contains(pattern, System.StringComparison.InvariantCultureIgnoreCase)).ToList();
+                return searchableWeapons.Where(x => x.Name.Contains(pattern, System.StringComparison.InvariantCultureIgnoreCase)).ToList();
             }
             else if (searchType == SearchType.Regex)
             {
@@ -81,13 +81,12 @@
 
                 var regex = new Regex(pattern: regexPattern, options: RegexOptions.IgnoreCase);
 
-                return SearchableWeapons.Where(x => regex.IsMatch(x.Name)).ToList();
+                return searchableWeapons.Where(x => regex.IsMatch(x.Name)).ToList();
             }
             else
             {
                 throw new NotImplementedException();
             }
         }
-
     }
 }

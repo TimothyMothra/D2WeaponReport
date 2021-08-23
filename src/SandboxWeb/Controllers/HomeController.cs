@@ -40,7 +40,7 @@
             {
                 model.WeaponDetails = null;
             }
-            else if (UInt32.TryParse(id, out uint hash))
+            else if (uint.TryParse(id, out uint hash))
             {
                 model.WeaponDetails = GetWeaponDetails(hash);
             }
@@ -52,7 +52,7 @@
                 {
                     model.WeaponDetails = GetWeaponDetails(searchResults[0].HashId);
                 }
-                else if (searchResults.Count > 1 )
+                else if (searchResults.Count > 1)
                 {
                     model.MultipleSearchResults = GetMultipleResults(searchResults);
                 }
@@ -62,7 +62,13 @@
                 }
             }
 
-            return View(model);
+            return this.View(model);
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return this.View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
         }
 
         /// <summary>
@@ -96,9 +102,9 @@
 
             var perkNames = weaponSummary.Permutations.OrderByDescending(x => x.MaxPoints).Select(x => x.ToDisplayString()).ToList();
 
-            return new()
+            return new ()
             {
-                MetaData = new()
+                MetaData = new ()
                 {
                     Name = definition.MetaData.Name,
                     IconUri = definition.MetaData.GetIconUri().AbsoluteUri,
@@ -119,7 +125,7 @@
         {
             var perkTableViewModel = new List<PerkTableViewModel>(weaponAnalysisSummary.PerkTables.Count);
 
-            foreach(var analysisPerkTable in weaponAnalysisSummary.PerkTables)
+            foreach (var analysisPerkTable in weaponAnalysisSummary.PerkTables)
             {
                 perkTableViewModel.Add(new PerkTableViewModel
                 {
@@ -131,12 +137,6 @@
             }
 
             return perkTableViewModel;
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

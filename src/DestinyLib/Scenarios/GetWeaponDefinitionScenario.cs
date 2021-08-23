@@ -12,8 +12,8 @@
         {
             var dbPath = new FileInfo(LibEnvironment.GetDatabaseFilePath("world_sql_content"));
             var worldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));
-            var WorldSqlContentProvider = new WorldSqlContentProvider(worldSqlContent, ProviderOptions.ScenarioDefault);
-            var weaponDefinition = WorldSqlContentProvider.GetWeaponDefinition(id);
+            var worldSqlContentProvider = new WorldSqlContentProvider(worldSqlContent, ProviderOptions.ScenarioDefault);
+            var weaponDefinition = worldSqlContentProvider.GetWeaponDefinition(id);
             return weaponDefinition;
         }
     }

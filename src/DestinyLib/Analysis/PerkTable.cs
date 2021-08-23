@@ -28,17 +28,17 @@
         public List<string> GetIconUris()
         {
             List<string> iconUris = new List<string>(this.PerkSet.Perks.Count);
-            foreach(var perk in this.PerkSet.Perks)
+            foreach (var perk in this.PerkSet.Perks)
             {
                 iconUris.Add(new Uri(LibEnvironment.GetDestinyHost(), perk.IconPath).AbsoluteUri);
             }
+
             return iconUris;
         }
 
         public List<string> GetHeaderRow()
         {
             int numberOfColumns = this.Stats.Count + 1;
-
 
             // make header row. record column index of each stat
             var headerRow = new List<string>(numberOfColumns);
@@ -67,7 +67,7 @@
 
             // enumerate perks and populate statContainer
             List<List<string>> rows = new List<List<string>>(this.PerkSet.Perks.Count);
-            foreach(var perk in this.PerkSet.Perks)
+            foreach (var perk in this.PerkSet.Perks)
             {
                 var tempRow = new string[numberOfColumns];
 
@@ -84,7 +84,6 @@
 
                 rows.Add(tempRow.ToList());
             }
-
 
             // export as rows of strings
             var exportTable = new List<List<string>>

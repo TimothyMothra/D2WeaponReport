@@ -6,7 +6,9 @@
     public class SearchableWeaponRecord
     {
         public int Id { get; set; }
+
         public uint HashId { get; set; }
+
         public string Name { get; set; }
 
         public uint CollectibleHash { get; set; }
@@ -14,8 +16,6 @@
         public string ItemDefinitionIconPath { get; set; }
 
         public string CollectionDefintitionIconPath { get; set; }
-
-        public Uri GetIconUri() => new Uri(LibEnvironment.GetDestinyHost(), CollectionDefintitionIconPath == null ? ItemDefinitionIconPath : CollectionDefintitionIconPath);
 
         public string ItemTypeDisplayName { get; set; }
 
@@ -31,6 +31,8 @@
                 ItemTypeDisplayName = record.GetString(6),
             };
         }
+
+        public Uri GetIconUri() => new Uri(LibEnvironment.GetDestinyHost(), this.CollectionDefintitionIconPath == null ? this.ItemDefinitionIconPath : this.CollectionDefintitionIconPath);
 
         //public static SearchableWeaponRecord ParseWithIcons(IDataRecord record)
         //{
@@ -50,7 +52,7 @@
 
         public override string ToString()
         {
-            return $"[{HashId}] {Name} ({ItemTypeDisplayName})";
+            return $"[{this.HashId}] {this.Name} ({this.ItemTypeDisplayName})";
         }
     }
 }

@@ -10,28 +10,28 @@
 
     public class WorldSqlContentProvider
     {
-        public readonly WorldSqlContent WorldSqlContent;
+        private readonly WorldSqlContent worldSqlContent;
 
-        private readonly ProviderOptions ProviderOptions;
+        private readonly ProviderOptions providerOptions;
 
-        private readonly Dictionary<uint, WeaponStatDefinition> WeaponStatDefinitionCache = new();
-        private readonly Dictionary<uint, WeaponDefinition.Perk> WeaponDefinitionPerkCache = new();
-        private readonly Dictionary<uint, DestinyCollectibleDefinition> DestinyCollectibleDefinitionCache = new();
+        private readonly Dictionary<uint, WeaponStatDefinition> weaponStatDefinitionCache = new ();
+        private readonly Dictionary<uint, WeaponDefinition.Perk> weaponDefinitionPerkCache = new ();
+        private readonly Dictionary<uint, DestinyCollectibleDefinition> destinyCollectibleDefinitionCache = new ();
 
         public WorldSqlContentProvider(WorldSqlContent worldSqlContent, ProviderOptions providerOptions)
         {
-            this.WorldSqlContent = worldSqlContent; 
-            this.ProviderOptions = providerOptions;
+            this.worldSqlContent = worldSqlContent;
+            this.providerOptions = providerOptions;
         }
 
         public WeaponDefinition GetWeaponDefinition(uint id)
         {
-            var record = this.WorldSqlContent.GetDestinyInventoryItemDefinition(id);
-            
+            var record = this.worldSqlContent.GetDestinyInventoryItemDefinition(id);
+
             dynamic jsonDynamic = JsonConvert.DeserializeObject(record);
             if (jsonDynamic == null)
             {
-                throw new Exception($"unexpected null result for {nameof(WorldSqlContent.GetDestinyInventoryItemDefinition)} id {id}");
+                throw new Exception($"unexpected null result for {nameof(this.worldSqlContent.GetDestinyInventoryItemDefinition)} id {id}");
             }
 
             var weaponDefinition = new WeaponDefinition
@@ -49,7 +49,6 @@
                     CollectibleHash = jsonDynamic.collectibleHash ?? default(uint),
                     FlavorText = jsonDynamic.flavorText,
                     ItemTypeId = jsonDynamic.itemSubType, //TODO: Need to identity Weapon Type (example: "enum DestinyItemSubType "AutoRifle"")
-                    
                 },
                 Stats = new List<WeaponDefinition.WeaponStat>(),
                 PerkSets = new List<WeaponDefinition.PerkSet>(),
@@ -86,14 +85,13 @@
                 // ASSUMPTION: MaxValue is never used.
                 if (stat.MaxValue != 0)
                 {
-                    throw new($"weapon id {id} name {weaponDefinition.MetaData.Name} | stat id {stat.StatHash} name {stat.Name} value {stat.Value} max {stat.MaxValue} displayMax {stat.DisplayMaximum}");
+                    throw new ($"weapon id {id} name {weaponDefinition.MetaData.Name} | stat id {stat.StatHash} name {stat.Name} value {stat.Value} max {stat.MaxValue} displayMax {stat.DisplayMaximum}");
                 }
 
                 weaponDefinition.Stats.Add(stat);
             }
             #endregion
 
-            
             // PERKS
             #region WeaponDefinition Perks
             // Perks are stored in SocketEntries.
@@ -108,15 +106,16 @@
                     weaponPerkIndexes = category.socketIndexes.ToObject<int[]>();
                 }
             }
-            
+
             var socketEntriesDynamic = jsonDynamic.sockets.socketEntries;
-            foreach(var i in weaponPerkIndexes)
+            foreach (var i in weaponPerkIndexes)
             {
                 var socketEntryDynamic = socketEntriesDynamic[i];
                 // TODO: Instead of referencing types to exclude, should identify types to include.
                 // Bungie could introduce new things at anytime that break parsing.
-                if (socketEntryDynamic.socketTypeHash == (uint)1282012138 // ignore Tracker (example: ??)
-                    || socketEntryDynamic.socketTypeHash == (uint)2575784089) // ignore Ticuu's Divination "stocks" (example: ??)
+                if (socketEntryDynamic.socketTypeHash == 1282012138u // ignore Tracker (example: ??)
+ // ignore Tracker (example: ??)
+                    || socketEntryDynamic.socketTypeHash == 2575784089u) // ignore Ticuu's Divination "stocks" (example: ??)
                 {
                     continue;
                 }
@@ -138,11 +137,79 @@
             return weaponDefinition;
         }
 
+        public WeaponStatDefinition GetWeaponStatDefinition(uint statHash)
+        {
+            if (this.providerOptions.EnableCaching && this.weaponStatDefinitionCache.TryGetValue(statHash, out var cachedRecord))
+            {
+                return cachedRecord;
+            }
+
+            var record = this.worldSqlContent.GetDestinyStatDefinition(statHash);
+
+            dynamic jsonDynamic = JsonConvert.DeserializeObject(record);
+            if (jsonDynamic == null)
+            {
+                throw new Exception($"unexpected null result for {nameof(this.worldSqlContent.GetDestinyStatDefinition)} id {statHash}");
+            }
+
+            var weaponStatDefinition = new WeaponStatDefinition
+            {
+                Id = jsonDynamic.hash,
+                Name = jsonDynamic.displayProperties.name,
+                Description = jsonDynamic.displayProperties.description,
+                Interpolate = jsonDynamic.interpolate,
+            };
+
+            if (this.providerOptions.EnableCaching)
+            {
+                this.weaponStatDefinitionCache.Add(statHash, weaponStatDefinition);
+            }
+
+            return weaponStatDefinition;
+        }
+
+        public DestinyCollectibleDefinition GetDestinyCollectibleDefinitions(uint collectibleHash)
+        {
+            if (this.providerOptions.EnableCaching && this.destinyCollectibleDefinitionCache.TryGetValue(collectibleHash, out var cachedRecord))
+            {
+                return cachedRecord;
+            }
+
+            var record = this.worldSqlContent.GetDestinyCollectibleDefinition(collectibleHash);
+
+            dynamic jsonDynamic = JsonConvert.DeserializeObject(record);
+            if (jsonDynamic == null)
+            {
+                throw new Exception($"unexpected null result for {nameof(this.worldSqlContent.GetDestinyCollectibleDefinition)} id {collectibleHash}");
+            }
+
+            var destinyCollectibleDefinition = new DestinyCollectibleDefinition
+            {
+                HashId = jsonDynamic.hash,
+                ItemHash = jsonDynamic.itemHash,
+                Name = jsonDynamic.displayProperties.name,
+                IconPath = jsonDynamic.displayProperties.icon,
+            };
+
+            if (this.providerOptions.EnableCaching)
+            {
+                this.destinyCollectibleDefinitionCache.Add(collectibleHash, destinyCollectibleDefinition);
+            }
+
+            return destinyCollectibleDefinition;
+        }
+
+        public IList<SearchableWeaponRecord> GetSearchableWeapons()
+        {
+            // Source: (https://stackoverflow.com/questions/1202935/convert-rows-from-a-data-reader-into-typed-results).
+            return this.worldSqlContent.GetRecords(Properties.Resources.WorldSqlContent_GetAllWeapons, SearchableWeaponRecord.Parse);
+        }
+
         internal List<WeaponDefinition.Perk> GetWeaponDefinitionPerks(uint plugSetHash)
         {
             var perks = new List<WeaponDefinition.Perk>();
 
-            var plugSetDefinitionRecord = this.WorldSqlContent.GetDestinyPlugSetDefinition(plugSetHash);
+            var plugSetDefinitionRecord = this.worldSqlContent.GetDestinyPlugSetDefinition(plugSetHash);
             dynamic plugSetDefinitionDynamic = JsonConvert.DeserializeObject(plugSetDefinitionRecord);
             foreach (var plug in plugSetDefinitionDynamic.reusablePlugItems)
             {
@@ -155,13 +222,12 @@
 
         internal WeaponDefinition.Perk GetWeaponDefinitionPerk(uint plugItemHash)
         {
-            if (this.ProviderOptions.EnableCaching && this.WeaponDefinitionPerkCache.TryGetValue(plugItemHash, out var cachedRecord))
+            if (this.providerOptions.EnableCaching && this.weaponDefinitionPerkCache.TryGetValue(plugItemHash, out var cachedRecord))
             {
                 return cachedRecord;
             }
 
-
-            var perkRecord = this.WorldSqlContent.GetDestinyInventoryItemDefinition(plugItemHash);
+            var perkRecord = this.worldSqlContent.GetDestinyInventoryItemDefinition(plugItemHash);
             dynamic perkDynamic = JsonConvert.DeserializeObject(perkRecord);
 
             dynamic perkValuesDynamic = perkDynamic.investmentStats;
@@ -187,84 +253,12 @@
                 PerkValues = perkValues.Any() ? perkValues : null, // some perks may not have values that affect stats (example: Rampage). but others will (example: Field Prep).
             };
 
-
-            if (this.ProviderOptions.EnableCaching)
+            if (this.providerOptions.EnableCaching)
             {
-                this.WeaponDefinitionPerkCache.Add(plugItemHash, perk);
+                this.weaponDefinitionPerkCache.Add(plugItemHash, perk);
             }
 
             return perk;
-        }
-
-        public WeaponStatDefinition GetWeaponStatDefinition(uint statHash)
-        {
-            if (this.ProviderOptions.EnableCaching && this.WeaponStatDefinitionCache.TryGetValue(statHash, out var cachedRecord))
-            {
-                return cachedRecord;
-            }
-
-            var record = this.WorldSqlContent.GetDestinyStatDefinition(statHash);
-
-            dynamic jsonDynamic = JsonConvert.DeserializeObject(record);
-            if (jsonDynamic == null)
-            {
-                throw new Exception($"unexpected null result for {nameof(WorldSqlContent.GetDestinyStatDefinition)} id {statHash}");
-            }
-
-            var weaponStatDefinition = new WeaponStatDefinition
-            {
-                Id = jsonDynamic.hash,
-                Name = jsonDynamic.displayProperties.name,
-                Description = jsonDynamic.displayProperties.description,
-                Interpolate = jsonDynamic.interpolate
-            };
-
-            if (this.ProviderOptions.EnableCaching)
-            {
-                this.WeaponStatDefinitionCache.Add(statHash, weaponStatDefinition);
-            }
-
-            return weaponStatDefinition;
-        }
-
-        public DestinyCollectibleDefinition GetDestinyCollectibleDefinitions(uint collectibleHash)
-        {
-            if (this.ProviderOptions.EnableCaching && this.DestinyCollectibleDefinitionCache.TryGetValue(collectibleHash, out var cachedRecord))
-            {
-                return cachedRecord;
-            }
-
-            var record = this.WorldSqlContent.GetDestinyCollectibleDefinition(collectibleHash);
-
-            dynamic jsonDynamic = JsonConvert.DeserializeObject(record);
-            if (jsonDynamic == null)
-            {
-                throw new Exception($"unexpected null result for {nameof(WorldSqlContent.GetDestinyCollectibleDefinition)} id {collectibleHash}");
-            }
-
-            var destinyCollectibleDefinition = new DestinyCollectibleDefinition
-            {
-                HashId = jsonDynamic.hash,
-                ItemHash = jsonDynamic.itemHash,
-                Name = jsonDynamic.displayProperties.name,
-                IconPath = jsonDynamic.displayProperties.icon,
-            };
-
-            if (this.ProviderOptions.EnableCaching)
-            {
-                this.DestinyCollectibleDefinitionCache.Add(collectibleHash, destinyCollectibleDefinition);
-            }
-
-            return destinyCollectibleDefinition;
-        }
-
-        /// <remarks>
-        /// Source: (https://stackoverflow.com/questions/1202935/convert-rows-from-a-data-reader-into-typed-results).
-        /// </remarks>
-        /// <returns></returns>
-        public IList<SearchableWeaponRecord> GetSearchableWeapons()
-        {
-            return this.WorldSqlContent.GetRecords(Properties.Resources.WorldSqlContent_GetAllWeapons, SearchableWeaponRecord.Parse);
         }
     }
 }

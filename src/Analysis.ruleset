@@ -1,0 +1,25 @@
+<RuleSet Name="Rules for DestinySandbox" Description="https://docs.microsoft.com/en-us/visualstudio/code-quality/using-rule-sets-to-group-code-analysis-rules" ToolsVersion="10.0">
+
+  <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
+    <Rule Id="SA0001" Action="None" /> <!-- XML comment analysis is disabled due to project configuration. -->
+    <Rule Id="SA1005" Action="None" /> <!-- Single line comment should begin with a space. -->
+    <Rule Id="SA1108" Action="None" /> <!-- Block statements should not contain embedded comments. -->
+    <Rule Id="SA1123" Action="None" /> <!-- Region should not be located within a code element. -->
+    <Rule Id="SA1128" Action="None" /> <!-- Put constructor initializers on their own line. -->
+    <Rule Id="SA1200" Action="None" /> <!-- Using directive should appear within a namespace declaration. -->
+    <Rule Id="SA1502" Action="None" /> <!-- Element should not be on a single line. -->
+    <Rule Id="SA1512" Action="None" /> <!-- Single-line comments should not be followed by blank line. -->
+    <Rule Id="SA1515" Action="None" /> <!-- Single-line comment should be preceded by blank line. -->
+    <Rule Id="SA1633" Action="None" /> <!-- The file header is missing or not located at the top of the file. -->
+
+
+    <!-- TODO: NEED TO DO DOCUMENTATION -->
+    <Rule Id="SA1600" Action="None" /> <!-- Elements should be documented. -->
+    <Rule Id="SA1611" Action="None" /> <!-- The documentation for parameter '' is missing. -->
+    <Rule Id="SA1614" Action="None" /> <!-- Element parameter documentation should have text. -->
+    <Rule Id="SA1615" Action="None" /> <!-- Element return value should be documented. -->
+    <Rule Id="SA1616" Action="None" /> <!-- Element return value documentation should have text. -->
+    <Rule Id="SA1623" Action="None" /> <!-- The property's documentation summary text should begin with: 'Gets or sets'. -->
+
+  </Rules>
+</RuleSet>

@@ -10,7 +10,7 @@ namespace Tests
     public class EnvironmentTests
     {
         /// <summary>
-        /// This test checks that the local environment has been initialized. 
+        /// This test checks that the local environment has been initialized.
         /// If this test fails, run the initialize environment script.
         /// </summary>
         [TestMethod]

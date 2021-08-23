@@ -10,7 +10,7 @@
     [TestClass]
     public class PerkPermutationTests
     {
-        private readonly List<WeaponDefinition.WeaponStat> exampleWeaponStat = new()
+        private readonly List<WeaponDefinition.WeaponStat> exampleWeaponStat = new ()
         {
             new WeaponDefinition.WeaponStat
             {
@@ -28,7 +28,7 @@
             },
         };
 
-        private readonly List<WeaponDefinition.WeaponStat> weirdBowStat = new()
+        private readonly List<WeaponDefinition.WeaponStat> weirdBowStat = new ()
         {
             // Draw Time on bows seems to ignore the maxValue
             new WeaponDefinition.WeaponStat
@@ -53,10 +53,10 @@
             var perkPermutation = new PerkPermutation
             {
                 PerkNames = "test perk",
-                PerkHashAndValues = new Dictionary<uint, double> { { 111, 4 }, }
+                PerkHashAndValues = new Dictionary<uint, double> { { 111, 4 }, },
             };
 
-            perkPermutation.Validate(exampleWeaponStat);
+            perkPermutation.Validate(this.exampleWeaponStat);
 
             Assert.AreEqual(4, perkPermutation.MaxPoints);
         }
@@ -67,10 +67,10 @@
             var perkPermutation = new PerkPermutation
             {
                 PerkNames = "test perk",
-                PerkHashAndValues = new Dictionary<uint, double> { { 111, 4 }, { 222, 10 }, }
+                PerkHashAndValues = new Dictionary<uint, double> { { 111, 4 }, { 222, 10 }, },
             };
 
-            perkPermutation.Validate(exampleWeaponStat);
+            perkPermutation.Validate(this.exampleWeaponStat);
             Assert.AreEqual(14, perkPermutation.MaxPoints);
         }
 
@@ -80,10 +80,10 @@
             var perkPermutation = new PerkPermutation
             {
                 PerkNames = "test perk",
-                PerkHashAndValues = new Dictionary<uint, double> { { 111, 10 }, }
+                PerkHashAndValues = new Dictionary<uint, double> { { 111, 10 }, },
             };
 
-            perkPermutation.Validate(exampleWeaponStat);
+            perkPermutation.Validate(this.exampleWeaponStat);
             Assert.AreEqual(5, perkPermutation.MaxPoints);
         }
 
@@ -93,10 +93,10 @@
             var perkPermutation = new PerkPermutation
             {
                 PerkNames = "test perk",
-                PerkHashAndValues = new Dictionary<uint, double> { { 111, -10 }, }
+                PerkHashAndValues = new Dictionary<uint, double> { { 111, -10 }, },
             };
 
-            perkPermutation.Validate(exampleWeaponStat);
+            perkPermutation.Validate(this.exampleWeaponStat);
             Assert.AreEqual(-5, perkPermutation.MaxPoints);
         }
     }

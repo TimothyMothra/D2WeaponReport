@@ -7,7 +7,7 @@ using StatisticsApi = MathNet.Numerics.Statistics.Statistics;
 namespace DestinyLib.Analysis
 {
     /// <summary>
-    /// https://en.wikipedia.org/wiki/Box_plot
+    /// (https://en.wikipedia.org/wiki/Box_plot).
     /// </summary>
     public class WeaponAnalysisSummary
     {
@@ -27,6 +27,14 @@ namespace DestinyLib.Analysis
         }
 
         public PermutationStatistics Statistics { get; set; }
+
+        public IList<PerkTable> PerkTables { get; set; }
+
+        public bool HasEmptyPerks { get; set; }
+
+        public IList<PerkPermutation> Permutations { get; set; }
+
+        public string PermutationsAsString() => string.Join(",", this.Permutations.Select(x => x.MaxPoints).AsEnumerable());
 
         public class PermutationStatistics
         {
@@ -69,15 +77,6 @@ namespace DestinyLib.Analysis
             /// 100th percentile: the largest data point.
             /// </summary>
             public double Maximum { get; set; }
-
         }
-
-        public IList<PerkTable> PerkTables { get; set; }
-
-        public bool HasEmptyPerks { get; set; }
-
-        public IList<PerkPermutation> Permutations { get; set; }
-
-        public string PermutationsAsString() => string.Join(",", Permutations.Select(x => x.MaxPoints).AsEnumerable());
     }
 }

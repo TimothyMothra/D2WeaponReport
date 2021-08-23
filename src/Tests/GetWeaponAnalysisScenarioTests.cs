@@ -24,7 +24,7 @@
         [TestMethod]
         public void VerifyGet_EmptyPerks()
         {
-            uint id_legendofacrius = 1744115122; 
+            uint id_legendofacrius = 1744115122;
             var summary = GetWeaponAnalysisScenario.Run(id_legendofacrius);
             Assert.IsTrue(summary.HasEmptyPerks);
         }

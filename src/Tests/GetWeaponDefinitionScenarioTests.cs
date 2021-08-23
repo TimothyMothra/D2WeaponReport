@@ -1,13 +1,13 @@
 ﻿namespace Tests
 {
+    using System.Linq;
+
     using DestinyLib.DataContract;
     using DestinyLib.Scenarios;
 
     using FluentAssertions;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using System.Linq;
 
     [TestClass]
     public class GetWeaponDefinitionScenarioTests

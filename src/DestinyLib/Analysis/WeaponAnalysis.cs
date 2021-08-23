@@ -27,7 +27,7 @@
                 return new WeaponAnalysisSummary();
             }
 
-            if (BehaviorValidatePermutations)// && weaponDefinition.Stats.Any()) // TODO: WHAT WAS I DOING HERE?
+            if (BehaviorValidatePermutations) // && weaponDefinition.Stats.Any()) // TODO: WHAT WAS I DOING HERE?
             {
                 // Note that some expired weapons do not have perks
                 permutations.ForEach(x => x.Validate(weaponDefinition.Stats));
@@ -66,7 +66,7 @@
                 var tempPermutations = permutations ?? new List<PerkPermutation>();
                 permutations = new List<PerkPermutation>();
 
-                //inner: Perk: 
+                //inner: Perk:
                 foreach (var perk in perkSet.Perks)
                 {
                     //inner: Perk.Values (Note: not all perks have values)

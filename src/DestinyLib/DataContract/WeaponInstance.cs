@@ -6,7 +6,7 @@
     {
         /// <summary>
         /// Assuming this can also hold Mods and MasterworkPerk.
-        /// Can this also hold Ornament and Shader? 
+        /// Can this also hold Ornament and Shader?
         /// </summary>
         public IList<Perk> InstancePerks { get; set; }
 

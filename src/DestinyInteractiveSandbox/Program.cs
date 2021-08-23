@@ -1,8 +1,6 @@
-﻿
-namespace DestinyInteractiveSandbox
+﻿namespace DestinyInteractiveSandbox
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
 
     using DestinyLib.Scenarios;
@@ -15,7 +13,6 @@ namespace DestinyInteractiveSandbox
     /// </summary>
     public static class Program
     {
-
         public static void Main(string[] args)
         {
             var app = GetApplicatiov();

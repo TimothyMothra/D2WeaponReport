@@ -9,39 +9,24 @@
     /// </summary>
     public static class LibEnvironment
     {
-        private const string markerFileName = "root.marker"; // this file marks the root of the repo.
-        private const string environmentDirectoryName = "environment";
-        private static readonly string rootDirectory;
-        private static readonly Uri DestinyHost = new Uri("https://bungie.net");
-
         public static readonly string EnvironmentDirectory;
+
+        private const string MarkerFileName = "root.marker"; // this file marks the root of the repo.
+        private const string EnvironmentDirectoryName = "environment";
+        private static readonly string RootDirectory;
+        private static readonly Uri DestinyHost = new Uri("https://bungie.net");
 
         static LibEnvironment()
         {
-            rootDirectory = GetRootDirectory();
+            RootDirectory = GetRootDirectory();
             EnvironmentDirectory = GetEnvironmentDirectory();
         }
 
         public static Uri GetDestinyHost() => DestinyHost;
 
-        private static string GetRootDirectory()
-        {
-            var assemblyLocation = Assembly.GetExecutingAssembly().Location;
-            
-            for(DirectoryInfo directory = new DirectoryInfo(assemblyLocation); directory != null ; directory = directory.Parent)
-            {
-                if (File.Exists(Path.Combine(directory.FullName, markerFileName)))
-                {
-                    return directory.FullName;
-                }
-            }
-
-            return null;
-        }
-
         public static string GetEnvironmentDirectory(bool createIfDoesntExist = true)
         {
-            var environmentDirectory = Path.Combine(rootDirectory, environmentDirectoryName);
+            var environmentDirectory = Path.Combine(RootDirectory, EnvironmentDirectoryName);
 
             // Create if directory doesn't exist.
             if (createIfDoesntExist && !Directory.Exists(environmentDirectory))
@@ -75,6 +60,21 @@
             {
                 throw new Exception("Unknown error; more database files than expected were found. Please re-initialize the environment directory.");
             }
+        }
+
+        private static string GetRootDirectory()
+        {
+            var assemblyLocation = Assembly.GetExecutingAssembly().Location;
+
+            for (DirectoryInfo directory = new DirectoryInfo(assemblyLocation); directory != null; directory = directory.Parent)
+            {
+                if (File.Exists(Path.Combine(directory.FullName, MarkerFileName)))
+                {
+                    return directory.FullName;
+                }
+            }
+
+            return null;
         }
     }
 }

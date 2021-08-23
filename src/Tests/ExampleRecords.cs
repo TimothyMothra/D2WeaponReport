@@ -55,8 +55,8 @@
             });
             gnawingHunger.Stats.Add(new WeaponDefinition.WeaponStat
             {
-                Name = "", // TODO: WHAT IS THIS?
-                Description = "",
+                Name = string.Empty, // TODO: WHAT IS THIS?
+                Description = string.Empty,
                 StatHash = 1885944937,
                 Value = 0,
                 MinValue = 0,
@@ -203,8 +203,8 @@
                             {
                                 StatHash = 943549884,
                                 Value = 10,
-                            }
-                        }
+                            },
+                        },
                     },
                     new WeaponDefinition.Perk
                     {
@@ -228,8 +228,8 @@
                             {
                                 StatHash = 943549884,
                                 Value = -5,
-                            }
-                        }
+                            },
+                        },
                     },
                     new WeaponDefinition.Perk
                     {
@@ -251,8 +251,8 @@
                              {
                                 StatHash = 943549884u,
                                 Value = 5,
-                             }
-                        }
+                             },
+                        },
                     },
                     new WeaponDefinition.Perk
                     {
@@ -274,8 +274,8 @@
              {
                 StatHash = 2715839340u,
                 Value = 10,
-             }
-                        }
+             },
+                        },
                     },
                     new WeaponDefinition.Perk
                     {
@@ -293,8 +293,8 @@
              {
                 StatHash = 943549884u,
                 Value = 15,
-             }
-                        }
+             },
+                        },
                     },
                     new WeaponDefinition.Perk
                     {
@@ -316,8 +316,8 @@
              {
                 StatHash = 943549884u,
                 Value = -5,
-             }
-                        }
+             },
+                        },
                     },
                     new WeaponDefinition.Perk
                     {
@@ -331,8 +331,8 @@
              {
                 StatHash = 1240592695u,
                 Value = 10,
-             }
-                        }
+             },
+                        },
                     },
                     new WeaponDefinition.Perk
                     {
@@ -346,8 +346,8 @@
              {
                 StatHash = 155624089u,
                 Value = 10,
-             }
-                        }
+             },
+                        },
                     },
                     new WeaponDefinition.Perk
                     {
@@ -365,8 +365,8 @@
              {
                 StatHash = 1240592695u,
                 Value = 7,
-             }
-                        }
+             },
+                        },
                     },
                 },
             });
@@ -390,8 +390,8 @@
                             {
                                 StatHash = 1240592695u,
                                 Value = 10,
-                            }
-                        }
+                            },
+                        },
                     },
                     new WeaponDefinition.Perk
                     {
@@ -402,11 +402,11 @@
                         PerkValues = new List<WeaponDefinition.PerkValue>
                         {
                             new WeaponDefinition.PerkValue
-             {
-                StatHash = 4188031367u,
-                Value = 30,
-             }
-                        }
+                            {
+                               StatHash = 4188031367u,
+                               Value = 30,
+                            },
+                        },
                     },
                     new WeaponDefinition.Perk
                     {
@@ -417,11 +417,11 @@
                         PerkValues = new List<WeaponDefinition.PerkValue>
                         {
                             new WeaponDefinition.PerkValue
-             {
-                StatHash = 3871231066u,
-                Value = 20,
-             }
-                        }
+                            {
+                            StatHash = 3871231066u,
+                            Value = 20,
+                            },
+                        },
                     },
                     new WeaponDefinition.Perk
                     {
@@ -432,19 +432,19 @@
                         PerkValues = new List<WeaponDefinition.PerkValue>
                         {
                             new WeaponDefinition.PerkValue
-             {
-                StatHash = 3871231066u,
-                Value = 10,
-             }, new WeaponDefinition.PerkValue
-             {
-                StatHash = 4188031367u,
-                Value = 10,
-             }, new WeaponDefinition.PerkValue
-             {
-                StatHash = 155624089u,
-                Value = 5,
-             }
-                        }
+                            {
+                                StatHash = 3871231066u,
+                                Value = 10,
+                            }, new WeaponDefinition.PerkValue
+                            {
+                                StatHash = 4188031367u,
+                                Value = 10,
+                            }, new WeaponDefinition.PerkValue
+                            {
+                                StatHash = 155624089u,
+                                Value = 5,
+                            },
+                        },
                     },
                     new WeaponDefinition.Perk
                     {
@@ -455,15 +455,15 @@
                         PerkValues = new List<WeaponDefinition.PerkValue>
                         {
                             new WeaponDefinition.PerkValue
-             {
-                StatHash = 3871231066u,
-                Value = 30,
-             }, new WeaponDefinition.PerkValue
-             {
-                StatHash = 4188031367u,
-                Value = -20,
-             }
-                        }
+                            {
+                                StatHash = 3871231066u,
+                                Value = 30,
+                            }, new WeaponDefinition.PerkValue
+                            {
+                                StatHash = 4188031367u,
+                                Value = -20,
+                            },
+                        },
                     },
                     new WeaponDefinition.Perk
                     {
@@ -474,15 +474,15 @@
                         PerkValues = new List<WeaponDefinition.PerkValue>
                         {
                             new WeaponDefinition.PerkValue
-             {
-                StatHash = 155624089u,
-                Value = 15,
-             }, new WeaponDefinition.PerkValue
-             {
-                StatHash = 1240592695u,
-                Value = -5,
-             }
-                        }
+                            {
+                                StatHash = 155624089u,
+                                Value = 15,
+                            }, new WeaponDefinition.PerkValue
+                            {
+                                StatHash = 1240592695u,
+                                Value = -5,
+                            },
+                        },
                     },
                     new WeaponDefinition.Perk
                     {
@@ -501,17 +501,17 @@
                         PerkValues = new List<WeaponDefinition.PerkValue>
                         {
                             new WeaponDefinition.PerkValue
-             {
-                StatHash = 4188031367u,
-                Value = 15,
-             }, new WeaponDefinition.PerkValue
-             {
-                StatHash = 155624089u,
-                Value = 5,
-             }
-                        }
-                    }
-                }
+                            {
+                                StatHash = 4188031367u,
+                                Value = 15,
+                            }, new WeaponDefinition.PerkValue
+                            {
+                                StatHash = 155624089u,
+                                Value = 5,
+                            },
+                        },
+                    },
+                },
             });
 
             gnawingHunger.PerkSets.Add(new WeaponDefinition.PerkSet
@@ -527,21 +527,21 @@
                         Name = "Tap the Trigger",
                         Description = "Grants a short period of increased stability and accuracy on initial trigger pull.",
                         IconPath = "/common/destiny2_content/icons/8e910e56aa6e36b2c406804e1d78d04f.png",
-                        PerkValues = null
+                        PerkValues = null,
                     }, new WeaponDefinition.Perk
                     {
                         Id = 1820235745u,
                         Name = "Subsistence",
                         Description = "Defeating targets partially reloads the magazine from reserves.",
                         IconPath = "/common/destiny2_content/icons/03d774525048e5eb5b6899b37d418920.png",
-                        PerkValues = null
+                        PerkValues = null,
                     }, new WeaponDefinition.Perk
                     {
                         Id = 2387244414u,
                         Name = "Zen Moment",
                         Description = "Causing damage with this weapon increases its stability.",
                         IconPath = "/common/destiny2_content/icons/49958f356ea1df930888d15fe6539fe1.png",
-                        PerkValues = null
+                        PerkValues = null,
                     }, new WeaponDefinition.Perk
                     {
                         Id = 2869569095u,
@@ -554,17 +554,17 @@
                             {
                                 StatHash = 1931675084u,
                                 Value = 30,
-                            }
-                        }
+                            },
+                        },
                     }, new WeaponDefinition.Perk
                     {
                         Id = 3300816228u,
                         Name = "Auto-Loading Holster",
                         Description = "The holstered weapon is automatically reloaded after a short period of time.",
                         IconPath = "/common/destiny2_content/icons/d355b1117307c9f187729249361cecc3.png",
-                        PerkValues = null
-                    }
-                }
+                        PerkValues = null,
+                    },
+                },
             });
 
             gnawingHunger.PerkSets.Add(new WeaponDefinition.PerkSet
@@ -579,38 +579,38 @@
                       Id = 3425386926u,
                       Name = "Rampage",
                       Description = "Kills with this weapon temporarily grant increased damage. Stacks 3x.",
-                        IconPath = "/common/destiny2_content/icons/e9aa2f479812bfabc8d48effde384737.png",
-                        PerkValues = null
+                      IconPath = "/common/destiny2_content/icons/e9aa2f479812bfabc8d48effde384737.png",
+                      PerkValues = null,
                    }, new WeaponDefinition.Perk
                    {
                       Id = 1015611457u,
                       Name = "Kill Clip",
                       Description = "Reloading after a kill grants increased damage.",
-                        IconPath = "/common/destiny2_content/icons/03e17b5e24aa08bebda6bcbd405b8ada.png",
-                        PerkValues = null
+                      IconPath = "/common/destiny2_content/icons/03e17b5e24aa08bebda6bcbd405b8ada.png",
+                      PerkValues = null,
                    }, new WeaponDefinition.Perk
                    {
                       Id = 2458213969u,
                       Name = "Multikill Clip",
                       Description = "Reloading grants increased damage based on the number of rapid kills made beforehand.",
-                        IconPath = "/common/destiny2_content/icons/a610c14dcf450e8c5b0c0903d5b05965.png",
-                        PerkValues = null
+                      IconPath = "/common/destiny2_content/icons/a610c14dcf450e8c5b0c0903d5b05965.png",
+                      PerkValues = null,
                    }, new WeaponDefinition.Perk
                    {
                       Id = 3523296417u,
                       Name = "Demolitionist",
                       Description = "Kills with this weapon generate grenade energy. Activating your grenade ability reloads this weapon from reserves.",
-                        IconPath = "/common/destiny2_content/icons/53ead908917c9156457c7c9dd453d649.png",
-                        PerkValues = null
+                      IconPath = "/common/destiny2_content/icons/53ead908917c9156457c7c9dd453d649.png",
+                      PerkValues = null,
                    }, new WeaponDefinition.Perk
                     {
                         Id = 4082225868u,
                         Name = "Swashbuckler",
                         Description = "This weapon gains increased damage from melee kills and kills with this weapon.",
                         IconPath = "/common/destiny2_content/icons/ef89b89410de618e9cfa353ff35125d8.png",
-                        PerkValues = null
+                        PerkValues = null,
                     },
-                }
+                },
             });
 
             #endregion

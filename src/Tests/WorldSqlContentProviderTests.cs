@@ -16,15 +16,15 @@
     [TestClass]
     public class WorldSqlContentProviderTests
     {
-        private readonly WorldSqlContent WorldSqlContent;
-        private readonly WorldSqlContentProvider WorldSqlContentProvider;
+        private readonly WorldSqlContent worldSqlContent;
+        private readonly WorldSqlContentProvider worldSqlContentProvider;
 
         public WorldSqlContentProviderTests()
         {
             var dbPath = new FileInfo(LibEnvironment.GetDatabaseFilePath("world_sql_content"));
-            this.WorldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));
+            this.worldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));
 
-            this.WorldSqlContentProvider = new WorldSqlContentProvider(this.WorldSqlContent, ProviderOptions.TestWithCaching);
+            this.worldSqlContentProvider = new WorldSqlContentProvider(this.worldSqlContent, ProviderOptions.TestWithCaching);
         }
 
         [TestMethod]
@@ -32,7 +32,7 @@
         {
             uint id_doubleEdgedAnswer = 3551104348;
 
-            var weaponDefinition = this.WorldSqlContentProvider.GetWeaponDefinition(id_doubleEdgedAnswer);
+            var weaponDefinition = this.worldSqlContentProvider.GetWeaponDefinition(id_doubleEdgedAnswer);
 
             Assert.AreEqual("Double-Edged Answer", weaponDefinition.MetaData.Name);
         }
@@ -42,7 +42,7 @@
         {
             uint id_doubleEdgedAnswer = 3260753130;
 
-            var weaponDefinition = this.WorldSqlContentProvider.GetWeaponDefinition(id_doubleEdgedAnswer);
+            var weaponDefinition = this.worldSqlContentProvider.GetWeaponDefinition(id_doubleEdgedAnswer);
 
             Assert.AreEqual("Ticuu's Divination", weaponDefinition.MetaData.Name);
         }
@@ -52,7 +52,7 @@
         {
             uint id_gnawingHunger = 821154603;
 
-            var weaponDefiniton = this.WorldSqlContentProvider.GetWeaponDefinition(id_gnawingHunger);
+            var weaponDefiniton = this.worldSqlContentProvider.GetWeaponDefinition(id_gnawingHunger);
 
             var expected = ExampleRecords.GetGnawingHunger();
 
@@ -62,7 +62,7 @@
         [TestMethod]
         public void TestGetSearchableWeapons()
         {
-            var weapons = this.WorldSqlContentProvider.GetSearchableWeapons();
+            var weapons = this.worldSqlContentProvider.GetSearchableWeapons();
             Assert.IsTrue(weapons.Any());
             Assert.IsTrue(weapons.Count > 800);
         }
@@ -78,7 +78,7 @@
             int id = unchecked((int)hashId);
             Debug.WriteLine($"hash: {hashId}; uint: {id}");
 
-            var record = this.WorldSqlContent.GetDestinyInventoryItemDefinition(hashId);
+            var record = this.worldSqlContent.GetDestinyInventoryItemDefinition(hashId);
             dynamic jsonDynamic = JsonConvert.DeserializeObject(record);
             string name = jsonDynamic.displayProperties.name;
 
