@@ -29,9 +29,9 @@
       },
       "MSTest.TestAdapter": {
         "type": "Direct",
-        "requested": "[2.2.5, )",
-        "resolved": "2.2.5",
-        "contentHash": "FvY/n4fEhtqTdLR7xzgfb6UDa9g+9QeKNlH8zA7gqor9cuZ9gNCeHsx1GqKmDyeLA4ZpxAgjIdzp/vGWISA3iw==",
+        "requested": "[2.2.6, )",
+        "resolved": "2.2.6",
+        "contentHash": "2z5XVBednseou2LXUgtnbkE9PNz0eFZaYyaJfI6VAHaeAx79gk3BE/Sjv6x3AnrzySzhHrVsS9Jr3z7sI7w0XA==",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "System.Diagnostics.TextWriterTraceListener": "4.3.0"
