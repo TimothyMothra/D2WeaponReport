@@ -46,7 +46,7 @@
             gnawingHunger.Stats.Add(new WeaponDefinition.WeaponStat
             {
                 Name = "Power",
-                Description = "Raising your Power increases the damage your abilities deal against higher-level enemies.",
+                Description = "Raising your Power increases the damage your abilities deal against higher-level combatants.",
                 StatHash = 1935470627,
                 Value = 0,
                 MinValue = 0,
@@ -397,7 +397,7 @@
                     {
                         Id = 4134353779u,
                         Name = "Drop Mag",
-                        Description = "Magazine drops on reload, wasting ammunition but greatly increasing reload speed.",
+                        Description = "Increases reload speed but reduces magazine size.",
                         IconPath = "/common/destiny2_content/icons/d316be9e70844427e69034b0f06bec75.png",
                         PerkValues = new List<WeaponDefinition.PerkValue>
                         {
