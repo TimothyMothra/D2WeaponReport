@@ -1,5 +1,8 @@
 ﻿namespace DestinyLib.DataContract
 {
+    /// <summary>
+    /// Collectible items have an entry in a separate table with some unique metadata.
+    /// </summary>
     public class DestinyCollectibleDefinition
     {
         public uint HashId { get; set; }

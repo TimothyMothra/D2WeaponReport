@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using DestinyLib.DataContract;
+using DestinyLib.DataContract.Definitions;
 
 namespace DestinyLib.Analysis
 {
@@ -19,17 +20,17 @@ namespace DestinyLib.Analysis
 
         public string ToDisplayString() => $"{this.MaxPoints}: {this.PerkNames}";
 
-        public void Validate(IList<WeaponDefinition.WeaponStat> weaponStats)
+        public void Validate(IList<WeaponStatDefinition> weaponStats)
         {
             double perkSum = 0;
 
             foreach (var perk in this.PerkHashAndValues)
             {
-                WeaponDefinition.WeaponStat stat = null;
+                WeaponStatDefinition stat = null;
 
                 try
                 {
-                    stat = weaponStats.SingleOrDefault(x => x.StatHash == perk.Key);
+                    stat = weaponStats.SingleOrDefault(x => x.MetaData.HashId == perk.Key);
 
                     if (stat == null)
                     {
@@ -48,7 +49,7 @@ namespace DestinyLib.Analysis
             this.MaxPoints = perkSum;
         }
 
-        private double Validate(WeaponDefinition.WeaponStat stat, double perkValue)
+        private double Validate(WeaponStatDefinition stat, double perkValue)
         {
             if (stat.IgnoreMaxValue())
             {
@@ -58,7 +59,7 @@ namespace DestinyLib.Analysis
             // ASSUMPTION: It is assumed that MaxValue or DisplayMaximum are set, but not both.
             if (stat.MaxValue != 0 && stat.DisplayMaximum != 0)
             {
-                throw new Exception($"This stat breaks an assumption. id '{stat.StatHash}' name '{stat.Name}' maxValue '{stat.MaxValue}' DisplayMax '{stat.DisplayMaximum}'");
+                throw new Exception($"This stat breaks an assumption. id '{stat.MetaData.HashId}' name '{stat.MetaData.Name}' maxValue '{stat.MaxValue}' DisplayMax '{stat.DisplayMaximum}'");
             }
 
             var statAssumedMax = stat.MaxValue != 0 ? stat.MaxValue : stat.DisplayMaximum;
@@ -66,13 +67,13 @@ namespace DestinyLib.Analysis
             // ASSUMPTION: It is assumed that a stat value can never be negative.
             if (stat.Value < stat.MinValue)
             {
-                throw new Exception($"This stat breaks an assumption. id '{stat.StatHash}' name '{stat.Name}' value '{stat.Value}' minValue '{stat.MinValue}'");
+                throw new Exception($"This stat breaks an assumption. id '{stat.MetaData.HashId}' name '{stat.MetaData.Name}' value '{stat.Value}' minValue '{stat.MinValue}'");
             }
 
             // ASSUMPTION: It is assumed that a stat value will not exceed max.
             if (stat.Value > statAssumedMax)
             {
-                throw new Exception($"This stat breaks an assumption. id '{stat.StatHash}' name '{stat.Name}' value '{stat.Value}' maxValue '{statAssumedMax}'");
+                throw new Exception($"This stat breaks an assumption. id '{stat.MetaData.HashId}' name '{stat.MetaData.Name}' value '{stat.Value}' maxValue '{statAssumedMax}'");
             }
 
             double perkValueToRecord = perkValue;

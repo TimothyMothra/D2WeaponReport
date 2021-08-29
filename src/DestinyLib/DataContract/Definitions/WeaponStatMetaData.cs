@@ -1,6 +1,6 @@
-﻿namespace DestinyLib.DataContract
+﻿namespace DestinyLib.DataContract.Definitions
 {
-    public class WeaponStatDefinition
+    public class WeaponStatMetaData
     {
         public string Name { get; set; }
 
@@ -8,6 +8,6 @@
 
         public bool Interpolate { get; set; }
 
-        public uint Id { get; set; }
+        public uint HashId { get; set; }
     }
 }

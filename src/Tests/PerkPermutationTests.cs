@@ -4,43 +4,56 @@
 
     using DestinyLib.Analysis;
     using DestinyLib.DataContract;
+    using DestinyLib.DataContract.Definitions;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class PerkPermutationTests
     {
-        private readonly List<WeaponDefinition.WeaponStat> exampleWeaponStat = new ()
+        private readonly List<WeaponStatDefinition> exampleWeaponStat = new ()
         {
-            new WeaponDefinition.WeaponStat
+            new WeaponStatDefinition
             {
-                StatHash = 111,
+                MetaData = new WeaponStatMetaData
+                {
+                    HashId = 111,
+                },
                 MaxValue = 10,
                 MinValue = 0,
                 Value = 5,
             },
-            new WeaponDefinition.WeaponStat
+            new WeaponStatDefinition
             {
-                StatHash = 222,
+                MetaData = new WeaponStatMetaData
+                {
+                    HashId = 222,
+                },
                 MaxValue = 50,
                 MinValue = 0,
                 Value = 25,
             },
         };
 
-        private readonly List<WeaponDefinition.WeaponStat> weirdBowStat = new ()
+        private readonly List<WeaponStatDefinition> weirdBowStat = new ()
         {
             // Draw Time on bows seems to ignore the maxValue
-            new WeaponDefinition.WeaponStat
+            new WeaponStatDefinition
             {
-                StatHash = 111,
+                MetaData = new WeaponStatMetaData
+                {
+                    HashId = 111,
+                },
                 MaxValue = 100,
                 MinValue = 0,
                 Value = 651,
             },
-            new WeaponDefinition.WeaponStat
+            new WeaponStatDefinition
             {
-                StatHash = 222,
+                MetaData = new WeaponStatMetaData
+                {
+                    HashId = 222,
+                },
                 MaxValue = 50,
                 MinValue = 0,
                 Value = 25,

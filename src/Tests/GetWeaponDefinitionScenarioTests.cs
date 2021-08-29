@@ -3,6 +3,7 @@
     using System.Linq;
 
     using DestinyLib.DataContract;
+    using DestinyLib.DataContract.Definitions;
     using DestinyLib.Scenarios;
 
     using FluentAssertions;
@@ -29,8 +30,8 @@
 
         private void VerifyPerks(WeaponDefinition expected, WeaponDefinition actual)
         {
-            var expectedPerks = expected.PerkSets.SelectMany(x => x.Perks).OrderBy(x => x.Name).ToList();
-            var actualPerks = actual.PerkSets.SelectMany(x => x.Perks).OrderBy(x => x.Name).ToList();
+            var expectedPerks = expected.WeaponPossiblePerks.Values.SelectMany(x => x.Values).OrderBy(x => x.MetaData.Name).ToList();
+            var actualPerks = actual.WeaponPossiblePerks.Values.SelectMany(x => x.Values).OrderBy(x => x.MetaData.Name).ToList();
 
             actualPerks.Should().BeEquivalentTo(expectedPerks);
         }
