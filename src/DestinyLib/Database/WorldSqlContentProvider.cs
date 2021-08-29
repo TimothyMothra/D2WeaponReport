@@ -15,7 +15,7 @@
 
         private readonly ProviderOptions providerOptions;
 
-        private readonly Dictionary<uint, WeaponStatDefinitionWhatIsThis> weaponStatDefinitionCache = new ();
+        private readonly Dictionary<uint, WeaponStatMetaData> weaponStatDefinitionCache = new ();
         private readonly Dictionary<uint, WeaponPerkDefinition> weaponDefinitionPerkCache = new ();
         private readonly Dictionary<uint, DestinyCollectibleDefinition> destinyCollectibleDefinitionCache = new ();
 
@@ -50,13 +50,6 @@
                 ItemTypeId = jsonDynamic.itemSubType, //TODO: Need to identity Weapon Type (example: "enum DestinyItemSubType "AutoRifle"")
             };
 
-            //var weaponDefinition = new WeaponDefinition
-            //{
-            //    MetaData 
-            //    Stats = new List<WeaponStatDefinition>(),
-            //    PerkSets = new List<WeaponPerkSetDefinition>(),
-            //};
-
             // check Collection for Seasonal Weapon Icon (Note: does not exist for all weapons).
             if (weaponMetaData.CollectibleHash != default)
             {
@@ -76,12 +69,8 @@
 
                 var statDefinition = this.GetWeaponStatDefinition(statHash);
 
-                var stat = new WeaponStatDefinition
+                var stat = new WeaponStatDefinition(statDefinition)
                 {
-                    Name = statDefinition.Name,
-                    Description = statDefinition.Description,
-                    Interpolate = statDefinition.Interpolate,
-                    StatHash = statHash,
                     Value = statDynamic.Value.value,
                     MinValue = statDynamic.Value.minimum,
                     MaxValue = statDynamic.Value.maximum,
@@ -91,7 +80,7 @@
                 // ASSUMPTION: MaxValue is never used.
                 if (stat.MaxValue != 0)
                 {
-                    throw new ($"weapon id {id} name {weaponMetaData.Name} | stat id {stat.StatHash} name {stat.Name} value {stat.Value} max {stat.MaxValue} displayMax {stat.DisplayMaximum}");
+                    throw new ($"weapon id {id} name {weaponMetaData.Name} | stat id {stat.MetaData.Id} name {stat.MetaData.Name} value {stat.Value} max {stat.MaxValue} displayMax {stat.DisplayMaximum}");
                 }
 
                 weaponStatsCollection.Values.Add(stat);
@@ -146,7 +135,7 @@
             return new WeaponDefinition(weaponMetaData, weaponStatsCollection, weaponPerksCollection);
         }
 
-        public WeaponStatDefinitionWhatIsThis GetWeaponStatDefinition(uint statHash)
+        public WeaponStatMetaData GetWeaponStatDefinition(uint statHash)
         {
             if (this.providerOptions.EnableCaching && this.weaponStatDefinitionCache.TryGetValue(statHash, out var cachedRecord))
             {
@@ -161,7 +150,7 @@
                 throw new Exception($"unexpected null result for {nameof(this.worldSqlContent.GetDestinyStatDefinition)} id {statHash}");
             }
 
-            var weaponStatDefinition = new WeaponStatDefinitionWhatIsThis
+            var weaponStatDefinition = new WeaponStatMetaData
             {
                 Id = jsonDynamic.hash,
                 Name = jsonDynamic.displayProperties.name,

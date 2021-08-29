@@ -15,14 +15,20 @@
         {
             new WeaponStatDefinition
             {
-                StatHash = 111,
+                MetaData = new WeaponStatMetaData
+                {
+                    Id = 111,
+                },
                 MaxValue = 10,
                 MinValue = 0,
                 Value = 5,
             },
             new WeaponStatDefinition
             {
-                StatHash = 222,
+                MetaData = new WeaponStatMetaData
+                {
+                    Id = 222,
+                },
                 MaxValue = 50,
                 MinValue = 0,
                 Value = 25,
@@ -34,14 +40,20 @@
             // Draw Time on bows seems to ignore the maxValue
             new WeaponStatDefinition
             {
-                StatHash = 111,
+                MetaData = new WeaponStatMetaData
+                {
+                    Id = 111,
+                },
                 MaxValue = 100,
                 MinValue = 0,
                 Value = 651,
             },
             new WeaponStatDefinition
             {
-                StatHash = 222,
+                MetaData = new WeaponStatMetaData
+                {
+                    Id = 222,
+                },
                 MaxValue = 50,
                 MinValue = 0,
                 Value = 25,

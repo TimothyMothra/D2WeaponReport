@@ -1,18 +1,19 @@
 ﻿namespace DestinyLib.DataContract.Definitions
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
     public class WeaponStatDefinition
     {
-        public uint StatHash { get; set; }
+        public WeaponStatDefinition(WeaponStatMetaData weaponStatMetaData = default)
+        {
+            this.MetaData = weaponStatMetaData;
+        }
 
-        public string Name { get; set; }
+        public WeaponStatMetaData MetaData { get; set; }
 
-        public string Description { get; set; }
+        //public uint StatHash { get; set; }
+
+        //public string Name { get; set; }
+
+        //public string Description { get; set; }
 
         public int Value { get; set; }
 
@@ -24,11 +25,11 @@
 
         //public bool IsHidden { get; set; }
 
-        public bool Interpolate { get; set; } // TODO: NEED AN EXAMPLE TO WRITE THIS ALGORITHM. See also: https://github.com/TimothyMothra/DestinySandbox/blob/main/journal/getting_started.md#how-to-query-all-available-perks-ex-rampage-outlaw
+        //public bool Interpolate { get; set; } // TODO: NEED AN EXAMPLE TO WRITE THIS ALGORITHM. See also: https://github.com/TimothyMothra/DestinySandbox/blob/main/journal/getting_started.md#how-to-query-all-available-perks-ex-rampage-outlaw
 
         public override string ToString()
         {
-            return $"[{this.StatHash}] {this.Name}";
+            return $"[{this.MetaData.Id}] {this.MetaData.Name}";
         }
 
         public bool IgnoreMaxValue()
@@ -39,7 +40,7 @@
             // id '447667954' name 'Draw Time'
             // id '3871231066' name 'Magazine'
 
-            return this.StatHash == 2961396640u || this.StatHash == 4284893193u || this.StatHash == 447667954u || this.StatHash == 3871231066u;
+            return this.MetaData.Id == 2961396640u || this.MetaData.Id == 4284893193u || this.MetaData.Id == 447667954u || this.MetaData.Id == 3871231066u;
         }
     }
 }

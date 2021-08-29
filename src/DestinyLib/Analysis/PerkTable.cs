@@ -47,8 +47,8 @@
             int columnIndex = 1;
             foreach (var stat in this.Stats)
             {
-                headerRow.Add(string.IsNullOrEmpty(stat.Name) ? "-" : stat.Name);
-                statsToColumnIndex.Add(stat.StatHash, columnIndex++);
+                headerRow.Add(string.IsNullOrEmpty(stat.MetaData.Name) ? "-" : stat.MetaData.Name);
+                statsToColumnIndex.Add(stat.MetaData.Id, columnIndex++);
             }
 
             return headerRow;
@@ -62,7 +62,7 @@
             int columnIndex = 1;
             foreach (var stat in this.Stats)
             {
-                statsToColumnIndex.Add(stat.StatHash, columnIndex++);
+                statsToColumnIndex.Add(stat.MetaData.Id, columnIndex++);
             }
 
             // enumerate perks and populate statContainer

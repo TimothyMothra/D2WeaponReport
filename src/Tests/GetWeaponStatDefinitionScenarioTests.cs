@@ -18,7 +18,7 @@
 
             var result = GetWeaponStatDefinitionScenario.Run(id_stability);
 
-            var expected = new WeaponStatDefinitionWhatIsThis
+            var expected = new WeaponStatMetaData
             {
                 Id = 155624089,
                 Name = "Stability",

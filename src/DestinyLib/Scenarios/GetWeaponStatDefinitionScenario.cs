@@ -8,7 +8,7 @@
 
     public static class GetWeaponStatDefinitionScenario
     {
-        public static WeaponStatDefinitionWhatIsThis Run(uint id)
+        public static WeaponStatMetaData Run(uint id)
         {
             var dbPath = new FileInfo(LibEnvironment.GetDatabaseFilePath("world_sql_content"));
             var worldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));

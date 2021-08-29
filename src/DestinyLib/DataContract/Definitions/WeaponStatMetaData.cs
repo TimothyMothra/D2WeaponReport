@@ -1,6 +1,6 @@
 ﻿namespace DestinyLib.DataContract.Definitions
 {
-    public class WeaponStatDefinitionWhatIsThis
+    public class WeaponStatMetaData
     {
         public string Name { get; set; }
 

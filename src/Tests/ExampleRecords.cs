@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
 
-    using DestinyLib.DataContract;
     using DestinyLib.DataContract.Definitions;
 
     public static class ExampleRecords
@@ -28,21 +27,17 @@
                 ScreenshotPath = "/common/destiny2_content/screenshots/821154603.jpg",
             };
 
-            //var gnawingHunger = new WeaponDefinition
-            //{
-            //    MetaData ,
-            //    Stats = new List<WeaponStatDefinition>(),
-            //    PerkSets = new List<WeaponPerkSetDefinition>(),
-            //};
-
             #region Stats
             var weaponStatsCollection = new WeaponStatsCollection();
 
             weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
-                Name = "Attack",
-                Description = "Higher Attack allows your weapons to damage higher-level opponents.",
-                StatHash = 1480404414,
+                MetaData = new WeaponStatMetaData
+                {
+                    Id = 1480404414,
+                    Name = "Attack",
+                    Description = "Higher Attack allows your weapons to damage higher-level opponents.",
+                },
                 Value = 0,
                 MinValue = 0,
                 MaxValue = 0,
@@ -50,9 +45,12 @@
             });
             weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
-                Name = "Power",
-                Description = "Raising your Power increases the damage your abilities deal against higher-level combatants.",
-                StatHash = 1935470627,
+                MetaData = new WeaponStatMetaData
+                {
+                    Id = 1935470627,
+                    Name = "Power",
+                    Description = "Raising your Power increases the damage your abilities deal against higher-level combatants.",
+                },
                 Value = 0,
                 MinValue = 0,
                 MaxValue = 0,
@@ -60,9 +58,12 @@
             });
             weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
-                Name = string.Empty, // TODO: WHAT IS THIS?
-                Description = string.Empty,
-                StatHash = 1885944937,
+                MetaData = new WeaponStatMetaData
+                {
+                    Id = 1885944937,
+                    Name = string.Empty, // TODO: WHAT IS THIS?
+                    Description = string.Empty,
+                },
                 Value = 0,
                 MinValue = 0,
                 MaxValue = 0,
@@ -70,9 +71,12 @@
             });
             weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
-                Name = "Zoom",
-                Description = "How much the weapon's scope can zoom in on targets.",
-                StatHash = 3555269338,
+                MetaData = new WeaponStatMetaData
+                {
+                    Id = 3555269338,
+                    Name = "Zoom",
+                    Description = "How much the weapon's scope can zoom in on targets.",
+                },
                 Value = 16,
                 MinValue = 0,
                 MaxValue = 0,
@@ -80,9 +84,12 @@
             });
             weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
-                Name = "Rounds Per Minute",
-                Description = "The number of shots per minute this weapon can fire.",
-                StatHash = 4284893193,
+                MetaData = new WeaponStatMetaData
+                {
+                    Id = 4284893193,
+                    Name = "Rounds Per Minute",
+                    Description = "The number of shots per minute this weapon can fire.",
+                },
                 Value = 600,
                 MinValue = 0,
                 MaxValue = 0,
@@ -90,9 +97,12 @@
             });
             weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
-                Name = "Impact",
-                Description = "Increases the damage inflicted by each round.",
-                StatHash = 4043523819,
+                MetaData = new WeaponStatMetaData
+                {
+                    Id = 4043523819,
+                    Name = "Impact",
+                    Description = "Increases the damage inflicted by each round.",
+                },
                 Value = 21,
                 MinValue = 0,
                 MaxValue = 0,
@@ -100,9 +110,12 @@
             });
             weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
-                Name = "Range",
-                Description = "Increases the effective range of this weapon.",
-                StatHash = 1240592695,
+                MetaData = new WeaponStatMetaData
+                {
+                    Id = 1240592695,
+                    Name = "Range",
+                    Description = "Increases the effective range of this weapon.",
+                },
                 Value = 53,
                 MinValue = 0,
                 MaxValue = 0,
@@ -110,9 +123,12 @@
             });
             weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
-                Name = "Stability",
-                Description = "How much or little recoil you will experience while firing the weapon.",
-                StatHash = 155624089,
+                MetaData = new WeaponStatMetaData
+                {
+                    Id = 155624089,
+                    Name = "Stability",
+                    Description = "How much or little recoil you will experience while firing the weapon.",
+                },
                 Value = 49,
                 MinValue = 0,
                 MaxValue = 0,
@@ -120,9 +136,12 @@
             });
             weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
-                Name = "Magazine",
-                Description = "The number of shots which can be fired before reloading.",
-                StatHash = 3871231066,
+                MetaData = new WeaponStatMetaData
+                {
+                    Id = 3871231066,
+                    Name = "Magazine",
+                    Description = "The number of shots which can be fired before reloading.",
+                },
                 Value = 43,
                 MinValue = 0,
                 MaxValue = 0,
@@ -130,9 +149,12 @@
             });
             weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
-                Name = "Reload Speed",
-                Description = "The time it takes to reload this weapon.",
-                StatHash = 4188031367,
+                MetaData = new WeaponStatMetaData
+                {
+                    Id = 4188031367,
+                    Name = "Reload Speed",
+                    Description = "The time it takes to reload this weapon.",
+                },
                 Value = 61,
                 MinValue = 0,
                 MaxValue = 0,
@@ -140,9 +162,12 @@
             });
             weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
-                Name = "Inventory Size",
-                Description = "How much ammo a player can hold in reserve.",
-                StatHash = 1931675084,
+                MetaData = new WeaponStatMetaData
+                {
+                    Id = 1931675084,
+                    Name = "Inventory Size",
+                    Description = "How much ammo a player can hold in reserve.",
+                },
                 Value = 55,
                 MinValue = 0,
                 MaxValue = 0,
@@ -150,9 +175,12 @@
             });
             weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
-                Name = "Handling",
-                Description = "The speed with which the weapon can be readied and aimed.",
-                StatHash = 943549884,
+                MetaData = new WeaponStatMetaData
+                {
+                    Id = 943549884,
+                    Name = "Handling",
+                    Description = "The speed with which the weapon can be readied and aimed.",
+                },
                 Value = 67,
                 MinValue = 0,
                 MaxValue = 0,
@@ -160,9 +188,12 @@
             });
             weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
-                Name = "Aim Assistance",
-                Description = "The weapon's ability to augment your aim.",
-                StatHash = 1345609583,
+                MetaData = new WeaponStatMetaData
+                {
+                    Id = 1345609583,
+                    Name = "Aim Assistance",
+                    Description = "The weapon's ability to augment your aim.",
+                },
                 Value = 65,
                 MinValue = 0,
                 MaxValue = 0,
@@ -170,9 +201,12 @@
             });
             weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
-                Name = "Recoil Direction",
-                Description = "The weapon's tendency to move while firing.",
-                StatHash = 2715839340,
+                MetaData = new WeaponStatMetaData
+                {
+                    Id = 2715839340,
+                    Name = "Recoil Direction",
+                    Description = "The weapon's tendency to move while firing.",
+                },
                 Value = 54,
                 MinValue = 0,
                 MaxValue = 0,
