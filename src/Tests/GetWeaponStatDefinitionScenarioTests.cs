@@ -1,6 +1,7 @@
 ﻿namespace Tests
 {
     using DestinyLib.DataContract;
+    using DestinyLib.DataContract.Definitions;
     using DestinyLib.Scenarios;
 
     using FluentAssertions;
@@ -17,7 +18,7 @@
 
             var result = GetWeaponStatDefinitionScenario.Run(id_stability);
 
-            var expected = new WeaponStatDefinition
+            var expected = new WeaponStatDefinitionWhatIsThis
             {
                 Id = 155624089,
                 Name = "Stability",

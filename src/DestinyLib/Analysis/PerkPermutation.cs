@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using DestinyLib.DataContract;
+using DestinyLib.DataContract.Definitions;
 
 namespace DestinyLib.Analysis
 {
@@ -19,13 +20,13 @@ namespace DestinyLib.Analysis
 
         public string ToDisplayString() => $"{this.MaxPoints}: {this.PerkNames}";
 
-        public void Validate(IList<WeaponDefinition.WeaponStat> weaponStats)
+        public void Validate(IList<WeaponStatDefinition> weaponStats)
         {
             double perkSum = 0;
 
             foreach (var perk in this.PerkHashAndValues)
             {
-                WeaponDefinition.WeaponStat stat = null;
+                WeaponStatDefinition stat = null;
 
                 try
                 {
@@ -48,7 +49,7 @@ namespace DestinyLib.Analysis
             this.MaxPoints = perkSum;
         }
 
-        private double Validate(WeaponDefinition.WeaponStat stat, double perkValue)
+        private double Validate(WeaponStatDefinition stat, double perkValue)
         {
             if (stat.IgnoreMaxValue())
             {

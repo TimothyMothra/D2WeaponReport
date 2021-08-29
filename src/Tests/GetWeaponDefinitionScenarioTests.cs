@@ -27,10 +27,10 @@
             result.Should().BeEquivalentTo(expected);
         }
 
-        private void VerifyPerks(WeaponDefinition expected, WeaponDefinition actual)
+        private void VerifyPerks(WeaponDefinitionOld expected, WeaponDefinitionOld actual)
         {
-            var expectedPerks = expected.PerkSets.SelectMany(x => x.Perks).OrderBy(x => x.Name).ToList();
-            var actualPerks = actual.PerkSets.SelectMany(x => x.Perks).OrderBy(x => x.Name).ToList();
+            var expectedPerks = expected.PerkSets.SelectMany(x => x.Values).OrderBy(x => x.Name).ToList();
+            var actualPerks = actual.PerkSets.SelectMany(x => x.Values).OrderBy(x => x.Name).ToList();
 
             actualPerks.Should().BeEquivalentTo(expectedPerks);
         }

@@ -10,7 +10,7 @@
         private const bool BehaviorIncludePerksWithNoValue = false;
         private const bool BehaviorValidatePermutations = true;
 
-        public static WeaponAnalysisSummary GetWeaponAnalysisSummary(WeaponDefinition weaponDefinition)
+        public static WeaponAnalysisSummary GetWeaponAnalysisSummary(WeaponDefinitionOld weaponDefinition)
         {
             var stats = weaponDefinition.Stats;
             var perkSets = weaponDefinition.PerkSets;
@@ -39,7 +39,7 @@
             return summary;
         }
 
-        private static int GetBaseTotalPoints(WeaponDefinition weaponDefinition)
+        private static int GetBaseTotalPoints(WeaponDefinitionOld weaponDefinition)
         {
             var stats = weaponDefinition.Stats;
 
@@ -52,7 +52,7 @@
             return baseTotalPoints;
         }
 
-        private static List<PerkPermutation> GetPerkPermutations(WeaponDefinition weaponDefinition)
+        private static List<PerkPermutation> GetPerkPermutations(WeaponDefinitionOld weaponDefinition)
         {
             // Use Breadth-First traversal to calculate all possible permutations.
             var perkSets = weaponDefinition.PerkSets;
@@ -67,19 +67,19 @@
                 permutations = new List<PerkPermutation>();
 
                 //inner: Perk:
-                foreach (var perk in perkSet.Perks)
+                foreach (var perk in perkSet.Values)
                 {
                     //inner: Perk.Values (Note: not all perks have values)
-                    if (!BehaviorIncludePerksWithNoValue && perk.PerkValues == null)
+                    if (!BehaviorIncludePerksWithNoValue && perk.WeaponPerkList == null)
                     {
                         continue;
                     }
 
                     // convert current perk to dictionary of key/values
                     var perkValuesAsDictionary = new Dictionary<uint, double>();
-                    if (perk.PerkValues != null)
+                    if (perk.WeaponPerkList != null)
                     {
-                        foreach (var values in perk.PerkValues)
+                        foreach (var values in perk.WeaponPerkList)
                         {
                             perkValuesAsDictionary.CustomAdd(values.StatHash, values.Value);
                         }
@@ -120,7 +120,7 @@
             return permutations;
         }
 
-        private static List<PerkTable> GetPerkTables(WeaponDefinition weaponDefinition)
+        private static List<PerkTable> GetPerkTables(WeaponDefinitionOld weaponDefinition)
         {
             var stats = weaponDefinition.Stats;
             var perkSets = weaponDefinition.PerkSets;

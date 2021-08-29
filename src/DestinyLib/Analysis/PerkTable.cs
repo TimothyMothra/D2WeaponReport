@@ -6,19 +6,21 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    using static DestinyLib.DataContract.WeaponDefinition;
+    using DestinyLib.DataContract.Definitions;
+
+    using static DestinyLib.DataContract.WeaponDefinitionOld;
 
     public class PerkTable
     {
-        public PerkTable(IList<WeaponStat> stats, PerkSet perkSet)
+        public PerkTable(IList<WeaponStatDefinition> stats, WeaponPerkSetDefinition perkSet)
         {
             this.Stats = stats;
             this.PerkSet = perkSet;
         }
 
-        public IList<WeaponStat> Stats { get; set; }
+        public IList<WeaponStatDefinition> Stats { get; set; }
 
-        public PerkSet PerkSet { get; set; }
+        public WeaponPerkSetDefinition PerkSet { get; set; }
 
         public string GetDisplayName()
         {
@@ -27,8 +29,8 @@
 
         public List<string> GetIconUris()
         {
-            List<string> iconUris = new List<string>(this.PerkSet.Perks.Count);
-            foreach (var perk in this.PerkSet.Perks)
+            List<string> iconUris = new List<string>(this.PerkSet.Values.Count);
+            foreach (var perk in this.PerkSet.Values)
             {
                 iconUris.Add(new Uri(LibEnvironment.GetDestinyHost(), perk.IconPath).AbsoluteUri);
             }
@@ -66,16 +68,16 @@
             }
 
             // enumerate perks and populate statContainer
-            List<List<string>> rows = new List<List<string>>(this.PerkSet.Perks.Count);
-            foreach (var perk in this.PerkSet.Perks)
+            List<List<string>> rows = new List<List<string>>(this.PerkSet.Values.Count);
+            foreach (var perk in this.PerkSet.Values)
             {
                 var tempRow = new string[numberOfColumns];
 
                 tempRow[0] = perk.Name;
 
-                if (perk.PerkValues != null)
+                if (perk.WeaponPerkList != null)
                 {
-                    foreach (var perkValue in perk.PerkValues)
+                    foreach (var perkValue in perk.WeaponPerkList)
                     {
                         int index = statsToColumnIndex[perkValue.StatHash];
                         tempRow[index] = perkValue.Value.ToString();

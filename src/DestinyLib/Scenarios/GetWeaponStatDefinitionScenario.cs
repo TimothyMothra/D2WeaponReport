@@ -4,10 +4,11 @@
 
     using DestinyLib.Database;
     using DestinyLib.DataContract;
+    using DestinyLib.DataContract.Definitions;
 
     public static class GetWeaponStatDefinitionScenario
     {
-        public static WeaponStatDefinition Run(uint id)
+        public static WeaponStatDefinitionWhatIsThis Run(uint id)
         {
             var dbPath = new FileInfo(LibEnvironment.GetDatabaseFilePath("world_sql_content"));
             var worldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));

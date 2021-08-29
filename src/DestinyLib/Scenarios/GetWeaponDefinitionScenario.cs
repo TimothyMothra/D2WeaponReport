@@ -8,7 +8,7 @@
     // TODO: SCENARIOS WOULD BENEFIT FROM DEPENDENCY INJECTION
     public static class GetWeaponDefinitionScenario
     {
-        public static WeaponDefinition Run(uint id)
+        public static WeaponDefinitionOld Run(uint id)
         {
             var dbPath = new FileInfo(LibEnvironment.GetDatabaseFilePath("world_sql_content"));
             var worldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));

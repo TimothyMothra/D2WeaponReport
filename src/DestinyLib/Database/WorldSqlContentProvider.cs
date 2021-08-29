@@ -5,6 +5,7 @@
     using System.Linq;
 
     using DestinyLib.DataContract;
+    using DestinyLib.DataContract.Definitions;
 
     using Newtonsoft.Json;
 
@@ -14,8 +15,8 @@
 
         private readonly ProviderOptions providerOptions;
 
-        private readonly Dictionary<uint, WeaponStatDefinition> weaponStatDefinitionCache = new ();
-        private readonly Dictionary<uint, WeaponDefinition.Perk> weaponDefinitionPerkCache = new ();
+        private readonly Dictionary<uint, WeaponStatDefinitionWhatIsThis> weaponStatDefinitionCache = new ();
+        private readonly Dictionary<uint, WeaponPerkDefinition> weaponDefinitionPerkCache = new ();
         private readonly Dictionary<uint, DestinyCollectibleDefinition> destinyCollectibleDefinitionCache = new ();
 
         public WorldSqlContentProvider(WorldSqlContent worldSqlContent, ProviderOptions providerOptions)
@@ -24,7 +25,7 @@
             this.providerOptions = providerOptions;
         }
 
-        public WeaponDefinition GetWeaponDefinition(uint id)
+        public DataContract.WeaponDefinitionOld GetWeaponDefinition(uint id)
         {
             var record = this.worldSqlContent.GetDestinyInventoryItemDefinition(id);
 
@@ -34,9 +35,9 @@
                 throw new Exception($"unexpected null result for {nameof(this.worldSqlContent.GetDestinyInventoryItemDefinition)} id {id}");
             }
 
-            var weaponDefinition = new WeaponDefinition
+            var weaponDefinition = new DataContract.WeaponDefinitionOld
             {
-                MetaData = new WeaponDefinition.WeaponMetaData
+                MetaData = new WeaponMetaData
                 {
                     Id = jsonDynamic.hash,
                     Name = jsonDynamic.displayProperties.name,
@@ -50,8 +51,8 @@
                     FlavorText = jsonDynamic.flavorText,
                     ItemTypeId = jsonDynamic.itemSubType, //TODO: Need to identity Weapon Type (example: "enum DestinyItemSubType "AutoRifle"")
                 },
-                Stats = new List<WeaponDefinition.WeaponStat>(),
-                PerkSets = new List<WeaponDefinition.PerkSet>(),
+                Stats = new List<WeaponStatDefinition>(),
+                PerkSets = new List<WeaponPerkSetDefinition>(),
             };
 
             // check Collection for Seasonal Weapon Icon (Note: does not exist for all weapons).
@@ -70,7 +71,7 @@
 
                 var statDefinition = this.GetWeaponStatDefinition(statHash);
 
-                var stat = new WeaponDefinition.WeaponStat
+                var stat = new WeaponStatDefinition
                 {
                     Name = statDefinition.Name,
                     Description = statDefinition.Description,
@@ -121,14 +122,14 @@
                 }
 
                 //TODO: Are PerkSets ever reused or unique to weapon? I don't think this needs to be cached but might be wrong.
-                var perkSet = new WeaponDefinition.PerkSet
+                var perkSet = new WeaponPerkSetDefinition
                 {
                     SocketIndex = i,
                     SocketTypeHash = socketEntryDynamic.socketTypeHash, //TODO: RELATED TO ABOVE COMMENT. I DON'T KNOW WHAT ALL OF THESE ARE YET.
                     PlugSetHash = socketEntryDynamic.randomizedPlugSetHash ?? socketEntryDynamic.reusablePlugSetHash,
-                    Perks = null,
+                    Values = null,
                 };
-                perkSet.Perks = this.GetWeaponDefinitionPerks(perkSet.PlugSetHash);
+                perkSet.Values = this.GetWeaponDefinitionPerks(perkSet.PlugSetHash);
 
                 weaponDefinition.PerkSets.Add(perkSet);
             }
@@ -137,7 +138,7 @@
             return weaponDefinition;
         }
 
-        public WeaponStatDefinition GetWeaponStatDefinition(uint statHash)
+        public WeaponStatDefinitionWhatIsThis GetWeaponStatDefinition(uint statHash)
         {
             if (this.providerOptions.EnableCaching && this.weaponStatDefinitionCache.TryGetValue(statHash, out var cachedRecord))
             {
@@ -152,7 +153,7 @@
                 throw new Exception($"unexpected null result for {nameof(this.worldSqlContent.GetDestinyStatDefinition)} id {statHash}");
             }
 
-            var weaponStatDefinition = new WeaponStatDefinition
+            var weaponStatDefinition = new WeaponStatDefinitionWhatIsThis
             {
                 Id = jsonDynamic.hash,
                 Name = jsonDynamic.displayProperties.name,
@@ -205,9 +206,9 @@
             return this.worldSqlContent.GetRecords(Properties.Resources.WorldSqlContent_GetAllWeapons, SearchableWeaponRecord.Parse);
         }
 
-        internal List<WeaponDefinition.Perk> GetWeaponDefinitionPerks(uint plugSetHash)
+        internal List<WeaponPerkDefinition> GetWeaponDefinitionPerks(uint plugSetHash)
         {
-            var perks = new List<WeaponDefinition.Perk>();
+            var perks = new List<WeaponPerkDefinition>();
 
             var plugSetDefinitionRecord = this.worldSqlContent.GetDestinyPlugSetDefinition(plugSetHash);
             dynamic plugSetDefinitionDynamic = JsonConvert.DeserializeObject(plugSetDefinitionRecord);
@@ -220,7 +221,7 @@
             return perks;
         }
 
-        internal WeaponDefinition.Perk GetWeaponDefinitionPerk(uint plugItemHash)
+        internal WeaponPerkDefinition GetWeaponDefinitionPerk(uint plugItemHash)
         {
             if (this.providerOptions.EnableCaching && this.weaponDefinitionPerkCache.TryGetValue(plugItemHash, out var cachedRecord))
             {
@@ -232,25 +233,25 @@
 
             dynamic perkValuesDynamic = perkDynamic.investmentStats;
 
-            var perkValues = new List<WeaponDefinition.PerkValue>();
+            var weaponPerkList = new List<WeaponPerkValueDefinition>();
             foreach (var perkValueDynamic in perkValuesDynamic)
             {
-                var perkValue = new WeaponDefinition.PerkValue
+                var perkValue = new WeaponPerkValueDefinition
                 {
                     StatHash = perkValueDynamic.statTypeHash,
                     Value = perkValueDynamic.value,
                 };
 
-                perkValues.Add(perkValue);
+                weaponPerkList.Add(perkValue);
             }
 
-            var perk = new WeaponDefinition.Perk
+            var perk = new WeaponPerkDefinition
             {
                 Id = plugItemHash,
                 Name = perkDynamic.displayProperties.name,
                 Description = perkDynamic.displayProperties.description,
                 IconPath = perkDynamic.displayProperties.icon,
-                PerkValues = perkValues.Any() ? perkValues : null, // some perks may not have values that affect stats (example: Rampage). but others will (example: Field Prep).
+                WeaponPerkList = weaponPerkList.Any() ? weaponPerkList : null, // some perks may not have values that affect stats (example: Rampage). but others will (example: Field Prep).
             };
 
             if (this.providerOptions.EnableCaching)
