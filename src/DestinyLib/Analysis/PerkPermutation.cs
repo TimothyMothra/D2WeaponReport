@@ -30,7 +30,7 @@ namespace DestinyLib.Analysis
 
                 try
                 {
-                    stat = weaponStats.SingleOrDefault(x => x.MetaData.Id == perk.Key);
+                    stat = weaponStats.SingleOrDefault(x => x.MetaData.HashId == perk.Key);
 
                     if (stat == null)
                     {
@@ -59,7 +59,7 @@ namespace DestinyLib.Analysis
             // ASSUMPTION: It is assumed that MaxValue or DisplayMaximum are set, but not both.
             if (stat.MaxValue != 0 && stat.DisplayMaximum != 0)
             {
-                throw new Exception($"This stat breaks an assumption. id '{stat.MetaData.Id}' name '{stat.MetaData.Name}' maxValue '{stat.MaxValue}' DisplayMax '{stat.DisplayMaximum}'");
+                throw new Exception($"This stat breaks an assumption. id '{stat.MetaData.HashId}' name '{stat.MetaData.Name}' maxValue '{stat.MaxValue}' DisplayMax '{stat.DisplayMaximum}'");
             }
 
             var statAssumedMax = stat.MaxValue != 0 ? stat.MaxValue : stat.DisplayMaximum;
@@ -67,13 +67,13 @@ namespace DestinyLib.Analysis
             // ASSUMPTION: It is assumed that a stat value can never be negative.
             if (stat.Value < stat.MinValue)
             {
-                throw new Exception($"This stat breaks an assumption. id '{stat.MetaData.Id}' name '{stat.MetaData.Name}' value '{stat.Value}' minValue '{stat.MinValue}'");
+                throw new Exception($"This stat breaks an assumption. id '{stat.MetaData.HashId}' name '{stat.MetaData.Name}' value '{stat.Value}' minValue '{stat.MinValue}'");
             }
 
             // ASSUMPTION: It is assumed that a stat value will not exceed max.
             if (stat.Value > statAssumedMax)
             {
-                throw new Exception($"This stat breaks an assumption. id '{stat.MetaData.Id}' name '{stat.MetaData.Name}' value '{stat.Value}' maxValue '{statAssumedMax}'");
+                throw new Exception($"This stat breaks an assumption. id '{stat.MetaData.HashId}' name '{stat.MetaData.Name}' value '{stat.Value}' maxValue '{statAssumedMax}'");
             }
 
             double perkValueToRecord = perkValue;

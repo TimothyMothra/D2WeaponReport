@@ -29,7 +29,7 @@
 
         public override string ToString()
         {
-            return $"[{this.MetaData.Id}] {this.MetaData.Name}";
+            return $"[{this.MetaData.HashId}] {this.MetaData.Name}";
         }
 
         public bool IgnoreMaxValue()
@@ -40,7 +40,7 @@
             // id '447667954' name 'Draw Time'
             // id '3871231066' name 'Magazine'
 
-            return this.MetaData.Id == 2961396640u || this.MetaData.Id == 4284893193u || this.MetaData.Id == 447667954u || this.MetaData.Id == 3871231066u;
+            return this.MetaData.HashId == 2961396640u || this.MetaData.HashId == 4284893193u || this.MetaData.HashId == 447667954u || this.MetaData.HashId == 3871231066u;
         }
     }
 }

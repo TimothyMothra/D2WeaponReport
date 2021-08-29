@@ -30,8 +30,8 @@
 
         private void VerifyPerks(WeaponDefinition expected, WeaponDefinition actual)
         {
-            var expectedPerks = expected.WeaponPossiblePerks.Values.SelectMany(x => x.Values).OrderBy(x => x.Name).ToList();
-            var actualPerks = actual.WeaponPossiblePerks.Values.SelectMany(x => x.Values).OrderBy(x => x.Name).ToList();
+            var expectedPerks = expected.WeaponPossiblePerks.Values.SelectMany(x => x.Values).OrderBy(x => x.MetaData.Name).ToList();
+            var actualPerks = actual.WeaponPossiblePerks.Values.SelectMany(x => x.Values).OrderBy(x => x.MetaData.Name).ToList();
 
             actualPerks.Should().BeEquivalentTo(expectedPerks);
         }

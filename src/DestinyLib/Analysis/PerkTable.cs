@@ -30,7 +30,7 @@
             List<string> iconUris = new List<string>(this.PerkSet.Values.Count);
             foreach (var perk in this.PerkSet.Values)
             {
-                iconUris.Add(new Uri(LibEnvironment.GetDestinyHost(), perk.IconPath).AbsoluteUri);
+                iconUris.Add(new Uri(LibEnvironment.GetDestinyHost(), perk.MetaData.IconPath).AbsoluteUri);
             }
 
             return iconUris;
@@ -48,7 +48,7 @@
             foreach (var stat in this.Stats)
             {
                 headerRow.Add(string.IsNullOrEmpty(stat.MetaData.Name) ? "-" : stat.MetaData.Name);
-                statsToColumnIndex.Add(stat.MetaData.Id, columnIndex++);
+                statsToColumnIndex.Add(stat.MetaData.HashId, columnIndex++);
             }
 
             return headerRow;
@@ -62,7 +62,7 @@
             int columnIndex = 1;
             foreach (var stat in this.Stats)
             {
-                statsToColumnIndex.Add(stat.MetaData.Id, columnIndex++);
+                statsToColumnIndex.Add(stat.MetaData.HashId, columnIndex++);
             }
 
             // enumerate perks and populate statContainer
@@ -71,7 +71,7 @@
             {
                 var tempRow = new string[numberOfColumns];
 
-                tempRow[0] = perk.Name;
+                tempRow[0] = perk.MetaData.Name;
 
                 if (perk.WeaponPerkList != null)
                 {

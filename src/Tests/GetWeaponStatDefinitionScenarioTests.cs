@@ -20,7 +20,7 @@
 
             var expected = new WeaponStatMetaData
             {
-                Id = 155624089,
+                HashId = 155624089,
                 Name = "Stability",
                 Description = "How much or little recoil you will experience while firing the weapon.",
                 Interpolate = false,

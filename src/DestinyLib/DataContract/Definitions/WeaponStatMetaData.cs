@@ -8,6 +8,6 @@
 
         public bool Interpolate { get; set; }
 
-        public uint Id { get; set; }
+        public uint HashId { get; set; }
     }
 }

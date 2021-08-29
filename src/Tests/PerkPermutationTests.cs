@@ -17,7 +17,7 @@
             {
                 MetaData = new WeaponStatMetaData
                 {
-                    Id = 111,
+                    HashId = 111,
                 },
                 MaxValue = 10,
                 MinValue = 0,
@@ -27,7 +27,7 @@
             {
                 MetaData = new WeaponStatMetaData
                 {
-                    Id = 222,
+                    HashId = 222,
                 },
                 MaxValue = 50,
                 MinValue = 0,
@@ -42,7 +42,7 @@
             {
                 MetaData = new WeaponStatMetaData
                 {
-                    Id = 111,
+                    HashId = 111,
                 },
                 MaxValue = 100,
                 MinValue = 0,
@@ -52,7 +52,7 @@
             {
                 MetaData = new WeaponStatMetaData
                 {
-                    Id = 222,
+                    HashId = 222,
                 },
                 MaxValue = 50,
                 MinValue = 0,

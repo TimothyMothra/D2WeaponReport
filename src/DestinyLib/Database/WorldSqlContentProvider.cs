@@ -37,7 +37,7 @@
 
             var weaponMetaData = new WeaponMetaData
             {
-                Id = jsonDynamic.hash,
+                HashId = jsonDynamic.hash,
                 Name = jsonDynamic.displayProperties.name,
                 ItemDefinitionIconPath = jsonDynamic.displayProperties.icon,
                 ScreenshotPath = jsonDynamic.screenshot,
@@ -80,7 +80,7 @@
                 // ASSUMPTION: MaxValue is never used.
                 if (stat.MaxValue != 0)
                 {
-                    throw new ($"weapon id {id} name {weaponMetaData.Name} | stat id {stat.MetaData.Id} name {stat.MetaData.Name} value {stat.Value} max {stat.MaxValue} displayMax {stat.DisplayMaximum}");
+                    throw new ($"weapon id {id} name {weaponMetaData.Name} | stat id {stat.MetaData.HashId} name {stat.MetaData.Name} value {stat.Value} max {stat.MaxValue} displayMax {stat.DisplayMaximum}");
                 }
 
                 weaponStatsCollection.Values.Add(stat);
@@ -90,7 +90,7 @@
             // PERKS
             #region WeaponDefinition Perks
 
-            var weaponPerksCollection = new WeaponPerksCollection();
+            var weaponPerksCollection = new WeaponPerkSetCollection();
 
             // Perks are stored in SocketEntries.
             // First, must read SocketCategory to identify which socket indexes hold WeaponPerks.
@@ -152,7 +152,7 @@
 
             var weaponStatDefinition = new WeaponStatMetaData
             {
-                Id = jsonDynamic.hash,
+                HashId = jsonDynamic.hash,
                 Name = jsonDynamic.displayProperties.name,
                 Description = jsonDynamic.displayProperties.description,
                 Interpolate = jsonDynamic.interpolate,
@@ -244,10 +244,13 @@
 
             var perk = new WeaponPerkDefinition
             {
-                Id = plugItemHash,
-                Name = perkDynamic.displayProperties.name,
-                Description = perkDynamic.displayProperties.description,
-                IconPath = perkDynamic.displayProperties.icon,
+                MetaData = new WeaponPerkMetaData
+                {
+                    HashId = plugItemHash,
+                    Name = perkDynamic.displayProperties.name,
+                    Description = perkDynamic.displayProperties.description,
+                    IconPath = perkDynamic.displayProperties.icon,
+                },
                 WeaponPerkList = weaponPerkList.Any() ? weaponPerkList : null, // some perks may not have values that affect stats (example: Rampage). but others will (example: Field Prep).
             };
 

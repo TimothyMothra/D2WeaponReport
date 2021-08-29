@@ -2,7 +2,7 @@
 {
     public class WeaponDefinition
     {
-        public WeaponDefinition(WeaponMetaData weaponMetaData, WeaponStatsCollection weaponStatsCollection, WeaponPerksCollection weaponPerksCollection)
+        public WeaponDefinition(WeaponMetaData weaponMetaData, WeaponStatsCollection weaponStatsCollection, WeaponPerkSetCollection weaponPerksCollection)
         {
             this.MetaData = weaponMetaData;
             this.WeaponBaseStats = weaponStatsCollection;
@@ -13,11 +13,11 @@
 
         public WeaponStatsCollection WeaponBaseStats { get; set; }
 
-        public WeaponPerksCollection WeaponPossiblePerks { get; set; }
+        public WeaponPerkSetCollection WeaponPossiblePerks { get; set; }
 
         public override string ToString()
         {
-            return $"[{this.MetaData.Id}] {this.MetaData.Name} (TODO: ItemType)"; // TODO: ITEM TYPE
+            return $"[{this.MetaData.HashId}] {this.MetaData.Name} (TODO: ItemType)"; // TODO: ITEM TYPE
         }
     }
 }

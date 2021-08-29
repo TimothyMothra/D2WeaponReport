@@ -6,7 +6,7 @@ namespace DestinyLib.DataContract.Definitions
     {
         public string Name { get; set; }
 
-        public uint Id { get; set; }
+        public uint HashId { get; set; }
 
         public string AmmoTypeId { get; set; }
 

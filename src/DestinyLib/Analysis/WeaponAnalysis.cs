@@ -93,7 +93,7 @@
                         {
                             var newPermutation = new PerkPermutation
                             {
-                                PerkNames = temp.PerkNames + $", {perk.Name}",
+                                PerkNames = temp.PerkNames + $", {perk.MetaData.Name}",
                                 PerkHashAndValues = new Dictionary<uint, double>(temp.PerkHashAndValues.AsEnumerable()), // TODO: THIS IS VERY WASTEFUL
                                 //Value = temp.Value + value
                             };
@@ -108,7 +108,7 @@
                     }
                     else
                     {
-                        permutations.Add(new PerkPermutation { PerkNames = perk.Name, PerkHashAndValues = new Dictionary<uint, double>(perkValuesAsDictionary) });
+                        permutations.Add(new PerkPermutation { PerkNames = perk.MetaData.Name, PerkHashAndValues = new Dictionary<uint, double>(perkValuesAsDictionary) });
                     }
                 }
 

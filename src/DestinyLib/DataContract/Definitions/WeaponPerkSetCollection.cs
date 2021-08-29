@@ -2,9 +2,9 @@
 {
     using System.Collections.Generic;
 
-    public class WeaponPerksCollection
+    public class WeaponPerkSetCollection
     {
-        public WeaponPerksCollection()
+        public WeaponPerkSetCollection()
         {
             this.Values = new List<WeaponPerkSetDefinition>();
         }

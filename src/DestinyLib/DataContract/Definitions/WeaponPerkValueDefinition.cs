@@ -2,8 +2,8 @@
 {
     public class WeaponPerkValueDefinition
     {
-            public uint StatHash { get; set; }
+        public uint StatHash { get; set; }
 
-            public int Value { get; set; }
+        public int Value { get; set; }
     }
 }
