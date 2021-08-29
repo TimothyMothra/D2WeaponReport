@@ -4,11 +4,12 @@
 
     using DestinyLib.Database;
     using DestinyLib.DataContract;
+    using DestinyLib.DataContract.Definitions;
 
     // TODO: SCENARIOS WOULD BENEFIT FROM DEPENDENCY INJECTION
     public static class GetWeaponDefinitionScenario
     {
-        public static WeaponDefinitionOld Run(uint id)
+        public static WeaponDefinition Run(uint id)
         {
             var dbPath = new FileInfo(LibEnvironment.GetDatabaseFilePath("world_sql_content"));
             var worldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));

@@ -2,7 +2,14 @@
 {
     public class WeaponDefinition
     {
-        public WeaponMetaData WeaponMetaData { get; set; }
+        public WeaponDefinition(WeaponMetaData weaponMetaData, WeaponStatsCollection weaponStatsCollection, WeaponPerksCollection weaponPerksCollection)
+        {
+            this.MetaData = weaponMetaData;
+            this.WeaponBaseStats = weaponStatsCollection;
+            this.WeaponPossiblePerks = weaponPerksCollection;
+        }
+
+        public WeaponMetaData MetaData { get; set; }
 
         public WeaponStatsCollection WeaponBaseStats { get; set; }
 
@@ -10,7 +17,7 @@
 
         public override string ToString()
         {
-            return $"[{this.WeaponMetaData.Id}] {this.WeaponMetaData.Name} (TODO: ItemType)"; // TODO: ITEM TYPE
+            return $"[{this.MetaData.Id}] {this.MetaData.Name} (TODO: ItemType)"; // TODO: ITEM TYPE
         }
     }
 }

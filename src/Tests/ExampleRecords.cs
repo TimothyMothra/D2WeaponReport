@@ -10,31 +10,35 @@
         /// <summary>
         /// (https://data.destinysets.com/i/InventoryItem:821154603).
         /// </summary>
-        public static WeaponDefinitionOld GetGnawingHunger()
+        public static WeaponDefinition GetGnawingHunger()
         {
-            var gnawingHunger = new WeaponDefinitionOld
+            var weaponMetaData = new WeaponMetaData
             {
-                MetaData = new WeaponMetaData
-                {
-                    Id = 821154603,
-                    Name = "Gnawing Hunger",
-                    AmmoTypeId = "1",
-                    TierTypeName = "Legendary",
-                    DefaultDamageTypeId = "4",
-                    DefaultDamageTypeHash = "3454344768",
-                    FlavorText = "Don't let pride keep you from a good meal.",
-                    ItemTypeId = "6",
-                    CollectibleHash = 1683333367,
-                    CollectionDefintitionIconPath = "/common/destiny2_content/icons/48037e6416c3c9da07030a72931e0ca9.jpg",
-                    ItemDefinitionIconPath = "/common/destiny2_content/icons/c4509acb76551495deac51bb29b61248.jpg",
-                    ScreenshotPath = "/common/destiny2_content/screenshots/821154603.jpg",
-                },
-                Stats = new List<WeaponStatDefinition>(),
-                PerkSets = new List<WeaponPerkSetDefinition>(),
+                Id = 821154603,
+                Name = "Gnawing Hunger",
+                AmmoTypeId = "1",
+                TierTypeName = "Legendary",
+                DefaultDamageTypeId = "4",
+                DefaultDamageTypeHash = "3454344768",
+                FlavorText = "Don't let pride keep you from a good meal.",
+                ItemTypeId = "6",
+                CollectibleHash = 1683333367,
+                CollectionDefintitionIconPath = "/common/destiny2_content/icons/48037e6416c3c9da07030a72931e0ca9.jpg",
+                ItemDefinitionIconPath = "/common/destiny2_content/icons/c4509acb76551495deac51bb29b61248.jpg",
+                ScreenshotPath = "/common/destiny2_content/screenshots/821154603.jpg",
             };
 
+            //var gnawingHunger = new WeaponDefinition
+            //{
+            //    MetaData ,
+            //    Stats = new List<WeaponStatDefinition>(),
+            //    PerkSets = new List<WeaponPerkSetDefinition>(),
+            //};
+
             #region Stats
-            gnawingHunger.Stats.Add(new WeaponStatDefinition
+            var weaponStatsCollection = new WeaponStatsCollection();
+
+            weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
                 Name = "Attack",
                 Description = "Higher Attack allows your weapons to damage higher-level opponents.",
@@ -44,7 +48,7 @@
                 MaxValue = 0,
                 DisplayMaximum = 100,
             });
-            gnawingHunger.Stats.Add(new WeaponStatDefinition
+            weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
                 Name = "Power",
                 Description = "Raising your Power increases the damage your abilities deal against higher-level combatants.",
@@ -54,7 +58,7 @@
                 MaxValue = 0,
                 DisplayMaximum = 100,
             });
-            gnawingHunger.Stats.Add(new WeaponStatDefinition
+            weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
                 Name = string.Empty, // TODO: WHAT IS THIS?
                 Description = string.Empty,
@@ -64,7 +68,7 @@
                 MaxValue = 0,
                 DisplayMaximum = 100,
             });
-            gnawingHunger.Stats.Add(new WeaponStatDefinition
+            weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
                 Name = "Zoom",
                 Description = "How much the weapon's scope can zoom in on targets.",
@@ -74,7 +78,7 @@
                 MaxValue = 0,
                 DisplayMaximum = 100,
             });
-            gnawingHunger.Stats.Add(new WeaponStatDefinition
+            weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
                 Name = "Rounds Per Minute",
                 Description = "The number of shots per minute this weapon can fire.",
@@ -84,7 +88,7 @@
                 MaxValue = 0,
                 DisplayMaximum = 100,
             });
-            gnawingHunger.Stats.Add(new WeaponStatDefinition
+            weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
                 Name = "Impact",
                 Description = "Increases the damage inflicted by each round.",
@@ -94,7 +98,7 @@
                 MaxValue = 0,
                 DisplayMaximum = 100,
             });
-            gnawingHunger.Stats.Add(new WeaponStatDefinition
+            weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
                 Name = "Range",
                 Description = "Increases the effective range of this weapon.",
@@ -104,7 +108,7 @@
                 MaxValue = 0,
                 DisplayMaximum = 100,
             });
-            gnawingHunger.Stats.Add(new WeaponStatDefinition
+            weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
                 Name = "Stability",
                 Description = "How much or little recoil you will experience while firing the weapon.",
@@ -114,7 +118,7 @@
                 MaxValue = 0,
                 DisplayMaximum = 100,
             });
-            gnawingHunger.Stats.Add(new WeaponStatDefinition
+            weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
                 Name = "Magazine",
                 Description = "The number of shots which can be fired before reloading.",
@@ -124,7 +128,7 @@
                 MaxValue = 0,
                 DisplayMaximum = 100,
             });
-            gnawingHunger.Stats.Add(new WeaponStatDefinition
+            weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
                 Name = "Reload Speed",
                 Description = "The time it takes to reload this weapon.",
@@ -134,7 +138,7 @@
                 MaxValue = 0,
                 DisplayMaximum = 100,
             });
-            gnawingHunger.Stats.Add(new WeaponStatDefinition
+            weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
                 Name = "Inventory Size",
                 Description = "How much ammo a player can hold in reserve.",
@@ -144,7 +148,7 @@
                 MaxValue = 0,
                 DisplayMaximum = 100,
             });
-            gnawingHunger.Stats.Add(new WeaponStatDefinition
+            weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
                 Name = "Handling",
                 Description = "The speed with which the weapon can be readied and aimed.",
@@ -154,7 +158,7 @@
                 MaxValue = 0,
                 DisplayMaximum = 100,
             });
-            gnawingHunger.Stats.Add(new WeaponStatDefinition
+            weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
                 Name = "Aim Assistance",
                 Description = "The weapon's ability to augment your aim.",
@@ -164,7 +168,7 @@
                 MaxValue = 0,
                 DisplayMaximum = 100,
             });
-            gnawingHunger.Stats.Add(new WeaponStatDefinition
+            weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
                 Name = "Recoil Direction",
                 Description = "The weapon's tendency to move while firing.",
@@ -180,7 +184,9 @@
             #region Perks
             // Perk Sets are the unique collections of Perks that belongs to an individual weapon.
 
-            gnawingHunger.PerkSets.Add(new WeaponPerkSetDefinition
+            var weaponPerksCollection = new WeaponPerksCollection();
+
+            weaponPerksCollection.Values.Add(new WeaponPerkSetDefinition
             {
                 SocketIndex = 1,
                 SocketTypeHash = 3362409147,
@@ -372,7 +378,7 @@
                 },
             });
 
-            gnawingHunger.PerkSets.Add(new WeaponPerkSetDefinition
+            weaponPerksCollection.Values.Add(new WeaponPerkSetDefinition
             {
                 SocketIndex = 2,
                 SocketTypeHash = 3815406785,
@@ -515,7 +521,7 @@
                 },
             });
 
-            gnawingHunger.PerkSets.Add(new WeaponPerkSetDefinition
+            weaponPerksCollection.Values.Add(new WeaponPerkSetDefinition
             {
                 SocketIndex = 3,
                 SocketTypeHash = 2614797986,
@@ -568,7 +574,7 @@
                 },
             });
 
-            gnawingHunger.PerkSets.Add(new WeaponPerkSetDefinition
+            weaponPerksCollection.Values.Add(new WeaponPerkSetDefinition
             {
                 SocketIndex = 4,
                 SocketTypeHash = 2614797986,
@@ -616,7 +622,7 @@
 
             #endregion
 
-            return gnawingHunger;
+            return new WeaponDefinition(weaponMetaData, weaponStatsCollection, weaponPerksCollection);
         }
     }
 }

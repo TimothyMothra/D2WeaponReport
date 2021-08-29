@@ -25,7 +25,7 @@
             this.providerOptions = providerOptions;
         }
 
-        public DataContract.WeaponDefinitionOld GetWeaponDefinition(uint id)
+        public WeaponDefinition GetWeaponDefinition(uint id)
         {
             var record = this.worldSqlContent.GetDestinyInventoryItemDefinition(id);
 
@@ -35,35 +35,40 @@
                 throw new Exception($"unexpected null result for {nameof(this.worldSqlContent.GetDestinyInventoryItemDefinition)} id {id}");
             }
 
-            var weaponDefinition = new DataContract.WeaponDefinitionOld
+            var weaponMetaData = new WeaponMetaData
             {
-                MetaData = new WeaponMetaData
-                {
-                    Id = jsonDynamic.hash,
-                    Name = jsonDynamic.displayProperties.name,
-                    ItemDefinitionIconPath = jsonDynamic.displayProperties.icon,
-                    ScreenshotPath = jsonDynamic.screenshot,
-                    AmmoTypeId = jsonDynamic.equippingBlock.ammoType.ToString(), //TODO: Need to identify Ammo Type (example: "Energy Weapons")
-                    TierTypeName = jsonDynamic.inventory.tierTypeName,
-                    DefaultDamageTypeId = jsonDynamic.defaultDamageType,
-                    DefaultDamageTypeHash = jsonDynamic.defaultDamageTypeHash,
-                    CollectibleHash = jsonDynamic.collectibleHash ?? default(uint),
-                    FlavorText = jsonDynamic.flavorText,
-                    ItemTypeId = jsonDynamic.itemSubType, //TODO: Need to identity Weapon Type (example: "enum DestinyItemSubType "AutoRifle"")
-                },
-                Stats = new List<WeaponStatDefinition>(),
-                PerkSets = new List<WeaponPerkSetDefinition>(),
+                Id = jsonDynamic.hash,
+                Name = jsonDynamic.displayProperties.name,
+                ItemDefinitionIconPath = jsonDynamic.displayProperties.icon,
+                ScreenshotPath = jsonDynamic.screenshot,
+                AmmoTypeId = jsonDynamic.equippingBlock.ammoType.ToString(), //TODO: Need to identify Ammo Type (example: "Energy Weapons")
+                TierTypeName = jsonDynamic.inventory.tierTypeName,
+                DefaultDamageTypeId = jsonDynamic.defaultDamageType,
+                DefaultDamageTypeHash = jsonDynamic.defaultDamageTypeHash,
+                CollectibleHash = jsonDynamic.collectibleHash ?? default(uint),
+                FlavorText = jsonDynamic.flavorText,
+                ItemTypeId = jsonDynamic.itemSubType, //TODO: Need to identity Weapon Type (example: "enum DestinyItemSubType "AutoRifle"")
             };
 
+            //var weaponDefinition = new WeaponDefinition
+            //{
+            //    MetaData 
+            //    Stats = new List<WeaponStatDefinition>(),
+            //    PerkSets = new List<WeaponPerkSetDefinition>(),
+            //};
+
             // check Collection for Seasonal Weapon Icon (Note: does not exist for all weapons).
-            if (weaponDefinition.MetaData.CollectibleHash != default)
+            if (weaponMetaData.CollectibleHash != default)
             {
-                var collectibleDefinition = this.GetDestinyCollectibleDefinitions(weaponDefinition.MetaData.CollectibleHash);
-                weaponDefinition.MetaData.CollectionDefintitionIconPath = collectibleDefinition.IconPath;
+                var collectibleDefinition = this.GetDestinyCollectibleDefinitions(weaponMetaData.CollectibleHash);
+                weaponMetaData.CollectionDefintitionIconPath = collectibleDefinition.IconPath;
             }
 
             // Stats
             #region Weapon Definition Stats
+
+            var weaponStatsCollection = new WeaponStatsCollection();
+
             var statCollectionDynamic = jsonDynamic.stats.stats;
             foreach (var statDynamic in statCollectionDynamic)
             {
@@ -86,15 +91,18 @@
                 // ASSUMPTION: MaxValue is never used.
                 if (stat.MaxValue != 0)
                 {
-                    throw new ($"weapon id {id} name {weaponDefinition.MetaData.Name} | stat id {stat.StatHash} name {stat.Name} value {stat.Value} max {stat.MaxValue} displayMax {stat.DisplayMaximum}");
+                    throw new ($"weapon id {id} name {weaponMetaData.Name} | stat id {stat.StatHash} name {stat.Name} value {stat.Value} max {stat.MaxValue} displayMax {stat.DisplayMaximum}");
                 }
 
-                weaponDefinition.Stats.Add(stat);
+                weaponStatsCollection.Values.Add(stat);
             }
             #endregion
 
             // PERKS
             #region WeaponDefinition Perks
+
+            var weaponPerksCollection = new WeaponPerksCollection();
+
             // Perks are stored in SocketEntries.
             // First, must read SocketCategory to identify which socket indexes hold WeaponPerks.
             // These are not cached because they are unique for each weapon definition.
@@ -131,11 +139,11 @@
                 };
                 perkSet.Values = this.GetWeaponDefinitionPerks(perkSet.PlugSetHash);
 
-                weaponDefinition.PerkSets.Add(perkSet);
+                weaponPerksCollection.Values.Add(perkSet);
             }
 #endregion
 
-            return weaponDefinition;
+            return new WeaponDefinition(weaponMetaData, weaponStatsCollection, weaponPerksCollection);
         }
 
         public WeaponStatDefinitionWhatIsThis GetWeaponStatDefinition(uint statHash)

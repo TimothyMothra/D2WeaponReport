@@ -8,6 +8,11 @@
 
     public class WeaponPerksCollection
     {
+        public WeaponPerksCollection()
+        {
+            this.Values = new List<WeaponPerkSetDefinition>();
+        }
+
         public IList<WeaponPerkSetDefinition> Values { get; set; }
     }
 }

@@ -8,8 +8,6 @@
 
     using DestinyLib.DataContract.Definitions;
 
-    using static DestinyLib.DataContract.WeaponDefinitionOld;
-
     public class PerkTable
     {
         public PerkTable(IList<WeaponStatDefinition> stats, WeaponPerkSetDefinition perkSet)
