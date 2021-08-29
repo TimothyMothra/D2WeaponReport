@@ -41,8 +41,10 @@
             int numberOfColumns = this.Stats.Count + 1;
 
             // make header row. record column index of each stat
-            var headerRow = new List<string>(numberOfColumns);
-            headerRow.Add(null); // top-left corner empty
+            var headerRow = new List<string>(numberOfColumns)
+            {
+                null, // top-left corner empty
+            };
             var statsToColumnIndex = new Dictionary<uint, int>();
             int columnIndex = 1;
             foreach (var stat in this.Stats)

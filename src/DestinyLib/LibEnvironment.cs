@@ -45,7 +45,7 @@
 
         public static string GetDatabaseFilePath(string fileNamePrefix)
         {
-            DirectoryInfo di = new DirectoryInfo(EnvironmentDirectory);
+            var di = new DirectoryInfo(EnvironmentDirectory);
             FileInfo[] files = di.GetFiles($"{fileNamePrefix}*.content");
 
             if (files.Length == 1)
@@ -66,7 +66,7 @@
         {
             var assemblyLocation = Assembly.GetExecutingAssembly().Location;
 
-            for (DirectoryInfo directory = new DirectoryInfo(assemblyLocation); directory != null; directory = directory.Parent)
+            for (var directory = new DirectoryInfo(assemblyLocation); directory != null; directory = directory.Parent)
             {
                 if (File.Exists(Path.Combine(directory.FullName, MarkerFileName)))
                 {
