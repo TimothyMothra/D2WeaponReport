@@ -22,7 +22,7 @@
 
         public string GetDisplayName()
         {
-            return $"SocketIndex: {this.PerkSet.SocketIndex} SocketTypeHash: {this.PerkSet.SocketTypeHash} PlugSetHash: {this.PerkSet.PlugSetHash}";
+            return $"SocketIndex: {this.PerkSet.SocketIndex} SocketTypeHash: {this.PerkSet.SocketTypeHash} PlugSetHash: {this.PerkSet.PlugSetHashId}";
         }
 
         public List<string> GetIconUris()

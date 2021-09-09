@@ -9,7 +9,7 @@ namespace DestinyLib.DataContract.Definitions
 
         public uint SocketTypeHash { get; set; }
 
-        public uint PlugSetHash { get; set; }
+        public uint PlugSetHashId { get; set; }
 
         public IList<WeaponPerkDefinition> Values { get; set; }
 
@@ -17,7 +17,7 @@ namespace DestinyLib.DataContract.Definitions
         {
             if (this.Values != null && this.Values.Count > 0)
             {
-                return $"index {this.SocketIndex} plugsethash {this.PlugSetHash} perks: " + string.Join(",", this.Values.Select(x => x.MetaData.Name));
+                return $"index {this.SocketIndex} plugsethash {this.PlugSetHashId} perks: " + string.Join(",", this.Values.Select(x => x.MetaData.Name));
             }
             else
             {

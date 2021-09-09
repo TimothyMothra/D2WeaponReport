@@ -123,10 +123,10 @@
                 {
                     SocketIndex = i,
                     SocketTypeHash = socketEntryDynamic.socketTypeHash, //TODO: RELATED TO ABOVE COMMENT. I DON'T KNOW WHAT ALL OF THESE ARE YET.
-                    PlugSetHash = socketEntryDynamic.randomizedPlugSetHash ?? socketEntryDynamic.reusablePlugSetHash,
+                    PlugSetHashId = socketEntryDynamic.randomizedPlugSetHash ?? socketEntryDynamic.reusablePlugSetHash,
                     Values = null,
                 };
-                perkSet.Values = this.GetWeaponDefinitionPerks(perkSet.PlugSetHash);
+                perkSet.Values = this.GetWeaponDefinitionPerks(perkSet.PlugSetHashId);
 
                 weaponPerksCollection.Values.Add(perkSet);
             }

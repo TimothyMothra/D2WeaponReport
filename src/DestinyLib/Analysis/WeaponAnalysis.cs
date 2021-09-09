@@ -3,7 +3,6 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using DestinyLib.DataContract;
     using DestinyLib.DataContract.Definitions;
 
     public static class WeaponAnalysis
@@ -53,6 +52,11 @@
             return baseTotalPoints;
         }
 
+        /// <summary>
+        /// Given a <see cref="WeaponDefinition"/> generate every possible PerkPermutation.
+        /// </summary>
+        /// <param name="weaponDefinition"></param>
+        /// <returns></returns>
         private static List<PerkPermutation> GetPerkPermutations(WeaponDefinition weaponDefinition)
         {
             // Use Breadth-First traversal to calculate all possible permutations.

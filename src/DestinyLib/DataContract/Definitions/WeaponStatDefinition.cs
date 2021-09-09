@@ -9,12 +9,6 @@
 
         public WeaponStatMetaData MetaData { get; set; }
 
-        //public uint StatHash { get; set; }
-
-        //public string Name { get; set; }
-
-        //public string Description { get; set; }
-
         public int Value { get; set; }
 
         public int MaxValue { get; set; }

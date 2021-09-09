@@ -224,7 +224,7 @@
             {
                 SocketIndex = 1,
                 SocketTypeHash = 3362409147,
-                PlugSetHash = 295878355,
+                PlugSetHashId = 295878355,
                 Values = new List<WeaponPerkDefinition>
                 {
                     new WeaponPerkDefinition
@@ -443,7 +443,7 @@
             {
                 SocketIndex = 2,
                 SocketTypeHash = 3815406785,
-                PlugSetHash = 3964805173,
+                PlugSetHashId = 3964805173,
                 Values = new List<WeaponPerkDefinition>
                 {
                     new WeaponPerkDefinition
@@ -610,7 +610,7 @@
             {
                 SocketIndex = 3,
                 SocketTypeHash = 2614797986,
-                PlugSetHash = 2297212861,
+                PlugSetHashId = 2297212861,
                 Values = new List<WeaponPerkDefinition>
                 {
                     new WeaponPerkDefinition
@@ -678,7 +678,7 @@
             {
                 SocketIndex = 4,
                 SocketTypeHash = 2614797986,
-                PlugSetHash = 1853656119,
+                PlugSetHashId = 1853656119,
                 Values = new List<WeaponPerkDefinition>
                 {
                     new WeaponPerkDefinition

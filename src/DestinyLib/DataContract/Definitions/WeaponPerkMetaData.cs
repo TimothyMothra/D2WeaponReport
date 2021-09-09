@@ -15,5 +15,10 @@
         public string Description { get; set; }
 
         public string IconPath { get; set; } // TODO: Will need Perk Icon to display in Table
+
+        public override string ToString()
+        {
+            return $"{this.HashId} {this.Name}";
+        }
     }
 }
