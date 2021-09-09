@@ -8,7 +8,7 @@
 
     public static class PerkPermutationGenerator
     {
-        public static List<PerkPermutation2> GetPerkPermutations(WeaponPerkSetCollection weaponPerkSetCollection)
+        public static List<PerkPermutation> GetPerkPermutations(WeaponPerkSetCollection weaponPerkSetCollection)
         {
             return GetPerkPermutations(weaponPerkSetCollection, Options.Default);
         }
@@ -18,19 +18,19 @@
         /// </summary>
         /// <param name="weaponPerkSetCollection"></param>
         /// <returns></returns>
-        public static List<PerkPermutation2> GetPerkPermutations(WeaponPerkSetCollection weaponPerkSetCollection, Options options)
+        public static List<PerkPermutation> GetPerkPermutations(WeaponPerkSetCollection weaponPerkSetCollection, Options options)
         {
             // Use Breadth-First traversal to calculate all possible permutations.
             var perkSetList = weaponPerkSetCollection.Values;
 
             // BREADTH-FIRST
-            List<PerkPermutation2> permutations = new List<PerkPermutation2>();
+            List<PerkPermutation> permutations = new List<PerkPermutation>();
 
             // outer: PerkSets
             foreach (WeaponPerkSetDefinition perkSet in perkSetList)
             {
                 var tempPermutations = permutations;
-                permutations = new List<PerkPermutation2>();
+                permutations = new List<PerkPermutation>();
 
                 //inner: Perk:
                 foreach (WeaponPerkDefinition perk in perkSet.Values)
@@ -54,7 +54,7 @@
                     }
                     else
                     {
-                        permutations.Add(new PerkPermutation2 { WeaponPerkList = new List<WeaponPerkDefinition>() { perk } });
+                        permutations.Add(new PerkPermutation { WeaponPerkList = new List<WeaponPerkDefinition>() { perk } });
                     }
                 }
 

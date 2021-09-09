@@ -63,7 +63,7 @@
         [TestMethod]
         public void ValidateMethod_SinglePerk_IsCorrect()
         {
-            var perkPermutation = new PerkPermutation
+            var perkPermutation = new PerkPermutationWithMaxPoints
             {
                 PerkNames = "test perk",
                 PerkHashAndValues = new Dictionary<uint, double> { { 111, 4 }, },
@@ -77,7 +77,7 @@
         [TestMethod]
         public void ValidateMethod_TwoPerks_IsCorrect()
         {
-            var perkPermutation = new PerkPermutation
+            var perkPermutation = new PerkPermutationWithMaxPoints
             {
                 PerkNames = "test perk",
                 PerkHashAndValues = new Dictionary<uint, double> { { 111, 4 }, { 222, 10 }, },
@@ -90,7 +90,7 @@
         [TestMethod]
         public void ValidateMethod_SinglePerk_CannotExceedStatMaxValue()
         {
-            var perkPermutation = new PerkPermutation
+            var perkPermutation = new PerkPermutationWithMaxPoints
             {
                 PerkNames = "test perk",
                 PerkHashAndValues = new Dictionary<uint, double> { { 111, 10 }, },
@@ -103,7 +103,7 @@
         [TestMethod]
         public void ValidateMethod_SinglePerk_CannotExceedStatMinValue()
         {
-            var perkPermutation = new PerkPermutation
+            var perkPermutation = new PerkPermutationWithMaxPoints
             {
                 PerkNames = "test perk",
                 PerkHashAndValues = new Dictionary<uint, double> { { 111, -10 }, },

@@ -16,7 +16,7 @@ namespace DestinyLib.Analysis
             this.HasEmptyPerks = true;
         }
 
-        public WeaponAnalysisSummary(double baseValue, List<PerkPermutation> permutations, List<PerkTable> perkTables)
+        public WeaponAnalysisSummary(double baseValue, List<PerkPermutationWithMaxPoints> permutations, List<PerkTable> perkTables)
         {
             this.Permutations = permutations ?? throw new ArgumentNullException(nameof(permutations));
 
@@ -32,7 +32,7 @@ namespace DestinyLib.Analysis
 
         public bool HasEmptyPerks { get; set; }
 
-        public IList<PerkPermutation> Permutations { get; set; }
+        public IList<PerkPermutationWithMaxPoints> Permutations { get; set; }
 
         public string PermutationsAsString() => string.Join(",", this.Permutations.Select(x => x.MaxPoints).AsEnumerable());
 

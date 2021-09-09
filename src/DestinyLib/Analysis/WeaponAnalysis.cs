@@ -17,7 +17,7 @@
 
             var baseTotalPoints = GetBaseTotalPoints(weaponDefinition);
 
-            List<PerkPermutation> permutations = GetPerkPermutations(weaponDefinition);
+            List<PerkPermutationWithMaxPoints> permutations = GetPerkPermutations(weaponDefinition);
 
             if (permutations == null)
             {
@@ -57,19 +57,19 @@
         /// </summary>
         /// <param name="weaponDefinition"></param>
         /// <returns></returns>
-        private static List<PerkPermutation> GetPerkPermutations(WeaponDefinition weaponDefinition)
+        private static List<PerkPermutationWithMaxPoints> GetPerkPermutations(WeaponDefinition weaponDefinition)
         {
             // Use Breadth-First traversal to calculate all possible permutations.
             var perkSets = weaponDefinition.WeaponPossiblePerks.Values;
 
             // BREADTH-FIRST
-            List<PerkPermutation> permutations = null;
+            List<PerkPermutationWithMaxPoints> permutations = null;
 
             // outer: PerkSets
             foreach (var perkSet in perkSets)
             {
-                var tempPermutations = permutations ?? new List<PerkPermutation>();
-                permutations = new List<PerkPermutation>();
+                var tempPermutations = permutations ?? new List<PerkPermutationWithMaxPoints>();
+                permutations = new List<PerkPermutationWithMaxPoints>();
 
                 //inner: Perk:
                 foreach (var perk in perkSet.Values)
@@ -95,7 +95,7 @@
                     {
                         foreach (var temp in tempPermutations)
                         {
-                            var newPermutation = new PerkPermutation
+                            var newPermutation = new PerkPermutationWithMaxPoints
                             {
                                 PerkNames = temp.PerkNames + $", {perk.MetaData.Name}",
                                 PerkHashAndValues = new Dictionary<uint, double>(temp.PerkHashAndValues.AsEnumerable()), // TODO: THIS IS VERY WASTEFUL
@@ -112,7 +112,7 @@
                     }
                     else
                     {
-                        permutations.Add(new PerkPermutation { PerkNames = perk.MetaData.Name, PerkHashAndValues = new Dictionary<uint, double>(perkValuesAsDictionary) });
+                        permutations.Add(new PerkPermutationWithMaxPoints { PerkNames = perk.MetaData.Name, PerkHashAndValues = new Dictionary<uint, double>(perkValuesAsDictionary) });
                     }
                 }
 

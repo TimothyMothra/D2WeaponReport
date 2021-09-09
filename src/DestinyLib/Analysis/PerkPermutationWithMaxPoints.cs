@@ -7,7 +7,7 @@ using DestinyLib.DataContract.Definitions;
 
 namespace DestinyLib.Analysis
 {
-    public class PerkPermutation
+    public class PerkPermutationWithMaxPoints
     {
         //public List<WeaponDefinition.PerkValue> PerkValues { get; set; }
 

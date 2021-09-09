@@ -4,13 +4,13 @@
 
     using DestinyLib.DataContract.Definitions;
 
-    public class PerkPermutation2
+    public class PerkPermutation
     {
         public IList<WeaponPerkDefinition> WeaponPerkList { get; set; }
 
-        public PerkPermutation2 DeepClone()
+        public PerkPermutation DeepClone()
         {
-            var clone = new PerkPermutation2
+            var clone = new PerkPermutation
             {
                 WeaponPerkList = new List<WeaponPerkDefinition>(),
             };
