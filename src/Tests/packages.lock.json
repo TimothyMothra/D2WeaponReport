@@ -29,9 +29,9 @@
       },
       "MSTest.TestAdapter": {
         "type": "Direct",
-        "requested": "[2.2.6, )",
-        "resolved": "2.2.6",
-        "contentHash": "2z5XVBednseou2LXUgtnbkE9PNz0eFZaYyaJfI6VAHaeAx79gk3BE/Sjv6x3AnrzySzhHrVsS9Jr3z7sI7w0XA==",
+        "requested": "[2.2.7, )",
+        "resolved": "2.2.7",
+        "contentHash": "E8seWhOKGEz4Aq6IaX6dUZGRSVYwLVy+6ZI9nq0TyHRuv54Id4Y7y/CB0KGiOUrqtygfooQm5wmpnDOW28N9Ug==",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "System.Diagnostics.TextWriterTraceListener": "4.3.0"
@@ -39,9 +39,9 @@
       },
       "MSTest.TestFramework": {
         "type": "Direct",
-        "requested": "[2.2.6, )",
-        "resolved": "2.2.6",
-        "contentHash": "sKE9tr1lATjPZAQOFTWvhXCrLvaj0A48rr0ROhtk11BTGgZTkDNytULbOud+3NjZDSOKq7PNot2UZOP1MKd1iA==",
+        "requested": "[2.2.7, )",
+        "resolved": "2.2.7",
+        "contentHash": "qroVMzabIcbqwxtlDZriZflqs3nKpmqSVoM/Nfw9fg+F6885rrgo9R4gwmK7xxPPd8gpDrmNqqwpnyh6GMoN9g==",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "System.Diagnostics.TextWriterTraceListener": "4.3.0"
