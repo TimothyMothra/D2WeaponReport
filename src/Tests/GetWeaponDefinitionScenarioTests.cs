@@ -2,7 +2,6 @@
 {
     using System.Linq;
 
-    using DestinyLib.DataContract;
     using DestinyLib.DataContract.Definitions;
     using DestinyLib.Scenarios;
 

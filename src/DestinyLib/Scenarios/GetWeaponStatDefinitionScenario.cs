@@ -3,7 +3,6 @@
     using System.IO;
 
     using DestinyLib.Database;
-    using DestinyLib.DataContract;
     using DestinyLib.DataContract.Definitions;
 
     public static class GetWeaponStatDefinitionScenario

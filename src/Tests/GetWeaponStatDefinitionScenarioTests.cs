@@ -1,6 +1,5 @@
 ﻿namespace Tests
 {
-    using DestinyLib.DataContract;
     using DestinyLib.DataContract.Definitions;
     using DestinyLib.Scenarios;
 
