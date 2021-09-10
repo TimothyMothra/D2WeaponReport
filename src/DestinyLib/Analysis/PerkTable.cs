@@ -75,9 +75,9 @@
 
                 tempRow[0] = perk.MetaData.Name;
 
-                if (perk.WeaponPerkList != null)
+                if (perk.WeaponPerkValueList != null)
                 {
-                    foreach (var perkValue in perk.WeaponPerkList)
+                    foreach (var perkValue in perk.WeaponPerkValueList)
                     {
                         int index = statsToColumnIndex[perkValue.StatHash];
                         tempRow[index] = perkValue.Value.ToString();

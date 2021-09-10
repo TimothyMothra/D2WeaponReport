@@ -51,7 +51,7 @@
                     new WeaponPerkDefinition
                     {
                         MetaData = new WeaponPerkMetaData { HashId = 111, Name = "Ones", },
-                        WeaponPerkList = new List<WeaponPerkValueDefinition>
+                        WeaponPerkValueList = new List<WeaponPerkValueDefinition>
                         {
                             new WeaponPerkValueDefinition { StatHash = 111, Value = 10, },
                             new WeaponPerkValueDefinition { StatHash = 222, Value = 10, },
@@ -59,7 +59,7 @@
                     }, new WeaponPerkDefinition
                     {
                        MetaData = new WeaponPerkMetaData { HashId = 222, Name = "Twos", },
-                       WeaponPerkList = null,
+                       WeaponPerkValueList = null,
                     },
                 },
             });
@@ -71,7 +71,7 @@
                     new WeaponPerkDefinition
                     {
                         MetaData = new WeaponPerkMetaData { HashId = 333, Name = "Threes", },
-                        WeaponPerkList = new List<WeaponPerkValueDefinition>
+                        WeaponPerkValueList = new List<WeaponPerkValueDefinition>
                         {
                             new WeaponPerkValueDefinition { StatHash = 111, Value = 5, },
                             new WeaponPerkValueDefinition { StatHash = 222, Value = -5, },

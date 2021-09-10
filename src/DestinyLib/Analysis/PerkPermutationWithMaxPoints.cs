@@ -9,13 +9,39 @@ namespace DestinyLib.Analysis
 {
     public class PerkPermutationWithMaxPoints
     {
-        //public List<WeaponDefinition.PerkValue> PerkValues { get; set; }
+        public PerkPermutationWithMaxPoints() { }
+
+        public PerkPermutationWithMaxPoints(PerkPermutation perkPermutation)
+        {
+            foreach (var perk in perkPermutation.WeaponPerkList)
+            {
+                if (this.PerkNames == null)
+                {
+                    this.PerkNames = perk.MetaData.Name;
+                }
+                else
+                {
+                    this.PerkNames += $", {perk.MetaData.Name}";
+                }
+
+                foreach (var perkValue in perk.WeaponPerkValueList)
+                {
+                    if (this.PerkHashAndValues.ContainsKey(perkValue.StatHash))
+                    {
+                        this.PerkHashAndValues[perkValue.StatHash] += perkValue.Value;
+                    }
+                    else
+                    {
+                        this.PerkHashAndValues.Add(perkValue.StatHash, perkValue.Value);
+                    }
+                }
+            }
+        }
 
         public double MaxPoints { get; private set; }
 
         public string PerkNames { get; set; }
 
-        // TODO: THIS IS VERY WASTEFUL.
         public Dictionary<uint, double> PerkHashAndValues { get; set; } = new Dictionary<uint, double>();
 
         public string ToDisplayString() => $"{this.MaxPoints}: {this.PerkNames}";

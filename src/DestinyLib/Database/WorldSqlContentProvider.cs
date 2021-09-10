@@ -251,7 +251,7 @@
                     Description = perkDynamic.displayProperties.description,
                     IconPath = perkDynamic.displayProperties.icon,
                 },
-                WeaponPerkList = weaponPerkList.Any() ? weaponPerkList : null, // some perks may not have values that affect stats (example: Rampage). but others will (example: Field Prep).
+                WeaponPerkValueList = weaponPerkList.Any() ? weaponPerkList : null, // some perks may not have values that affect stats (example: Rampage). but others will (example: Field Prep).
             };
 
             if (this.providerOptions.EnableCaching)

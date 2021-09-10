@@ -236,7 +236,7 @@
                             Description = "Lightly vented barrel.\n  •  Greatly controls recoil\n  •  Increases handling speed",
                             IconPath = "/common/destiny2_content/icons/7a0a23f9622636cea92387d50d368333.png",
                         },
-                        WeaponPerkList = new List<WeaponPerkValueDefinition>
+                        WeaponPerkValueList = new List<WeaponPerkValueDefinition>
                         {
                             new WeaponPerkValueDefinition
                             {
@@ -259,7 +259,7 @@
                             Description = "Stable barrel attachment.\n  •  Increases stability\n  •  Moderately controls recoil\n  •  Slightly decreases handling speed",
                             IconPath = "/common/destiny2_content/icons/376aa9bd8c392567f501012fc3b3d4d0.png",
                         },
-                        WeaponPerkList = new List<WeaponPerkValueDefinition>
+                        WeaponPerkValueList = new List<WeaponPerkValueDefinition>
                         {
                             new WeaponPerkValueDefinition
                             {
@@ -287,7 +287,7 @@
                             Description = "Balanced barrel. \n  •  Slightly increases range and stability\n  •  Slightly increases handling speed",
                             IconPath = "/common/destiny2_content/icons/18cc75bf9a17bb80b5109f1b8909521f.png",
                         },
-                        WeaponPerkList = new List<WeaponPerkValueDefinition>
+                        WeaponPerkValueList = new List<WeaponPerkValueDefinition>
                         {
                             new WeaponPerkValueDefinition
                              {
@@ -313,7 +313,7 @@
                             Description = "Weighty barrel extension.\n  •  Increases range\n  •  Decreases handling speed\n  •  Moderately controls recoil",
                             IconPath = "/common/destiny2_content/icons/7c81469db03f7111f8d248b54c83d7cf.png",
                         },
-                        WeaponPerkList = new List<WeaponPerkValueDefinition>
+                        WeaponPerkValueList = new List<WeaponPerkValueDefinition>
                         {
                             new WeaponPerkValueDefinition
                              {
@@ -339,7 +339,7 @@
                             Description = "Ultra-light barrel. \n  •  Greatly increases handling speed\n  •  Slightly increases stability",
                             IconPath = "/common/destiny2_content/icons/c2a4355c8db7eac12d6dec52d09a20fe.png",
                         },
-                        WeaponPerkList = new List<WeaponPerkValueDefinition>
+                        WeaponPerkValueList = new List<WeaponPerkValueDefinition>
                         {
                             new WeaponPerkValueDefinition
              {
@@ -361,7 +361,7 @@
                             Description = "Barrel optimized for distance.\n  •  Greatly increases range\n  •  Decreases stability\n  •  Slightly decreases handling speed",
                             IconPath = "/common/destiny2_content/icons/9307c5604f995d90ad5ed65281b64772.png",
                         },
-                        WeaponPerkList = new List<WeaponPerkValueDefinition>
+                        WeaponPerkValueList = new List<WeaponPerkValueDefinition>
                         {
                             new WeaponPerkValueDefinition
              {
@@ -387,7 +387,7 @@
                             Description = "Durable ranged barrel.\n  •  Increases range",
                             IconPath = "/common/destiny2_content/icons/9acb073d4e85160f66f0d617d210cf61.png",
                         },
-                        WeaponPerkList = new List<WeaponPerkValueDefinition>
+                        WeaponPerkValueList = new List<WeaponPerkValueDefinition>
                         {
                             new WeaponPerkValueDefinition
              {
@@ -405,7 +405,7 @@
                             Description = "Barrel optimized for recoil reduction.\n  •  Increases stability",
                             IconPath = "/common/destiny2_content/icons/7cadd68b66ffd3bbedc09aa9c7ba6e03.png",
                         },
-                        WeaponPerkList = new List<WeaponPerkValueDefinition>
+                        WeaponPerkValueList = new List<WeaponPerkValueDefinition>
                         {
                             new WeaponPerkValueDefinition
              {
@@ -423,7 +423,7 @@
                             Description = "Dual strength barrel.\n  •  Increases range\n  •  Increases stability",
                             IconPath = "/common/destiny2_content/icons/bc3d5d36c6b4627bdb8d37cd52711cf4.png",
                         },
-                        WeaponPerkList = new List<WeaponPerkValueDefinition>
+                        WeaponPerkValueList = new List<WeaponPerkValueDefinition>
                         {
                             new WeaponPerkValueDefinition
              {
@@ -455,7 +455,7 @@
                             Description = "This weapon can fire longer distances.\n  •  Increases range",
                             IconPath = "/common/destiny2_content/icons/05e357cd152eb0f665ee986aaa3edc56.png",
                         },
-                        WeaponPerkList = new List<WeaponPerkValueDefinition>
+                        WeaponPerkValueList = new List<WeaponPerkValueDefinition>
                         {
                             new WeaponPerkValueDefinition
                             {
@@ -473,7 +473,7 @@
                             Description = "Increases reload speed but reduces magazine size.",
                             IconPath = "/common/destiny2_content/icons/d316be9e70844427e69034b0f06bec75.png",
                         },
-                        WeaponPerkList = new List<WeaponPerkValueDefinition>
+                        WeaponPerkValueList = new List<WeaponPerkValueDefinition>
                         {
                             new WeaponPerkValueDefinition
                             {
@@ -491,7 +491,7 @@
                             Description = "This weapon's magazine is built for higher capacity.\n  •  Increases magazine size",
                             IconPath = "/common/destiny2_content/icons/9d8a7be4c2fef471a6fde38d02ab8dae.png",
                         },
-                        WeaponPerkList = new List<WeaponPerkValueDefinition>
+                        WeaponPerkValueList = new List<WeaponPerkValueDefinition>
                         {
                             new WeaponPerkValueDefinition
                             {
@@ -509,7 +509,7 @@
                             Description = "This weapon has multiple tactical improvements.\n  •  Slightly increases stability\n  •  Increases reload speed\n  •  Slightly increases magazine size",
                             IconPath = "/common/destiny2_content/icons/9711e6d3de7a9cf2f844752992390a63.png",
                         },
-                        WeaponPerkList = new List<WeaponPerkValueDefinition>
+                        WeaponPerkValueList = new List<WeaponPerkValueDefinition>
                         {
                             new WeaponPerkValueDefinition
                             {
@@ -535,7 +535,7 @@
                             Description = "This weapon has a greatly increased magazine size, but reloads much slower.\n  •  Greatly increases magazine size\n  •  Greatly decreases reload speed",
                             IconPath = "/common/destiny2_content/icons/4cd73ae5b1bc1ae0afc7adb34c2f2df6.png",
                         },
-                        WeaponPerkList = new List<WeaponPerkValueDefinition>
+                        WeaponPerkValueList = new List<WeaponPerkValueDefinition>
                         {
                             new WeaponPerkValueDefinition
                             {
@@ -557,7 +557,7 @@
                             Description = "This magazine is optimized for recoil control.\n  •  Greatly increases stability \n  •  Slightly decreases range",
                             IconPath = "/common/destiny2_content/icons/adaf4315dab749519c41a233e9954598.png",
                         },
-                        WeaponPerkList = new List<WeaponPerkValueDefinition>
+                        WeaponPerkValueList = new List<WeaponPerkValueDefinition>
                         {
                             new WeaponPerkValueDefinition
                             {
@@ -579,7 +579,7 @@
                             Description = "Faster reloads when the magazine is empty.",
                             IconPath = "/common/destiny2_content/icons/932e7b84c233c6cc49a58058f8c5144d.png",
                         },
-                        WeaponPerkList = null,
+                        WeaponPerkValueList = null,
                     },
                     new WeaponPerkDefinition
                     {
@@ -590,7 +590,7 @@
                             Description = "Optimized for fast reloading.\n  •  Slightly increases stability\n  •  Greatly increases reload speed",
                             IconPath = "/common/destiny2_content/icons/ec1bca64fc9709678ea5c297c0e64c19.png",
                         },
-                        WeaponPerkList = new List<WeaponPerkValueDefinition>
+                        WeaponPerkValueList = new List<WeaponPerkValueDefinition>
                         {
                             new WeaponPerkValueDefinition
                             {
@@ -622,7 +622,7 @@
                             Description = "Grants a short period of increased stability and accuracy on initial trigger pull.",
                             IconPath = "/common/destiny2_content/icons/8e910e56aa6e36b2c406804e1d78d04f.png",
                         },
-                        WeaponPerkList = null,
+                        WeaponPerkValueList = null,
                     }, new WeaponPerkDefinition
                     {
                         MetaData = new WeaponPerkMetaData
@@ -632,7 +632,7 @@
                             Description = "Defeating targets partially reloads the magazine from reserves.",
                             IconPath = "/common/destiny2_content/icons/03d774525048e5eb5b6899b37d418920.png",
                         },
-                        WeaponPerkList = null,
+                        WeaponPerkValueList = null,
                     }, new WeaponPerkDefinition
                     {
                         MetaData = new WeaponPerkMetaData
@@ -642,7 +642,7 @@
                             Description = "Causing damage with this weapon increases its stability.",
                             IconPath = "/common/destiny2_content/icons/49958f356ea1df930888d15fe6539fe1.png",
                         },
-                        WeaponPerkList = null,
+                        WeaponPerkValueList = null,
                     }, new WeaponPerkDefinition
                     {
                         MetaData = new WeaponPerkMetaData
@@ -652,7 +652,7 @@
                             Description = "Increased ammo reserves. Faster reload, stow, and ready when you're crouching.",
                             IconPath = "/common/destiny2_content/icons/fd815414532978ad2e5decbfc416b9e4.png",
                         },
-                        WeaponPerkList = new List<WeaponPerkValueDefinition>
+                        WeaponPerkValueList = new List<WeaponPerkValueDefinition>
                         {
                             new WeaponPerkValueDefinition
                             {
@@ -669,7 +669,7 @@
                             Description = "The holstered weapon is automatically reloaded after a short period of time.",
                             IconPath = "/common/destiny2_content/icons/d355b1117307c9f187729249361cecc3.png",
                         },
-                        WeaponPerkList = null,
+                        WeaponPerkValueList = null,
                     },
                 },
             });
@@ -690,7 +690,7 @@
                           Description = "Kills with this weapon temporarily grant increased damage. Stacks 3x.",
                           IconPath = "/common/destiny2_content/icons/e9aa2f479812bfabc8d48effde384737.png",
                        },
-                      WeaponPerkList = null,
+                      WeaponPerkValueList = null,
                    }, new WeaponPerkDefinition
                    {
                        MetaData = new WeaponPerkMetaData
@@ -700,7 +700,7 @@
                           Description = "Reloading after a kill grants increased damage.",
                           IconPath = "/common/destiny2_content/icons/03e17b5e24aa08bebda6bcbd405b8ada.png",
                        },
-                       WeaponPerkList = null,
+                       WeaponPerkValueList = null,
                    }, new WeaponPerkDefinition
                    {
                       MetaData = new WeaponPerkMetaData
@@ -710,7 +710,7 @@
                             Description = "Reloading grants increased damage based on the number of rapid kills made beforehand.",
                             IconPath = "/common/destiny2_content/icons/a610c14dcf450e8c5b0c0903d5b05965.png",
                         },
-                      WeaponPerkList = null,
+                      WeaponPerkValueList = null,
                    }, new WeaponPerkDefinition
                    {
                       MetaData = new WeaponPerkMetaData
@@ -720,7 +720,7 @@
                             Description = "Kills with this weapon generate grenade energy. Activating your grenade ability reloads this weapon from reserves.",
                             IconPath = "/common/destiny2_content/icons/53ead908917c9156457c7c9dd453d649.png",
                         },
-                      WeaponPerkList = null,
+                      WeaponPerkValueList = null,
                    }, new WeaponPerkDefinition
                     {
                         MetaData = new WeaponPerkMetaData
@@ -730,7 +730,7 @@
                             Description = "This weapon gains increased damage from melee kills and kills with this weapon.",
                             IconPath = "/common/destiny2_content/icons/ef89b89410de618e9cfa353ff35125d8.png",
                         },
-                        WeaponPerkList = null,
+                        WeaponPerkValueList = null,
                     },
                 },
             });

@@ -3,7 +3,9 @@
     using System.Collections.Generic;
     using System.Linq;
 
+    using DestinyLib.DataContract;
     using DestinyLib.DataContract.Definitions;
+    using DestinyLib.Operations;
 
     public static class WeaponAnalysis
     {
@@ -17,9 +19,10 @@
 
             var baseTotalPoints = GetBaseTotalPoints(weaponDefinition);
 
-            List<PerkPermutationWithMaxPoints> permutations = GetPerkPermutations(weaponDefinition);
+            List<PerkPermutation> permutations = PerkPermutationGenerator.GetPerkPermutations(weaponDefinition.WeaponPossiblePerks);
+            List<PerkPermutationWithMaxPoints> permutationsWithMaxPoints = GetPerkPermutations(permutations);
 
-            if (permutations == null)
+            if (permutationsWithMaxPoints == null)
             {
                 // Two weapons do not have perks.
                 // id:1619016919 name:Khvostov 7G-02
@@ -30,12 +33,12 @@
             if (BehaviorValidatePermutations) // && weaponDefinition.Stats.Any()) // TODO: WHAT WAS I DOING HERE?
             {
                 // Note that some expired weapons do not have perks
-                permutations.ForEach(x => x.Validate(weaponDefinition.WeaponBaseStats.Values));
+                permutationsWithMaxPoints.ForEach(x => x.Validate(weaponDefinition.WeaponBaseStats.Values));
             }
 
             List<PerkTable> perkTables = GetPerkTables(weaponDefinition);
 
-            var summary = new WeaponAnalysisSummary(baseTotalPoints, permutations, perkTables);
+            var summary = new WeaponAnalysisSummary(baseTotalPoints, permutationsWithMaxPoints, perkTables);
             return summary;
         }
 
@@ -53,76 +56,12 @@
         }
 
         /// <summary>
-        /// Given a <see cref="WeaponDefinition"/> generate every possible PerkPermutation.
+        /// Given a list of <see cref="PerkPermutation"/> calculate the max points.
         /// </summary>
-        /// <param name="weaponDefinition"></param>
         /// <returns></returns>
-        private static List<PerkPermutationWithMaxPoints> GetPerkPermutations(WeaponDefinition weaponDefinition)
+        private static List<PerkPermutationWithMaxPoints> GetPerkPermutations(IList<PerkPermutation> perkPermutations)
         {
-            // Use Breadth-First traversal to calculate all possible permutations.
-            var perkSets = weaponDefinition.WeaponPossiblePerks.Values;
-
-            // BREADTH-FIRST
-            List<PerkPermutationWithMaxPoints> permutations = null;
-
-            // outer: PerkSets
-            foreach (var perkSet in perkSets)
-            {
-                var tempPermutations = permutations ?? new List<PerkPermutationWithMaxPoints>();
-                permutations = new List<PerkPermutationWithMaxPoints>();
-
-                //inner: Perk:
-                foreach (var perk in perkSet.Values)
-                {
-                    //inner: Perk.Values (Note: not all perks have values)
-                    if (!BehaviorIncludePerksWithNoValue && perk.WeaponPerkList == null)
-                    {
-                        continue;
-                    }
-
-                    // convert current perk to dictionary of key/values
-                    var perkValuesAsDictionary = new Dictionary<uint, double>();
-                    if (perk.WeaponPerkList != null)
-                    {
-                        foreach (var values in perk.WeaponPerkList)
-                        {
-                            perkValuesAsDictionary.CustomAdd(values.StatHash, values.Value);
-                        }
-                    }
-
-                    // combine with temp
-                    if (tempPermutations.Any())
-                    {
-                        foreach (var temp in tempPermutations)
-                        {
-                            var newPermutation = new PerkPermutationWithMaxPoints
-                            {
-                                PerkNames = temp.PerkNames + $", {perk.MetaData.Name}",
-                                PerkHashAndValues = new Dictionary<uint, double>(temp.PerkHashAndValues.AsEnumerable()), // TODO: THIS IS VERY WASTEFUL
-                                //Value = temp.Value + value
-                            };
-
-                            foreach (var kvp in perkValuesAsDictionary)
-                            {
-                                newPermutation.PerkHashAndValues.CustomAdd(kvp.Key, kvp.Value);
-                            }
-
-                            permutations.Add(newPermutation);
-                        }
-                    }
-                    else
-                    {
-                        permutations.Add(new PerkPermutationWithMaxPoints { PerkNames = perk.MetaData.Name, PerkHashAndValues = new Dictionary<uint, double>(perkValuesAsDictionary) });
-                    }
-                }
-
-                if (!permutations.Any())
-                {
-                    permutations = tempPermutations;
-                }
-            }
-
-            return permutations;
+            return perkPermutations.Select(x => new PerkPermutationWithMaxPoints(x)).ToList();
         }
 
         private static List<PerkTable> GetPerkTables(WeaponDefinition weaponDefinition)
@@ -137,18 +76,6 @@
             }
 
             return perkTables;
-        }
-
-        private static void CustomAdd(this Dictionary<uint, double> dictionary, uint key, double value)
-        {
-            if (dictionary.ContainsKey(key))
-            {
-                dictionary[key] += value;
-            }
-            else
-            {
-                dictionary.Add(key, value);
-            }
         }
     }
 }

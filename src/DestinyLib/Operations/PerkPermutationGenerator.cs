@@ -36,7 +36,7 @@
                 foreach (WeaponPerkDefinition perk in perkSet.Values)
                 {
                     //inner: Perk.Values (Note: not all perks have stat values)
-                    if (!options.BehaviorIncludePerksWithNoValue && perk.WeaponPerkList == null)
+                    if (!options.BehaviorIncludePerksWithNoValue && perk.WeaponPerkValueList == null)
                     {
                         continue;
                     }
