@@ -20,7 +20,7 @@
             var baseTotalPoints = GetBaseTotalPoints(weaponDefinition);
 
             List<PerkPermutation> permutations = PerkPermutationGenerator.GetPerkPermutations(weaponDefinition.WeaponPossiblePerks);
-            List<PerkPermutationWithMaxPoints> permutationsWithMaxPoints = GetPerkPermutations(permutations);
+            List<MaxPointPermutations> permutationsWithMaxPoints = GetMaxPointPermutations(permutations);
 
             if (permutationsWithMaxPoints == null)
             {
@@ -44,24 +44,16 @@
 
         private static int GetBaseTotalPoints(WeaponDefinition weaponDefinition)
         {
-            var stats = weaponDefinition.WeaponBaseStats.Values;
-
-            var baseTotalPoints = 0;
-            foreach (var stat in stats)
-            {
-                baseTotalPoints += stat.Value;
-            }
-
-            return baseTotalPoints;
+            return weaponDefinition.WeaponBaseStats.Values.Sum(x => x.Value);
         }
 
         /// <summary>
         /// Given a list of <see cref="PerkPermutation"/> calculate the max points.
         /// </summary>
         /// <returns></returns>
-        private static List<PerkPermutationWithMaxPoints> GetPerkPermutations(IList<PerkPermutation> perkPermutations)
+        private static List<MaxPointPermutations> GetMaxPointPermutations(IList<PerkPermutation> perkPermutations)
         {
-            return perkPermutations.Select(x => new PerkPermutationWithMaxPoints(x)).ToList();
+            return perkPermutations.Select(x => new MaxPointPermutations(x)).ToList();
         }
 
         private static List<PerkTable> GetPerkTables(WeaponDefinition weaponDefinition)
@@ -69,13 +61,7 @@
             var stats = weaponDefinition.WeaponBaseStats.Values;
             var perkSets = weaponDefinition.WeaponPossiblePerks.Values;
 
-            var perkTables = new List<PerkTable>(perkSets.Count);
-            foreach (var perkSet in perkSets)
-            {
-                perkTables.Add(new PerkTable(stats, perkSet));
-            }
-
-            return perkTables;
+            return perkSets.Select(x => new PerkTable(stats, x)).ToList();
         }
     }
 }

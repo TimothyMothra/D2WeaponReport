@@ -7,11 +7,11 @@ using DestinyLib.DataContract.Definitions;
 
 namespace DestinyLib.Analysis
 {
-    public class PerkPermutationWithMaxPoints
+    public class MaxPointPermutations
     {
-        public PerkPermutationWithMaxPoints() { }
+        public MaxPointPermutations() { }
 
-        public PerkPermutationWithMaxPoints(PerkPermutation perkPermutation)
+        public MaxPointPermutations(PerkPermutation perkPermutation)
         {
             foreach (var perk in perkPermutation.WeaponPerkList)
             {
