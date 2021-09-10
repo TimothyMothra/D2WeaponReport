@@ -7,7 +7,7 @@ namespace Tests
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    public class EnvironmentTests
+    public class LibEnvironmentTests
     {
         /// <summary>
         /// This test checks that the local environment has been initialized.

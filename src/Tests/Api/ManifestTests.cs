@@ -1,4 +1,4 @@
-﻿namespace Tests
+﻿namespace Tests.Api
 {
     using System.Threading.Tasks;
 

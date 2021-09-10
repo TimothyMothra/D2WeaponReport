@@ -1,4 +1,4 @@
-﻿namespace Tests
+﻿namespace Tests.Scenarios
 {
     using System.Linq;
 

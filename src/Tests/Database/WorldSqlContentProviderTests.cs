@@ -1,4 +1,4 @@
-﻿namespace Tests
+﻿namespace Tests.Database
 {
     using System.Diagnostics;
     using System.IO;

@@ -21,7 +21,7 @@
         public StressTests()
         {
             var dbPath = new FileInfo(LibEnvironment.GetDatabaseFilePath("world_sql_content"));
-            this.worldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));
+            this.worldSqlContent = new WorldSqlContent(connectionString: DestinyLib.Database.Database.MakeConnectionString(dbPath));
         }
 
         /// <summary>
