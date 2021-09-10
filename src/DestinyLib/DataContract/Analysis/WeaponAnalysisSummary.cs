@@ -4,7 +4,7 @@ using System.Linq;
 
 using StatisticsApi = MathNet.Numerics.Statistics.Statistics;
 
-namespace DestinyLib.Analysis
+namespace DestinyLib.DataContract.Analysis
 {
     /// <summary>
     /// (https://en.wikipedia.org/wiki/Box_plot).

@@ -2,8 +2,7 @@
 {
     using System.Collections.Generic;
 
-    using DestinyLib.Analysis;
-    using DestinyLib.DataContract;
+    using DestinyLib.DataContract.Analysis;
     using DestinyLib.DataContract.Definitions;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;

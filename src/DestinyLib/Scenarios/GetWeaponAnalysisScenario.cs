@@ -2,8 +2,9 @@
 {
     using System.IO;
 
-    using DestinyLib.Analysis;
     using DestinyLib.Database;
+    using DestinyLib.DataContract.Analysis;
+    using DestinyLib.Operations;
 
     public static class GetWeaponAnalysisScenario
     {
@@ -23,7 +24,7 @@
             // First get WeaponDefinition
             var weaponDefinition = worldSqlContentProvider.GetWeaponDefinition(id);
 
-            return WeaponAnalysis.GetWeaponAnalysisSummary(weaponDefinition);
+            return WeaponAnalysisGenerator.GetWeaponAnalysisSummary(weaponDefinition);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace DestinyLib.DataContract
+﻿namespace DestinyLib.DataContract.Definitions
 {
     /// <summary>
     /// Collectible items have an entry in a separate table with some unique metadata.

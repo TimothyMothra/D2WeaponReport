@@ -5,9 +5,9 @@
     using System.Diagnostics;
     using System.Linq;
 
-    using DestinyLib.Analysis;
     using DestinyLib.Database;
     using DestinyLib.DataContract;
+    using DestinyLib.DataContract.Analysis;
     using DestinyLib.Scenarios;
 
     using Microsoft.AspNetCore.Mvc;

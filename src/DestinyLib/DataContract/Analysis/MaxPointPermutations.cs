@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using DestinyLib.DataContract;
 using DestinyLib.DataContract.Definitions;
 
-namespace DestinyLib.Analysis
+namespace DestinyLib.DataContract.Analysis
 {
     public class MaxPointPermutations
     {

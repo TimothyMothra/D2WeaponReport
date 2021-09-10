@@ -1,13 +1,13 @@
-﻿namespace DestinyLib.Analysis
+﻿namespace DestinyLib.Operations
 {
     using System.Collections.Generic;
     using System.Linq;
 
     using DestinyLib.DataContract;
+    using DestinyLib.DataContract.Analysis;
     using DestinyLib.DataContract.Definitions;
-    using DestinyLib.Operations;
 
-    public static class WeaponAnalysis
+    public static class WeaponAnalysisGenerator
     {
         private const bool BehaviorIncludePerksWithNoValue = false;
         private const bool BehaviorValidatePermutations = true;
@@ -22,7 +22,7 @@
             List<PerkPermutation> permutations = PerkPermutationGenerator.GetPerkPermutations(weaponDefinition.WeaponPossiblePerks);
             List<MaxPointPermutations> permutationsWithMaxPoints = GetMaxPointPermutations(permutations);
 
-            if (permutationsWithMaxPoints == null)
+            if (!permutationsWithMaxPoints.Any())
             {
                 // Two weapons do not have perks.
                 // id:1619016919 name:Khvostov 7G-02
@@ -47,10 +47,6 @@
             return weaponDefinition.WeaponBaseStats.Values.Sum(x => x.Value);
         }
 
-        /// <summary>
-        /// Given a list of <see cref="PerkPermutation"/> calculate the max points.
-        /// </summary>
-        /// <returns></returns>
         private static List<MaxPointPermutations> GetMaxPointPermutations(IList<PerkPermutation> perkPermutations)
         {
             return perkPermutations.Select(x => new MaxPointPermutations(x)).ToList();
