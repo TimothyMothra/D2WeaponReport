@@ -25,14 +25,7 @@ namespace DestinyLib.DataContract.Analysis
 
                 foreach (var perkValue in perk.WeaponPerkValueList)
                 {
-                    if (this.PerkHashAndValues.ContainsKey(perkValue.StatHash))
-                    {
-                        this.PerkHashAndValues[perkValue.StatHash] += perkValue.Value;
-                    }
-                    else
-                    {
-                        this.PerkHashAndValues.Add(perkValue.StatHash, perkValue.Value);
-                    }
+                    this.PerkHashAndValues.CustomAdd(perkValue.StatHash, perkValue.Value);
                 }
             }
         }

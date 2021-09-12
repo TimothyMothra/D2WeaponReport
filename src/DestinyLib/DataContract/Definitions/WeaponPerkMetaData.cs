@@ -8,7 +8,7 @@
 
         public string Description { get; set; }
 
-        public string IconPath { get; set; } // TODO: Will need Perk Icon to display in Table
+        public string IconPath { get; set; }
 
         public override string ToString()
         {
