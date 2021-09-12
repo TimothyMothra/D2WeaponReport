@@ -8,6 +8,7 @@
 
     using DestinyLib;
     using DestinyLib.Database;
+    using DestinyLib.Operations;
     using DestinyLib.Scenarios;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -29,7 +30,7 @@
         /// If any test fails, likely something breaks the expected data schema.
         /// </summary>
         [TestMethod]
-        public void TestCanParseWeapons()
+        public void StressTest_CanParseWeapons()
         {
             var worldSqlContentProvider = new WorldSqlContentProvider(this.worldSqlContent, ProviderOptions.TestWithCaching);
 
@@ -61,7 +62,7 @@
         }
 
         [TestMethod]
-        public void TestAnalysis()
+        public void StressTest_Analysis()
         {
             var worldSqlContentProvider = new WorldSqlContentProvider(this.worldSqlContent, ProviderOptions.TestWithCaching);
 
@@ -76,6 +77,39 @@
                     // TODO, NEED TO PASS IN MY OWN PROVIDER.
                     var result = GetWeaponAnalysisScenario.Run(weapon.HashId);
                     //result.
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"{weapon.HashId} {weapon.Name}");
+                    Console.WriteLine(ex.Message);
+
+                    failedIds.Add(weapon.ToString());
+                }
+            }
+
+            if (failedIds.Any())
+            {
+                failedIds.ForEach(x => Debug.WriteLine(x));
+
+                Assert.Fail($"Failed to parse {failedIds.Count} weaponsIds");
+            }
+        }
+
+        [TestMethod]
+        public void StressTest_StatPermutationPercentiles()
+        {
+            var worldSqlContentProvider = new WorldSqlContentProvider(this.worldSqlContent, ProviderOptions.TestWithCaching);
+
+            var weapons = worldSqlContentProvider.GetSearchableWeapons();
+
+            var failedIds = new List<string>();
+
+            foreach (var weapon in weapons)
+            {
+                try
+                {
+                    var weaponDefinition = worldSqlContentProvider.GetWeaponDefinition(weapon.HashId);
+                    _ = WeaponAnalysisGenerator.GetStatPermutationPercentiles(weaponDefinition);
                 }
                 catch (Exception ex)
                 {

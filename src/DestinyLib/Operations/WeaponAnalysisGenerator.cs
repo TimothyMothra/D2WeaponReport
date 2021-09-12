@@ -66,8 +66,17 @@
             var statPermutationPercentiles = new List<StatPermutationPercentiles>();
             foreach (var sd in statsDictionary)
             {
+                var matchingStatDefinition = statDefinitions.SingleOrDefault(x => x.MetaData.HashId == sd.Key);
+
+                if (matchingStatDefinition == null)
+                {
+                    // TODO: SEVERAL WEAPONS HAVE PERKS THAT AFFECT STATS NOT FOUND IN THE DEFINITION. NEED TO QUERY DB FOR MISSING STATS.
+                    Debug.WriteLine($"Missing Definition: Weapon: {weaponDefinition.MetaData} Stat: {sd.Key}");
+                    continue;
+                }
+
                 statPermutationPercentiles.Add(new StatPermutationPercentiles(
-                    name: statDefinitions.Single(x => x.MetaData.HashId == sd.Key).MetaData.Name,
+                    name: matchingStatDefinition.MetaData.Name,
                     hashId: sd.Key,
                     values: sd.Value,
                     totalCount: perkPermutations.Count));

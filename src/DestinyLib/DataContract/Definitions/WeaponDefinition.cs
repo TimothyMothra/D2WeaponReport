@@ -17,7 +17,7 @@
 
         public override string ToString()
         {
-            return $"[{this.MetaData.HashId}] {this.MetaData.Name} (TODO: ItemType)"; // TODO: ITEM TYPE
+            return this.MetaData.ToString();
         }
     }
 }

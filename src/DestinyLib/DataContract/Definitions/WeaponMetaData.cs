@@ -38,5 +38,10 @@ namespace DestinyLib.DataContract.Definitions
         public Uri GetIconUri() => new Uri(LibEnvironment.GetDestinyHost(), this.CollectionDefintitionIconPath ?? this.ItemDefinitionIconPath);
 
         public Uri GetScreenshotUri() => new Uri(LibEnvironment.GetDestinyHost(), this.ScreenshotPath);
+
+        public override string ToString()
+        {
+            return $"{this.HashId} {this.Name} (TODO: ItemType)"; // TODO: ITEM TYPE
+        }
     }
 }
