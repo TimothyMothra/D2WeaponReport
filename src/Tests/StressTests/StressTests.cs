@@ -1,4 +1,4 @@
-﻿namespace Tests
+﻿namespace Tests.StressTests
 {
     using System;
     using System.Collections.Generic;
