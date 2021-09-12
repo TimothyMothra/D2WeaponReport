@@ -40,7 +40,9 @@
 
             List<PerkTable> perkTables = GetPerkTables(weaponDefinition);
 
-            var summary = new WeaponAnalysisSummary(baseTotalPoints, permutationsWithMaxPoints, perkTables);
+            var statPermutationPercentiles = GetStatPermutationPercentiles(weaponDefinition);
+
+            var summary = new WeaponAnalysisSummary(baseTotalPoints, permutationsWithMaxPoints, perkTables, statPermutationPercentiles);
             return summary;
         }
 
@@ -77,6 +79,7 @@
 
                 statPermutationPercentiles.Add(new StatPermutationPercentiles(
                     name: matchingStatDefinition.MetaData.Name,
+                    baseValue: matchingStatDefinition.Value,
                     hashId: sd.Key,
                     values: sd.Value,
                     totalCount: perkPermutations.Count));

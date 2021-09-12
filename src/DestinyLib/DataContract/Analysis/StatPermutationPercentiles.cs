@@ -8,10 +8,11 @@
     /// </summary>
     public class StatPermutationPercentiles
     {
-        public StatPermutationPercentiles(string name, uint hashId, List<double> values)
+        public StatPermutationPercentiles(uint hashId, string name, double baseValue, List<double> values)
         {
-            this.Name = name;
             this.HashId = hashId;
+            this.Name = name;
+            this.BaseValue = baseValue;
             this.Count = values.Count;
             this.Percentiles = new Percentiles(values);
         }
@@ -24,10 +25,11 @@
         /// <param name="hashId"></param>
         /// <param name="values"></param>
         /// <param name="totalCount"></param>
-        public StatPermutationPercentiles(string name, uint hashId, List<double> values, int totalCount)
+        public StatPermutationPercentiles(uint hashId, string name, double baseValue, List<double> values, int totalCount)
         {
-            this.Name = name;
             this.HashId = hashId;
+            this.Name = name;
+            this.BaseValue = baseValue;
             this.Count = values.Count;
 
             // Note: not all perk permutations will affect each stat.
@@ -40,13 +42,15 @@
             this.Percentiles = new Percentiles(values);
         }
 
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
-        public uint HashId { get; set; }
+        public double BaseValue { get; private set; }
 
-        public int Count { get; set; }
+        public uint HashId { get; private set; }
 
-        public Percentiles Percentiles { get; set; }
+        public int Count { get; private set; }
+
+        public Percentiles Percentiles { get; private set; }
 
         public override string ToString()
         {

@@ -2,6 +2,8 @@
 {
     using System.Collections.Generic;
 
+    using DestinyLib.DataContract.Analysis;
+
     public class HomeViewModel
     {
         public HomeViewModel(List<string> weaponNames)
@@ -33,6 +35,8 @@
             public string PermutationsCount { get; set; }
 
             public List<string> PerkNames { get; set; }
+
+            public IList<StatPermutationPercentiles> StatPermutationPercentiles { get; internal set; }
 
             public class PerkTableViewModel
             {

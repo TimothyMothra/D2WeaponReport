@@ -16,7 +16,7 @@ namespace DestinyLib.DataContract.Analysis
             this.HasEmptyPerks = true;
         }
 
-        public WeaponAnalysisSummary(double baseValue, List<MaxPointPermutations> permutations, List<PerkTable> perkTables)
+        public WeaponAnalysisSummary(double baseValue, List<MaxPointPermutations> permutations, List<PerkTable> perkTables, IList<StatPermutationPercentiles> statPermutationPercentiles)
         {
             this.Permutations = permutations ?? throw new ArgumentNullException(nameof(permutations));
 
@@ -24,6 +24,8 @@ namespace DestinyLib.DataContract.Analysis
             this.Statistics = new PermutationStatistics(baseValue, permutationsEnumerable);
 
             this.PerkTables = perkTables;
+
+            this.StatPermutationPercentiles = statPermutationPercentiles;
         }
 
         public PermutationStatistics Statistics { get; set; }
@@ -31,6 +33,8 @@ namespace DestinyLib.DataContract.Analysis
         public IList<PerkTable> PerkTables { get; set; }
 
         public bool HasEmptyPerks { get; set; }
+
+        public IList<StatPermutationPercentiles> StatPermutationPercentiles { get; set; }
 
         public IList<MaxPointPermutations> Permutations { get; set; }
 

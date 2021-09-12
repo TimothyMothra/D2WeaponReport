@@ -117,6 +117,8 @@
                 PermutationValues = weaponSummary.PermutationsAsString(),
                 PermutationsCount = weaponSummary.Permutations.Count.ToString(),
 
+                StatPermutationPercentiles = weaponSummary.StatPermutationPercentiles,
+
                 PerkNames = perkNames,
             };
         }

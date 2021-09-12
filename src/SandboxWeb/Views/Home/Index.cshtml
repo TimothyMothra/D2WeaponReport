@@ -128,12 +128,20 @@ Examples:
         <div>
             <img src="@Html.Raw(this.Model.WeaponDetails.MetaData.ScreenshotUri)" alt="screenshot" width="600">
 
-            <p>Base Points: @Html.DisplayFor(x => x.WeaponDetails.BaseValue)</p>
+            @*<p>Base Points: @Html.DisplayFor(x => x.WeaponDetails.BaseValue)</p>*@
 
             <p>Number of Permutations @Html.DisplayFor(x => x.WeaponDetails.PermutationsCount)</p>
 
             <p id="weaponName" style="display:none">@Html.DisplayFor(x => x.WeaponDetails.MetaData.Name)</p>
             <p id="permutations" style="display:none">@Html.DisplayFor(x => x.WeaponDetails.PermutationValues)</p>
+
+            @*Weapon Stats*@
+            <ul>
+                @foreach (var stat in this.Model.WeaponDetails.StatPermutationPercentiles)
+                {
+                    <li>@Html.Raw(stat.Name): @Html.Raw(stat.BaseValue) @Html.Raw(stat.Percentiles)</li>
+                }
+            </ul>
 
         </div>
 
