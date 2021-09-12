@@ -46,13 +46,13 @@
 
         public static List<StatPermutationPercentiles> GetStatPermutationPercentiles(WeaponDefinition weaponDefinition)
         {
+            var statDefinitions = weaponDefinition.WeaponBaseStats.Values;
             var perkPermutations = PerkPermutationGenerator.GetPerkPermutations(weaponDefinition.WeaponPossiblePerks);
             var statPermutations = perkPermutations.Select(x => new StatPermutation(x)).ToList();
 
             Debug.Assert(statPermutations != null, "StatPermutations failed.");
 
-            var permutationCount = perkPermutations.Count;
-
+            // Convert StatPermutations into Dictionary of StatId w/ list of values.
             var statsDictionary = new Dictionary<uint, List<double>>();
             foreach (var sp in statPermutations)
             {
@@ -62,24 +62,15 @@
                 }
             }
 
-            statsDictionary.ToString();
-
-            ///
-
-            var statDefinitions = weaponDefinition.WeaponBaseStats.Values;
-            var metaDataList = statDefinitions.Select(x => x.MetaData).ToList();
-
-            ///
-
+            // Calculate Percertiles given all possible Stat Values.
             var statPermutationPercentiles = new List<StatPermutationPercentiles>();
-
             foreach (var sd in statsDictionary)
             {
                 statPermutationPercentiles.Add(new StatPermutationPercentiles(
-                    name: metaDataList.Single(x => x.HashId == sd.Key).Name,
+                    name: statDefinitions.Single(x => x.MetaData.HashId == sd.Key).MetaData.Name,
                     hashId: sd.Key,
                     values: sd.Value,
-                    totalCount: permutationCount));
+                    totalCount: perkPermutations.Count));
             }
 
             return statPermutationPercentiles;
