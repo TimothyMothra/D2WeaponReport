@@ -1,11 +1,13 @@
 ﻿namespace DestinyLib.Operations
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
 
     using DestinyLib.DataContract;
     using DestinyLib.DataContract.Analysis;
     using DestinyLib.DataContract.Definitions;
+    using DestinyLib.Extensions;
 
     public static class WeaponAnalysisGenerator
     {
@@ -40,6 +42,47 @@
 
             var summary = new WeaponAnalysisSummary(baseTotalPoints, permutationsWithMaxPoints, perkTables);
             return summary;
+        }
+
+        public static List<StatPermutationPercentiles> GetStatPermutationPercentiles(WeaponDefinition weaponDefinition)
+        {
+            var perkPermutations = PerkPermutationGenerator.GetPerkPermutations(weaponDefinition.WeaponPossiblePerks);
+            var statPermutations = perkPermutations.Select(x => new StatPermutation(x)).ToList();
+
+            Debug.Assert(statPermutations != null, "StatPermutations failed.");
+
+            var permutationCount = perkPermutations.Count;
+
+            var statsDictionary = new Dictionary<uint, List<double>>();
+            foreach (var sp in statPermutations)
+            {
+                foreach (var kvp in sp.PerkHashAndValues)
+                {
+                    statsDictionary.CustomAdd(kvp.Key, kvp.Value);
+                }
+            }
+
+            statsDictionary.ToString();
+
+            ///
+
+            var statDefinitions = weaponDefinition.WeaponBaseStats.Values;
+            var metaDataList = statDefinitions.Select(x => x.MetaData).ToList();
+
+            ///
+
+            var statPermutationPercentiles = new List<StatPermutationPercentiles>();
+
+            foreach (var sd in statsDictionary)
+            {
+                statPermutationPercentiles.Add(new StatPermutationPercentiles(
+                    name: metaDataList.Single(x => x.HashId == sd.Key).Name,
+                    hashId: sd.Key,
+                    values: sd.Value,
+                    totalCount: permutationCount));
+            }
+
+            return statPermutationPercentiles;
         }
 
         private static int GetBaseTotalPoints(WeaponDefinition weaponDefinition)

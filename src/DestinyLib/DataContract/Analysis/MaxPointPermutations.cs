@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using DestinyLib.DataContract.Definitions;
+using DestinyLib.Extensions;
 
 namespace DestinyLib.DataContract.Analysis
 {
