@@ -136,6 +136,7 @@ Examples:
             <p id="permutations" style="display:none">@Html.DisplayFor(x => x.WeaponDetails.PermutationValues)</p>
 
             @*Weapon Stats*@
+            <p>Stats - Base Value - Percentiles (min, first quartile, median, third quartile, max)</p>
             <ul>
                 @foreach (var stat in this.Model.WeaponDetails.StatPermutationPercentiles)
                 {
