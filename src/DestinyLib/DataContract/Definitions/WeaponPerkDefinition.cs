@@ -19,5 +19,24 @@ namespace DestinyLib.DataContract.Definitions
                 return $"{this.MetaData}, Perks Count {this.WeaponPerkValueList.Count}";
             }
         }
+
+        public IList<uint> GetAffectedStatHashIds()
+        {
+            if (this.WeaponPerkValueList == null)
+            {
+                return new List<uint>();
+            }
+            else
+            {
+                var list = new List<uint>();
+
+                foreach (var wpvd in this.WeaponPerkValueList)
+                {
+                    list.Add(wpvd.StatHash);
+                }
+
+                return list;
+            }
+        }
     }
 }

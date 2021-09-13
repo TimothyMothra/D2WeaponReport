@@ -10,13 +10,27 @@
     {
         public PerkTable(IList<WeaponStatDefinition> stats, WeaponPerkSetDefinition perkSet)
         {
-            this.Stats = stats;
+            // Sanitize Input.
+            // TODO: IF STAT IS NOT PRESENT IN PERK SET, EXCLUDE STAT FROM DISPLAY.
+            var affectedStatIds = perkSet.Values.SelectMany(x => x.GetAffectedStatHashIds()).Distinct().ToList();
+
+            this.Stats = stats.Where(x => affectedStatIds.Contains(x.MetaData.HashId)).ToList();
+
             this.PerkSet = perkSet;
+
+            this.StatsToColumnIndex = new Dictionary<uint, int>();
+            int columnIndex = 1;
+            foreach (var stat in this.Stats)
+            {
+                this.StatsToColumnIndex.Add(stat.MetaData.HashId, columnIndex++);
+            }
         }
 
         public IList<WeaponStatDefinition> Stats { get; set; }
 
         public WeaponPerkSetDefinition PerkSet { get; set; }
+
+        private Dictionary<uint, int> StatsToColumnIndex { get; set; }
 
         public string GetDisplayName()
         {
@@ -43,12 +57,10 @@
             {
                 null, // top-left corner empty
             };
-            var statsToColumnIndex = new Dictionary<uint, int>();
-            int columnIndex = 1;
+
             foreach (var stat in this.Stats)
             {
                 headerRow.Add(string.IsNullOrEmpty(stat.MetaData.Name) ? "-" : stat.MetaData.Name);
-                statsToColumnIndex.Add(stat.MetaData.HashId, columnIndex++);
             }
 
             return headerRow;
@@ -57,13 +69,6 @@
         public List<List<string>> GetDataDisplayTable()
         {
             int numberOfColumns = this.Stats.Count + 1;
-
-            var statsToColumnIndex = new Dictionary<uint, int>();
-            int columnIndex = 1;
-            foreach (var stat in this.Stats)
-            {
-                statsToColumnIndex.Add(stat.MetaData.HashId, columnIndex++);
-            }
 
             // enumerate perks and populate statContainer
             List<List<string>> rows = new List<List<string>>(this.PerkSet.Values.Count);
@@ -77,7 +82,7 @@
                 {
                     foreach (var perkValue in perk.WeaponPerkValueList)
                     {
-                        int index = statsToColumnIndex[perkValue.StatHash];
+                        int index = this.StatsToColumnIndex[perkValue.StatHash];
                         tempRow[index] = perkValue.Value.ToString();
                     }
                 }
