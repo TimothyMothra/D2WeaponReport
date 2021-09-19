@@ -17,16 +17,21 @@
             //uint id = 741454304; // CrownSplitter
             //uint id = 720351795; // ArsenicBite
 
-            var summary = GetWeaponAnalysisScenario.Run(id);
-            Assert.IsNotNull(summary);
+            var analysis = GetWeaponAnalysisScenario.Run(id);
+            Assert.IsNotNull(analysis);
         }
 
         [TestMethod]
         public void VerifyGet_EmptyPerks()
         {
+            uint id_khvostov7G02 = 1619016919;
             uint id_legendofacrius = 1744115122;
-            var summary = GetWeaponAnalysisScenario.Run(id_legendofacrius);
-            Assert.IsTrue(summary.HasEmptyPerks);
+
+            var khvostov7G02Summary = GetWeaponAnalysisScenario.Run(id_khvostov7G02);
+            Assert.IsNull(khvostov7G02Summary);
+
+            var legendofacriusSummary = GetWeaponAnalysisScenario.Run(id_legendofacrius);
+            Assert.IsNull(legendofacriusSummary);
         }
     }
 }

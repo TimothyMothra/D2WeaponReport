@@ -22,5 +22,7 @@
 
             return clone;
         }
+
+        public StatPermutation GetStatPermutation() => new StatPermutation(this);
     }
 }

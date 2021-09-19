@@ -7,15 +7,13 @@
 
     using DestinyLib.Database;
     using DestinyLib.DataContract;
-    using DestinyLib.DataContract.Analysis;
+    using DestinyLib.Operations;
     using DestinyLib.Scenarios;
 
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
 
     using SandboxWeb.Models;
-
-    using static SandboxWeb.Models.HomeViewModel.WeaponDetailsViewModel;
 
     public class HomeController : Controller
     {
@@ -95,50 +93,33 @@
 
         private static HomeViewModel.WeaponDetailsViewModel GetWeaponDetails(uint hash)
         {
-            var definition = GetWeaponDefinitionScenario.Run(hash);
-            var weaponSummary = GetWeaponAnalysisScenario.Run(hash);
+            var weaponDefinition = GetWeaponDefinitionScenario.Run(hash);
 
-            var perktables = GetPerkTableViewModel(weaponSummary);
+            var statPermutationPercentiles = WeaponAnalysisGenerator.GetStatPermutationPercentiles(weaponDefinition);
+            var perkPermutationAnalysisList = WeaponAnalysisGenerator.GetPerkPermutationAnalysis(weaponDefinition); // TODO: THIS CAN RETURN NULL
+            var perktables = WeaponPerkTableGenerator.GetPerkTableViewModel(weaponDefinition);
 
-            var perkNames = weaponSummary.Permutations.OrderByDescending(x => x.MaxPoints).Select(x => x.ToDisplayString()).ToList();
-
-            return new ()
+            var viewModel = new HomeViewModel.WeaponDetailsViewModel()
             {
                 MetaData = new ()
                 {
-                    Name = definition.MetaData.Name,
-                    IconUri = definition.MetaData.GetIconUri().AbsoluteUri,
-                    ScreenshotUri = definition.MetaData.GetScreenshotUri().AbsoluteUri,
+                    Name = weaponDefinition.MetaData.Name,
+                    IconUri = weaponDefinition.MetaData.GetIconUri().AbsoluteUri,
+                    ScreenshotUri = weaponDefinition.MetaData.GetScreenshotUri().AbsoluteUri,
                 },
 
                 PerkTables = perktables,
 
-                BaseValue = weaponSummary.Statistics.Base.ToString(),
-                PermutationValues = weaponSummary.PermutationsAsString(),
-                PermutationsCount = weaponSummary.Permutations.Count.ToString(),
+                BaseValue = null, // weaponSummary.Statistics.Base.ToString(), // TODO: this needs to come from the weapon definition, not the perk summary
 
-                StatPermutationPercentiles = weaponSummary.StatPermutationPercentiles,
+                StatPermutationPercentiles = statPermutationPercentiles, //TODO: I WANT TO KEEP THIS FOR FUTURE WORK
 
-                PerkNames = perkNames,
+                // Needed for Box Plot (https://en.wikipedia.org/wiki/Box_plot).
+                PerkPermutationMaxValuesAsCSV = string.Join(",", perkPermutationAnalysisList.OrderByDescending(x => x.MaxPoints).Select(x => x.MaxPoints).AsEnumerable()),
+                PerkPermutationCount = perkPermutationAnalysisList.Count,
+                PerkPermutationDisplayStrings = perkPermutationAnalysisList.OrderByDescending(x => x.MaxPoints).Select(x => x.ToDisplayString()).ToList(),
             };
-        }
-
-        private static List<PerkTableViewModel> GetPerkTableViewModel(WeaponAnalysisSummary weaponAnalysisSummary)
-        {
-            var perkTableViewModel = new List<PerkTableViewModel>(weaponAnalysisSummary.PerkTables.Count);
-
-            foreach (var analysisPerkTable in weaponAnalysisSummary.PerkTables)
-            {
-                perkTableViewModel.Add(new PerkTableViewModel
-                {
-                    TableDisplayName = analysisPerkTable.GetDisplayName(),
-                    HeaderRow = analysisPerkTable.GetHeaderRow(),
-                    Rows = analysisPerkTable.GetDataDisplayTable(),
-                    IconUris = analysisPerkTable.GetIconUris(),
-                });
-            }
-
-            return perkTableViewModel;
+            return viewModel;
         }
     }
 }

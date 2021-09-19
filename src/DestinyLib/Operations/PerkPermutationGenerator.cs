@@ -29,6 +29,12 @@
             // outer: PerkSets
             foreach (WeaponPerkSetDefinition perkSet in perkSetList)
             {
+                // Ability Perks can affect stats, but this isn't useful for comparisons
+                if (options.BehaviorExcludeAbilityPerks && perkSet.SocketTypeHash == 2614797986)
+                {
+                    continue;
+                }
+
                 var tempPermutations = permutations;
                 permutations = new List<PerkPermutation>();
 
@@ -36,7 +42,7 @@
                 foreach (WeaponPerkDefinition perk in perkSet.Values)
                 {
                     //inner: Perk.Values (Note: not all perks have stat values)
-                    if (!options.BehaviorIncludePerksWithNoValue && perk.WeaponPerkValueList == null)
+                    if (options.BehaviorExcludePerksWithNoValue && perk.WeaponPerkValueList == null)
                     {
                         continue;
                     }
@@ -71,10 +77,13 @@
         {
             public static Options Default => new ()
             {
-                BehaviorIncludePerksWithNoValue = false,
+                BehaviorExcludePerksWithNoValue = true,
+                BehaviorExcludeAbilityPerks = true,
             };
 
-            public bool BehaviorIncludePerksWithNoValue { get; set; }
+            public bool BehaviorExcludePerksWithNoValue { get; set; }
+
+            public bool BehaviorExcludeAbilityPerks { get; set; }
         }
     }
 }

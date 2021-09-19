@@ -4,6 +4,8 @@
 
     using DestinyLib.DataContract.Analysis;
 
+    using static DestinyLib.Operations.WeaponPerkTableGenerator;
+
     public class HomeViewModel
     {
         public HomeViewModel(List<string> weaponNames)
@@ -30,24 +32,13 @@
 
             public string BaseValue { get; set; }
 
-            public string PermutationValues { get; set; }
+            public string PerkPermutationMaxValuesAsCSV { get; set; }
 
-            public string PermutationsCount { get; set; }
+            public int PerkPermutationCount { get; set; }
 
-            public List<string> PerkNames { get; set; }
+            public List<string> PerkPermutationDisplayStrings { get; set; }
 
             public IList<StatPermutationPercentiles> StatPermutationPercentiles { get; internal set; }
-
-            public class PerkTableViewModel
-            {
-                public string TableDisplayName { get; set; }
-
-                public List<string> HeaderRow { get; set; }
-
-                public List<string> IconUris { get; set; }
-
-                public List<List<string>> Rows { get; set; }
-            }
 
             public class MetaDataViewModel
             {

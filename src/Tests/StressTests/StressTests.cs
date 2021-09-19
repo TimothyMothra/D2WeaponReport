@@ -64,6 +64,7 @@
         [TestMethod]
         public void StressTest_Analysis()
         {
+            // TODO, NEED TO PASS IN MY OWN PROVIDER.
             var worldSqlContentProvider = new WorldSqlContentProvider(this.worldSqlContent, ProviderOptions.TestWithCaching);
 
             var weapons = worldSqlContentProvider.GetSearchableWeapons();
@@ -74,9 +75,7 @@
             {
                 try
                 {
-                    // TODO, NEED TO PASS IN MY OWN PROVIDER.
                     var result = GetWeaponAnalysisScenario.Run(weapon.HashId);
-                    //result.
                 }
                 catch (Exception ex)
                 {

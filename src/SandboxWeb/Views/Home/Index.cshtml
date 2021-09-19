@@ -130,10 +130,10 @@ Examples:
 
             @*<p>Base Points: @Html.DisplayFor(x => x.WeaponDetails.BaseValue)</p>*@
 
-            <p>Number of Permutations @Html.DisplayFor(x => x.WeaponDetails.PermutationsCount)</p>
+            <p>Number of Permutations @Html.DisplayFor(x => x.WeaponDetails.PerkPermutationCount)</p>
 
             <p id="weaponName" style="display:none">@Html.DisplayFor(x => x.WeaponDetails.MetaData.Name)</p>
-            <p id="permutations" style="display:none">@Html.DisplayFor(x => x.WeaponDetails.PermutationValues)</p>
+            <p id="permutations" style="display:none">@Html.DisplayFor(x => x.WeaponDetails.PerkPermutationMaxValuesAsCSV)</p>
 
             @*Weapon Stats*@
             <p>Stats - Base Value - Percentiles (min, first quartile, median, third quartile, max)</p>
@@ -242,7 +242,7 @@ Examples:
                 Plotly.newPlot('plotDiv', data, layout);
             </script>
             <ul>
-                @foreach (var perkName in this.Model.WeaponDetails.PerkNames)
+                @foreach (var perkName in this.Model.WeaponDetails.PerkPermutationDisplayStrings)
                 {
                     <li>@perkName</li>
                 }
