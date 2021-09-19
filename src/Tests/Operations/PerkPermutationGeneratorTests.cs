@@ -19,7 +19,7 @@
 
             var result = PerkPermutationGenerator.GetPerkPermutations(
                 weaponPerkSetCollection: exampleWeaponPerkSetCollection,
-                options: new Options { BehaviorExcludePerksWithNoValue = false });
+                options: new Options { BehaviorExcludePerksWithNoValue = true });
 
             Assert.AreEqual(1, result.Count);
         }
@@ -31,7 +31,7 @@
 
             var result = PerkPermutationGenerator.GetPerkPermutations(
                 weaponPerkSetCollection: exampleWeaponPerkSetCollection,
-                options: new Options { BehaviorExcludePerksWithNoValue = true });
+                options: new Options { BehaviorExcludePerksWithNoValue = false });
 
             Assert.AreEqual(2, result.Count);
         }

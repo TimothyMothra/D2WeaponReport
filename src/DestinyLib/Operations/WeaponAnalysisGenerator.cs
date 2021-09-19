@@ -17,18 +17,19 @@
 
         public static List<PerkPermutationAnalysis> GetPerkPermutationAnalysis(WeaponDefinition weaponDefinition)
         {
-            // TODO: rewrite this to detect this condition without needing hardcoded exceptions
-            if (weaponDefinition.MetaData.HashId == 1619016919
-                || weaponDefinition.MetaData.HashId == 1744115122)
+            var statDefinitions = weaponDefinition.WeaponBaseStats.Values;
+            var perkPermutations = PerkPermutationGenerator.GetPerkPermutations(weaponDefinition.WeaponPossiblePerks);
+
+            if (!perkPermutations.Any())
             {
-                // Two weapons do not have perks.
+                // NOTE: SOME WEAPONS DO NOT CONTAIN PERKS. This will identify those during debug.
                 // id:1619016919 name:Khvostov 7G-02
                 // id:1744115122 name:Legend of Acrius
+                Debug.WriteLine($"Missing Definition: Weapon: {weaponDefinition.MetaData}");
+
                 return null;
             }
 
-            var statDefinitions = weaponDefinition.WeaponBaseStats.Values;
-            var perkPermutations = PerkPermutationGenerator.GetPerkPermutations(weaponDefinition.WeaponPossiblePerks);
             var statPermutations = perkPermutations.Select(x => x.GetStatPermutation()).ToList();
             var statPermutationPercentiles = CalculateStatPermutationPercentiles(weaponDefinition, perkPermutations, statPermutations);
 
