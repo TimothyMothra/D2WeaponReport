@@ -2,6 +2,9 @@
 {
     using System.Collections.Generic;
 
+    using System;
+    using System.Linq;
+
     using StatisticsApi = MathNet.Numerics.Statistics.Statistics;
 
     public class Percentiles
@@ -40,9 +43,46 @@
         /// </summary>
         public double Maximum { get; set; }
 
+        public static string GetDisplayString(List<PercentileGrade> percentileGrades)
+        {
+            return string.Join(string.Empty, percentileGrades
+                    .GroupBy(x => x)
+                    .OrderBy(x => x.Key)
+                    .Select(x => $"{x.Count()}{x.Key}")
+                    .AsEnumerable());
+        }
+
         public override string ToString()
         {
             return $"({this.Minimum}, {this.FirstQuartile}, {this.Median}, {this.ThirdQuartile}, {this.Maximum})";
+        }
+
+        public PercentileGrade GetPercentileGrade(double value)
+        {
+            if (value > this.Maximum)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            else if (value > this.ThirdQuartile)
+            {
+                return PercentileGrade.A;
+            }
+            else if (value > this.Median)
+            {
+                return PercentileGrade.B;
+            }
+            else if (value > this.FirstQuartile)
+            {
+                return PercentileGrade.C;
+            }
+            else if (value >= this.Minimum)
+            {
+                return PercentileGrade.D;
+            }
+            else //if (value < this.Minimum)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }

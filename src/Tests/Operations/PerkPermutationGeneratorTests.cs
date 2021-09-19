@@ -7,8 +7,6 @@
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using static DestinyLib.Operations.PerkPermutationGenerator;
-
     [TestClass]
     public class PerkPermutationGeneratorTests
     {
@@ -19,7 +17,7 @@
 
             var result = PerkPermutationGenerator.GetPerkPermutations(
                 weaponPerkSetCollection: exampleWeaponPerkSetCollection,
-                options: new Options { BehaviorExcludePerksWithNoValue = true });
+                options: new PerkPermutationGenerator.Options { BehaviorExcludePerksWithNoValue = true });
 
             Assert.AreEqual(1, result.Count);
         }
@@ -31,7 +29,7 @@
 
             var result = PerkPermutationGenerator.GetPerkPermutations(
                 weaponPerkSetCollection: exampleWeaponPerkSetCollection,
-                options: new Options { BehaviorExcludePerksWithNoValue = false });
+                options: new PerkPermutationGenerator.Options { BehaviorExcludePerksWithNoValue = false });
 
             Assert.AreEqual(2, result.Count);
         }

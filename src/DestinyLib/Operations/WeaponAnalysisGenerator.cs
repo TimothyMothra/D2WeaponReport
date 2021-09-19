@@ -64,7 +64,21 @@
 
         private static string CalculatePercentileGrade(List<StatPermutationPercentiles> statPermutationPercentiles, PerkPermutation perkPermutation)
         {
-            return "TODO: PercentileGrade"; //TODO: PercentileGrade
+            var grades = new List<PercentileGrade>();
+
+            var statPermutation = new StatPermutation(perkPermutation);
+
+            foreach (var statPerm in statPermutation.PerkHashAndValues)
+            {
+                var spp = statPermutationPercentiles.SingleOrDefault(x => x.HashId == statPerm.Key);
+                if (spp != null)
+                {
+                    grades.Add(spp.Percentiles.GetPercentileGrade(statPerm.Value));
+                }
+            }
+
+            var displayString = Percentiles.GetDisplayString(grades);
+            return displayString;
         }
 
         private static double CalculateMaxPoints(WeaponDefinition weaponDefinition, Dictionary<uint, double> perkHashAndValues)
