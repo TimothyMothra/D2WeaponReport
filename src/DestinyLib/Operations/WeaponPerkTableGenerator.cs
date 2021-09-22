@@ -37,7 +37,7 @@
             var stats = weaponDefinition.WeaponBaseStats.Values;
             var perkSets = weaponDefinition.WeaponPossiblePerks.Values;
 
-            return perkSets.Select(x => new PerkTable(stats, x)).ToList();
+            return perkSets.Select(x => new PerkTable(weaponDefinition, stats, x)).ToList();
         }
 
         public class PerkTableViewModel

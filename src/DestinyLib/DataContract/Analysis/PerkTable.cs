@@ -2,14 +2,17 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
 
     using DestinyLib.DataContract.Definitions;
 
     public class PerkTable
     {
-        public PerkTable(IList<WeaponStatDefinition> stats, WeaponPerkSetDefinition perkSet)
+        public PerkTable(WeaponDefinition weaponDefinition, IList<WeaponStatDefinition> stats, WeaponPerkSetDefinition perkSet)
         {
+            this.WeaponDefinitionMetaData = weaponDefinition.MetaData;
+
             // Sanitize Input.
             // TODO: IF STAT IS NOT PRESENT IN PERK SET, EXCLUDE STAT FROM DISPLAY.
             var affectedStatIds = perkSet.Values.SelectMany(x => x.GetAffectedStatHashIds()).Distinct().ToList();
@@ -25,6 +28,8 @@
                 this.StatsToColumnIndex.Add(stat.MetaData.HashId, columnIndex++);
             }
         }
+
+        private WeaponMetaData WeaponDefinitionMetaData { get; set; }
 
         public IList<WeaponStatDefinition> Stats { get; set; }
 
@@ -82,8 +87,15 @@
                 {
                     foreach (var perkValue in perk.WeaponPerkValueList)
                     {
-                        int index = this.StatsToColumnIndex[perkValue.StatHash];
-                        tempRow[index] = perkValue.Value.ToString();
+                        if (this.StatsToColumnIndex.TryGetValue(perkValue.StatHash, out int index))
+                        {
+                            tempRow[index] = perkValue.Value.ToString();
+                        }
+                        else
+                        {
+                            // TODO: SEVERAL WEAPONS HAVE PERKS THAT AFFECT STATS NOT FOUND IN THE DEFINITION. NEED TO QUERY DB FOR MISSING STATS.
+                            Debug.WriteLine($"Missing Definition: Weapon: {this.WeaponDefinitionMetaData} Stat: {perkValue.StatHash}");
+                        }
                     }
                 }
 
