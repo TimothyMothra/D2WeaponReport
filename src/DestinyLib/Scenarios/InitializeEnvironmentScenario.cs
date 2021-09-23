@@ -36,17 +36,17 @@
             {
                 Console.WriteLine($"Arg[0]: '{arg[0]}'");
 
-                void print(string x)
-                {
-                    Console.WriteLine($"{x}, Exists: {Directory.Exists(x)}");
-                }
+                static void Printd(string x) => Console.WriteLine($"{x}, Exists: {Directory.Exists(x)}");
+                static void Printf(string x) => Console.WriteLine($"{x}, Exists: {File.Exists(x)}");
 
-                print(Environment.CurrentDirectory);
+                Printd(Environment.CurrentDirectory);
 
-                print(Path.Join(Environment.CurrentDirectory, arg[0]));
+                Printd(arg[0]);
 
                 // TODO: This value needs to come from LibEnvironment.
-                await File.Create(Path.Join(Environment.CurrentDirectory, arg[0], "root.marker")).DisposeAsync();
+                File.Create(Path.Combine(arg[0], "root.marker")); //.DisposeAsync();
+
+                Printf(Path.Combine(arg[0], "root.marker"));
 
                 var manifest = new Manifest();
                 await manifest.DownloadWorldSqlContent(arg[0]);
