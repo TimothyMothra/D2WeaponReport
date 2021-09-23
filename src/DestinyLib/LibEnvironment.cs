@@ -3,6 +3,7 @@
     using System;
     using System.IO;
     using System.Reflection;
+    using System.Text;
 
     /// <summary>
     /// This class encapsulates the local file IO necessary to run this application.
@@ -46,21 +47,45 @@
         public static string GetDatabaseFilePath(string fileNamePrefix)
         {
             var di = new DirectoryInfo(EnvironmentDirectory);
-            FileInfo[] files = di.GetFiles($"{fileNamePrefix}*.content");
 
-            if (files.Length == 1)
+            try
             {
-                return files[0].FullName;
-            }
-            else if (files.Length == 0)
-            {
-                Console.WriteLine($"DirectoryInfo: {di.FullName}");
+                FileInfo[] files = di.GetFiles($"{fileNamePrefix}*.content");
 
-                throw new Exception("Environment has not been initialized");
+                if (files.Length == 1)
+                {
+                    return files[0].FullName;
+                }
+                else if (files.Length == 0)
+                {
+                    Console.WriteLine($"DirectoryInfo: {di.FullName}");
+
+                    throw new Exception("Environment has not been initialized");
+                }
+                else
+                {
+                    throw new Exception("Unknown error; more database files than expected were found. Please re-initialize the environment directory.");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                throw new Exception("Unknown error; more database files than expected were found. Please re-initialize the environment directory.");
+                // Print directory contents
+                var sb = new StringBuilder();
+
+                sb.AppendLine($"**DIRECTORY EXCEPTION: {ex.Message}**");
+
+                while (di != null)
+                {
+                    sb.AppendLine(di.FullName);
+                    foreach (var f in di.GetFiles())
+                    {
+                        sb.AppendLine(f.FullName);
+                    }
+
+                    di = di.Parent;
+                }
+
+                throw new Exception(sb.ToString(), ex);
             }
         }
 
