@@ -40,6 +40,12 @@
                 static void Printf(string x) => Console.WriteLine($"{x}, Exists: {File.Exists(x)}");
 
                 Printd(Environment.CurrentDirectory);
+                Printd(arg[0]);
+
+                if (!Directory.Exists(arg[0]))
+                {
+                    Directory.CreateDirectory(arg[0]);
+                }
 
                 Printd(arg[0]);
 
