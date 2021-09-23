@@ -1,13 +1,11 @@
+# Syntax: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy ASP.Net Core app to Azure Web App - SandboxWeb20210922151420
+name: Build and Deploy
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # End of every 
 
 jobs:
   build:
@@ -21,19 +19,32 @@ jobs:
       with:
         dotnet-version: '5.0.x'
         include-prerelease: true
+###**************
 
-    - name: Build with dotnet
-      run: dotnet build --configuration Release
+    - name: Restore dependencies
+      run: dotnet restore ./src/DestinySandbox.sln
+
+    - name: Build
+      run: dotnet build  ./src/DestinySandbox.sln --no-restore
+
+    - name: Initialize Local Environment
+      run: dotnet run --project ./src/InitEnvironment/InitEnvironment.csproj -- C:\TEMP
+
+    #- name: Test
+    #  run: dotnet test  ./src/DestinySandbox.sln --no-build --verbosity normal
+      
+    #- name: Build with dotnet
+    #  run: dotnet build --configuration Release
 
     - name: dotnet publish
-      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+      run: dotnet publish --project ./src/SandboxWeb/SandboxWeb.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v2
       with:
         name: .net-app
         path: ${{env.DOTNET_ROOT}}/myapp
-
+#************************
   deploy:
     runs-on: ubuntu-latest
     needs: build

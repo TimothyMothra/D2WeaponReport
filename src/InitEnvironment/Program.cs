@@ -4,6 +4,6 @@
 
     public class Program
     {
-        public static async Task Main(string[] arg_s) => await DestinyLib.Scenarios.InitializeEnvironmentScenario.Run();
+        public static async Task Main(string[] arg_s) => await DestinyLib.Scenarios.InitializeEnvironmentScenario.Run(arg_s);
     }
 }
