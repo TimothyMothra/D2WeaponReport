@@ -28,7 +28,7 @@ jobs:
       run: dotnet build  ./src/DestinySandbox.sln --no-restore
 
     - name: Initialize Local Environment
-      run: dotnet run --project ./src/InitEnvironment/InitEnvironment.csproj -- ${{env.DOTNET_ROOT}}/myapp
+      run: dotnet run --project ./src/InitEnvironment/InitEnvironment.csproj -- ${{env.DOTNET_ROOT}}/root
 
     #- name: Test
     #  run: dotnet test  ./src/DestinySandbox.sln --no-build --verbosity normal
@@ -37,13 +37,13 @@ jobs:
     #  run: dotnet build --configuration Release
 
     - name: dotnet publish
-      run: dotnet publish ./src/SandboxWeb/SandboxWeb.csproj  -o ${{env.DOTNET_ROOT}}/myapp  # -c Release
+      run: dotnet publish ./src/SandboxWeb/SandboxWeb.csproj  -o ${{env.DOTNET_ROOT}}/root/app  # -c Release
 
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v2
       with:
         name: .net-app
-        path: ${{env.DOTNET_ROOT}}/myapp
+        path: ${{env.DOTNET_ROOT}}/root
 #************************
   deploy:
     runs-on: ubuntu-latest
