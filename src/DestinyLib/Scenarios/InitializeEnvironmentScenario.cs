@@ -34,10 +34,11 @@
             }
             else if (arg.Length == 1)
             {
-                Console.WriteLine("Test " + arg[0]);
+                Console.WriteLine($"Arg[0]: '{arg[0]}'");
+                Console.WriteLine(Environment.CurrentDirectory);
 
                 // TODO: This value needs to come from LibEnvironment.
-                await File.Create(Path.Join(arg[0], "root.marker")).DisposeAsync();
+                await File.Create(Path.Join(Environment.CurrentDirectory, arg[0], "root.marker")).DisposeAsync();
 
                 var manifest = new Manifest();
                 await manifest.DownloadWorldSqlContent(arg[0]);
