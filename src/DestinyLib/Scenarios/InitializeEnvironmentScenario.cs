@@ -23,18 +23,29 @@
 
         public static async Task Run(string[] arg)
         {
-            if (arg.Length != 1)
+            if (arg.Length == 0)
+            {
+                Console.WriteLine("Zero args");
+
+                var environmentDirectory = LibEnvironment.EnvironmentDirectory;
+
+                var manifest = new Manifest();
+                await manifest.DownloadWorldSqlContent(environmentDirectory);
+            }
+            else if (arg.Length == 1)
+            {
+                Console.WriteLine("Test " + arg[0]);
+
+                // TODO: This value needs to come from LibEnvironment.
+                await File.Create(Path.Join(arg[0], "root.marker")).DisposeAsync();
+
+                var manifest = new Manifest();
+                await manifest.DownloadWorldSqlContent(arg[0]);
+            }
+            else
             {
                 throw new Exception($"Unexpected number of args: {arg.Length}");
             }
-
-            Console.WriteLine("Test " + arg[0]);
-
-            // TODO: This value needs to come from LibEnvironment.
-            await File.Create(Path.Join(arg[0], "root.marker")).DisposeAsync();
-
-            var manifest = new Manifest();
-            await manifest.DownloadWorldSqlContent(arg[0]);
         }
 
         public static string Test()
