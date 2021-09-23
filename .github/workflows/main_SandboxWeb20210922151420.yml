@@ -28,7 +28,7 @@ jobs:
       run: dotnet build  ./src/DestinySandbox.sln --no-restore
 
     - name: Initialize Local Environment
-      run: dotnet run --project ./src/InitEnvironment/InitEnvironment.csproj -- C:\TEMP
+      run: dotnet run --project ./src/InitEnvironment/InitEnvironment.csproj -- ${{env.DOTNET_ROOT}}/myapp
 
     #- name: Test
     #  run: dotnet test  ./src/DestinySandbox.sln --no-build --verbosity normal
