@@ -35,7 +35,15 @@
             else if (arg.Length == 1)
             {
                 Console.WriteLine($"Arg[0]: '{arg[0]}'");
-                Console.WriteLine(Environment.CurrentDirectory);
+
+                void print(string x)
+                {
+                    Console.WriteLine($"{x}, Exists: {Directory.Exists(x)}");
+                }
+
+                print(Environment.CurrentDirectory);
+
+                print(Path.Join(Environment.CurrentDirectory, arg[0]));
 
                 // TODO: This value needs to come from LibEnvironment.
                 await File.Create(Path.Join(Environment.CurrentDirectory, arg[0], "root.marker")).DisposeAsync();
