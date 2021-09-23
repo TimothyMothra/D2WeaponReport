@@ -1,6 +1,7 @@
 namespace SandboxWeb
 {
     using System.IO;
+    using System.Reflection;
 
     using DestinyLib;
     using DestinyLib.Database;
@@ -15,6 +16,8 @@ namespace SandboxWeb
     {
         public Startup(IConfiguration configuration)
         {
+            this.InitializeEnvironment();
+
             this.Configuration = configuration;
         }
 
@@ -65,6 +68,14 @@ namespace SandboxWeb
             var worldSqlContentProvider = new WorldSqlContentProvider(worldSqlContent, new ProviderOptions { EnableCaching = true });
 
             services.AddSingleton<WorldSqlContentProvider>(worldSqlContentProvider);
+        }
+
+        public void InitializeEnvironment()
+        {
+            var dllDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+            var runTask = DestinyLib.Scenarios.InitializeEnvironmentScenario.Run(new[] { dllDirectory });
+            runTask.Wait();
         }
     }
 }

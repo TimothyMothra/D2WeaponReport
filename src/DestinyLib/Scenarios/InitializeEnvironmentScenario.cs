@@ -36,26 +36,33 @@
             {
                 Console.WriteLine($"Arg[0]: '{arg[0]}'");
 
-                static void Printd(string x) => Console.WriteLine($"{x}, Exists: {Directory.Exists(x)}");
-                static void Printf(string x) => Console.WriteLine($"{x}, Exists: {File.Exists(x)}");
+                var fi = arg[0].EndsWith("root.marker")
+                    ? new FileInfo(arg[0])
+                    : new FileInfo(Path.Combine(arg[0], "root.marker"));
 
-                Printd(Environment.CurrentDirectory);
-                Printd(arg[0]);
-
-                if (!Directory.Exists(arg[0]))
+                // SELF INITAILIZE: THIS IS DANGEROUS
+                if (fi.Exists)
                 {
-                    Directory.CreateDirectory(arg[0]);
+                    // TODO: This value needs to come from LibEnvironment.
+                    var di = new DirectoryInfo(Path.Combine(fi.Directory.FullName, "environment"));
+
+                    if (!di.Exists)
+                    {
+                        di.Create();
+                    }
+                    else
+                    {
+                        di.Delete(recursive: true);
+                        di.Create();
+                    }
+
+                    var manifest = new Manifest();
+                    await manifest.DownloadWorldSqlContent(di.FullName);
                 }
-
-                Printd(arg[0]);
-
-                // TODO: This value needs to come from LibEnvironment.
-                File.Create(Path.Combine(arg[0], "root.marker")); //.DisposeAsync();
-
-                Printf(Path.Combine(arg[0], "root.marker"));
-
-                var manifest = new Manifest();
-                await manifest.DownloadWorldSqlContent(arg[0]);
+                else
+                {
+                    throw new ArgumentException($"root.marker not found. '{arg[0]}'");
+                }
             }
             else
             {

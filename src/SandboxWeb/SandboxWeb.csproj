@@ -10,4 +10,10 @@
     <ProjectReference Include="..\DestinyLib\DestinyLib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="root.marker">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
