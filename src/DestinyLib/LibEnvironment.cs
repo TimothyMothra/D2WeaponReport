@@ -54,6 +54,8 @@
             }
             else if (files.Length == 0)
             {
+                Console.WriteLine($"DirectoryInfo: {di.FullName}");
+
                 throw new Exception("Environment has not been initialized");
             }
             else
@@ -74,7 +76,7 @@
                 }
             }
 
-            return null;
+            throw new FileNotFoundException($"Could not find MarkerFile {MarkerFileName} in relative directory to assembly: {assemblyLocation}");
         }
     }
 }
