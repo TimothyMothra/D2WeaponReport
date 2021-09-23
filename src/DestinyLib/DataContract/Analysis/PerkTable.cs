@@ -29,11 +29,11 @@
             }
         }
 
-        private WeaponMetaData WeaponDefinitionMetaData { get; set; }
-
         public IList<WeaponStatDefinition> Stats { get; set; }
 
         public WeaponPerkSetDefinition PerkSet { get; set; }
+
+        private WeaponMetaData WeaponDefinitionMetaData { get; set; }
 
         private Dictionary<uint, int> StatsToColumnIndex { get; set; }
 
@@ -44,7 +44,7 @@
 
         public List<string> GetIconUris()
         {
-            List<string> iconUris = new List<string>(this.PerkSet.Values.Count);
+            var iconUris = new List<string>(this.PerkSet.Values.Count);
             foreach (var perk in this.PerkSet.Values)
             {
                 iconUris.Add(new Uri(LibEnvironment.GetDestinyHost(), perk.MetaData.IconPath).AbsoluteUri);
@@ -76,7 +76,7 @@
             int numberOfColumns = this.Stats.Count + 1;
 
             // enumerate perks and populate statContainer
-            List<List<string>> rows = new List<List<string>>(this.PerkSet.Values.Count);
+            var rows = new List<List<string>>(this.PerkSet.Values.Count);
             foreach (var perk in this.PerkSet.Values)
             {
                 var tempRow = new string[numberOfColumns];

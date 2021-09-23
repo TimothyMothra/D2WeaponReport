@@ -37,7 +37,7 @@ jobs:
     #  run: dotnet build --configuration Release
 
     - name: dotnet publish
-      run: dotnet publish ./src/SandboxWeb/SandboxWeb.csproj  -o ${{env.DOTNET_ROOT}}/myapp # -c Release
+      run: dotnet publish ./src/SandboxWeb/SandboxWeb.csproj  -o ${{env.DOTNET_ROOT}}/myapp -c Release
 
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v2

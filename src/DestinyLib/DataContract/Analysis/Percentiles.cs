@@ -1,10 +1,8 @@
 ﻿namespace DestinyLib.DataContract.Analysis
 {
-    using System.Collections.Generic;
-
     using System;
+    using System.Collections.Generic;
     using System.Linq;
-
     using StatisticsApi = MathNet.Numerics.Statistics.Statistics;
 
     public class Percentiles
@@ -61,7 +59,7 @@
         {
             if (value > this.Maximum)
             {
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException(nameof(value), "Exceeds Maximum");
             }
             else if (value > this.ThirdQuartile)
             {
@@ -81,7 +79,7 @@
             }
             else //if (value < this.Minimum)
             {
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException(nameof(value), "Unexpected value");
             }
         }
     }
