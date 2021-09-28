@@ -1,7 +1,9 @@
 
 # DestinySandbox
 
-![main branch](https://github.com/TimothyMothra/DestinySandbox/actions/workflows/BuildAndTest.yml/badge.svg?branch=main&event=push)
+[![.NET Build And Test](https://github.com/TimothyMothra/DestinySandbox/actions/workflows/BuildAndTest.yml/badge.svg)](https://github.com/TimothyMothra/DestinySandbox/actions/workflows/BuildAndTest.yml)
+
+[![Build and Deploy](https://github.com/TimothyMothra/DestinySandbox/actions/workflows/main_SandboxWeb20210922151420.yml/badge.svg)](https://github.com/TimothyMothra/DestinySandbox/actions/workflows/main_SandboxWeb20210922151420.yml)
 
 ## Resources
 
