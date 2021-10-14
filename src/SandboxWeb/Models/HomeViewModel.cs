@@ -32,11 +32,7 @@
 
             public string BaseValue { get; set; }
 
-            public string PerkPermutationMaxValuesAsCSV { get; set; }
-
-            public int PerkPermutationCount { get; set; }
-
-            public List<string> PerkPermutationDisplayStrings { get; set; }
+            public List<PerkPermutationAnalysis> PerkPermutationAnalysisList { get; set; }
 
             public IList<StatPermutationPercentiles> StatPermutationPercentiles { get; internal set; }
 

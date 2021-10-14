@@ -112,12 +112,10 @@
 
                 BaseValue = null, // weaponSummary.Statistics.Base.ToString(), // TODO: this needs to come from the weapon definition, not the perk summary
 
-                StatPermutationPercentiles = statPermutationPercentiles, //TODO: I WANT TO KEEP THIS FOR FUTURE WORK
+                StatPermutationPercentiles = statPermutationPercentiles, // TODO: I WANT TO KEEP THIS FOR FUTURE WORK
 
-                // Needed for Box Plot (https://en.wikipedia.org/wiki/Box_plot).
-                PerkPermutationMaxValuesAsCSV = string.Join(",", perkPermutationAnalysisList.OrderByDescending(x => x.MaxPoints).Select(x => x.MaxPoints).AsEnumerable()),
-                PerkPermutationCount = perkPermutationAnalysisList.Count,
-                PerkPermutationDisplayStrings = perkPermutationAnalysisList.OrderByDescending(x => x.MaxPoints).Select(x => x.ToDisplayString()).ToList(),
+                // Needed for Box Plot and PermutationList (https://en.wikipedia.org/wiki/Box_plot).
+                PerkPermutationAnalysisList = perkPermutationAnalysisList,
             };
             return viewModel;
         }
