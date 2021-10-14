@@ -130,13 +130,11 @@ Examples:
 
     @*WeaponDetails Header: MetaData *@
     <div>
-        <img src="@Html.Raw(this.Model.WeaponDetails.MetaData.ScreenshotUri)" alt="screenshot" width="600">
-
-        @*<p>Base Points: @Html.DisplayFor(x => x.WeaponDetails.BaseValue)</p>*@
+        <img src="@Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.GetScreenshotUri().AbsoluteUri)" alt="screenshot" width="600">
 
         <p>Number of Permutations @Html.DisplayFor(x => x.WeaponDetails.PerkPermutationAnalysisList.Count)</p>
 
-        <p id="weaponName" style="display:none">@Html.DisplayFor(x => x.WeaponDetails.MetaData.Name)</p>
+        <p id="weaponName" style="display:none">@Html.DisplayFor(x => x.WeaponDetails.WeaponDefinition.MetaData.Name)</p>
 
         <p id="permutations" style="display:none">
             @Html.Raw(string.Join(",", this.Model.WeaponDetails.PerkPermutationAnalysisList.OrderByDescending(x => x.MaxPoints).Select(x => x.MaxPoints).AsEnumerable()))
@@ -195,71 +193,80 @@ Examples:
     }
 
     @*WeaponDetails Body: Permutations *@
-<div>
-    <div id="plotDiv" style="width:600px;height:500px;"></div>
+    <div>
+        <div id="plotDiv" style="width:600px;height:500px;"></div>
 
-    <script lang="javascript">
-        // https://github.com/plotly/plotly.js
-        // https://plotly.com/javascript/box-plots/
+        <script lang="javascript">
+            // https://github.com/plotly/plotly.js
+            // https://plotly.com/javascript/box-plots/
 
-        var weaponName = document.getElementById("weaponName").innerText;
-        var permutations = document.getElementById("permutations").innerText.split(',');
+            var weaponName = document.getElementById("weaponName").innerText;
+            var permutations = document.getElementById("permutations").innerText.split(',');
 
-        var data = [
-            {
-                type: 'box',
-                y: permutations,
-                name: '+/- points',
-                boxpoints: 'all',
-                jitter: 0.5,
-                whiskerwidth: 0.2,
-                fillcolor: 'cls',
-                marker: {
-                    size: 2
-                },
-                line: {
-                    width: 1
+            var data = [
+                {
+                    type: 'box',
+                    y: permutations,
+                    name: '+/- points',
+                    boxpoints: 'all',
+                    jitter: 0.5,
+                    whiskerwidth: 0.2,
+                    fillcolor: 'cls',
+                    marker: {
+                        size: 2
+                    },
+                    line: {
+                        width: 1
+                    }
                 }
-            }
-        ];
+            ];
 
-        var layout = {
-            title: weaponName,
-            yaxis: {
-                autorange: true,
-                showgrid: true,
-                zeroline: true,
-                dtick: 5,
-                //gridcolor: 'rgb(255, 255, 255)',
-                gridwidth: 1,
-                zerolinecolor: 'rgb(255, 255, 255)',
-                zerolinewidth: 2
-            },
-            margin: {
-                l: 40,
-                r: 30,
-                b: 80,
-                t: 100
-            },
-            paper_bgcolor: 'rgb(243, 243, 243)',
-            plot_bgcolor: 'rgb(243, 243, 243)',
-            showlegend: false
-        };
+            var layout = {
+                title: weaponName,
+                hovermode: false,
+                clickmode: false,
+                dragmode: false,
+                yaxis: {
+                    autorange: true,
+                    fixedrange: true,
+                    showgrid: true,
+                    zeroline: true,
+                    dtick: 5,
+                    //gridcolor: 'rgb(255, 255, 255)',
+                    gridwidth: 1,
+                    zerolinecolor: 'rgb(255, 255, 255)',
+                    zerolinewidth: 2
+                },
+                xaxis: {
+                    fixedrange: true,
+                },
+                margin: {
+                    l: 40,
+                    r: 30,
+                    b: 80,
+                    t: 100
+                },
+                paper_bgcolor: 'rgb(243, 243, 243)',
+                plot_bgcolor: 'rgb(243, 243, 243)',
+                showlegend: false,
+            };
 
-        Plotly.newPlot('plotDiv', data, layout);
-    </script>
+            Plotly.newPlot('plotDiv', data, layout);
+        </script>
 
-    <p>
-        Max Points: perk permutation (percentile grade).
-        Grades: A = top 25%, B = second 25%, C = third 25%, D = bottom 25%
-    </p>
+        <p>
+            Max Points: perk permutation (percentile grade).
+            Grades: A = top 25%, B = second 25%, C = third 25%, D = bottom 25%
+        </p>
 
-    <div>@await Html.PartialAsync("_PermutationView", this.Model.WeaponDetails.PerkPermutationAnalysisList)</div>
-</div>
+        <div>
+            @await Html.PartialAsync("_PermutationView", this.Model.WeaponDetails.PerkPermutationAnalysisList)
+        </div>
+    </div>
 
     @*WeaponDetails Footer *@
     <div>
-        <img src="@Html.Raw(this.Model.WeaponDetails.MetaData.IconUri)" alt="icon" width="50" height="50">
+        <img src="@Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.GetIconUri().AbsoluteUri)" alt="icon" width="50" height="50">
     </div>
 </div>
 }

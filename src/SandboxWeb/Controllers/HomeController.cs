@@ -101,16 +101,9 @@
 
             var viewModel = new HomeViewModel.WeaponDetailsViewModel()
             {
-                MetaData = new ()
-                {
-                    Name = weaponDefinition.MetaData.Name,
-                    IconUri = weaponDefinition.MetaData.GetIconUri().AbsoluteUri,
-                    ScreenshotUri = weaponDefinition.MetaData.GetScreenshotUri().AbsoluteUri,
-                },
+                WeaponDefinition = weaponDefinition,
 
                 PerkTables = perktables,
-
-                BaseValue = null, // weaponSummary.Statistics.Base.ToString(), // TODO: this needs to come from the weapon definition, not the perk summary
 
                 StatPermutationPercentiles = statPermutationPercentiles, // TODO: I WANT TO KEEP THIS FOR FUTURE WORK
 

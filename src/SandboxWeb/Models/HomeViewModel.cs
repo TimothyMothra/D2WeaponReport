@@ -3,6 +3,7 @@
     using System.Collections.Generic;
 
     using DestinyLib.DataContract.Analysis;
+    using DestinyLib.DataContract.Definitions;
 
     using static DestinyLib.Operations.WeaponPerkTableGenerator;
 
@@ -26,24 +27,13 @@
 
         public class WeaponDetailsViewModel
         {
-            public MetaDataViewModel MetaData { get; set; }
-
             public List<PerkTableViewModel> PerkTables { get; set; }
-
-            public string BaseValue { get; set; }
 
             public List<PerkPermutationAnalysis> PerkPermutationAnalysisList { get; set; }
 
             public IList<StatPermutationPercentiles> StatPermutationPercentiles { get; internal set; }
 
-            public class MetaDataViewModel
-            {
-                public string Name { get; set; }
-
-                public string IconUri { get; set; }
-
-                public string ScreenshotUri { get; set; }
-            }
+            public WeaponDefinition WeaponDefinition { get; internal set; }
         }
 
         public class SearchResultViewModel
