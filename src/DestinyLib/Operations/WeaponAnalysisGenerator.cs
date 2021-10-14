@@ -47,6 +47,7 @@
                 {
                     MaxPoints = CalculateMaxPoints(weaponDefinition, perkHashAndValues),
                     PercentileGrade = CalculatePercentileGrade(statPermutationPercentiles, perkPerm),
+                    StatAndPercentileGrades = CalculateStatAndPercentileGrades(statPermutationPercentiles, perkPerm),
                 });
             }
 
@@ -62,6 +63,25 @@
             return CalculateStatPermutationPercentiles(weaponDefinition, perkPermutations, statPermutations);
         }
 
+        private static List<Tuple<string, PercentileGrade>> CalculateStatAndPercentileGrades(List<StatPermutationPercentiles> statPermutationPercentiles, PerkPermutation perkPermutation)
+        {
+            var namesAndGrades = new List<Tuple<string, PercentileGrade>>();
+
+            var statPermutation = new StatPermutation(perkPermutation);
+
+            foreach (var statPerm in statPermutation.PerkHashAndValues)
+            {
+                var spp = statPermutationPercentiles.SingleOrDefault(x => x.HashId == statPerm.Key);
+                if (spp != null)
+                {
+                    namesAndGrades.Add(new Tuple<string, PercentileGrade>(spp.Name, spp.Percentiles.GetPercentileGrade(statPerm.Value)));
+                }
+            }
+
+            return namesAndGrades;
+        }
+
+        // TODO: SPLIT THIS INTO TWO METHODS
         private static string CalculatePercentileGrade(List<StatPermutationPercentiles> statPermutationPercentiles, PerkPermutation perkPermutation)
         {
             var grades = new List<PercentileGrade>();
