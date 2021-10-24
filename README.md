@@ -24,7 +24,7 @@ This codebase is sloppy because I'm working in short bursts of large rewrites. I
 
 ## Contributing
 
-[Journal](journal/).
+[Journal](journal/)
 
 
 ### Prerequisits
