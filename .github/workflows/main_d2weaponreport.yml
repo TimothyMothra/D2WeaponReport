@@ -63,7 +63,7 @@ jobs:
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'SandboxWeb20210922151420'
-        slot-name: 'production'
+        app-name: 'D2WeaponReport'
+        slot-name: 'Production'
         publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EE9871C4B5CA43C4A27E18E0D106F33A }}
         package: .
