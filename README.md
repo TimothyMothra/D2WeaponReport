@@ -1,4 +1,5 @@
-# D2 Weapon Report (https://www.d2weaponreport.com)
+# D2 Weapon Report 
+https://www.d2weaponreport.com
 
 This repo is a hobby project and practicing the skills/tools/technologies I use in my day job. I'm unable to guarentee any quality service at this time.
 Destiny 2 Weapon Report attempts to objectively grade weapons based on any weapon's metadata. The information provided should not be trusted for actual gameplay.
@@ -20,7 +21,7 @@ Destiny 2 Weapon Report attempts to objectively grade weapons based on any weapo
 
 ## Contributing
 
-Please view the journal  [here](journal/).
+[Journal](journal/).
 
 
 ### Prerequisits
