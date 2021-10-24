@@ -4,7 +4,7 @@ https://www.d2weaponreport.com
 This repo is a hobby project and practicing the skills/tools/technologies I use in my day job. I'm unable to guarentee any quality service at this time.
 Destiny 2 Weapon Report attempts to objectively grade weapons based on any weapon's metadata. The information provided should not be trusted for actual gameplay.
 
-
+This codebase is sloppy because I'm working in short bursts of large rewrites. I define a theory and then start exploring raw data from the manifest while looking for interesting insights. This is very much amateur data science and a learning oportunity for me.
 
 [![.NET Build And Test](https://github.com/TimothyMothra/D2WeaponReport/actions/workflows/BuildAndTest.yml/badge.svg)](https://github.com/TimothyMothra/D2WeaponReport/actions/workflows/BuildAndTest.yml)
 
