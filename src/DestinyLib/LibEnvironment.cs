@@ -25,7 +25,11 @@
 
         public static void MakeRootDirectory(DirectoryInfo rootDirectoryInfo, bool deleteDirectory, out DirectoryInfo envDirectoryInfo)
         {
-            if (rootDirectoryInfo.Exists && deleteDirectory)
+            if (!rootDirectoryInfo.Exists)
+            {
+                rootDirectoryInfo.Create();
+            }
+            else if (rootDirectoryInfo.Exists && deleteDirectory)
             {
                 rootDirectoryInfo.Delete(recursive: true);
                 rootDirectoryInfo.Create();
