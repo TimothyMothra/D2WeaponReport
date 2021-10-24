@@ -2,6 +2,7 @@
 
 On 10/23/2021, I used the free trial to claim a logo from ShutterStock.
 These come with a STANDARD LICENSE.
+
 Source: https://www.shutterstock.com/discover/10-free-stock-images
 
 ## ShutterStock FAQ
