@@ -13,9 +13,34 @@
 <script src="https://cdn.jsdelivr.net/npm/@@tarekraafat/autocomplete.js@10.0.4/dist/autoComplete.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tarekraafat/autocomplete.js@10.1.4/dist/css/autoComplete.01.min.css">
 
-
-Examples:
 <div>
+    Destiny 2 Weapon Report attempts to objectively grade weapons based on any weapon's metadata.
+</div>
+
+<br />
+
+<div>
+    THIS SITE IS A WORK IN PROGRESS and the information shown here should not be trusted.
+    <ul>
+        <li>AutoComplete works with keyboard. Off by one with mouse. Consider switching to jQuery AutoComplete.</li>
+        <li>Values shown are from the database. There are no checks for values exceeding maximum.</li>
+        <li>Any stat where smaller values are better (ex: chargetime) are broken.</li>
+        <li>Math is wrong, need to implement interpolation.</li>
+    </ul>
+</div>
+
+
+
+@*Search by Name or Id*@
+<div class="autoComplete_wrapper">
+    <input id="autoComplete" type="search" dir="ltr" spellcheck=false autocorrect="off" autocomplete="off" autocapitalize="off" tabindex="1">
+</div>
+<input type="button" value="Search" name="no" onclick="ButtonClick_Search()" tabindex="2">
+
+
+
+<div>
+    Examples:
     <ul>
         <li><a href="~/Home/Index/2891672170">Xenoclast IV</a></li>
         <li><a href="~/Home/Index/821154603">Gnawing Hunger</a></li>
@@ -24,21 +49,7 @@ Examples:
     </ul>
 </div>
 
-@*Search by Name or Id*@
-<div class="autoComplete_wrapper">
-    <input id="autoComplete" type="search" dir="ltr" spellcheck=false autocorrect="off" autocomplete="off" autocapitalize="off" tabindex="1">
-</div>
-<input type="button" value="Search" name="no" onclick="ButtonClick_Search()" tabindex="2">
 
-<p>
-    Disclaimer: This is far from finished.
-    <ul>
-        <li>AutoComplete works with keyboard. Off by one with mouse. Consider switching to jQuery AutoComplete.</li>
-        <li>Values shown are from the database. There are no checks for values exceeding maximum.</li>
-        <li>Any stat where smaller values are better (ex: chargetime) are broken.</li>
-        <li>Math is wrong, need to implement interpolation.</li>
-    </ul>
-</p>
 
 <p id="weaponNames" style="display:none">
     @Html.DisplayFor(x => x.WeaponNamesForAutoComplete)
@@ -127,147 +138,147 @@ Examples:
 @*WeaponDetails *@
 @if (this.Model.WeaponDetails != null)
 {
-<div>
-
-    @*WeaponDetails Header: MetaData *@
     <div>
-        <img src="@Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.GetScreenshotUri().AbsoluteUri)" alt="screenshot" width="600">
 
-        <p>Number of Permutations @Html.DisplayFor(x => x.WeaponDetails.PerkPermutationAnalysisList.Count)</p>
-
-        <p id="weaponName" style="display:none">@Html.DisplayFor(x => x.WeaponDetails.WeaponDefinition.MetaData.Name)</p>
-
-        <p id="permutations" style="display:none">
-            @Html.Raw(string.Join(",", this.Model.WeaponDetails.PerkPermutationAnalysisList.OrderByDescending(x => x.MaxPoints).Select(x => x.MaxPoints).AsEnumerable()))
-        </p>
-
-        @*Weapon Stats*@
-        <p>Stats - Base Value - Percentiles (min, first quartile, median, third quartile, max)</p>
-        <ul>
-            @foreach (var stat in this.Model.WeaponDetails.StatPermutationPercentiles)
-            {
-                <li>@Html.Raw(stat.Name): @Html.Raw(stat.BaseValue) @Html.Raw(stat.Percentiles)</li>
-            }
-        </ul>
-
-    </div>
-
-    @*WeaponDetails Body: Perks *@
-    @foreach (var perkTable in this.Model.WeaponDetails.PerkTables)
-    {
+        @*WeaponDetails Header: MetaData *@
         <div>
-            <p>@perkTable.TableDisplayName </p>
+            <img src="@Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.GetIconUri().AbsoluteUri)" alt="icon" width="50" height="50">
+            <h2>@Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.Name)</h2>
+            <p>@Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.TypeName)</p>
+            <p>@Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.FrameName)</p>
+            <p>@Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.FlavorText)</p>
+            <img src="@Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.GetScreenshotUri().AbsoluteUri)" alt="screenshot" width="600">
 
-            <table>
-                <tr style="border: 1px solid white;">
-                    <td></td> @*empty for icons*@
-                    @foreach (var cell in perkTable.HeaderRow)
-                    {
-                        <td>@cell</td>
-                    }
-                </tr>
+            <p>Number of Permutations @Html.DisplayFor(x => x.WeaponDetails.PerkPermutationAnalysisList.Count)</p>
 
+            <p id="weaponName" style="display:none">@Html.DisplayFor(x => x.WeaponDetails.WeaponDefinition.MetaData.Name)</p>
 
+            <p id="permutations" style="display:none">
+                @Html.Raw(string.Join(",", this.Model.WeaponDetails.PerkPermutationAnalysisList.OrderByDescending(x => x.MaxPoints).Select(x => x.MaxPoints).AsEnumerable()))
+            </p>
 
-                @for (int i = 0; i < perkTable.Rows.Count; i++)
+            @*Weapon Stats*@
+            <p>Stats - Base Value - Percentiles (min, first quartile, median, third quartile, max)</p>
+            <ul>
+                @foreach (var stat in this.Model.WeaponDetails.StatPermutationPercentiles)
                 {
+                    <li>@Html.Raw(stat.Name): @Html.Raw(stat.BaseValue) @Html.Raw(stat.Percentiles)</li>
+                }
+            </ul>
 
+        </div>
+
+        @*WeaponDetails Body: Perks *@
+        @foreach (var perkTable in this.Model.WeaponDetails.PerkTables)
+        {
+            <div>
+                <p>@perkTable.TableDisplayName </p>
+
+                <table>
                     <tr style="border: 1px solid white;">
-
-
-                        <td>
-
-                            <img src="@Html.Raw(perkTable.IconUris[i])" alt="icon" width="50">
-
-                        </td>
-
-                        @foreach (var cell in perkTable.Rows[i])
+                        <td></td> @*empty for icons*@
+                        @foreach (var cell in perkTable.HeaderRow)
                         {
                             <td>@cell</td>
                         }
                     </tr>
-                }
-            </table>
-        </div>
 
-        <br />
-    }
 
-    @*WeaponDetails Body: Permutations *@
-    <div>
-        <div id="plotDiv" style="width:600px;height:500px;"></div>
 
-        <script lang="javascript">
-            // https://github.com/plotly/plotly.js
-            // https://plotly.com/javascript/box-plots/
+                    @for (int i = 0; i < perkTable.Rows.Count; i++)
+                    {
 
-            var weaponName = document.getElementById("weaponName").innerText;
-            var permutations = document.getElementById("permutations").innerText.split(',');
+                        <tr style="border: 1px solid white;">
 
-            var data = [
-                {
-                    type: 'box',
-                    y: permutations,
-                    name: '+/- points',
-                    boxpoints: 'all',
-                    jitter: 0.5,
-                    whiskerwidth: 0.2,
-                    fillcolor: 'cls',
-                    marker: {
-                        size: 2
-                    },
-                    line: {
-                        width: 1
+
+                            <td>
+
+                                <img src="@Html.Raw(perkTable.IconUris[i])" alt="icon" width="50">
+
+                            </td>
+
+                            @foreach (var cell in perkTable.Rows[i])
+                            {
+                                <td>@cell</td>
+                            }
+                        </tr>
                     }
-                }
-            ];
+                </table>
+            </div>
 
-            var layout = {
-                title: weaponName,
-                hovermode: false,
-                clickmode: false,
-                dragmode: false,
-                yaxis: {
-                    autorange: true,
-                    fixedrange: true,
-                    showgrid: true,
-                    zeroline: true,
-                    dtick: 5,
-                    //gridcolor: 'rgb(255, 255, 255)',
-                    gridwidth: 1,
-                    zerolinecolor: 'rgb(255, 255, 255)',
-                    zerolinewidth: 2
-                },
-                xaxis: {
-                    fixedrange: true,
-                },
-                margin: {
-                    l: 40,
-                    r: 30,
-                    b: 80,
-                    t: 100
-                },
-                paper_bgcolor: 'rgb(243, 243, 243)',
-                plot_bgcolor: 'rgb(243, 243, 243)',
-                showlegend: false,
-            };
+            <br />
+        }
 
-            Plotly.newPlot('plotDiv', data, layout);
-        </script>
-
-        <p>
-            Max Points: perk permutation (percentile grade).
-            Grades: A = top 25%, B = second 25%, C = third 25%, D = bottom 25%
-        </p>
-
+        @*WeaponDetails Body: Permutations *@
         <div>
-            @await Html.PartialAsync("_PermutationView", this.Model.WeaponDetails.PerkPermutationAnalysisList)
+            <div id="plotDiv" style="width:600px;height:500px;"></div>
+
+            <script lang="javascript">
+                // https://github.com/plotly/plotly.js
+                // https://plotly.com/javascript/box-plots/
+
+                var weaponName = document.getElementById("weaponName").innerText;
+                var permutations = document.getElementById("permutations").innerText.split(',');
+
+                var data = [
+                    {
+                        type: 'box',
+                        y: permutations,
+                        name: '+/- points',
+                        boxpoints: 'all',
+                        jitter: 0.5,
+                        whiskerwidth: 0.2,
+                        fillcolor: 'cls',
+                        marker: {
+                            size: 2
+                        },
+                        line: {
+                            width: 1
+                        }
+                    }
+                ];
+
+                var layout = {
+                    title: weaponName,
+                    hovermode: false,
+                    clickmode: false,
+                    dragmode: false,
+                    yaxis: {
+                        autorange: true,
+                        fixedrange: true,
+                        showgrid: true,
+                        zeroline: true,
+                        dtick: 5,
+                        //gridcolor: 'rgb(255, 255, 255)',
+                        gridwidth: 1,
+                        zerolinecolor: 'rgb(255, 255, 255)',
+                        zerolinewidth: 2
+                    },
+                    xaxis: {
+                        fixedrange: true,
+                    },
+                    margin: {
+                        l: 40,
+                        r: 30,
+                        b: 80,
+                        t: 100
+                    },
+                    paper_bgcolor: 'rgb(243, 243, 243)',
+                    plot_bgcolor: 'rgb(243, 243, 243)',
+                    showlegend: false,
+                };
+
+                Plotly.newPlot('plotDiv', data, layout);
+            </script>
+
+            <p>
+                Max Points: perk permutation (percentile grade).
+                Grades: A = top 25%, B = second 25%, C = third 25%, D = bottom 25%
+            </p>
+
+            <div>
+                @await Html.PartialAsync("_PermutationView", this.Model.WeaponDetails.PerkPermutationAnalysisList)
+            </div>
         </div>
     </div>
-
-    @*WeaponDetails Footer *@
-    <div>
-        <img src="@Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.GetIconUri().AbsoluteUri)" alt="icon" width="50" height="50">
-    </div>
-</div>
 }
