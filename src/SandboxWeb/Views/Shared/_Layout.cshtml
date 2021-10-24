@@ -3,24 +3,26 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - DestinySandbox</title>
+    @*<title>@ViewData["Title"] - DestinySandbox</title>*@
+    @await Html.PartialAsync("_Favicons")
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <style>
-body {
-  background-image: linear-gradient(to bottom, #000070, #000018);
-  color:white;
-}
+    body {
+        /*background-image: linear-gradient(to bottom, #000070, #000018);*/
+        background-color: #062037;
+        color:white;
+    }
 table {
     color:white;
 }
 </style>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light  border-bottom box-shadow mb-3">@*bg-white*@
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">DestinySandbox</a>
+                <a style=" font-weight: bold; color: white; " class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">D2 Weapon Report</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -28,8 +30,8 @@ table {
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         @*<li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>*@
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>*@
                     </ul>
                 </div>
             </div>
