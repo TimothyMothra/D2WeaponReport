@@ -40,7 +40,7 @@ jobs:
       run: dotnet publish ./src/SandboxWeb/SandboxWeb.csproj  -o ${{ github.workspace }}/root  # -c Release
 
     - name: List files
-      shell: powershell
+      shell: pwsh
       run: |
         Get-ChildItem '${{ github.workspace }}/root' -Recurse -Force | Write-Host
 
