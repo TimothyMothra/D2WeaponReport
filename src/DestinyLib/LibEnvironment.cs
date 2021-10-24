@@ -12,15 +12,36 @@
     {
         public static readonly string EnvironmentDirectory;
 
-        private const string MarkerFileName = "root.marker"; // this file marks the root of the repo.
+        private const string RootMarkerFileName = "root.marker"; // this file marks the root of the repo.
         private const string EnvironmentDirectoryName = "environment";
         private static readonly string RootDirectory;
         private static readonly Uri DestinyHost = new Uri("https://bungie.net");
 
         static LibEnvironment()
         {
-            RootDirectory = GetRootDirectory();
+            RootDirectory = GetRootDirectory().FullName;
             EnvironmentDirectory = GetEnvironmentDirectory();
+        }
+
+        public static void MakeRootDirectory(DirectoryInfo rootDirectoryInfo, bool deleteDirectory, out DirectoryInfo envDirectoryInfo)
+        {
+            if (rootDirectoryInfo.Exists && deleteDirectory)
+            {
+                rootDirectoryInfo.Delete(recursive: true);
+                rootDirectoryInfo.Create();
+            }
+
+            var rootMarkerPath = Path.Combine(rootDirectoryInfo.FullName, RootMarkerFileName);
+            if (!File.Exists(rootMarkerPath))
+            {
+                File.Create(rootMarkerPath);
+            }
+
+            envDirectoryInfo = new DirectoryInfo(Path.Combine(rootDirectoryInfo.FullName, EnvironmentDirectoryName));
+            if (!envDirectoryInfo.Exists)
+            {
+                envDirectoryInfo.Create();
+            }
         }
 
         public static Uri GetDestinyHost() => DestinyHost;
@@ -89,19 +110,19 @@
             }
         }
 
-        private static string GetRootDirectory()
+        public static DirectoryInfo GetRootDirectory()
         {
             var assemblyLocation = Assembly.GetExecutingAssembly().Location;
 
             for (var directory = new DirectoryInfo(assemblyLocation); directory != null; directory = directory.Parent)
             {
-                if (File.Exists(Path.Combine(directory.FullName, MarkerFileName)))
+                if (File.Exists(Path.Combine(directory.FullName, RootMarkerFileName)))
                 {
-                    return directory.FullName;
+                    return directory;
                 }
             }
 
-            throw new FileNotFoundException($"Could not find MarkerFile {MarkerFileName} in relative directory to assembly: {assemblyLocation}");
+            throw new FileNotFoundException($"Could not find MarkerFile {RootMarkerFileName} in relative directory to assembly: {assemblyLocation}");
         }
     }
 }

@@ -21,53 +21,58 @@
         //    await manifest.DownloadWorldSqlContent(environmentDirectory);
         //}
 
-        public static async Task Run(string[] arg)
+        public static async Task Run(DirectoryInfo rootDirectoryInfo, bool deleteDirectory)
         {
-            if (arg.Length == 0)
-            {
-                Console.WriteLine("Zero args");
+            // TODO: NEED ILOGGER AS A PARAM TO OUTPUT STATUS (ex: command line)
 
-                var environmentDirectory = LibEnvironment.EnvironmentDirectory;
+            LibEnvironment.MakeRootDirectory(rootDirectoryInfo, deleteDirectory, out DirectoryInfo envDirectoryInfo);
 
-                var manifest = new Manifest();
-                await manifest.DownloadWorldSqlContent(environmentDirectory);
-            }
-            else if (arg.Length == 1)
-            {
-                Console.WriteLine($"Arg[0]: '{arg[0]}'");
+            var manifest = new Manifest();
+            await manifest.DownloadWorldSqlContent(envDirectoryInfo);
 
-                var fi = arg[0].EndsWith("root.marker")
-                    ? new FileInfo(arg[0])
-                    : new FileInfo(Path.Combine(arg[0], "root.marker"));
+            //if (arg.Length == 0)
+            //{
+            //    Console.WriteLine("Zero args");
 
-                // SELF INITAILIZE: THIS IS DANGEROUS
-                if (fi.Exists)
-                {
-                    // TODO: This value needs to come from LibEnvironment.
-                    var di = new DirectoryInfo(Path.Combine(fi.Directory.FullName, "environment"));
+            //    var environmentDirectory = LibEnvironment.EnvironmentDirectory;
 
-                    if (!di.Exists)
-                    {
-                        di.Create();
-                    }
-                    else
-                    {
-                        di.Delete(recursive: true);
-                        di.Create();
-                    }
+            //    var manifest = new Manifest();
+            //    await manifest.DownloadWorldSqlContent(environmentDirectory);
+            //}
+            //else if (arg.Length == 1)
+            //{
+            //    Console.WriteLine($"Arg[0]: '{arg[0]}'");
 
-                    var manifest = new Manifest();
-                    await manifest.DownloadWorldSqlContent(di.FullName);
-                }
-                else
-                {
-                    throw new ArgumentException($"root.marker not found. '{arg[0]}'");
-                }
-            }
-            else
-            {
-                throw new Exception($"Unexpected number of args: {arg.Length}");
-            }
+            //    var fi = arg[0].EndsWith("root.marker")
+            //        ? new FileInfo(arg[0])
+            //        : new FileInfo(Path.Combine(arg[0], "root.marker"));
+
+            //    // SELF INITAILIZE: THIS IS DANGEROUS
+            //    if (fi.Exists)
+            //    {
+            //        // TODO: This value needs to come from LibEnvironment.
+            //        var di = new DirectoryInfo(Path.Combine(fi.Directory.FullName, "environment"));
+
+            //        if (!di.Exists)
+            //        {
+            //            di.Create();
+            //        }
+            //        else
+            //        {
+            //            di.Delete(recursive: true);
+            //            di.Create();
+            //        }
+
+            //    }
+            //    else
+            //    {
+            //        throw new ArgumentException($"root.marker not found. '{arg[0]}'");
+            //    }
+            //}
+            //else
+            //{
+            //    throw new Exception($"Unexpected number of args: {arg.Length}");
+            //}
         }
 
         public static string Test()

@@ -44,10 +44,11 @@
             return new Uri(this.bungieHostUri, path);
         }
 
-        public async Task DownloadWorldSqlContent(string directory)
+        public async Task DownloadWorldSqlContent(DirectoryInfo directoryInfo)
         {
             try
             {
+                var directory = directoryInfo.FullName;
                 var uri = await this.GetWorldSqlContentUri();
 
                 var fullPath = uri.AbsoluteUri;

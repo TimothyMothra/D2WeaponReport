@@ -16,7 +16,9 @@ namespace SandboxWeb
     {
         public Startup(IConfiguration configuration)
         {
+#if DEBUG
             this.InitializeEnvironment();
+#endif
 
             this.Configuration = configuration;
         }
@@ -70,12 +72,14 @@ namespace SandboxWeb
             services.AddSingleton<WorldSqlContentProvider>(worldSqlContentProvider);
         }
 
+#if DEBUG
         public void InitializeEnvironment()
         {
-            var dllDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var dllDirectoryInfo = new DirectoryInfo(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
 
-            var runTask = DestinyLib.Scenarios.InitializeEnvironmentScenario.Run(new[] { dllDirectory });
+            var runTask = DestinyLib.Scenarios.InitializeEnvironmentScenario.Run(rootDirectoryInfo: dllDirectoryInfo, deleteDirectory: false);
             runTask.Wait();
         }
+#endif
     }
 }
