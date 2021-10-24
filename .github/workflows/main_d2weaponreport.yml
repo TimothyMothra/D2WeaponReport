@@ -39,6 +39,11 @@ jobs:
     - name: dotnet publish
       run: dotnet publish ./src/SandboxWeb/SandboxWeb.csproj  -o ${{ github.workspace }}/root  # -c Release
 
+    - name: List files
+      shell: powershell
+      run: |
+        Get-ChildItem '${{ github.workspace }}/root' -Recurse -Force | Write-Host
+
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v2
       with:
