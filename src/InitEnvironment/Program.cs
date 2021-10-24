@@ -16,6 +16,7 @@
             if (args.Length == 0)
             {
                 Console.WriteLine("**ZERO ARGS RECEIVED");
+                Console.WriteLine("This script will attempt to initialize the repo's environment directory, necessary for unit tests and debugging.");
 
                 var rootDirectoryInfo = DestinyLib.LibEnvironment.GetRootDirectory();
                 Console.WriteLine($"Root dir: '{rootDirectoryInfo.FullName}'");
@@ -25,14 +26,7 @@
             else if (args.Length == 1)
             {
                 var dir = new DirectoryInfo(args[0]);
-                if (dir.Exists)
-                {
-                    await DestinyLib.Scenarios.InitializeEnvironmentScenario.Run(rootDirectoryInfo: dir, deleteDirectory: true);
-                }
-                else
-                {
-                    throw new Exception($"Directory does not exist: '{args[0]}'");
-                }
+                await DestinyLib.Scenarios.InitializeEnvironmentScenario.Run(rootDirectoryInfo: dir, deleteDirectory: true);
             }
             else
             {
