@@ -21,7 +21,6 @@
                 Console.WriteLine($"Root dir: '{rootDirectoryInfo.FullName}'");
 
                 await DestinyLib.Scenarios.InitializeEnvironmentScenario.Run(rootDirectoryInfo: rootDirectoryInfo, deleteDirectory: false);
-
             }
             else if (args.Length == 1)
             {

@@ -18,6 +18,7 @@
         public string PerkNames => string.Join(", ", this.PerkPermutation.WeaponPerkList.Select(x => x.MetaData.Name));
 
         public string PercentileGrade { get; set; }
+
         public List<Tuple<string, PercentileGrade>> StatAndPercentileGrades { get; internal set; }
 
         public string ToDisplayString() => $"{this.MaxPoints}: {this.PerkNames} ({this.PercentileGrade})";

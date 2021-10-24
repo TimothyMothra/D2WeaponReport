@@ -34,6 +34,7 @@
     <AnalysisLevel>latest</AnalysisLevel>
 
     <!-- All warnings should fail in Release configuration. -->
+    <!-- TODO: WarningsAsErrors isn't working for cli -->
     <TreatWarningsAsErrors Condition=" '$(Configuration)' == 'Release' ">true</TreatWarningsAsErrors>
     <TreatWarningsAsErrors Condition=" '$(Configuration)' != 'Release' ">false</TreatWarningsAsErrors>
     <StyleCopTreatErrorsAsWarnings Condition=" '$(Configuration)' == 'Release' ">true</StyleCopTreatErrorsAsWarnings>
