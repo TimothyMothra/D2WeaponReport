@@ -3,7 +3,7 @@
 
 [![.NET Build And Test](https://github.com/TimothyMothra/D2WeaponReport/actions/workflows/BuildAndTest.yml/badge.svg)](https://github.com/TimothyMothra/D2WeaponReport/actions/workflows/BuildAndTest.yml)
 
-[![Build and Deploy](https://github.com/TimothyMothra/D2WeaponReport/actions/workflows/main_SandboxWeb20210922151420.yml/badge.svg)](https://github.com/TimothyMothra/D2WeaponReport/actions/workflows/main_SandboxWeb20210922151420.yml)
+[![Build and Deploy](https://github.com/TimothyMothra/D2WeaponReport/actions/workflows/main_d2weaponreport.yml/badge.svg)](https://github.com/TimothyMothra/D2WeaponReport/actions/workflows/main_d2weaponreport.yml)
 
 ## Resources
 
