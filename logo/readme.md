@@ -3,20 +3,19 @@
 On 10/23/2021, I used the free trial to claim a logo from ShutterStock.
 These come with a STANDARD LICENSE.
 
-Source: https://www.shutterstock.com/discover/10-free-stock-images
-
 ## ShutterStock FAQ
 
-FAQ: How do I get free images on ShutterStock?
+Source: https://www.shutterstock.com/discover/10-free-stock-images
 
+> FAQ: How do I get free images on ShutterStock?
+>
 > With the free trial, you can download up to 10 images for free from our library of over 300 million stock images, illustrations, photos, and vectors.
 > Once you sign up for the trial, browse the curated collections or use the search bar to find the image you want. On the image page, click the red download button to save the image to your computer. The 10 free images are yours to keep regardless of whether you continue or cancel your annual plan.
 
 
-FAQ: How do I download ShutterStock images for free without watermark?
-
-> With the free trial, you can download up to 10 images for free from our library of over 300 million stock images, illustrations, photos, and vectors.
-> Once you sign up for the trial, browse the curated collections or use the search bar to find the image you want. On the image page, click the red download button to save the image to your computer. The 10 free images are yours to keep regardless of whether you continue or cancel your annual plan.
+> FAQ: How do I download ShutterStock images for free without watermark?
+>
+> The free images you download as part of the trial will have their watermarks removed. You can use the images for any project that's covered under our Standard License, including advertising, social media, web sites, and blogs.
 
 
 ## Relevant section of ShutterStock License
