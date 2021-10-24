@@ -10,6 +10,9 @@ This codebase is sloppy because I'm working in short bursts of large rewrites. I
 
 [![Build and Deploy](https://github.com/TimothyMothra/D2WeaponReport/actions/workflows/main_d2weaponreport.yml/badge.svg)](https://github.com/TimothyMothra/D2WeaponReport/actions/workflows/main_d2weaponreport.yml)
 
+<img src="https://flat.badgen.net/dependabot/thepracticaldev/dev.to?icon=dependabot" alt="Dependabot Badge" />
+
+
 ## Resources
 
 - [Official Api Signup](https://www.bungie.net/en/Application/Create)
