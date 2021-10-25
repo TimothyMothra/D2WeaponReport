@@ -49,7 +49,7 @@ jobs:
       with:
         name: .net-app
         path: ${{ github.workspace }}/root
-        retention-days: 2
+        retention-days: 1
 #************************
   deploy:
     runs-on: ubuntu-latest
