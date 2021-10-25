@@ -32,17 +32,18 @@ This codebase is sloppy because I'm working in short bursts of large rewrites. I
 ### Prerequisits
 - .NET v5 SDK (https://dotnet.microsoft.com/download/dotnet/5.0)
 
-### Initialize local environment.
+#### Initialize local environment.
 To get started you must initialze the local environment. 
 This will download the latest manifest db from Bungie.
 Unit tests expect this file.
 
-Run these command using the windows console:
-```
-dotnet run --project .\src\InitEnvironment\InitEnvironment.csproj
-```
+1. Run these command using the windows console:
+   ```
+   dotnet run --project .\src\InitEnvironment\InitEnvironment.csproj
+   ```
 
-Now run this command to execute all tests:
-```
-dotnet test .\src\Tests\Tests.csproj
-```
+2. Now run this command to execute all tests. 
+   This will confirm that the environment has been initialized.
+   ```
+   dotnet test .\src\Tests\Tests.csproj
+   ```
