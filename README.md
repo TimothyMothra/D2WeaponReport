@@ -47,3 +47,5 @@ Unit tests expect this file.
    ```
    dotnet test .\src\Tests\Tests.csproj
    ```
+
+This is a test.
