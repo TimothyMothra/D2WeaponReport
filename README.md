@@ -1,5 +1,6 @@
 # D2 Weapon Report 
 www.d2weaponreport.com
+
 https://twitter.com/D2WeaponReport
 
 This repo is a hobby project and practicing the skills/tools/technologies I use in my day job. I'm unable to guarentee any quality service at this time.
