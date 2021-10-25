@@ -38,7 +38,7 @@ To get started you must initialze the local environment.
 This will download the latest manifest db from Bungie.
 Unit tests expect this file.
 
-1. Run these command using the windows console:
+1. Run these command using the cli:
    ```
    dotnet run --project .\src\InitEnvironment\InitEnvironment.csproj
    ```
