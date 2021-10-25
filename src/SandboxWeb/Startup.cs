@@ -75,10 +75,12 @@ namespace SandboxWeb
 #if DEBUG
         public void InitializeEnvironment()
         {
-            var dllDirectoryInfo = new DirectoryInfo(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+            // TODO: This was causing too many problems so i disabled the self-init.
 
-            var runTask = DestinyLib.Scenarios.InitializeEnvironmentScenario.Run(rootDirectoryInfo: dllDirectoryInfo, deleteDirectory: false);
-            runTask.Wait();
+            //var dllDirectoryInfo = new DirectoryInfo(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+
+            //var runTask = DestinyLib.Scenarios.InitializeEnvironmentScenario.Run(rootDirectoryInfo: dllDirectoryInfo, deleteDirectory: false);
+            //runTask.Wait();
         }
 #endif
     }
