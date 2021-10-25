@@ -5,10 +5,10 @@ name: Build and Deploy
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *' # End of every 
+    - cron: '0 0 * * *' # End of every day
 
 jobs:
-  build:
+  Deployment:
     runs-on: ubuntu-latest
 
     steps:
@@ -44,25 +44,12 @@ jobs:
       run: |
         Get-ChildItem '${{ github.workspace }}/root' -Recurse -Force | Write-Host
 
-    - name: Upload artifact for deployment job
-      uses: actions/upload-artifact@v2
-      with:
-        name: .net-app
-        path: ${{ github.workspace }}/root
-        retention-days: 1
-#************************
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: 'production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
-    steps:
-    - name: Download artifact from build job
-      uses: actions/download-artifact@v2
-      with:
-        name: .net-app
+    #- name: Upload artifact for deployment job
+    #  uses: actions/upload-artifact@v2
+    #  with:
+    #    name: .net-app
+    #    path: ${{ github.workspace }}/root
+    #    retention-days: 1
 
     - name: Deploy to Azure Web App
       id: deploy-to-webapp
@@ -71,4 +58,26 @@ jobs:
         app-name: 'D2WeaponReport'
         slot-name: 'Production'
         publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EE9871C4B5CA43C4A27E18E0D106F33A }}
-        package: .
+        package: ${{ github.workspace }}/root
+#************************
+  #deploy:
+  #  runs-on: ubuntu-latest
+  #  needs: build
+  #  environment:
+  #    name: 'production'
+  #    url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+  #  steps:
+  #  - name: Download artifact from build job
+  #    uses: actions/download-artifact@v2
+  #    with:
+  #      name: .net-app
+
+  #  - name: Deploy to Azure Web App
+  #    id: deploy-to-webapp
+  #    uses: azure/webapps-deploy@v2
+  #    with:
+  #      app-name: 'D2WeaponReport'
+  #      slot-name: 'Production'
+  #      publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EE9871C4B5CA43C4A27E18E0D106F33A }}
+  #      package: .
