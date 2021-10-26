@@ -11,25 +11,20 @@
 
 <!--https://tarekraafat.github.io/autoComplete.js/#/installation-->
 @*<script src="https://cdn.jsdelivr.net/npm/@@tarekraafat/autocomplete.js@10.0.4/dist/autoComplete.min.js"></script>*@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tarekraafat/autocomplete.js@10.1.4/dist/css/autoComplete.01.min.css">
+@*<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tarekraafat/autocomplete.js@10.1.4/dist/css/autoComplete.01.min.css">*@
+
+
 
 <div>
-    Destiny 2 Weapon Report attempts to objectively grade weapons based on any weapon's metadata.
-</div>
-
-<br />
-
-<div>
-    THIS SITE IS A WORK IN PROGRESS and the information shown here should not be trusted for actual gameplay.
+    Examples:
     <ul>
-        <li>AutoComplete works with keyboard. Off by one with mouse/touch. TODO: jQuery AutoComplete.</li>
-        <li>Values shown are from the manifest. TODO: Check min/max.</li>
-        <li>TODO: Stat Interpolation.</li>
-        <li>Bug: Any stat where smaller values are better (ex: chargetime) are broken.</li>
+        <li><a href="~/Home/Index/1622998472">Vulpecula</a></li>
+        <li><a href="~/Home/Index/2891672170">Xenoclast IV</a></li>
+        <li><a href="~/Home/Index/821154603">Gnawing Hunger</a></li>
+        <li><a href="~/Home/Index/3654674561">Dead Man's Tale</a></li>
+        <li><a href="~/Home/Index/3856705927">Hawkmoon</a></li>
     </ul>
 </div>
-
-
 
 @*Search by Name or Id*@
 @*<div class="autoComplete_wrapper">
@@ -37,21 +32,13 @@
     </div>*@
 <div class="ui-widget">
     <label for="tags">Search for Weapon by Name or ID: </label>
+    <br />
     <input id="autoComplete">
     <input type="button" value="Search" name="no" onclick="ButtonClick_Search()" @*tabindex="2"*@>
 </div>
 
 
 
-<div>
-    Examples:
-    <ul>
-        <li><a href="~/Home/Index/2891672170">Xenoclast IV</a></li>
-        <li><a href="~/Home/Index/821154603">Gnawing Hunger</a></li>
-        <li><a href="~/Home/Index/3654674561">Dead Man's Tale</a></li>
-        <li><a href="~/Home/Index/3856705927">Hawkmoon</a></li>
-    </ul>
-</div>
 
 
 
@@ -85,9 +72,7 @@
     </ul>
 }
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+
 <script>
     // TODO: TYPESCRIPT
     function ButtonClick_Search() {
@@ -100,7 +85,7 @@
     var weaponNames = document.getElementById("weaponNames").innerText.split(',');
     console.log(weaponNames);
 
-    
+
     $("#autoComplete").autocomplete({
         source: weaponNames
     });
@@ -167,6 +152,7 @@
         <div>
             <img src="@Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.GetIconUri().AbsoluteUri)" alt="icon" width="50" height="50">
             <h2>@Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.Name)</h2>
+            <p class="text-muted">HashId: @Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.HashId)</p>
             <p>@Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.TypeName)</p>
             <p>@Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.FrameName)</p>
             <p>@Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.FlavorText)</p>
@@ -195,7 +181,7 @@
         @foreach (var perkTable in this.Model.WeaponDetails.PerkTables)
         {
             <div>
-                <p>@perkTable.TableDisplayName </p>
+                <p class="text-muted">@perkTable.TableDisplayName </p>
 
                 <table>
                     <tr style="border: 1px solid white;">
