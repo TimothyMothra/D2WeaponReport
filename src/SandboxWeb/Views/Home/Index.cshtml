@@ -6,15 +6,6 @@
 
 @*// Razor Syntax: https://www.tutorialsteacher.com/mvc/razor-syntax*@
 
-<!-- Latest compiled and minified plotly.js JavaScript -->
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-
-<!--https://tarekraafat.github.io/autoComplete.js/#/installation-->
-@*<script src="https://cdn.jsdelivr.net/npm/@@tarekraafat/autocomplete.js@10.0.4/dist/autoComplete.min.js"></script>*@
-@*<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tarekraafat/autocomplete.js@10.1.4/dist/css/autoComplete.01.min.css">*@
-
-
-
 <div>
     Examples:
     <ul>
@@ -36,11 +27,6 @@
     <input id="autoComplete">
     <input type="button" value="Search" name="no" onclick="ButtonClick_Search()" @*tabindex="2"*@>
 </div>
-
-
-
-
-
 
 <p id="weaponNames" style="display:none">
     @Html.DisplayFor(x => x.WeaponNamesForAutoComplete)
