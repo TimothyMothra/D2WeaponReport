@@ -12,9 +12,9 @@ namespace DestinyLib.DataContract.Definitions
 
         public string ItemTypeId { get; set; }
 
-        public string TypeName { get; set; }
+        public string TypeName { get; set; } = "TODO: TYPE NAME"; // TODO: FIND ITEM TYPE
 
-        public string FrameName { get; set; }
+        public string FrameName { get; set; } = "TODO: FRAME NAME"; // TODO: FIND FRAME NAME
 
         public string FlavorText { get; set; }
 
@@ -39,9 +39,6 @@ namespace DestinyLib.DataContract.Definitions
 
         public Uri GetScreenshotUri() => new Uri(LibEnvironment.GetDestinyHost(), this.ScreenshotPath);
 
-        public override string ToString()
-        {
-            return $"{this.HashId} {this.Name} (TODO: ItemType)"; // TODO: ITEM TYPE
-        }
+        public override string ToString() => $"{this.HashId} {this.Name} {this.TypeName}";
     }
 }

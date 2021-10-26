@@ -112,8 +112,7 @@
                 // TODO: Instead of referencing types to exclude, should identify types to include.
                 // Bungie could introduce new things at anytime that break parsing.
                 if (socketEntryDynamic.socketTypeHash == 1282012138u // ignore Tracker (example: ??)
- // ignore Tracker (example: ??)
-                    || socketEntryDynamic.socketTypeHash == 2575784089u) // ignore Ticuu's Divination "stocks" (example: ??)
+                     || socketEntryDynamic.socketTypeHash == 2575784089u) // ignore Ticuu's Divination "stocks" (example: ??)
                 {
                     continue;
                 }
