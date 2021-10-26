@@ -10,7 +10,7 @@
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 <!--https://tarekraafat.github.io/autoComplete.js/#/installation-->
-<script src="https://cdn.jsdelivr.net/npm/@@tarekraafat/autocomplete.js@10.0.4/dist/autoComplete.min.js"></script>
+@*<script src="https://cdn.jsdelivr.net/npm/@@tarekraafat/autocomplete.js@10.0.4/dist/autoComplete.min.js"></script>*@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tarekraafat/autocomplete.js@10.1.4/dist/css/autoComplete.01.min.css">
 
 <div>
@@ -32,10 +32,14 @@
 
 
 @*Search by Name or Id*@
-<div class="autoComplete_wrapper">
-    <input id="autoComplete" type="search" dir="ltr" spellcheck=false autocorrect="off" autocomplete="off" autocapitalize="off" tabindex="1">
+@*<div class="autoComplete_wrapper">
+        <input id="autoComplete" type="search" dir="ltr" spellcheck=false autocorrect="off" autocomplete="off" autocapitalize="off" tabindex="1">
+    </div>*@
+<div class="ui-widget">
+    <label for="tags">Search for Weapon by Name or ID: </label>
+    <input id="autoComplete">
+    <input type="button" value="Search" name="no" onclick="ButtonClick_Search()" @*tabindex="2"*@>
 </div>
-<input type="button" value="Search" name="no" onclick="ButtonClick_Search()" tabindex="2">
 
 
 
@@ -81,6 +85,9 @@
     </ul>
 }
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 <script>
     // TODO: TYPESCRIPT
     function ButtonClick_Search() {
@@ -93,41 +100,57 @@
     var weaponNames = document.getElementById("weaponNames").innerText.split(',');
     console.log(weaponNames);
 
-    const autoCompleteJS = new autoComplete({
-        selector: "#autoComplete",
-        placeHolder: "Search for Weapon by Name or ID...",
-        data: {
-            src: weaponNames,
-            cache: true,
-        },
-        resultsList: {
-            element: (list, data) => {
-                if (!data.results.length) {
-                    // Create "No Results" message element
-                    const message = document.createElement("div");
-                    // Add class to the created element
-                    message.setAttribute("class", "no_result");
-                    // Add message text content
-                    message.innerHTML = `<span>Found No Results for "${data.query}"</span>`;
-                    // Append message element to the results list
-                    list.prepend(message);
-                }
-            },
-            noResults: true,
-        },
-        resultItem: {
-            highlight: true
-        },
-        events: {
-            input: {
-                selection: (event) => {
-                    const selection = event.detail.selection.value;
-                    autoCompleteJS.input.value = selection;
-                }
-            }
-        },
-        searchEngine: "loose",
+    
+    $("#autoComplete").autocomplete({
+        source: weaponNames
     });
+
+    //// https://miroslavpopovic.com/posts/2012/06/jqueryui-autocomplete-filter-words-starting-with-term
+    //// Overrides the default autocomplete filter function to
+    //// search only from the beginning of the string
+    //$.ui.autocomplete.filter = function (array, term) {
+    //    var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(term), "i");
+    //    return $.grep(array, function (value) {
+    //        return matcher.test(value.label || value.value || value);
+    //    });
+    //};
+
+
+    //const autoCompleteJS = new autoComplete({
+    //    selector: "#autoComplete",
+    //    placeHolder: "Search for Weapon by Name or ID...",
+    //    data: {
+    //        src: weaponNames,
+    //        cache: true,
+    //    },
+    //    resultsList: {
+    //        element: (list, data) => {
+    //            if (!data.results.length) {
+    //                // Create "No Results" message element
+    //                const message = document.createElement("div");
+    //                // Add class to the created element
+    //                message.setAttribute("class", "no_result");
+    //                // Add message text content
+    //                message.innerHTML = `<span>Found No Results for "${data.query}"</span>`;
+    //                // Append message element to the results list
+    //                list.prepend(message);
+    //            }
+    //        },
+    //        noResults: true,
+    //    },
+    //    resultItem: {
+    //        highlight: true
+    //    },
+    //    events: {
+    //        input: {
+    //            selection: (event) => {
+    //                const selection = event.detail.selection.value;
+    //                autoCompleteJS.input.value = selection;
+    //            }
+    //        }
+    //    },
+    //    searchEngine: "loose",
+    //});
 
 </script>
 
