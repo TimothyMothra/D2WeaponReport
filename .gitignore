@@ -349,3 +349,10 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 /environment
+
+# Output directory for compiled Typescript
+/**/**/wwwroot/scripts
+
+# Generated files for debugging Typescript
+/**/scripts/*.js
+/**/scripts/*.map

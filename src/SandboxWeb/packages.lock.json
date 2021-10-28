@@ -2,6 +2,12 @@
   "version": 1,
   "dependencies": {
     ".NETCoreApp,Version=v5.0": {
+      "Microsoft.TypeScript.MSBuild": {
+        "type": "Direct",
+        "requested": "[4.4.4, )",
+        "resolved": "4.4.4",
+        "contentHash": "i8icKQvoxwt2th9y4kBXbNkN+Q9guYRFrNlaEOpBubkcCyX1RhIppVcFe7wM95qGCYCpFslmhidRPqnC9t1Ueg=="
+      },
       "StyleCop.Analyzers": {
         "type": "Direct",
         "requested": "[1.1.118, )",
