@@ -10,21 +10,27 @@ on:
 jobs:
   build_and_test:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
 
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        solution: [./src/DestinySandbox.sln]
+        
     steps:
     - uses: actions/checkout@v2
 
     - uses: actions/setup-node@v2
       with:
-        node-version: '16'
+        node-version: 'lts/*'
         check-latest: true
         cache: 'npm'
         cache-dependency-path: '**/package.lock.json'
-        architecture: ${{ runner.os }}
+        architecture: ${{ matrix.os }}
     - run: npm install
     - run: npm test
-
+    
     - uses: actions/cache@v2
       with:
         path: ~/.nuget/packages
@@ -38,13 +44,13 @@ jobs:
         dotnet-version: 5.0.x
 
     - name: Restore dependencies
-      run: dotnet restore ./src/DestinySandbox.sln --use-lock-file
+      run: dotnet restore ${{ matrix.solution }} --use-lock-file
 
     - name: Build
-      run: dotnet build  ./src/DestinySandbox.sln --no-restore
+      run: dotnet build  ${{ matrix.solution }} --no-restore
 
     - name: Initialize Local Environment
       run: dotnet run --project ./src/InitEnvironment/InitEnvironment.csproj
 
     - name: Test
-      run: dotnet test  ./src/DestinySandbox.sln --no-build --verbosity normal
+      run: dotnet test  ${{ matrix.solution }} --no-build --verbosity normal
