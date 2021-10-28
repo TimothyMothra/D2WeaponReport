@@ -27,7 +27,6 @@ jobs:
         check-latest: true
         cache: 'npm'
         cache-dependency-path: '**/package.lock.json'
-        architecture: ${{ matrix.os }}
     - run: npm install
     - run: npm test
     
