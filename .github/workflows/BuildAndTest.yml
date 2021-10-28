@@ -28,9 +28,9 @@ jobs:
         # cache: 'npm'
         # cache-dependency-path: '**/package.lock.json'
     - run: npm install
+    - run: npm init
     - run: npm test
-      working-directory: ./src
-    
+
     - uses: actions/cache@v2
       with:
         path: ~/.nuget/packages
