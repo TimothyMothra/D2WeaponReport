@@ -8,7 +8,7 @@
   <PropertyGroup>
     <!-- RootMarker identifies the root directory of the repo and is used to dermine all other relative paths. -->
     <RootMarker>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildProjectDirectory), 'root.marker'))</RootMarker>
-    <SourceRoot>$(RootMarker)/src</SourceRoot>
+    <SourceRoot>$(RootMarker)\src</SourceRoot>
   </PropertyGroup>
 
   <PropertyGroup>
