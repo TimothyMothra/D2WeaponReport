@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -17,4 +17,16 @@
     <ProjectReference Include="..\DestinyLib\DestinyLib.csproj" />
   </ItemGroup>
 
+
+  <Target Name="TypescriptVerification" AfterTargets="Build">
+    <PropertyGroup>
+      <ExpectedTypescriptCompiledOutputFile>$(SourceRoot)\SandboxWeb\wwwroot\scripts\1app.js</ExpectedTypescriptCompiledOutputFile>
+    </PropertyGroup>
+    
+    <Message Importance="high" Text="Verify Typescript was compiled and published to wwwroot..." />
+    <Message Importance="high" Text="File: '$(ExpectedTypescriptCompiledOutputFile)' was found." Condition="Exists($(ExpectedTypescriptCompiledOutputFile))" />
+    <Message Importance="high" Text="File: '$(ExpectedTypescriptCompiledOutputFile)' was NOT found! This is configured in 'tsconfig.json'. This could be a problem with either Node or NPM." Condition="!Exists($(ExpectedTypescriptCompiledOutputFile))" />
+    <Error  Text="Typescript compiled output not found: '$(ExpectedTypescriptCompiledOutputFile)'. This is configured in 'tsconfig.json'. This could be a problem with either Node or NPM." Condition="!Exists($(ExpectedTypescriptCompiledOutputFile))" />
+  </Target>
+  
 </Project>
