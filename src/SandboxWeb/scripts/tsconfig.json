@@ -1,23 +1,18 @@
-//{
-//  "compilerOptions": {
-//    "noImplicitAny": true,
-//    "target": "es6",
-//  },
-//  "files": [ "./app.ts" ],
-//}
-
 // This script tells the Typescript "Microsoft.TypeScript.MSBuild" NuGet Package where to find Typscript files in source, and where to publish these compiled files.
 
 {
   "compileOnSave": true,
   "compilerOptions": {
+    //"noImplicitAny": true,
     "noImplicitAny": false,
     "noEmitOnError": true,
     "removeComments": false,
     "sourceMap": true,
+    //"target": "es6",
     "target": "es5",
     "outDir": "../wwwroot/scripts"
   },
+  //"files": [ "./app.ts" ],
   "include": [
     "./**/*"
   ]
