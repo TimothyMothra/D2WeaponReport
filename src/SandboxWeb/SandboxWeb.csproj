@@ -21,7 +21,6 @@
     <Folder Include="wwwroot\scripts\" />
   </ItemGroup>
 
-
   <Target Name="TypescriptVerification" BeforeTargets="Build">
     <PropertyGroup>
       <ExpectedTypescriptCompiledOutputFile>$(SourceRoot)\SandboxWeb\wwwroot\scripts\app.js</ExpectedTypescriptCompiledOutputFile>
