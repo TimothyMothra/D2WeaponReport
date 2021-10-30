@@ -22,7 +22,7 @@
   </ItemGroup>-->
 
   
-  
+  <!-- https://www.meziantou.net/running-npm-tasks-when-building-a-dotnet-project.htm -->
   <!--
       1. Install npm packages
       "Inputs" and "Outputs" are used for incremental builds. If all output items are up-to-date, MSBuild skips the target.
