@@ -60,9 +60,7 @@ jobs:
 
     - name: Verify Typescript Output
       shell: pwsh
-      run: |
-        exit Test-Path -Path ${{ env.TYPESCRIPT_OUTPUT_FILE }} -PathType Leaf
-        exit $LastExitCode
+      run: if (Test-Path -Path ${{ env.TYPESCRIPT_OUTPUT_FILE }} -PathType Leaf) { throw "Not Found" }
 
     - name: Dotnet Run - Initialize Local Environment
       run: dotnet run --project ./src/InitEnvironment/InitEnvironment.csproj
