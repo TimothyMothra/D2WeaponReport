@@ -20,16 +20,47 @@
   <ItemGroup>
     <Folder Include="wwwroot\scripts\" />
   </ItemGroup>
-
-  <Target Name="TypescriptVerification" BeforeTargets="Build">
+      
+  <Target Name="TypescriptVerification" AfterTargets="AfterBuild" DependsOnTargets="AfterBuild">
+    <!--This works after Build, but not after Rebuild. -->
+      
     <PropertyGroup>
-      <ExpectedTypescriptCompiledOutputFile>$(SourceRoot)\SandboxWeb\wwwroot\scripts\app.js</ExpectedTypescriptCompiledOutputFile>
+      <ExpectedTypescriptOutput_JS>$(SourceRoot)\SandboxWeb\wwwroot\scripts\app.js</ExpectedTypescriptOutput_JS>
+      <ExpectedTypescriptOutput_TS>$(SourceRoot)\SandboxWeb\wwwroot\scripts\app.ts</ExpectedTypescriptOutput_TS>
+      <ExpectedTypescriptOutput_JS_MAP>$(SourceRoot)\SandboxWeb\wwwroot\scripts\app.js.map</ExpectedTypescriptOutput_JS_MAP>
     </PropertyGroup>
     
     <Message Importance="high" Text="Verify Typescript was compiled and published to wwwroot..." />
-    <Message Importance="high" Text="File: '$(ExpectedTypescriptCompiledOutputFile)' was found." Condition="Exists($(ExpectedTypescriptCompiledOutputFile))" />
-    <Message Importance="high" Text="File: '$(ExpectedTypescriptCompiledOutputFile)' was NOT found! This is configured in 'tsconfig.json'. This could be a problem with either Node or NPM." Condition="!Exists($(ExpectedTypescriptCompiledOutputFile))" />
-    <Error Text="Typescript compiled output not found: '$(ExpectedTypescriptCompiledOutputFile)'. This is configured in 'tsconfig.json'. This could be a problem with either Node or NPM." Condition="!Exists($(ExpectedTypescriptCompiledOutputFile))" />
+    
+    <Message Importance="high" Text="File: '$(ExpectedTypescriptOutput_JS)' was found." Condition="Exists($(ExpectedTypescriptOutput_JS))" />
+    <Message Importance="high" Text="File: '$(ExpectedTypescriptOutput_JS)' was NOT found! This is configured in 'tsconfig.json'. This could be a problem with either Node or NPM. Also try restoring package.json." Condition="!Exists($(ExpectedTypescriptOutput_JS))" />
+    <Error Text="Typescript compiled output not found: '$(ExpectedTypescriptOutput_JS)'. This is configured in 'tsconfig.json'. This could be a problem with either Node or NPM. Also try restoring package.json." Condition="!Exists($(ExpectedTypescriptOutput_JS))" />
+
+    <Message Importance="high" Text="File: '$(ExpectedTypescriptOutput_JS_MAP)' was found." Condition="Exists($(ExpectedTypescriptOutput_JS_MAP))" />
+    <Message Importance="high" Text="File: '$(ExpectedTypescriptOutput_JS_MAP)' was NOT found! This is configured in 'tsconfig.json'. This could be a problem with either Node or NPM. Also try restoring package.json." Condition="!Exists($(ExpectedTypescriptOutput_JS_MAP))" />
+    <Error Text="Typescript compiled output not found: '$(ExpectedTypescriptOutput_JS_MAP)'. This is configured in 'tsconfig.json'. This could be a problem with either Node or NPM. Also try restoring package.json." Condition="!Exists($(ExpectedTypescriptOutput_JS_MAP))" />
+
+    <Message Importance="high" Text="File: '$(ExpectedTypescriptOutput_TS)' was found." Condition="Exists($(ExpectedTypescriptOutput_TS))" />
+    <Message Importance="high" Text="File: '$(ExpectedTypescriptOutput_TS)' was NOT found! This is configured in 'tsconfig.json'. This could be a problem with either Node or NPM. Also try restoring package.json." Condition="!Exists($(ExpectedTypescriptOutput_TS))" />
+    <Error Text="Typescript compiled output not found: '$(ExpectedTypescriptOutput_TS)'. This is configured in 'tsconfig.json'. This could be a problem with either Node or NPM. Also try restoring package.json." Condition="!Exists($(ExpectedTypescriptOutput_TS))" />
+
+
+    <!--<VerifyTypescriptOutput FilePath="$(ExpectedTypescriptOutput_JS)" />
+    <VerifyTypescriptOutput FilePath="$(ExpectedTypescriptOutput_TS)" />
+    <VerifyTypescriptOutput FilePath="$(ExpectedTypescriptOutput_JS_MAP)" />-->
+
   </Target>
+
+  <!--<UsingTask TaskName="VerifyTypescriptOutput">
+    <ParameterGroup>
+      <FilePath ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Message Importance="high" Text="Verify Typescript was compiled and published to wwwroot..." />
+      <Message Importance="high" Text="File: '$(FilePath)' was found." Condition="Exists($(FilePath))" />
+      <Message Importance="high" Text="File: '$(FilePath)' was NOT found! This is configured in 'tsconfig.json'. This could be a problem with either Node or NPM." Condition="!Exists($(FilePath))" />
+      <Error Text="Typescript compiled output not found: '$(FilePath)'. This is configured in 'tsconfig.json'. This could be a problem with either Node or NPM." Condition="!Exists($(FilePath))" />  
+    </Task> 
+  </UsingTask>-->
   
 </Project>
