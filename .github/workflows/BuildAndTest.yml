@@ -33,8 +33,7 @@ jobs:
         node-version: 'lts/*'
         check-latest: true
         cache: 'npm'
-        cache-dependency-path: './src/SandboxWeb/package.lock.json'
-      working-directory: ${{ env.WEB_DIRECTORY }}
+        cache-dependency-path: ./src/SandboxWeb/package.lock.json
 
     - run: npm install
       working-directory: ${{ env.WEB_DIRECTORY }}
