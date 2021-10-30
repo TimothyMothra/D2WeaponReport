@@ -12,18 +12,16 @@ jobs:
 
     runs-on: ${{ matrix.os }}
     
-    
     env: # These variables are available to the entire job.
       DAY_OF_WEEK: Mon
-      SOLUTION: [./src/DestinySandbox.sln]
-      WEB_DIRECTORY: [./src/SandboxWeb]
-      TYPESCRIPT_OUTPUT_FILE: [./src/SandboxWeb/wwwroot/scripts/app.js]
+      SOLUTION: ./src/DestinySandbox.sln
+      WEB_DIRECTORY: ./src/SandboxWeb
+      TYPESCRIPT_OUTPUT_FILE: ./src/SandboxWeb/wwwroot/scripts/app.js
     
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        
         
     steps:
     - uses: actions/checkout@v2
