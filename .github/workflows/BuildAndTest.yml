@@ -58,11 +58,16 @@ jobs:
 
      - name: Verify Typescript Output
        shell: pwsh
-       run: |
-         if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js -PathType Leaf)) { throw "Compiled Typescript Not Found .JS" }
-         if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js_map -PathType Leaf)) { throw "Compiled Typescript Not Found .JS_MAP" }
-         if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.ts -PathType Leaf)) { throw "Compiled Typescript Not Found .TS" }
-
+       run: if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js -PathType Leaf)) { throw "Compiled Typescript Not Found .JS" }
+       
+     - name: Verify Typescript Output
+       shell: pwsh
+       run: if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js -PathType Leaf)) { throw "Compiled Typescript Not Found .JS_MAP" }
+       
+     - name: Verify Typescript Output
+       shell: pwsh
+       run: if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js -PathType Leaf)) { throw "Compiled Typescript Not Found .TS" }
+       
     - name: Dotnet Run Initialize Local Environment
       run: dotnet run --project ./src/InitEnvironment/InitEnvironment.csproj
 
