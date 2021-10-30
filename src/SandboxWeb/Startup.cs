@@ -49,7 +49,7 @@ namespace SandboxWeb
             }
 
             app.UseHttpsRedirection();
-            app.UseDefaultFiles(); // added to compile Typescript?
+            //app.UseDefaultFiles(); // added to compile Typescript?
             app.UseStaticFiles();
 
             app.UseRouting();
