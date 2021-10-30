@@ -26,14 +26,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-#### SETUP NODE, NPM, AND COMPILE TYPESCRIPT # EVERYTHING SEEMS TO WORK CORRECTLY. I'M GOING TO BREAK MORE THINGCS NEXT
+#### SETUP NODE, NPM, AND COMPILE TYPESCRIPT 
 
     - uses: actions/setup-node@v2
       with:
         node-version: 'lts/*'
         check-latest: true
-#        cache: 'npm'
-#        cache-dependency-path: './src/SandboxWeb/package.lock.json'
+        cache: 'npm'
+        cache-dependency-path: './src/SandboxWeb/package.lock.json'
     - run: npm install
       working-directory: ${{ env.WEB_DIRECTORY }}
 
