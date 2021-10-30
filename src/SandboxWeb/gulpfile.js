@@ -12,7 +12,6 @@ gulp.task("clean", function () {
     return del(["wwwroot/scripts/**/*"]);
 });
 gulp.task("default", function (done) {
-    console.log("default is run.")
     gulp.src(paths.scripts).pipe(gulp.dest("wwwroot/scripts"));
     done();
 });
