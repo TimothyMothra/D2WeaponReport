@@ -1,11 +1,14 @@
 {
-  "_comment": "This file is the NPM configuration.",
+  "description": "This file is the NPM configuration.",
   "version": "1.0.0",
   "name": "asp.net",
   "private": true,
   "devDependencies": {
-    "gulp": "4.0.2",
-    "del": "5.1.0",
-    "@types/jquery": "3.3.33"
+    "@types/jquery": "^3.3.33",
+    "del": "^5.1.0",
+    "gulp": "^4.0.2"
+  },
+  "dependencies": {
+    "jquery": "^3.6.0"
   }
 }
