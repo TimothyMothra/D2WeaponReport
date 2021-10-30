@@ -33,7 +33,8 @@ jobs:
         node-version: 'lts/*'
         check-latest: true
         cache: 'npm'
-        cache-dependency-path: ./src/SandboxWeb/package.lock.json
+        cache-dependency-path: ./src/SandboxWeb/package-lock.json
+        # "C:\REPOS\D2WeaponReport\src\SandboxWeb\package-lock.json"
 
     - run: npm install
       working-directory: ${{ env.WEB_DIRECTORY }}
