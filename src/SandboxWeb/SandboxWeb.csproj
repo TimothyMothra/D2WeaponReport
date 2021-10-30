@@ -21,6 +21,7 @@
     <Folder Include="wwwroot\scripts\" />
   </ItemGroup>
 
+
   <Target Name="TypeScriptVerification" AfterTargets="AfterCompile" DependsOnTargets="AfterCompile"> <!--Condition="$(TypeScriptEnabled) == 'true'"-->
   <!--<Target Name="TypeScriptVerification" AfterTargets="GetTypeScriptCopyToOutputDirectoryItems" DependsOnTargets="GetTypeScriptCopyToOutputDirectoryItems"> --><!--Condition="$(TypeScriptEnabled) == 'true'"-->
     <!--DependsOnTargets BeforeBuild;CoreBuild;AfterBuild-->
@@ -43,7 +44,9 @@
     <VerifyTypescriptOutput FilePath="$(ExpectedTypescriptOutput_JS_MAP)" />
     <VerifyTypescriptOutput FilePath="$(ExpectedTypescriptOutput_TS)" />-->
 
-
+    <!--<Exec Command="gulp" />-->
+    <Exec Command="npm install" />
+    
     <Message Importance="high" Text="$(MSBuildProjectName): Run $(TypeScriptVerification_Name) - $(TypeScriptVerification_Description)" />
     <Message Importance="high" Text="$(TypeScriptVerification_Name) passed." Condition="Exists($(ExpectedTypescriptOutput_JS)) and Exists($(ExpectedTypescriptOutput_JS_MAP)) and Exists($(ExpectedTypescriptOutput_TS))" />
     <Message Importance="high" Text="$(TypeScriptVerification_Name) failed. $(TypeScriptVerification_HelpText)" Condition="!Exists($(ExpectedTypescriptOutput_JS)) or !Exists($(ExpectedTypescriptOutput_JS_MAP)) or !Exists($(ExpectedTypescriptOutput_TS))" />

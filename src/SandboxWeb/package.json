@@ -2,6 +2,9 @@
   "description": "This file is the NPM configuration.",
   "version": "1.0.0",
   "name": "asp.net",
+  "scripts": {
+    "test": "echo \"Hello World! No test specified\" && exit 1"
+  },
   "private": true,
   "devDependencies": {
     "@types/jquery": "^3.3.33",
