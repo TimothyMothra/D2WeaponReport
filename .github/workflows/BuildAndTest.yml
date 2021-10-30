@@ -13,7 +13,6 @@ jobs:
     runs-on: ${{ matrix.os }}
     
     env: # These variables are available to the entire job.
-      DAY_OF_WEEK: Mon
       SOLUTION: ./src/DestinySandbox.sln
       WEB_DIRECTORY: ./src/SandboxWeb
       TYPESCRIPT_OUTPUT_FILE: ./src/SandboxWeb/wwwroot/scripts/app.js
@@ -66,7 +65,7 @@ jobs:
     #   shell: pwsh
     #   run: if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js -PathType Leaf)) { throw "Compiled Typescript Not Found" }
 
-    - name: Dotnet Run - Initialize Local Environment
+    - name: Dotnet Run Initialize Local Environment
       run: dotnet run --project ./src/InitEnvironment/InitEnvironment.csproj
 
     - name: Dotnet Test
