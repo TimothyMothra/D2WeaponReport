@@ -13,13 +13,28 @@
 //  "compileOnSave": true
 //}
 
+//{
+//  "compilerOptions": {
+//    "noEmitOnError": true,
+//    "noImplicitAny": true,
+//    "sourceMap": true,
+//    "target": "es6"
+//  },
+//  "files": [ "./app.ts" ],
+//  "compileOnSave": true
+//}
+
 {
+  "compileOnSave": true,
   "compilerOptions": {
+    "noImplicitAny": false,
     "noEmitOnError": true,
-    "noImplicitAny": true,
+    "removeComments": false,
     "sourceMap": true,
-    "target": "es6"
+    "target": "es5",
+    "outDir": "../wwwroot/scripts"
   },
-  "files": [ "./app.ts" ],
-  "compileOnSave": true
+  "include": [
+    "./**/*"
+  ]
 }
