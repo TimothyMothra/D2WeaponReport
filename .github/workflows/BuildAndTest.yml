@@ -31,8 +31,8 @@ jobs:
     - run: npm install
       working-directory: ${{ matrix.web_directory }}
 
-    - run: npm init
-      working-directory: ${{ matrix.web_directory }}
+    #- run: npm init
+    #  working-directory: ${{ matrix.web_directory }}
 
     - run: npm test
       working-directory: ${{ matrix.web_directory }}
