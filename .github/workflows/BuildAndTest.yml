@@ -11,16 +11,24 @@ jobs:
   build_and_test:
 
     runs-on: ${{ matrix.os }}
-
+    
+    
+    env: # These variables are available to the entire job.
+      DAY_OF_WEEK: Mon
+      SOLUTION: [./src/DestinySandbox.sln]
+      WEB_DIRECTORY: [./src/SandboxWeb]
+      TYPESCRIPT_OUTPUT_FILE: [./src/SandboxWeb/wwwroot/scripts/app.js]
+    
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        solution: [./src/DestinySandbox.sln]
-        web_directory: [./src/SandboxWeb]
+        
         
     steps:
     - uses: actions/checkout@v2
+
+#### SETUP NODE, NPM, AND COMPILE TYPESCRIPT
 
     - uses: actions/setup-node@v2
       with:
@@ -29,13 +37,10 @@ jobs:
 #        cache: 'npm'
 #        cache-dependency-path: './src/SandboxWeb/package.lock.json'
     - run: npm install
-      working-directory: ${{ matrix.web_directory }}
-
-    #- run: npm init
-    #  working-directory: ${{ matrix.web_directory }}
+      working-directory: ${{ env.WEB_DIRECTORY }}
 
     - run: npm test
-      working-directory: ${{ matrix.web_directory }}
+      working-directory: ${{ env.WEB_DIRECTORY }}
 
     - uses: actions/cache@v2
       with:
@@ -50,13 +55,17 @@ jobs:
         dotnet-version: 5.0.x
 
     - name: Restore dependencies
-      run: dotnet restore ${{ matrix.solution }} --use-lock-file
+      run: dotnet restore ${{ env.SOLUTION }} --use-lock-file
 
     - name: Build
-      run: dotnet build  ${{ matrix.solution }} --no-restore
+      run: dotnet build  ${{ env.SOLUTION }} --no-restore
+
+    - name: Verify Typescript Output
+      shell: pwsh
+      run: Test-Path -Path ${{ env.TYPESCRIPT_OUTPUT_FILE }} -PathType Leaf
 
     - name: Initialize Local Environment
       run: dotnet run --project ./src/InitEnvironment/InitEnvironment.csproj
 
     - name: Test
-      run: dotnet test  ${{ matrix.solution }} --no-build --verbosity normal
+      run: dotnet test  ${{ env.SOLUTION }} --no-build --verbosity normal
