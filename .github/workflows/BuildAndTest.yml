@@ -17,6 +17,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         solution: [./src/DestinySandbox.sln]
+        web_directory: [./src/SandboxWeb]
         
     steps:
     - uses: actions/checkout@v2
@@ -28,8 +29,13 @@ jobs:
 #        cache: 'npm'
 #        cache-dependency-path: './src/SandboxWeb/package.lock.json'
     - run: npm install
+      working-directory: ${{ matrix.web_directory }}
+
     - run: npm init
+      working-directory: ${{ matrix.web_directory }}
+
     - run: npm test
+      working-directory: ${{ matrix.web_directory }}
 
     - uses: actions/cache@v2
       with:
