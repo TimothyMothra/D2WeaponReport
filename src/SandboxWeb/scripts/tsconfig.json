@@ -1,14 +1,25 @@
+//{
+//  "compilerOptions": {
+//    "noEmitOnError": true,
+//    "noImplicitAny": true,
+//    "sourceMap": true,
+//    "target": "es6",
+//    //"removeComments": false
+//  },
+//  "files": [ "./app.ts" ],
+//  "include": [
+//    "./**/*"
+//  ],
+//  "compileOnSave": true
+//}
+
 {
   "compilerOptions": {
     "noEmitOnError": true,
     "noImplicitAny": true,
     "sourceMap": true,
-    "target": "es6",
-    //"removeComments": false
+    "target": "es6"
   },
-  //"files": [ "./app.ts" ],
-  "include": [
-    "./**/*"
-  ],
+  "files": [ "./app.ts" ],
   "compileOnSave": true
 }

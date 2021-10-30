@@ -37,6 +37,9 @@ jobs:
     - run: npm install
       working-directory: ${{ env.WEB_DIRECTORY }}
 
+    - run: npm init # testing if this restores packages?
+      working-directory: ${{ env.WEB_DIRECTORY }}
+
     - run: npm test
       working-directory: ${{ env.WEB_DIRECTORY }}
 
