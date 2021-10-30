@@ -10,18 +10,13 @@ on:
 jobs:
   build_and_test:
 
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     
     env: # These variables are available to the entire job.
       SOLUTION: ./src/DestinySandbox.sln
       WEB_DIRECTORY: ./src/SandboxWeb
       TYPESCRIPT_OUTPUT_FILE: ./src/SandboxWeb/wwwroot/scripts/app.js
     
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest]
-        
     steps:
     - uses: actions/checkout@v2
 
@@ -55,7 +50,7 @@ jobs:
       with:
         dotnet-version: 5.0.x
 
-    - name: Restore dependencies
+    - name: Dotnet Restore Dependencies
       run: dotnet restore ${{ env.SOLUTION }} --use-lock-file
 
     - name: Dotnet Build
