@@ -25,11 +25,11 @@ jobs:
       with:
         node-version: 'lts/*'
         check-latest: true
-        cache: 'npm'
-        cache-dependency-path: './src/SandboxWeb/package.lock.json'
+#        cache: 'npm'
+#        cache-dependency-path: './src/SandboxWeb/package.lock.json'
     - run: npm install
-    # - run: npm init
-    # - run: npm test
+    - run: npm init
+    - run: npm test
 
     - uses: actions/cache@v2
       with:
