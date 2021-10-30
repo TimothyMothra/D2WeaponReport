@@ -13,7 +13,7 @@
     "outDir": "../wwwroot/scripts"
   },
   //"files": [ "./app.ts" ],
-  "include": [
-    "./**/*"
-  ]
+  //"include": [
+  //  "./**/*"
+  //]
 }
