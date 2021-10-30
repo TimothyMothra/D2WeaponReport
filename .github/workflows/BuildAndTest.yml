@@ -55,15 +55,15 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore ${{ env.SOLUTION }} --use-lock-file
 
-    - name: Build
+    - name: Dotnet Build
       run: dotnet build  ${{ env.SOLUTION }} --no-restore
 
     - name: Verify Typescript Output
       shell: pwsh
       run: Test-Path -Path ${{ env.TYPESCRIPT_OUTPUT_FILE }} -PathType Leaf
 
-    - name: Initialize Local Environment
+    - name: Dotnet Run - Initialize Local Environment
       run: dotnet run --project ./src/InitEnvironment/InitEnvironment.csproj
 
-    - name: Test
+    - name: Dotnet Test
       run: dotnet test  ${{ env.SOLUTION }} --no-build --verbosity normal
