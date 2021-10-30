@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "name": "asp.net",
   "scripts": {
-    "test": "echo \"Hello World! No test specified\" && exit 1"
+    "test": "echo \"Hello World! No test specified\" && exit 0"
   },
   "private": true,
   "devDependencies": {
