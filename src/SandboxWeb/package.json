@@ -1,4 +1,5 @@
 {
+  "_comment": "This file is the NPM configuration.",
   "version": "1.0.0",
   "name": "asp.net",
   "private": true,
