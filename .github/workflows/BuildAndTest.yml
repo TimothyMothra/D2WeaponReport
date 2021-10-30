@@ -12,6 +12,10 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env: # These variables are available to the entire job.
+      SOLUTION: ./src/DestinySandbox.sln
+      WEB_DIRECTORY: ./src/SandboxWeb
+
     steps:
     - uses: actions/checkout@v2
 
@@ -27,14 +31,14 @@ jobs:
       with:
         dotnet-version: 5.0.x
 
-    - name: Restore dependencies
-      run: dotnet restore ./src/DestinySandbox.sln --use-lock-file
+    - name: Dotnet Restore Dependencies
+      run: dotnet restore ${{ env.SOLUTION }} --use-lock-file
 
-    - name: Build
-      run: dotnet build  ./src/DestinySandbox.sln --no-restore
+    - name: Dotnet Build
+      run: dotnet build  ${{ env.SOLUTION }} --no-restore
 
-    - name: Initialize Local Environment
+    - name: Dotnet Run Initialize Local Environment
       run: dotnet run --project ./src/InitEnvironment/InitEnvironment.csproj
 
-    - name: Test
-      run: dotnet test  ./src/DestinySandbox.sln --no-build --verbosity normal
+    - name: Dotnet Test
+      run: dotnet test  ${{ env.SOLUTION }} --no-build --verbosity normal

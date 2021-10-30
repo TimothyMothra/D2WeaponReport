@@ -11,6 +11,10 @@ jobs:
   Init_Publish_Deploy:
     runs-on: ubuntu-latest
 
+    env: # These variables are available to the entire job.
+      SOLUTION: ./src/DestinySandbox.sln
+      WEB_DIRECTORY: ./src/SandboxWeb
+
     steps:
     - uses: actions/checkout@v2
 
@@ -24,17 +28,11 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore ./src/DestinySandbox.sln
 
-    - name: Build
-      run: dotnet build  ./src/DestinySandbox.sln --no-restore
+    - name: Dotnet Build
+      run: dotnet build  ${{ env.SOLUTION }} --no-restore
 
-    - name: Initialize Local Environment
-      run: dotnet run --project ./src/InitEnvironment/InitEnvironment.csproj -- ${{ github.workspace }}/root
-
-    #- name: Test
-    #  run: dotnet test  ./src/DestinySandbox.sln --no-build --verbosity normal
-      
-    #- name: Build with dotnet
-    #  run: dotnet build --configuration Release
+    - name: Dotnet Run Initialize Local Environment
+      run: dotnet run --project ./src/InitEnvironment/InitEnvironment.csproj
 
     - name: dotnet publish
       run: dotnet publish ./src/SandboxWeb/SandboxWeb.csproj  -o ${{ github.workspace }}/root  # -c Release
