@@ -33,8 +33,7 @@ jobs:
         node-version: 'lts/*'
         check-latest: true
         cache: 'npm'
-        cache-dependency-path: ./src/SandboxWeb/package-lock.json
-        # "C:\REPOS\D2WeaponReport\src\SandboxWeb\package-lock.json"
+        cache-dependency-path: '**/package-lock.json'
 
     - run: npm install
       working-directory: ${{ env.WEB_DIRECTORY }}
@@ -63,9 +62,9 @@ jobs:
     - name: Dotnet Build
       run: dotnet build  ${{ env.SOLUTION }} --no-restore
 
-    - name: Verify Typescript Output
-      shell: pwsh
-      run: if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js -PathType Leaf)) { throw "Not Found" }
+    # - name: Verify Typescript Output
+    #   shell: pwsh
+    #   run: if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js -PathType Leaf)) { throw "Compiled Typescript Not Found" }
 
     - name: Dotnet Run - Initialize Local Environment
       run: dotnet run --project ./src/InitEnvironment/InitEnvironment.csproj
