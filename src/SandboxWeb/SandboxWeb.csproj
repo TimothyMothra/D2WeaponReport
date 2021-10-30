@@ -21,7 +21,8 @@
     <Folder Include="wwwroot\scripts\" />
   </ItemGroup>
 
-  <Target Name="TypeScriptVerification" AfterTargets="Build">
+  <Target Name="TypeScriptVerification" AfterTargets="AfterCompile" DependsOnTargets="AfterCompile"> <!--Condition="$(TypeScriptEnabled) == 'true'"-->
+  <!--<Target Name="TypeScriptVerification" AfterTargets="GetTypeScriptCopyToOutputDirectoryItems" DependsOnTargets="GetTypeScriptCopyToOutputDirectoryItems"> --><!--Condition="$(TypeScriptEnabled) == 'true'"-->
     <!--DependsOnTargets BeforeBuild;CoreBuild;AfterBuild-->
     <PropertyGroup>
       <ExpectedTypescriptOutput_JS>$(SourceRoot)\SandboxWeb\wwwroot\scripts\app.js</ExpectedTypescriptOutput_JS>
@@ -35,6 +36,14 @@
     </PropertyGroup>
     <!--TODO: This works for VisualStudio Build. Does not work for dotnet CLI or VisualStudio Rebuild-->
 
+
+    <Message Importance="high" Text="@(TSCompilerOutput)" />
+
+    <!--<VerifyTypescriptOutput FilePath="$(ExpectedTypescriptOutput_JS)" />
+    <VerifyTypescriptOutput FilePath="$(ExpectedTypescriptOutput_JS_MAP)" />
+    <VerifyTypescriptOutput FilePath="$(ExpectedTypescriptOutput_TS)" />-->
+
+
     <Message Importance="high" Text="$(MSBuildProjectName): Run $(TypeScriptVerification_Name) - $(TypeScriptVerification_Description)" />
     <Message Importance="high" Text="$(TypeScriptVerification_Name) passed." Condition="Exists($(ExpectedTypescriptOutput_JS)) and Exists($(ExpectedTypescriptOutput_JS_MAP)) and Exists($(ExpectedTypescriptOutput_TS))" />
     <Message Importance="high" Text="$(TypeScriptVerification_Name) failed. $(TypeScriptVerification_HelpText)" Condition="!Exists($(ExpectedTypescriptOutput_JS)) or !Exists($(ExpectedTypescriptOutput_JS_MAP)) or !Exists($(ExpectedTypescriptOutput_TS))" />
@@ -44,16 +53,32 @@
 
 </Target>
 
-  <!--<UsingTask TaskName="VerifyTypescriptOutput">
+  <!--<UsingTask TaskName="VerifyTypescriptOutput" TaskFactory="RoslynCodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
     <ParameterGroup>
       <FilePath ParameterType="System.String" Required="true" />
     </ParameterGroup>
     <Task>
-      <Message Importance="high" Text="Verify Typescript was compiled and published to wwwroot..." />
-      <Message Importance="high" Text="File: '$(FilePath)' was found." Condition="Exists($(FilePath))" />
-      <Message Importance="high" Text="File: '$(FilePath)' was NOT found! This is configured in 'tsconfig.json'. This could be a problem with either Node or NPM." Condition="!Exists($(FilePath))" />
-      <Error Text="Typescript compiled output not found: '$(FilePath)'. This is configured in 'tsconfig.json'. This could be a problem with either Node or NPM." Condition="!Exists($(FilePath))" />  
-    </Task> 
+      <Using Namespace="System" />
+      <Using Namespace="System.Diagnostics" />
+      <Using Namespace="System.IO" />
+      --><!--
+            Not sure where the requirement of xml:lang="en" came from. But to address it - hacking is the only way now:
+            https://social.msdn.microsoft.com/forums/en-us/70b984eb-f490-4494-8fbc-12fe4a62e5e4/xmllang-on-doc-for-xml-doc-comments?forum=xmlandnetfx
+          --><!--
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+                    Log.LogMessage(MessageImportance.High, "VerifyTypescriptOutput -> {0}", FilePath);
+                    if (File.Exists(FilePath))
+                    {
+                        Log.LogMessage(MessageImportance.High, "Found -> {0}", FilePath);
+                    }
+                    else
+                    {
+                        Log.LogMessage(MessageImportance.High, "NOT FOUND -> {0}", FilePath);
+                    }
+            ]]>
+      </Code>
+    </Task>
   </UsingTask>-->
   
 </Project>
