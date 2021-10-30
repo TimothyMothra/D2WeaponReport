@@ -26,7 +26,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-#### SETUP NODE, NPM, AND COMPILE TYPESCRIPT
+#### SETUP NODE, NPM, AND COMPILE TYPESCRIPT # EVERYTHING SEEMS TO WORK CORRECTLY. I'M GOING TO BREAK MORE THINGCS NEXT
 
     - uses: actions/setup-node@v2
       with:
