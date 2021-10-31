@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "name": "npm_config",
   "scripts": {
-    "helloworld": "echo 'Hello World!' && exit 0",
-    "test": "echo \"No test specified in package.json\" && exit 1",
-    "build": "echo 'Hello World!'"
+    "helloworld": "echo 'Hello World!, package.json' && exit 0",
+    "test": "echo \"No test specified, package.json\" && exit 1",
+    "build": "echo 'Build!, package.json' && exit 0"
   },
   "private": true,
   "devDependencies": {

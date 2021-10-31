@@ -9,13 +9,14 @@ var paths = {
     scripts: ["scripts/**/*.js", "scripts/**/*.ts", "scripts/**/*.map"],
 };
 gulp.task('hello', function () {
-    console.log('Hello, World!');
+    console.log('Hello, World!, gulpfile.js');
     done();
 });
 gulp.task("clean", function () {
     return del(["wwwroot/scripts/**/*"]);
 });
-gulp.task("default", function (done) {
+gulp.task("gulp_copy_wwwroot", function (done) {
+    console.log('***gulp_copy_wwwroot!, gulpfile.js');
     gulp.src(paths.scripts).pipe(gulp.dest("wwwroot/scripts"));
     done();
 });

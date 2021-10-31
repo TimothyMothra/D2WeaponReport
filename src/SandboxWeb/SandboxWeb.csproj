@@ -29,6 +29,7 @@
       Documentation: https://docs.microsoft.com/en-us/visualstudio/msbuild/incremental-builds?WT.mc_id=DT-MVP-5003978
    -->
   <Target Name="NpmInstall" Inputs="package.json" Outputs="node_modules/.install-stamp">
+    <Message Importance="high" Text="***NpmInstall, SandboxWeb.csproj" />
     <!--
         Use npm install or npm ci depending on RestorePackagesWithLockFile value.
         Uncomment the following lines if you want to use this feature:
@@ -49,12 +50,17 @@
       MSBuild runs NpmInstall before this task because of the DependsOnTargets attribute.
    -->
   <Target Name="NpmRunBuild" DependsOnTargets="NpmInstall" BeforeTargets="BeforeBuild">
-    <Exec Command="npm run build" />
+    <Message Importance="high" Text="***NpmRunBuild, SandboxWeb.csproj" />
+    <!--<Exec Command="npm run build" />--> <!--I don't think this does anything-->
+    
+    <!-- This command will compile the *.ts and generate both *.js and *.js.map in the source directory.-->
     <Exec Command="npx tsc -p $(SourceRoot)/SandboxWeb/scripts/tsconfig.json" />
-    <Exec Command="npx gulp default" />
+
+    <!-- This command will copy all typescript source (*.ts, *.js, *.js.map) into wwwroot. TODO: HOW TO SUPPORT Build AND Publish?-->
+    <Exec Command="npx gulp gulp_copy_wwwroot" />
   </Target>
 
-  <Target Name="TypeScriptVerification" AfterTargets="AfterBuild" DependsOnTargets="AfterBuild"> 
+  <Target Name="TypeScriptVerification" AfterTargets="AfterBuild" BeforeTargets="Publish" DependsOnTargets="AfterBuild"> 
     <!--Condition="$(TypeScriptEnabled) == 'true'"-->
     <!--<Target Name="TypeScriptVerification" AfterTargets="GetTypeScriptCopyToOutputDirectoryItems" DependsOnTargets="GetTypeScriptCopyToOutputDirectoryItems"> -->
     <!--DependsOnTargets BeforeBuild;CoreBuild;AfterBuild-->
