@@ -60,12 +60,12 @@ jobs:
       run: dotnet build  ${{ env.SOLUTION }} --no-restore
 
     - name: Verify Typescript Output
-     shell: pwsh
-     run: if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js -PathType Leaf)) { throw "Compiled Typescript Not Found .JS" }
+      shell: pwsh
+      run: if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js -PathType Leaf)) { throw "Compiled Typescript Not Found .JS" }
        
     - name: Verify Typescript Output
-     shell: pwsh
-     run: if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js.map -PathType Leaf)) { throw "Compiled Typescript Not Found .JS.MAP" }
+      shell: pwsh
+      run: if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js.map -PathType Leaf)) { throw "Compiled Typescript Not Found .JS.MAP" }
        
     - name: Verify Typescript Output
      shell: pwsh
