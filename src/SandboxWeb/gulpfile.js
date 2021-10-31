@@ -1,12 +1,11 @@
-﻿/// <binding AfterBuild='gulp_copy_wwwroot' Clean='clean' />
-/*
+﻿/*
 This file is the main entry point for defining Gulp tasks and using Gulp plugins.
 Click here to learn more. http://go.microsoft.com/fwlink/?LinkId=518007
 */
 var gulp = require("gulp");
 var del = require("del");
 var paths = {
-    scripts: ["scripts/**/*.js", "scripts/**/*.map"], // "scripts/**/*.ts,"
+    scripts: ["scripts/**/*.js", "scripts/**/*.ts", "scripts/**/*.map"], // "scripts/**/*.ts",
 };
 
 gulp.task('hello', function () {
@@ -14,7 +13,8 @@ gulp.task('hello', function () {
     done();
 });
 
-gulp.task("clean", function () {
+gulp.task("gulp_clean_wwwroot", function () {
+    console.log('***gulp_clean_wwwroot!, gulpfile.js');
     return del(["wwwroot/scripts/**/*"]);
 });
 

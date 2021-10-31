@@ -51,12 +51,17 @@
    -->
   <Target Name="NpmRunBuild" DependsOnTargets="NpmInstall" BeforeTargets="BeforeBuild">
     <Message Importance="high" Text="***NpmRunBuild, SandboxWeb.csproj" />
-    <Exec Command="npm run helloworld" />
+    <!--This is an example of how to call npm functions.-->
+    <!--<Exec Command="npm run helloworld" />-->
+
+
+    <!--This command will clean wwwroot.-->
+    <Exec Command="npx gulp gulp_clean_wwwroot" />
     
      <!--This command will compile the *.ts and generate both *.js and *.js.map in the source directory.-->
     <Exec Command="npx tsc --project $(SourceRoot)/SandboxWeb/scripts/tsconfig.json" />
 
-     <!--This command will copy all typescript source (*.ts, *.js, *.js.map) into wwwroot. TODO: HOW TO SUPPORT Build AND Publish?-->
+     <!--This command will copy all typescript source (*.ts, *.js, *.js.map) into wwwroot.-->
     <Exec Command="npx gulp gulp_copy_wwwroot" />
   </Target>
 
@@ -86,7 +91,7 @@
     <Message Importance="high" Text="$(TypeScriptVerification_Name) failed. $(TypeScriptVerification_HelpText)" Condition="!Exists($(ExpectedTypescriptOutput_JS)) or !Exists($(ExpectedTypescriptOutput_JS_MAP)) or !Exists($(ExpectedTypescriptOutput_TS))" />-->
     <Error Code="$(TypeScriptVerification_Name)" Text="$(TypeScriptVerification_ErrorPrefix): '$(ExpectedTypescriptOutput_JS)'. $(TypeScriptVerification_HelpText)" Condition="!Exists($(ExpectedTypescriptOutput_JS))" ContinueOnError="ErrorAndContinue" />
     <Error Code="$(TypeScriptVerification_Name)" Text="$(TypeScriptVerification_ErrorPrefix): '$(ExpectedTypescriptOutput_JS_MAP)'. $(TypeScriptVerification_HelpText)" Condition="!Exists($(ExpectedTypescriptOutput_JS_MAP))" ContinueOnError="ErrorAndContinue" />
-    <!--<Error Code="$(TypeScriptVerification_Name)" Text="$(TypeScriptVerification_ErrorPrefix): '$(ExpectedTypescriptOutput_TS)'. $(TypeScriptVerification_HelpText)" Condition="!Exists($(ExpectedTypescriptOutput_TS))" ContinueOnError="ErrorAndContinue" />-->
+    <Error Code="$(TypeScriptVerification_Name)" Text="$(TypeScriptVerification_ErrorPrefix): '$(ExpectedTypescriptOutput_TS)'. $(TypeScriptVerification_HelpText)" Condition="!Exists($(ExpectedTypescriptOutput_TS))" ContinueOnError="ErrorAndContinue" />
 
 </Target>
   

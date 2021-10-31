@@ -3,7 +3,7 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "inlineSources": true,
+    //"inlineSources": true, // this will embed the *.ts  source into the *.js.map
     "noImplicitAny": true,
     "noEmitOnError": true,
     "removeComments": false,
