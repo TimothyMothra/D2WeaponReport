@@ -55,7 +55,7 @@ jobs:
       run: dotnet restore ${{ env.SOLUTION }} --use-lock-file
 
     - name: Dotnet Build
-      run: dotnet build  ${{ env.SOLUTION }} --no-restore --verbosity normal
+      run: dotnet build  ${{ env.SOLUTION }} --no-restore
 
     - name: Verify Typescript Output
       shell: pwsh
@@ -75,7 +75,7 @@ jobs:
     #   run: dotnet run --project ./src/InitEnvironment/InitEnvironment.csproj -- ${{ github.workspace }}/root
 
     - name: dotnet publish
-      run: dotnet publish ./src/SandboxWeb/SandboxWeb.csproj  -o ${{ github.workspace }}/root  --verbosity normal # -c Release
+      run: dotnet publish ./src/SandboxWeb/SandboxWeb.csproj  -o ${{ github.workspace }}/root # -c Release
 
     - name: List files
       shell: pwsh
