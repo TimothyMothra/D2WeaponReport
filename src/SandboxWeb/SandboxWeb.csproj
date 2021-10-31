@@ -17,6 +17,10 @@
     <ProjectReference Include="..\DestinyLib\DestinyLib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\scripts\" />
+  </ItemGroup>
+
   <!-- https://www.meziantou.net/running-npm-tasks-when-building-a-dotnet-project.htm -->
   <!--
       1. Install npm packages
@@ -33,7 +37,7 @@
           <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
         </PropertyGroup>
      -->
-    <Exec Command="npm ci"      Condition="$(RestorePackagesWithLockFile) == 'true'" />
+    <Exec Command="npm ci" Condition="$(RestorePackagesWithLockFile) == 'true'" />
     <Exec Command="npm install" Condition="$(RestorePackagesWithLockFile) != 'true'" />
 
     <!-- Write the stamp file, so incremental builds work -->

@@ -68,6 +68,32 @@ jobs:
       shell: pwsh
       run: if (!(Test-Path -Path ${{ env.TYPESCRIPT_EXPECTED_OUTPUT_FILENAME }}.ts -PathType Leaf)) { throw "Compiled Typescript Not Found .TS" }
     
+#### Verify Publish Output
+
+    # - name: Dotnet Run Initialize Local Environment
+    #   run: dotnet run --project ./src/InitEnvironment/InitEnvironment.csproj -- ${{ github.workspace }}/root
+
+    - name: dotnet publish
+      run: dotnet publish ./src/SandboxWeb/SandboxWeb.csproj  -o ${{ github.workspace }}/root  # -c Release
+
+    - name: List files
+      shell: pwsh
+      run: Get-ChildItem '${{ github.workspace }}/root' -Recurse -Force | Write-Host
+
+    - name: Verify Typescript Output
+      shell: pwsh
+      run: if (!(Test-Path -Path ${{ github.workspace }}/root/wwwroot/scripts/app.js -PathType Leaf)) { throw "Compiled Typescript Not Found .JS" }
+       
+    - name: Verify Typescript Output
+      shell: pwsh
+      run: if (!(Test-Path -Path ${{ env.TYPESCRIPT_EXPECTED_OUTPUT_FILENAME }}.js.map -PathType Leaf)) { throw "Compiled Typescript Not Found .JS.MAP" }
+       
+    - name: Verify Typescript Output
+      shell: pwsh
+      run: if (!(Test-Path -Path ${{ env.TYPESCRIPT_EXPECTED_OUTPUT_FILENAME }}.ts -PathType Leaf)) { throw "Compiled Typescript Not Found .TS" }
+    
+
+
     # - name: Verify Typescript Output
     #   shell: pwsh
     #   run: |
