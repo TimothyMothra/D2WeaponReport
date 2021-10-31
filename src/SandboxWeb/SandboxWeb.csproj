@@ -1,10 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
-  <Import Project="$(PropsRoot)\Typescript.props" />
+  <Import Project="$(PropsRoot)\TypeScript.props" />
 
   <ItemGroup>
     <!--<PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />-->
