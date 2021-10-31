@@ -1,9 +1,10 @@
 {
   "description": "This file is the NPM configuration.",
   "version": "1.0.0",
-  "name": "asp.net",
+  "name": "npm_config",
   "scripts": {
-    "test": "echo \"Hello World! No test specified\" && exit 0",
+    "helloworld": "echo 'Hello World!' && exit 0",
+    "test": "echo \"No test specified in package.json\" && exit 1",
     "build": "echo 'Hello World!'"
   },
   "private": true,

@@ -15,7 +15,7 @@ jobs:
     env: # These variables are available to the entire job.
       SOLUTION: ./src/DestinySandbox.sln
       WEB_DIRECTORY: ./src/SandboxWeb
-      TYPESCRIPT_OUTPUT_FILE: ./src/SandboxWeb/wwwroot/scripts/app.js
+      TYPESCRIPT_EXPECTED_OUTPUT_FILENAME: ./src/SandboxWeb/wwwroot/scripts/app
     
     steps:
     - uses: actions/checkout@v2
@@ -32,10 +32,7 @@ jobs:
     - run: npm install
       working-directory: ${{ env.WEB_DIRECTORY }}
 
-    # - run: npm init # testing if this restores packages?
-    #   working-directory: ${{ env.WEB_DIRECTORY }}
-
-    - run: npm run test # npm test
+    - run: npm run helloworld # verify npm is running "package.json"
       working-directory: ${{ env.WEB_DIRECTORY }}
 
     - run: npm run build
@@ -61,15 +58,15 @@ jobs:
 
     - name: Verify Typescript Output
       shell: pwsh
-      run: if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js -PathType Leaf)) { throw "Compiled Typescript Not Found .JS" }
+      run: if (!(Test-Path -Path ${{ env.TYPESCRIPT_EXPECTED_OUTPUT_FILENAME }}.js -PathType Leaf)) { throw "Compiled Typescript Not Found .JS" }
        
     - name: Verify Typescript Output
       shell: pwsh
-      run: if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js.map -PathType Leaf)) { throw "Compiled Typescript Not Found .JS.MAP" }
+      run: if (!(Test-Path -Path ${{ env.TYPESCRIPT_EXPECTED_OUTPUT_FILENAME }}.js.map -PathType Leaf)) { throw "Compiled Typescript Not Found .JS.MAP" }
        
     - name: Verify Typescript Output
       shell: pwsh
-      run: if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.ts -PathType Leaf)) { throw "Compiled Typescript Not Found .TS" }
+      run: if (!(Test-Path -Path ${{ env.TYPESCRIPT_EXPECTED_OUTPUT_FILENAME }}.ts -PathType Leaf)) { throw "Compiled Typescript Not Found .TS" }
     
     # - name: Verify Typescript Output
     #   shell: pwsh
