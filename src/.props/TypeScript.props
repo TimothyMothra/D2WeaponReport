@@ -7,9 +7,20 @@
     <!-- The purpose of this message is to announce which projects have loaded this file. -->
     <Message Text="$(MSBuildProjectName): TypeScript.props imported. SolutionName: $(SolutionName). ProjectName: $(MSBuildProjectName). TargetFramework: $(TargetFramework)." Importance="high"/>
   </Target>
-  
+
+  <PropertyGroup>
+    <ExpectedTypescriptOutput_JS>wwwroot\scripts\app.js</ExpectedTypescriptOutput_JS>
+    <ExpectedTypescriptOutput_TS>wwwroot\scripts\app.ts</ExpectedTypescriptOutput_TS>
+    <ExpectedTypescriptOutput_JS_MAP>wwwroot\scripts\app.js.map</ExpectedTypescriptOutput_JS_MAP>
+
+    <TypeScriptVerification_Name>TypeScriptVerification</TypeScriptVerification_Name>
+    <TypeScriptVerification_Description>Verify TypeScript was compiled and published to wwwroot.</TypeScriptVerification_Description>
+    <TypeScriptVerification_ErrorPrefix>Expected TypeScript compiled output not found</TypeScriptVerification_ErrorPrefix>
+    <TypeScriptVerification_HelpText>Confirm that file name hasn't changed. Output is configured in 'tsconfig.json'. This could be a problem with either Node or NPM. Also try manually restoring package.json.</TypeScriptVerification_HelpText>
+  </PropertyGroup>
+
   <Target Name="NpmInstall" Inputs="package.json" Outputs="node_modules/.install-stamp">
-    <Message Importance="high" Text="$(MSBuildProjectName): TypeScript.props: NpmInstall." />
+    <Message Importance="high" Text="$(MSBuildProjectName): TypeScript.props: Run NpmInstall." />
     <!-- "Inputs" and "Outputs" are used for incremental builds. If all items are up to date, MSBuild skips this target. -->
     <!-- These commands execute in the $(SourceRoot)/$(MSBuildProjectName) directory -->
     
@@ -29,7 +40,7 @@
   </Target>
 
   <Target Name="NpmRunBuild" DependsOnTargets="NpmInstall" BeforeTargets="BeforeBuild">
-    <Message Importance="high" Text="***NpmRunBuild, SandboxWeb.csproj" />
+    <Message Importance="high" Text="$(MSBuildProjectName): TypeScript.props: Run NpmRunBuild" />
     <!--Run npm commands before building the .NET project. -->
     <!-- These commands execute in the $(SourceRoot)/$(MSBuildProjectName) directory -->
 
@@ -43,26 +54,14 @@
     <!-- <Exec Command="npx tsc - -project $(SourceRoot)/$(MSBuildProjectName)/scripts/tsconfig.json" /> -->
     <Exec Command="npx tsc --project scripts/tsconfig.json" />
 
-    <!--This command will copy all typescript source (*.ts, *.js, *.js.map) into wwwroot.-->
+    <!--This command will copy all typescript source files (*.ts, *.js, *.js.map) into wwwroot.-->
     <Exec Command="npx gulp gulp_copy_wwwroot" />
   </Target>
 
   <Target Name="TypeScriptVerification" AfterTargets="AfterBuild" BeforeTargets="Publish" DependsOnTargets="AfterBuild"> 
-  
-    <PropertyGroup>
-      <ExpectedTypescriptOutput_JS>wwwroot\scripts\app.js</ExpectedTypescriptOutput_JS>
-      <ExpectedTypescriptOutput_TS>wwwroot\scripts\app.ts</ExpectedTypescriptOutput_TS>
-      <ExpectedTypescriptOutput_JS_MAP>wwwroot\scripts\app.js.map</ExpectedTypescriptOutput_JS_MAP>
+    <Message Importance="high" Text="$(MSBuildProjectName): TypeScript.props: Run $(TypeScriptVerification_Name) - $(TypeScriptVerification_Description)" />
+    <!-- This inspects an output directory for expected files (*.js, *.js.map, *.ts)-->
 
-      <TypeScriptVerification_Name>TypeScriptVerification</TypeScriptVerification_Name>
-      <TypeScriptVerification_Description>Verify TypeScript was compiled and published to wwwroot.</TypeScriptVerification_Description>
-      <TypeScriptVerification_ErrorPrefix>Expected TypeScript compiled output not found</TypeScriptVerification_ErrorPrefix>
-      <TypeScriptVerification_HelpText>Confirm that file name hasn't changed. Output is configured in 'tsconfig.json'. This could be a problem with either Node or NPM. Also try manually restoring package.json.</TypeScriptVerification_HelpText>
-    </PropertyGroup>
-    
-    <Message Importance="high" Text="$(MSBuildProjectName): Run $(TypeScriptVerification_Name) - $(TypeScriptVerification_Description)" />
-    <!--<Message Importance="high" Text="$(TypeScriptVerification_Name) passed." Condition="Exists($(ExpectedTypescriptOutput_JS)) and Exists($(ExpectedTypescriptOutput_JS_MAP)) and Exists($(ExpectedTypescriptOutput_TS))" />
-    <Message Importance="high" Text="$(TypeScriptVerification_Name) failed. $(TypeScriptVerification_HelpText)" Condition="!Exists($(ExpectedTypescriptOutput_JS)) or !Exists($(ExpectedTypescriptOutput_JS_MAP)) or !Exists($(ExpectedTypescriptOutput_TS))" />-->
     <Error Code="$(TypeScriptVerification_Name)" Text="$(TypeScriptVerification_ErrorPrefix): '$(ExpectedTypescriptOutput_JS)'. $(TypeScriptVerification_HelpText)" Condition="!Exists($(ExpectedTypescriptOutput_JS))" ContinueOnError="ErrorAndContinue" />
     <Error Code="$(TypeScriptVerification_Name)" Text="$(TypeScriptVerification_ErrorPrefix): '$(ExpectedTypescriptOutput_JS_MAP)'. $(TypeScriptVerification_HelpText)" Condition="!Exists($(ExpectedTypescriptOutput_JS_MAP))" ContinueOnError="ErrorAndContinue" />
     <Error Code="$(TypeScriptVerification_Name)" Text="$(TypeScriptVerification_ErrorPrefix): '$(ExpectedTypescriptOutput_TS)'. $(TypeScriptVerification_HelpText)" Condition="!Exists($(ExpectedTypescriptOutput_TS))" ContinueOnError="ErrorAndContinue" />
