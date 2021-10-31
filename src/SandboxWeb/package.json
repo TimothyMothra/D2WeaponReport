@@ -13,6 +13,7 @@
     "gulp": "^4.0.2"
   },
   "dependencies": {
-    "jquery": "^3.6.0"
+    "jquery": "^3.6.0",
+    "typescript": "^4.4.4"
   }
 }

@@ -46,6 +46,7 @@
    -->
   <Target Name="NpmRunBuild" DependsOnTargets="NpmInstall" BeforeTargets="BeforeBuild">
     <Exec Command="npm run build" />
+    <Exec Command="npx tsc -p $(SourceRoot)\SandboxWeb\scripts\tsconfig.json" />
   </Target>
 
   <Target Name="TypeScriptVerification" AfterTargets="AfterBuild" DependsOnTargets="AfterBuild"> 
