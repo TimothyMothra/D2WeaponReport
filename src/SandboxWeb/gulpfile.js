@@ -8,6 +8,10 @@ var del = require("del");
 var paths = {
     scripts: ["scripts/**/*.js", "scripts/**/*.ts", "scripts/**/*.map"],
 };
+gulp.task('hello', function () {
+    console.log('Hello, World!');
+    done();
+});
 gulp.task("clean", function () {
     return del(["wwwroot/scripts/**/*"]);
 });

@@ -9,10 +9,11 @@
     "sourceMap": true,
     //"target": "es5",
     "target": "es6",
-    "outDir": "../wwwroot/scripts"
+    "outDir": "../wwwroot/scripts",
+    "rootDir": "./"
   },
-  "files": [ "./app.ts" ],
-  //"include": [
-  //  "./**/*"
-  //]
+  //"files": [ "./app.ts" ]
+  "include": [
+    "./**/*"
+  ]
 }
