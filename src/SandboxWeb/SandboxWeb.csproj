@@ -82,8 +82,8 @@
     <!--<Exec Command="npm install" />-->
     
     <Message Importance="high" Text="$(MSBuildProjectName): Run $(TypeScriptVerification_Name) - $(TypeScriptVerification_Description)" />
-    <Message Importance="high" Text="$(TypeScriptVerification_Name) passed." Condition="Exists($(ExpectedTypescriptOutput_JS)) and Exists($(ExpectedTypescriptOutput_JS_MAP)) and Exists($(ExpectedTypescriptOutput_TS))" />
-    <Message Importance="high" Text="$(TypeScriptVerification_Name) failed. $(TypeScriptVerification_HelpText)" Condition="!Exists($(ExpectedTypescriptOutput_JS)) or !Exists($(ExpectedTypescriptOutput_JS_MAP)) or !Exists($(ExpectedTypescriptOutput_TS))" />
+    <!--<Message Importance="high" Text="$(TypeScriptVerification_Name) passed." Condition="Exists($(ExpectedTypescriptOutput_JS)) and Exists($(ExpectedTypescriptOutput_JS_MAP)) and Exists($(ExpectedTypescriptOutput_TS))" />
+    <Message Importance="high" Text="$(TypeScriptVerification_Name) failed. $(TypeScriptVerification_HelpText)" Condition="!Exists($(ExpectedTypescriptOutput_JS)) or !Exists($(ExpectedTypescriptOutput_JS_MAP)) or !Exists($(ExpectedTypescriptOutput_TS))" />-->
     <Error Code="$(TypeScriptVerification_Name)" Text="$(TypeScriptVerification_ErrorPrefix): '$(ExpectedTypescriptOutput_JS)'. $(TypeScriptVerification_HelpText)" Condition="!Exists($(ExpectedTypescriptOutput_JS))" ContinueOnError="ErrorAndContinue" />
     <Error Code="$(TypeScriptVerification_Name)" Text="$(TypeScriptVerification_ErrorPrefix): '$(ExpectedTypescriptOutput_JS_MAP)'. $(TypeScriptVerification_HelpText)" Condition="!Exists($(ExpectedTypescriptOutput_JS_MAP))" ContinueOnError="ErrorAndContinue" />
     <!--<Error Code="$(TypeScriptVerification_Name)" Text="$(TypeScriptVerification_ErrorPrefix): '$(ExpectedTypescriptOutput_TS)'. $(TypeScriptVerification_HelpText)" Condition="!Exists($(ExpectedTypescriptOutput_TS))" ContinueOnError="ErrorAndContinue" />-->
