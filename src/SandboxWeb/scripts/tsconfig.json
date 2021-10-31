@@ -3,6 +3,7 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
+    "inlineSources": true,
     "noImplicitAny": true,
     "noEmitOnError": true,
     "removeComments": false,

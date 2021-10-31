@@ -4,12 +4,12 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
+  <!--<ItemGroup>
     <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.4.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
+  </ItemGroup>-->
 
   <ItemGroup>
     <!--<PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />-->
@@ -17,9 +17,9 @@
     <ProjectReference Include="..\DestinyLib\DestinyLib.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
+  <!--<ItemGroup>
     <Folder Include="wwwroot\scripts\" />
-  </ItemGroup>
+  </ItemGroup>-->
 
   <!-- https://www.meziantou.net/running-npm-tasks-when-building-a-dotnet-project.htm -->
   <!--
@@ -51,12 +51,12 @@
    -->
   <Target Name="NpmRunBuild" DependsOnTargets="NpmInstall" BeforeTargets="BeforeBuild">
     <Message Importance="high" Text="***NpmRunBuild, SandboxWeb.csproj" />
-    <!--<Exec Command="npm run build" />--> <!--I don't think this does anything-->
+    <Exec Command="npm run helloworld" />
     
-    <!-- This command will compile the *.ts and generate both *.js and *.js.map in the source directory.-->
-    <Exec Command="npx tsc --project $(SourceRoot)/SandboxWeb/scripts/tsconfig.json --inlineSources true" />
+     <!--This command will compile the *.ts and generate both *.js and *.js.map in the source directory.-->
+    <Exec Command="npx tsc --project $(SourceRoot)/SandboxWeb/scripts/tsconfig.json" />
 
-    <!-- This command will copy all typescript source (*.ts, *.js, *.js.map) into wwwroot. TODO: HOW TO SUPPORT Build AND Publish?-->
+     <!--This command will copy all typescript source (*.ts, *.js, *.js.map) into wwwroot. TODO: HOW TO SUPPORT Build AND Publish?-->
     <Exec Command="npx gulp gulp_copy_wwwroot" />
   </Target>
 
