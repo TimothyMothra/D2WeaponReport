@@ -1,11 +1,9 @@
 {
-  "description": "This file is the NPM configuration.",
+  "description": "This file is the NPM configuration. Scripts defined here can be run from cli.",
   "version": "1.0.0",
   "name": "npm_config",
   "scripts": {
-    "helloworld": "echo 'Hello World!, package.json' && exit 0",
-    "test": "echo \"No test specified, package.json\" && exit 1",
-    "build": "echo 'Build!, package.json' && exit 0"
+    "helloworld": "echo 'Hello World!, package.json' && exit 0"
   },
   "private": true,
   "devDependencies": {

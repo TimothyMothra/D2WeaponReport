@@ -1,4 +1,5 @@
-# Syntax: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
+# Github Workflow Syntax: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
+# .NET CLI Syntax: https://docs.microsoft.com/en-us/dotnet/core/tools
 name: .NET Build And Test
 
 on:
@@ -54,7 +55,7 @@ jobs:
       run: dotnet restore ${{ env.SOLUTION }} --use-lock-file
 
     - name: Dotnet Build
-      run: dotnet build  ${{ env.SOLUTION }} --no-restore
+      run: dotnet build  ${{ env.SOLUTION }} --no-restore --verbosity normal
 
     - name: Verify Typescript Output
       shell: pwsh
@@ -74,7 +75,7 @@ jobs:
     #   run: dotnet run --project ./src/InitEnvironment/InitEnvironment.csproj -- ${{ github.workspace }}/root
 
     - name: dotnet publish
-      run: dotnet publish ./src/SandboxWeb/SandboxWeb.csproj  -o ${{ github.workspace }}/root  # -c Release
+      run: dotnet publish ./src/SandboxWeb/SandboxWeb.csproj  -o ${{ github.workspace }}/root  --verbosity normal # -c Release
 
     - name: List files
       shell: pwsh

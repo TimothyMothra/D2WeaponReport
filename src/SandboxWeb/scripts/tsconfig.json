@@ -1,4 +1,4 @@
-// This script tells the Typescript "Microsoft.TypeScript.MSBuild" NuGet Package where to find Typscript files in source, and where to publish these compiled files.
+// Typescript Configuration
 
 {
   "compileOnSave": true,
