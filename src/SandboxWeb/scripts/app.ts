@@ -23,9 +23,6 @@ let user = new Student("Fred", "M.", "Smith");
 
 
 function sayHello() {
-    const compiler = (document.getElementById("compiler") as HTMLInputElement)
-        .value;
-    const framework = (document.getElementById("framework") as HTMLInputElement)
-        .value;
-    return `Hello from ${compiler} and ${framework}!`;
+    const testInput = (document.getElementById("typescript_test_input") as HTMLInputElement).value;
+    return `Hello from ${testInput}!`;
 }
