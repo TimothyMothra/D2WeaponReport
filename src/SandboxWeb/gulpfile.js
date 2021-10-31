@@ -6,7 +6,7 @@ Click here to learn more. http://go.microsoft.com/fwlink/?LinkId=518007
 var gulp = require("gulp");
 var del = require("del");
 var paths = {
-    scripts: ["scripts/**/*.js", "scripts/**/*.ts", "scripts/**/*.map"],
+    scripts: ["scripts/**/*.js", "scripts/**/*.map"], // "scripts/**/*.ts,"
 };
 gulp.task('hello', function () {
     console.log('Hello, World!, gulpfile.js');

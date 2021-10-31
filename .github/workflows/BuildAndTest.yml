@@ -64,9 +64,9 @@ jobs:
       shell: pwsh
       run: if (!(Test-Path -Path ${{ env.TYPESCRIPT_EXPECTED_OUTPUT_FILENAME }}.js.map -PathType Leaf)) { throw "Compiled Typescript Not Found .JS.MAP" }
        
-    - name: Verify Typescript Output
-      shell: pwsh
-      run: if (!(Test-Path -Path ${{ env.TYPESCRIPT_EXPECTED_OUTPUT_FILENAME }}.ts -PathType Leaf)) { throw "Compiled Typescript Not Found .TS" }
+    # - name: Verify Typescript Output
+    #   shell: pwsh
+    #   run: if (!(Test-Path -Path ${{ env.TYPESCRIPT_EXPECTED_OUTPUT_FILENAME }}.ts -PathType Leaf)) { throw "Compiled Typescript Not Found .TS" }
     
 #### Verify Publish Output
 
@@ -88,9 +88,9 @@ jobs:
       shell: pwsh
       run: if (!(Test-Path -Path ${{ github.workspace }}/root/wwwroot/scripts/app.js.map -PathType Leaf)) { throw "Compiled Typescript Not Found .JS.MAP" }
        
-    - name: Verify Typescript Output
-      shell: pwsh
-      run: if (!(Test-Path -Path ${{ github.workspace }}/root/wwwroot/scripts/app.ts -PathType Leaf)) { throw "Compiled Typescript Not Found .TS" }
+    # - name: Verify Typescript Output
+    #   shell: pwsh
+    #   run: if (!(Test-Path -Path ${{ github.workspace }}/root/wwwroot/scripts/app.ts -PathType Leaf)) { throw "Compiled Typescript Not Found .TS" }
 
     # - name: Verify Typescript Output
     #   shell: pwsh

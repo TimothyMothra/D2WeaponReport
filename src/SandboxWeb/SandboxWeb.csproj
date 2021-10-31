@@ -54,7 +54,7 @@
     <!--<Exec Command="npm run build" />--> <!--I don't think this does anything-->
     
     <!-- This command will compile the *.ts and generate both *.js and *.js.map in the source directory.-->
-    <Exec Command="npx tsc -p $(SourceRoot)/SandboxWeb/scripts/tsconfig.json" />
+    <Exec Command="npx tsc --project $(SourceRoot)/SandboxWeb/scripts/tsconfig.json --inlineSources true" />
 
     <!-- This command will copy all typescript source (*.ts, *.js, *.js.map) into wwwroot. TODO: HOW TO SUPPORT Build AND Publish?-->
     <Exec Command="npx gulp gulp_copy_wwwroot" />
@@ -86,7 +86,7 @@
     <Message Importance="high" Text="$(TypeScriptVerification_Name) failed. $(TypeScriptVerification_HelpText)" Condition="!Exists($(ExpectedTypescriptOutput_JS)) or !Exists($(ExpectedTypescriptOutput_JS_MAP)) or !Exists($(ExpectedTypescriptOutput_TS))" />
     <Error Code="$(TypeScriptVerification_Name)" Text="$(TypeScriptVerification_ErrorPrefix): '$(ExpectedTypescriptOutput_JS)'. $(TypeScriptVerification_HelpText)" Condition="!Exists($(ExpectedTypescriptOutput_JS))" ContinueOnError="ErrorAndContinue" />
     <Error Code="$(TypeScriptVerification_Name)" Text="$(TypeScriptVerification_ErrorPrefix): '$(ExpectedTypescriptOutput_JS_MAP)'. $(TypeScriptVerification_HelpText)" Condition="!Exists($(ExpectedTypescriptOutput_JS_MAP))" ContinueOnError="ErrorAndContinue" />
-    <Error Code="$(TypeScriptVerification_Name)" Text="$(TypeScriptVerification_ErrorPrefix): '$(ExpectedTypescriptOutput_TS)'. $(TypeScriptVerification_HelpText)" Condition="!Exists($(ExpectedTypescriptOutput_TS))" ContinueOnError="ErrorAndContinue" />
+    <!--<Error Code="$(TypeScriptVerification_Name)" Text="$(TypeScriptVerification_ErrorPrefix): '$(ExpectedTypescriptOutput_TS)'. $(TypeScriptVerification_HelpText)" Condition="!Exists($(ExpectedTypescriptOutput_TS))" ContinueOnError="ErrorAndContinue" />-->
 
 </Target>
   
