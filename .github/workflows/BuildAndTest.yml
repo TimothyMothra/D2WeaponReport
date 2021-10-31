@@ -59,25 +59,24 @@ jobs:
     - name: Dotnet Build
       run: dotnet build  ${{ env.SOLUTION }} --no-restore
 
-    #- name: Verify Typescript Output
-    #  shell: pwsh
-    #  run: if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js -PathType Leaf)) { throw "Compiled Typescript Not Found .JS" }
-       
-    #- name: Verify Typescript Output
-    #  shell: pwsh
-    #  run: if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js.map -PathType Leaf)) { throw "Compiled Typescript Not Found .JS.MAP" }
-       
-    #- name: Verify Typescript Output
-    #  shell: pwsh
-    #  run: if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.ts -PathType Leaf)) { throw "Compiled Typescript Not Found .TS" }
-       
-    
     - name: Verify Typescript Output
-      shell: pwsh
-      run: |
-        if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js -PathType Leaf)) { throw "Compiled Typescript Not Found .JS" }
-        else if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js.map -PathType Leaf)) { throw "Compiled Typescript Not Found .JS.MAP" }
-        else if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.ts -PathType Leaf)) { throw "Compiled Typescript Not Found .TS" }
+     shell: pwsh
+     run: if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js -PathType Leaf)) { throw "Compiled Typescript Not Found .JS" }
+       
+    - name: Verify Typescript Output
+     shell: pwsh
+     run: if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js.map -PathType Leaf)) { throw "Compiled Typescript Not Found .JS.MAP" }
+       
+    - name: Verify Typescript Output
+     shell: pwsh
+     run: if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.ts -PathType Leaf)) { throw "Compiled Typescript Not Found .TS" }
+    
+    # - name: Verify Typescript Output
+    #   shell: pwsh
+    #   run: |
+    #     if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js -PathType Leaf)) { throw "Compiled Typescript Not Found .JS" }
+    #     else if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js.map -PathType Leaf)) { throw "Compiled Typescript Not Found .JS.MAP" }
+    #     else if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.ts -PathType Leaf)) { throw "Compiled Typescript Not Found .TS" }
        
     - name: Dotnet Run Initialize Local Environment
       run: dotnet run --project ./src/InitEnvironment/InitEnvironment.csproj
