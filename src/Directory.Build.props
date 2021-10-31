@@ -1,6 +1,7 @@
+<!-- MSBuild Targets: https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-targets -->
 <Project>
 
-  <Target Name="Info_InternalSettings"  BeforeTargets="Build">
+  <Target Name="Info_DirectoryBuildProps"  BeforeTargets="Build">
     <!-- The purpose of this message is to announce which projects have loaded this file. -->
     <Message Text="$(MSBuildProjectName): Directory.Build.props imported. SolutionName: $(SolutionName). ProjectName: $(MSBuildProjectName). TargetFramework: $(TargetFramework)." Importance="high"/>
   </Target>
