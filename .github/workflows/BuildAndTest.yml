@@ -15,8 +15,11 @@ jobs:
 
     env: # These variables are available to the entire job.
       SOLUTION: ./src/DestinySandbox.sln
+      INIT_ENVIRONMENT_PROJECT: ./src/InitEnvironment/InitEnvironment.csproj
+      WEB_PROJECT: ./src/SandboxWeb/SandboxWeb.csproj
       WEB_DIRECTORY: ./src/SandboxWeb
-      TYPESCRIPT_EXPECTED_OUTPUT_FILENAME: ./src/SandboxWeb/wwwroot/scripts/app
+      TYPESCRIPT_EXPECTED_OUTPUT_FILENAME: /wwwroot/scripts/app # *.js, *.js.map, *.ts
+      PUBLISH_DIRECTORY: ${{ github.workspace }}/publishroot
     
     steps:
     - uses: actions/checkout@v2
@@ -33,10 +36,9 @@ jobs:
     - run: npm install
       working-directory: ${{ env.WEB_DIRECTORY }}
 
-    - run: npm run helloworld # verify npm is running "package.json"
+    - run: npm run helloworld # verify npm is running
       working-directory: ${{ env.WEB_DIRECTORY }}
 
-      
 #### SETUP DOTNET
 
     - uses: actions/cache@v2
@@ -61,37 +63,16 @@ jobs:
 
     - name: Verify Typescript Output
       shell: pwsh
-      run: if (!(Test-Path -Path ${{ env.TYPESCRIPT_EXPECTED_OUTPUT_FILENAME }}.js -PathType Leaf)) { throw "Compiled Typescript Not Found .JS" }
+      run: if (!(Test-Path -Path ${{ env.WEB_DIRECTORY }}${{ env.TYPESCRIPT_EXPECTED_OUTPUT_FILENAME }}.js -PathType Leaf)) { throw "Compiled Typescript Not Found .JS" }
        
     - name: Verify Typescript Output
       shell: pwsh
-      run: if (!(Test-Path -Path ${{ env.TYPESCRIPT_EXPECTED_OUTPUT_FILENAME }}.js.map -PathType Leaf)) { throw "Compiled Typescript Not Found .JS.MAP" }
+      run: if (!(Test-Path -Path ${{ env.WEB_DIRECTORY }}${{ env.TYPESCRIPT_EXPECTED_OUTPUT_FILENAME }}.js.map -PathType Leaf)) { throw "Compiled Typescript Not Found .JS.MAP" }
        
     - name: Verify Typescript Output
       shell: pwsh
-      run: if (!(Test-Path -Path ${{ env.TYPESCRIPT_EXPECTED_OUTPUT_FILENAME }}.ts -PathType Leaf)) { throw "Compiled Typescript Not Found .TS" }
-    
-#### Verify Publish Output
-
-    - name: dotnet publish
-      run: dotnet publish ./src/SandboxWeb/SandboxWeb.csproj  -o ${{ github.workspace }}/root # -c Release
-
-    - name: List files
-      shell: pwsh
-      run: Get-ChildItem '${{ github.workspace }}/root' -Recurse -Force | Write-Host
-
-    - name: Verify Typescript Output
-      shell: pwsh
-      run: if (!(Test-Path -Path ${{ github.workspace }}/root/wwwroot/scripts/app.js -PathType Leaf)) { throw "Compiled Typescript Not Found .JS" }
-       
-    - name: Verify Typescript Output
-      shell: pwsh
-      run: if (!(Test-Path -Path ${{ github.workspace }}/root/wwwroot/scripts/app.js.map -PathType Leaf)) { throw "Compiled Typescript Not Found .JS.MAP" }
-       
-    - name: Verify Typescript Output
-      shell: pwsh
-      run: if (!(Test-Path -Path ${{ github.workspace }}/root/wwwroot/scripts/app.ts -PathType Leaf)) { throw "Compiled Typescript Not Found .TS" }
-
+      run: if (!(Test-Path -Path ${{ env.WEB_DIRECTORY }}${{ env.TYPESCRIPT_EXPECTED_OUTPUT_FILENAME }}.ts -PathType Leaf)) { throw "Compiled Typescript Not Found .TS" }
+      
     # - name: Verify Typescript Output
     #   shell: pwsh
     #   run: |
@@ -99,10 +80,31 @@ jobs:
     #     else if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js.map -PathType Leaf)) { throw "Compiled Typescript Not Found .JS.MAP" }
     #     else if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.ts -PathType Leaf)) { throw "Compiled Typescript Not Found .TS" }
 
+#### Verify Publish Output
+
+    - name: dotnet publish
+      run: dotnet publish ${{ env.WEB_PROJECT }} -o ${{ env.PUBLISH_DIRECTORY }}
+
+    - name: List files
+      shell: pwsh
+      run: Get-ChildItem '${{ env.PUBLISH_DIRECTORY }}' -Recurse -Force | Write-Host
+
+    - name: Verify Typescript Output
+      shell: pwsh
+      run: if (!(Test-Path -Path ${{ env.PUBLISH_DIRECTORY }}${{ env.TYPESCRIPT_EXPECTED_OUTPUT_FILENAME }}.js -PathType Leaf)) { throw "Compiled Typescript Not Found .JS" }
+       
+    - name: Verify Typescript Output
+      shell: pwsh
+      run: if (!(Test-Path -Path ${{ env.PUBLISH_DIRECTORY }}${{ env.TYPESCRIPT_EXPECTED_OUTPUT_FILENAME }}.js.map -PathType Leaf)) { throw "Compiled Typescript Not Found .JS.MAP" }
+       
+    - name: Verify Typescript Output
+      shell: pwsh
+      run: if (!(Test-Path -Path ${{ env.PUBLISH_DIRECTORY }}${{ env.TYPESCRIPT_EXPECTED_OUTPUT_FILENAME }}.ts -PathType Leaf)) { throw "Compiled Typescript Not Found .TS" }
+
 #### Run Tests
 
     - name: Dotnet Run Initialize Local Environment
-      run: dotnet run --project ./src/InitEnvironment/InitEnvironment.csproj
+      run: dotnet run --project ${{ env.INIT_ENVIRONMENT_PROJECT }}
 
     - name: Dotnet Test
       run: dotnet test  ${{ env.SOLUTION }} --no-build --verbosity normal
