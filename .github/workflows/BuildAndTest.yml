@@ -80,7 +80,7 @@ jobs:
     #     else if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js.map -PathType Leaf)) { throw "Compiled Typescript Not Found .JS.MAP" }
     #     else if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.ts -PathType Leaf)) { throw "Compiled Typescript Not Found .TS" }
 
-#### Verify Publish Output
+#### Publish and Verify Output
 
     - name: dotnet publish
       run: dotnet publish ${{ env.WEB_PROJECT }} -o ${{ env.PUBLISH_DIRECTORY }}

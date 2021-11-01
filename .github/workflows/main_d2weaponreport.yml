@@ -1,4 +1,5 @@
 # Syntax: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
+# .NET CLI Syntax: https://docs.microsoft.com/en-us/dotnet/core/tools
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 name: Deployment
 
@@ -9,72 +10,87 @@ on:
 
 jobs:
   Init_Publish_Deploy:
+
     runs-on: ubuntu-latest
 
     env: # These variables are available to the entire job.
       SOLUTION: ./src/DestinySandbox.sln
+      INIT_ENVIRONMENT_PROJECT: ./src/InitEnvironment/InitEnvironment.csproj
+      WEB_PROJECT: ./src/SandboxWeb/SandboxWeb.csproj
+      WEB_DIRECTORY: ./src/SandboxWeb
+      TYPESCRIPT_EXPECTED_OUTPUT_FILENAME: /wwwroot/scripts/app # *.js, *.js.map, *.ts
+      PUBLISH_DIRECTORY: ${{ github.workspace }}/publishroot
 
     steps:
     - uses: actions/checkout@v2
 
-    - name: Set up .NET Core
+#### SETUP NODE AND NPM
+
+    - uses: actions/setup-node@v2
+      with:
+        node-version: 'lts/*'
+        check-latest: true
+        cache: 'npm'
+        cache-dependency-path: '**/package-lock.json'
+
+    - run: npm install
+      working-directory: ${{ env.WEB_DIRECTORY }}
+
+    - run: npm run helloworld # verify npm is running
+      working-directory: ${{ env.WEB_DIRECTORY }}
+
+#### SETUP DOTNET
+
+    - uses: actions/cache@v2
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+
+    - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '5.0.x'
-        include-prerelease: true
-###**************
+        dotnet-version: 5.0.x
 
     - name: Dotnet Restore Dependencies
-      run: dotnet restore ./src/DestinySandbox.sln
+      run: dotnet restore ${{ env.SOLUTION }} --use-lock-file
+
+#### Build and Verify Output
 
     - name: Dotnet Build
       run: dotnet build  ${{ env.SOLUTION }} --no-restore
 
+#### Publish and Verify Output
+
     - name: Dotnet Run Initialize Local Environment
-      run: dotnet run --project ./src/InitEnvironment/InitEnvironment.csproj -- ${{ github.workspace }}/root
+      run: dotnet run --project ${{ env.INIT_ENVIRONMENT_PROJECT }} -- ${{ github.workspace }}/root
 
     - name: dotnet publish
-      run: dotnet publish ./src/SandboxWeb/SandboxWeb.csproj  -o ${{ github.workspace }}/root  # -c Release
+      run: dotnet publish ${{ env.WEB_PROJECT }} -o ${{ env.PUBLISH_DIRECTORY }}
 
     - name: List files
       shell: pwsh
-      run: |
-        Get-ChildItem '${{ github.workspace }}/root' -Recurse -Force | Write-Host
-
-    #- name: Upload artifact for deployment job
-    #  uses: actions/upload-artifact@v2
-    #  with:
-    #    name: .net-app
-    #    path: ${{ github.workspace }}/root
-    #    retention-days: 1
+      run: Get-ChildItem '${{ env.PUBLISH_DIRECTORY }}' -Recurse -Force | Write-Host
 
     - name: Deploy to Azure Web App
-      id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'D2WeaponReport'
         slot-name: 'Production'
         publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EE9871C4B5CA43C4A27E18E0D106F33A }}
-        package: ${{ github.workspace }}/root
+        package: ${{ env.PUBLISH_DIRECTORY }}
+
 #************************
-  #deploy:
-  #  runs-on: ubuntu-latest
-  #  needs: build
-  #  environment:
-  #    name: 'production'
-  #    url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+  #- name: Upload artifact for deployment job
+  #  uses: actions/upload-artifact@v2
+  #  with:
+  #    name: .net-app
+  #    path: ${{ env.PUBLISH_DIRECTORY }}
+  #    retention-days: 1
 
-  #  steps:
-  #  - name: Download artifact from build job
-  #    uses: actions/download-artifact@v2
-  #    with:
-  #      name: .net-app
-
-  #  - name: Deploy to Azure Web App
-  #    id: deploy-to-webapp
-  #    uses: azure/webapps-deploy@v2
-  #    with:
-  #      app-name: 'D2WeaponReport'
-  #      slot-name: 'Production'
-  #      publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EE9871C4B5CA43C4A27E18E0D106F33A }}
-  #      package: .
+#************************
+  # - name: Download artifact from build job
+  #   uses: actions/download-artifact@v2
+  #   with:
+  #     name: .net-app
