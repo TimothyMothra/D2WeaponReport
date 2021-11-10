@@ -1,4 +1,4 @@
-# D2 Weapon Report 
+# D2 Weapon Report [![.NET Build And Test](https://github.com/TimothyMothra/D2WeaponReport/actions/workflows/BuildAndTest.yml/badge.svg)](https://github.com/TimothyMothra/D2WeaponReport/actions/workflows/BuildAndTest.yml) [![Build and Deploy](https://github.com/TimothyMothra/D2WeaponReport/actions/workflows/main_d2weaponreport.yml/badge.svg)](https://github.com/TimothyMothra/D2WeaponReport/actions/workflows/main_d2weaponreport.yml)
 www.d2weaponreport.com
 
 https://twitter.com/D2WeaponReport
@@ -8,10 +8,6 @@ This repo is a hobby project and practicing the skills/tools/technologies I use 
 Destiny 2 Weapon Report attempts to objectively grade weapons based on its metadata. The information provided should not be trusted for actual gameplay.
 
 This codebase is sloppy because I'm working in short bursts of large rewrites. _"Perfect is the enemy of done."_ I define a theory and then start exploring raw data from the manifest while looking for interesting insights.
-
-[![.NET Build And Test](https://github.com/TimothyMothra/D2WeaponReport/actions/workflows/BuildAndTest.yml/badge.svg)](https://github.com/TimothyMothra/D2WeaponReport/actions/workflows/BuildAndTest.yml)
-
-[![Build and Deploy](https://github.com/TimothyMothra/D2WeaponReport/actions/workflows/main_d2weaponreport.yml/badge.svg)](https://github.com/TimothyMothra/D2WeaponReport/actions/workflows/main_d2weaponreport.yml)
 
 ## Resources
 
@@ -25,7 +21,6 @@ This codebase is sloppy because I'm working in short bursts of large rewrites. _
 ## Contributing
 
 [Journal](journal/)
-
 
 ### Prerequisits
 - .NET v5 SDK (https://dotnet.microsoft.com/download/dotnet/5.0)
