@@ -14,10 +14,11 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <!-- DISABLING BECAUSE NOT SUPPORTED BY DEPENDABOT -->
     <!-- Locking Packages is required to support caching dependencies in Github Actions. -->
     <!-- https://docs.github.com/en/actions/guides/caching-dependencies-to-speed-up-workflows -->
     <!-- https://docs.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files#locking-dependencies -->
-    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <!-- <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile> -->
   </PropertyGroup>
 
   <ItemGroup>

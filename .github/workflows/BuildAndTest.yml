@@ -41,20 +41,21 @@ jobs:
 
 #### SETUP DOTNET
 
-    - uses: actions/cache@v2
-      with:
-        path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-nuget-
+    # DISABLING PACKAGE CACHING BECAUSE NOT SUPPORTED BY DEPENDABOT
+    # - uses: actions/cache@v2
+    #   with:
+    #     path: ~/.nuget/packages
+    #     key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+    #     restore-keys: |
+    #       ${{ runner.os }}-nuget-
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 6.0.x
 
     - name: Dotnet Restore Dependencies
-      run: dotnet restore ${{ env.SOLUTION }} --use-lock-file
+      run: dotnet restore ${{ env.SOLUTION }} # --use-lock-file
 
 #### Build and Verify Output
 

@@ -51,10 +51,12 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: '6.0.x'
+
+###**************
 
     - name: Dotnet Restore Dependencies
-      run: dotnet restore ${{ env.SOLUTION }} --use-lock-file
+      run: dotnet restore ${{ env.SOLUTION }} #--use-lock-file
 
 #### Build and Verify Output
 
@@ -64,7 +66,7 @@ jobs:
 #### Publish and Verify Output
 
     - name: Dotnet Run Initialize Local Environment
-      run: dotnet run --project ${{ env.INIT_ENVIRONMENT_PROJECT }} -- ${{ github.workspace }}/root
+      run: dotnet run --project ${{ env.INIT_ENVIRONMENT_PROJECT }} -- ${{ env.PUBLISH_DIRECTORY }}
 
     - name: dotnet publish
       run: dotnet publish ${{ env.WEB_PROJECT }} -o ${{ env.PUBLISH_DIRECTORY }}
