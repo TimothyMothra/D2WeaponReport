@@ -30,10 +30,10 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 6.0.x
 
     - name: Dotnet Restore Dependencies
-      run: dotnet restore ${{ env.SOLUTION }} --use-lock-file
+      run: dotnet restore ${{ env.SOLUTION }} # --use-lock-file
 
     - name: Dotnet Build
       run: dotnet build  ${{ env.SOLUTION }} --no-restore
