@@ -23,7 +23,7 @@ This codebase is sloppy because I'm working in short bursts of large rewrites. _
 [Journal](journal/)
 
 ### Prerequisits
-- .NET v5 SDK (https://dotnet.microsoft.com/download/dotnet/5.0)
+- .NET v6 SDK (https://dotnet.microsoft.com/download/dotnet/6.0)
 
 #### Initialize local environment.
 To get started you must initialze the local environment. 
