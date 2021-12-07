@@ -28,7 +28,10 @@
             };
 
             #region Stats
-            var weaponStatsCollection = new WeaponStatsCollection();
+            var weaponStatsCollection = new WeaponStatsCollection
+            {
+                StatGroupHashId = 3941551777u,
+            };
 
             weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
