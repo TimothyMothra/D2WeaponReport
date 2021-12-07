@@ -39,17 +39,6 @@
     <meta property="og:url" content="https://d2weaponreport.com/repository-open-graph-template.png" />
     <meta property="og:description" content="Hobby project exploring amateur data science on the weapons of Destiny 2." />
 
-    <style>
-        body {
-            /*background-image: linear-gradient(to bottom, #000070, #000018);*/
-            background-color: #062037;
-            color: white;
-        }
-
-        table {
-            color: white;
-        }
-    </style>
 </head>
 
 <body>
@@ -65,7 +54,10 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light  ">
             @*bg-white*@@*border-bottom box-shadow mb-3*@
             <div class="container">
-                <a style=" font-weight: bold; color: white; " class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">D2 Weapon Report</a>
+                <h1>
+                    <a style=" font-weight: bold; color: white; " class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">D2 Weapon <span class="wr-green">Report</span></a>
+                </h1>
+                
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

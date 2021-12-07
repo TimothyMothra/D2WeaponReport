@@ -142,18 +142,19 @@
             <p>@Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.TypeName)</p>
             <p>@Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.FrameName)</p>
             <p>@Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.FlavorText)</p>
-            <img src="@Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.GetScreenshotUri().AbsoluteUri)" alt="screenshot" width="600">
+            <img class="img-fluid" src="@Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.GetScreenshotUri().AbsoluteUri)" alt="screenshot">
 
             <p>Number of Permutations @Html.DisplayFor(x => x.WeaponDetails.PerkPermutationAnalysisList.Count)</p>
 
+            @*Hidden fields here are read by plotly library*@
             <p id="weaponName" style="display:none">@Html.DisplayFor(x => x.WeaponDetails.WeaponDefinition.MetaData.Name)</p>
-
             <p id="permutations" style="display:none">
                 @Html.Raw(string.Join(",", this.Model.WeaponDetails.PerkPermutationAnalysisList.OrderByDescending(x => x.MaxPoints).Select(x => x.MaxPoints).AsEnumerable()))
             </p>
 
-            @*Weapon Stats*@
-            <p>Stats - Base Value - Percentiles (min, first quartile, median, third quartile, max)</p>
+            @*Weapon Attributes*@
+            <h3>Affected Attributes</h3>
+            <p>Name: Base Value - Percentiles (min, first quartile, median, third quartile, max)</p>
             <ul>
                 @foreach (var stat in this.Model.WeaponDetails.StatPermutationPercentiles)
                 {
@@ -164,6 +165,7 @@
         </div>
 
         @*WeaponDetails Body: Perks *@
+        <h3>Available Perks</h3>
         @foreach (var perkTable in this.Model.WeaponDetails.PerkTables)
         {
             <div>
@@ -178,18 +180,11 @@
                         }
                     </tr>
 
-
-
                     @for (int i = 0; i < perkTable.Rows.Count; i++)
                     {
-
                         <tr style="border: 1px solid white;">
-
-
                             <td>
-
                                 <img src="@Html.Raw(perkTable.IconUris[i])" alt="icon" width="50">
-
                             </td>
 
                             @foreach (var cell in perkTable.Rows[i])
@@ -204,9 +199,10 @@
             <br />
         }
 
+        <h3>Weapon Report</h3>
         @*WeaponDetails Body: Permutations *@
         <div>
-            <div id="plotDiv" style="width:600px;height:500px;"></div>
+            <div id="plotDiv" style="width:400px;height:500px;"></div>
 
             <script lang="javascript">
                 // https://github.com/plotly/plotly.js
@@ -234,7 +230,7 @@
                 ];
 
                 var layout = {
-                    title: weaponName,
+                    title: "Distribution of Net Points",
                     hovermode: false,
                     clickmode: false,
                     dragmode: false,
@@ -267,7 +263,7 @@
             </script>
 
             <p>
-                Max Points: perk permutation (percentile grade).
+                Net Points: perk permutation (percentile grade).
                 Grades: A = top 25%, B = second 25%, C = third 25%, D = bottom 25%
             </p>
 
