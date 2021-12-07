@@ -46,7 +46,7 @@
             return string.Join(string.Empty, percentileGrades
                     .GroupBy(x => x)
                     .OrderBy(x => x.Key)
-                    .Select(x => $"{x.Count()}{x.Key}")
+                    .Select(x => $"{x.Key}{x.Count()}")
                     .AsEnumerable());
         }
 
