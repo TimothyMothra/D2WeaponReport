@@ -60,7 +60,10 @@
             // Stats
             #region Weapon Definition Stats
 
-            var weaponStatsCollection = new WeaponStatsCollection();
+            var weaponStatsCollection = new WeaponStatsCollection
+            {
+                StatGroupHashId = jsonDynamic.stats.statGroupHash,
+            };
 
             var statCollectionDynamic = jsonDynamic.stats.stats;
             foreach (var statDynamic in statCollectionDynamic)
