@@ -30,8 +30,8 @@ jobs:
       with:
         node-version: 'lts/*'
         check-latest: true
-        cache: 'npm'
-        cache-dependency-path: '**/package-lock.json'
+        #cache: 'npm'
+        #cache-dependency-path: '**/package-lock.json'
 
     - run: npm install
       working-directory: ${{ env.WEB_DIRECTORY }}
