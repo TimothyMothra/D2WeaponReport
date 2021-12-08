@@ -2,12 +2,12 @@
 {
     using System;
 
-    public static class InterpolationCalculator
+    public static class Calculator
     {
         /// <summary>
         /// <code> y =  (y2 – y1) / (x2 – x1) * (x – x1) + y1 </code>.
         /// </summary>
-        public static double Function(double input, double x1, double x2, double y1, double y2, bool roundResult = false)
+        public static double Interpolate(double input, double x1, double x2, double y1, double y2, bool roundResult = false)
         {
             var result = (((y2 - y1) / (x2 - x1)) * (input - x1)) + y1;
 
