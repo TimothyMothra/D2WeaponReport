@@ -11,9 +11,6 @@ namespace DestinyLib.DataContract.Definitions
 
         public IList<WeaponStatDefinition> Values { get; set; }
 
-        /// <summary>
-        /// This is the Pid for Interpolation rules.
-        /// </summary>
-        public uint StatGroupHashId { get; set; } // TODO: IMPLEMENT INTERPOLATION
+        public WeaponStatGroupDefinition StatGroupDefinition { get; set; }
     }
 }

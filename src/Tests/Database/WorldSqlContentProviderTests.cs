@@ -84,5 +84,19 @@
 
             Assert.AreEqual("Chambered Compensator", name);
         }
+
+        [TestMethod]
+        public void TestGetStatGroupDefinition_GnawingHunger()
+        {
+            uint id_GnawingHungerStatGroup = 3941551777;
+
+            var statGroupDefinition = this.worldSqlContentProvider.GetWeaponStatGroupDefinition(id_GnawingHungerStatGroup);
+
+            var expectedRecord = ExampleRecords.GetGnawingHunger_StatGroupDefinition();
+
+            Assert.AreEqual(7, statGroupDefinition.InterpolationDefinitions.Count);
+
+            statGroupDefinition.Should().BeEquivalentTo(expectedRecord);
+        }
     }
 }

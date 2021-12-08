@@ -31,5 +31,12 @@
         /// <param name="id"></param>
         /// <returns></returns>
         public string GetDestinyStatDefinition(uint id) => this.GetJsonRecord("DestinyStatDefinition", id);
+
+        /// <summary>
+        /// This contains: Weapon Stat Interpolation Definitions.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public string GetDestinyStatGroupDefinition(uint id) => this.GetJsonRecord("DestinyStatGroupDefinition", id);
     }
 }

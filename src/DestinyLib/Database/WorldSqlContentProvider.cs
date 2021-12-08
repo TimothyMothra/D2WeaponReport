@@ -9,6 +9,8 @@
 
     using Newtonsoft.Json;
 
+    using static DestinyLib.DataContract.Definitions.WeaponStatGroupDefinition;
+
     public class WorldSqlContentProvider
     {
         private readonly WorldSqlContent worldSqlContent;
@@ -59,11 +61,7 @@
 
             // Stats
             #region Weapon Definition Stats
-
-            var weaponStatsCollection = new WeaponStatsCollection
-            {
-                StatGroupHashId = jsonDynamic.stats.statGroupHash,
-            };
+            var weaponStatsCollection = new WeaponStatsCollection();
 
             var statCollectionDynamic = jsonDynamic.stats.stats;
             foreach (var statDynamic in statCollectionDynamic)
@@ -88,6 +86,9 @@
 
                 weaponStatsCollection.Values.Add(stat);
             }
+
+            uint statGroupHashId = jsonDynamic.stats.statGroupHash;
+            weaponStatsCollection.StatGroupDefinition = this.GetWeaponStatGroupDefinition(statGroupHashId);
             #endregion
 
             // PERKS
@@ -132,7 +133,7 @@
 
                 weaponPerksCollection.Values.Add(perkSet);
             }
-#endregion
+            #endregion
 
             return new WeaponDefinition(weaponMetaData, weaponStatsCollection, weaponPerksCollection);
         }
@@ -203,6 +204,40 @@
         {
             // Source: (https://stackoverflow.com/questions/1202935/convert-rows-from-a-data-reader-into-typed-results).
             return this.worldSqlContent.GetRecords(Properties.Resources.WorldSqlContent_GetAllWeapons, SearchableWeaponRecord.Parse);
+        }
+
+        public WeaponStatGroupDefinition GetWeaponStatGroupDefinition(uint statGroupHashId)
+        {
+            var definition = new WeaponStatGroupDefinition
+            {
+                StatGroupHashId = statGroupHashId,
+                InterpolationDefinitions = new List<WeaponStatInterpolationDefinition>(),
+            };
+
+            var statGroupDefinitionRecord = this.worldSqlContent.GetDestinyStatGroupDefinition(statGroupHashId);
+            dynamic statGroupDefinitionDynamic = JsonConvert.DeserializeObject(statGroupDefinitionRecord);
+
+            foreach (var scaledStatDynamic in statGroupDefinitionDynamic.scaledStats)
+            {
+                var interpolationDefinition = new WeaponStatInterpolationDefinition
+                {
+                    StatHashId = scaledStatDynamic.statHash,
+                    MaxValue = scaledStatDynamic.maximumValue,
+                    DataPoints = new List<Tuple<double, double>>(),
+                };
+
+                foreach (var interpolationDynamic in scaledStatDynamic.displayInterpolation)
+                {
+                    double x = interpolationDynamic.value;
+                    double y = interpolationDynamic.weight;
+
+                    interpolationDefinition.DataPoints.Add(new Tuple<double, double>(x, y));
+                }
+
+                definition.InterpolationDefinitions.Add(interpolationDefinition);
+            }
+
+            return definition;
         }
 
         internal List<WeaponPerkDefinition> GetWeaponDefinitionPerks(uint plugSetHash)
