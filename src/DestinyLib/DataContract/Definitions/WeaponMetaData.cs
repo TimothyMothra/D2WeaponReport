@@ -12,9 +12,11 @@ namespace DestinyLib.DataContract.Definitions
 
         public string ItemTypeId { get; set; }
 
-        public string TypeName { get; set; } = "TODO: TYPE NAME"; // TODO: FIND ITEM TYPE
+        public string TypeName { get; set; }
 
-        public string FrameName { get; set; } = "TODO: FRAME NAME"; // TODO: FIND FRAME NAME
+        public string FrameName { get; set; }
+
+        public string FrameDescription { get; set; }
 
         public string FlavorText { get; set; }
 

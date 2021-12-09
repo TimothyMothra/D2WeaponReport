@@ -18,6 +18,9 @@
             {
                 HashId = 821154603,
                 Name = "Gnawing Hunger",
+                TypeName = "Auto Rifle",
+                FrameName = "Adaptive Frame",
+                FrameDescription = "A well-rounded grip, reliable and sturdy.",
                 AmmoTypeId = "1",
                 TierTypeName = "Legendary",
                 DefaultDamageTypeId = "4",

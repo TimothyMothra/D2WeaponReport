@@ -41,6 +41,7 @@
             {
                 HashId = jsonDynamic.hash,
                 Name = jsonDynamic.displayProperties.name,
+                TypeName = jsonDynamic.itemTypeDisplayName,
                 ItemDefinitionIconPath = jsonDynamic.displayProperties.icon,
                 ScreenshotPath = jsonDynamic.screenshot,
                 AmmoTypeId = jsonDynamic.equippingBlock.ammoType.ToString(), //TODO: Need to identify Ammo Type (example: "Energy Weapons")
@@ -101,8 +102,22 @@
             // These are not cached because they are unique for each weapon definition.
             var socketCategoriesDynamic = jsonDynamic.sockets.socketCategories;
             var weaponPerkIndexes = Array.Empty<int>();
+            var intrinsicTraitsIndex = -1;
             foreach (var category in socketCategoriesDynamic)
             {
+                if (category.socketCategoryHash == (uint)3956125808) // SocketCategory: "Intrinsic Traits"
+                {
+                    var indexes = category.socketIndexes.ToObject<int[]>();
+
+                    // ASSUMPTION: There is only 1 intrinsic trait
+                    if (indexes.Length != 1)
+                    {
+                        throw new($"weapon id {id} name {weaponMetaData.Name} | intrinsic traits: {indexes.Length}");
+                    }
+
+                    intrinsicTraitsIndex = indexes[0];
+                }
+
                 if (category.socketCategoryHash == (uint)4241085061) // SocketCategory: "Weapon Perks"
                 {
                     weaponPerkIndexes = category.socketIndexes.ToObject<int[]>();
@@ -110,6 +125,22 @@
             }
 
             var socketEntriesDynamic = jsonDynamic.sockets.socketEntries;
+
+            // Get FrameName from Intrinsic Traits.
+            if (intrinsicTraitsIndex != -1)
+            {
+                var intrinsicTraitDynamic = socketEntriesDynamic[intrinsicTraitsIndex];
+
+                uint frameHashId = intrinsicTraitDynamic.singleInitialItemHash;
+
+                var intrinsicRecord = this.worldSqlContent.GetDestinyInventoryItemDefinition(frameHashId);
+                dynamic intrinsicDynamic = JsonConvert.DeserializeObject(intrinsicRecord);
+
+                weaponMetaData.FrameName = intrinsicDynamic.displayProperties.name;
+                weaponMetaData.FrameDescription = intrinsicDynamic.displayProperties.description;
+            }
+
+            // Get Perks
             foreach (var i in weaponPerkIndexes)
             {
                 var socketEntryDynamic = socketEntriesDynamic[i];
