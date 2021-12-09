@@ -1,0 +1,72 @@
+﻿@model List<DestinyLib.DataContract.Analysis.StatPermutationPercentiles>
+ 
+    
+<div id="affectedAttributes">
+    @foreach (var stat in this.Model)
+    {
+        <p>@Html.Raw(stat.Name)</p>
+        <p class="text-muted">HashId: @Html.Raw(stat.HashId)</p>
+        <ul>
+            <li>BaseValue: @Html.Raw(stat.BaseValue)</li>
+            <li>Pertentiles of Perk Permutations: @Html.Raw(stat.Percentiles) <br /><span class="text-muted">(min, 25%, 50%, 75%, max)</span></li>
+            <li>Interpolation:
+                <p class="text-muted">Data: @Html.Raw(stat.GetInterpolationDataAsString())</p>
+                <div style="width:400px;">
+                    <canvas id="chart_canvas_@Html.Raw(stat.HashId)"></canvas>
+                </div>
+
+                <script>
+                    new Chart(document.getElementById('chart_canvas_@Html.Raw(stat.HashId)').getContext('2d'), {
+                        type: 'scatter',
+                        data: {
+                            datasets: [{
+                                data: eval('@Html.Raw(stat.GetInterpolationDataAsString())')
+                                //[{x: 0, y: 20}, {x: 10, y: 10}, {x: 20, y: 15}, {x: 30, y: 10}],
+                            }],
+                        },
+                        options: {
+                            animation: false,
+                            showLine: true,
+                            elements: {
+                                line: {
+                                    borderColor: '#1CB574',
+                                },
+                                point: {
+                                    radius: 5,
+                                    backgroundColor: '#1CB574',
+                                },
+                            },
+                            scales: {
+                                x: {
+                                    type: 'linear',
+                                    position: 'bottom',
+                                    grid: {
+                                        color: '#43464B',
+                                        borderColor: '#FFF'
+                                    },
+                                    ticks: {
+                                        color: '#FFF'
+                                    }
+                                },
+                                y: {
+                                    grid: {
+                                        color: '#43464B',
+                                        borderColor: '#FFF'
+                                    },
+                                    ticks: {
+                                        color: '#FFF',
+                                    }
+                                },
+                            },
+                            plugins: {
+                                legend: {
+                                    display: false,
+                                }
+                            },
+                        }
+                    });
+                </script>
+            </li>
+        </ul>
+    }
+</div>
