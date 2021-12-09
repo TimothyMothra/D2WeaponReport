@@ -356,3 +356,6 @@ MigrationBackup/
 # Generated files for debugging Typescript
 /**/scripts/*.js
 /**/scripts/*.map
+
+# npm file
+/src/SandboxWeb/package-lock.json
