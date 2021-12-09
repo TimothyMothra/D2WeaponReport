@@ -1,8 +1,11 @@
 ﻿namespace Tests
 {
+    using System;
     using System.Collections.Generic;
 
     using DestinyLib.DataContract.Definitions;
+
+    using static DestinyLib.DataContract.Definitions.WeaponStatGroupDefinition;
 
     public static class ExampleRecords
     {
@@ -15,6 +18,9 @@
             {
                 HashId = 821154603,
                 Name = "Gnawing Hunger",
+                TypeName = "Auto Rifle",
+                FrameName = "Adaptive Frame",
+                FrameDescription = "A well-rounded grip, reliable and sturdy.",
                 AmmoTypeId = "1",
                 TierTypeName = "Legendary",
                 DefaultDamageTypeId = "4",
@@ -28,7 +34,10 @@
             };
 
             #region Stats
-            var weaponStatsCollection = new WeaponStatsCollection();
+            var weaponStatsCollection = new WeaponStatsCollection
+            {
+                StatGroupDefinition = GetGnawingHunger_StatGroupDefinition(),
+            };
 
             weaponStatsCollection.Values.Add(new WeaponStatDefinition
             {
@@ -738,6 +747,107 @@
             #endregion
 
             return new WeaponDefinition(weaponMetaData, weaponStatsCollection, weaponPerksCollection);
+        }
+
+        public static WeaponStatGroupDefinition GetGnawingHunger_StatGroupDefinition()
+        {
+            var definition = new WeaponStatGroupDefinition
+            {
+                StatGroupHashId = 3941551777u,
+                InterpolationDefinitions = new List<WeaponStatInterpolationDefinition>(),
+            };
+
+            definition.InterpolationDefinitions.Add(new WeaponStatInterpolationDefinition
+            {
+                StatHashId = 4284893193,
+                MaxValue = 100,
+                DataPoints = new List<Tuple<double, double>>
+                {
+                    Tuple.Create(0d, 360d),
+                    Tuple.Create(20d, 450d),
+                    Tuple.Create(80d, 600d),
+                    Tuple.Create(100d, 720d),
+                },
+            });
+
+            definition.InterpolationDefinitions.Add(new WeaponStatInterpolationDefinition
+            {
+                StatHashId = 4043523819,
+                MaxValue = 100,
+                DataPoints = new List<Tuple<double, double>>
+                {
+                    Tuple.Create(0d, 18d),
+                    Tuple.Create(20d, 21d),
+                    Tuple.Create(80d, 29d),
+                    Tuple.Create(100d, 33d),
+                },
+            });
+
+            definition.InterpolationDefinitions.Add(new WeaponStatInterpolationDefinition
+            {
+                StatHashId = 1240592695,
+                MaxValue = 100,
+                DataPoints = new List<Tuple<double, double>>
+                {
+                    Tuple.Create(0d, 10d),
+                    Tuple.Create(100d, 100d),
+                },
+            });
+
+            definition.InterpolationDefinitions.Add(new WeaponStatInterpolationDefinition
+            {
+                StatHashId = 155624089,
+                MaxValue = 100,
+                DataPoints = new List<Tuple<double, double>>
+                {
+                    Tuple.Create(0d, 10d),
+                    Tuple.Create(100d, 100d),
+                },
+            });
+
+            definition.InterpolationDefinitions.Add(new WeaponStatInterpolationDefinition
+            {
+                StatHashId = 943549884,
+                MaxValue = 100,
+                DataPoints = new List<Tuple<double, double>>
+                {
+                    Tuple.Create(0d, 10d),
+                    Tuple.Create(100d, 100d),
+                },
+            });
+
+            definition.InterpolationDefinitions.Add(new WeaponStatInterpolationDefinition
+            {
+                StatHashId = 4188031367,
+                MaxValue = 100,
+                DataPoints = new List<Tuple<double, double>>
+                {
+                    Tuple.Create(0d, 10d),
+                    Tuple.Create(100d, 100d),
+                },
+            });
+
+            definition.InterpolationDefinitions.Add(new WeaponStatInterpolationDefinition
+            {
+                StatHashId = 3871231066,
+                MaxValue = 100,
+                DataPoints = new List<Tuple<double, double>>
+                {
+                    Tuple.Create(0d, 33d),
+                    Tuple.Create(10d, 36d),
+                    Tuple.Create(20d, 39d),
+                    Tuple.Create(30d, 41d),
+                    Tuple.Create(40d, 44d),
+                    Tuple.Create(50d, 47d),
+                    Tuple.Create(60d, 49d),
+                    Tuple.Create(70d, 52d),
+                    Tuple.Create(80d, 55d),
+                    Tuple.Create(90d, 57d),
+                    Tuple.Create(100d, 60d),
+                },
+            });
+
+            return definition;
         }
     }
 }

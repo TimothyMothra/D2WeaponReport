@@ -10,5 +10,7 @@ namespace DestinyLib.DataContract.Definitions
         }
 
         public IList<WeaponStatDefinition> Values { get; set; }
+
+        public WeaponStatGroupDefinition StatGroupDefinition { get; set; }
     }
 }
