@@ -24,6 +24,7 @@ This codebase is sloppy because I'm working in short bursts of large rewrites. _
 
 ### Prerequisits
 - .NET v6 SDK (https://dotnet.microsoft.com/download/dotnet/6.0)
+- Node LTS (https://nodejs.org/en/download/)
 
 #### Initialize local environment.
 To get started you must initialze the local environment. 

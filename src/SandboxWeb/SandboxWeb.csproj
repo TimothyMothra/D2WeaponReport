@@ -1,13 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
   </PropertyGroup>
+
+  <Import Project="$(PropsRoot)\TypeScript.props" />
 
   <ItemGroup>
     <!--<PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />-->
     
     <ProjectReference Include="..\DestinyLib\DestinyLib.csproj" />
   </ItemGroup>
-
+  
 </Project>

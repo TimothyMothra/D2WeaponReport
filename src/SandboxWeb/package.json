@@ -1,0 +1,18 @@
+{
+  "description": "This file is the NPM configuration. Scripts defined here can be run from cli.",
+  "version": "1.0.0",
+  "name": "npm_config",
+  "scripts": {
+    "helloworld": "echo 'Hello World!, package.json' && exit 0"
+  },
+  "private": true,
+  "devDependencies": {
+    "@types/jquery": "^3.3.33",
+    "del": "^5.1.0",
+    "gulp": "^4.0.2"
+  },
+  "dependencies": {
+    "jquery": "^3.6.0",
+    "typescript": "^4.4.4"
+  }
+}

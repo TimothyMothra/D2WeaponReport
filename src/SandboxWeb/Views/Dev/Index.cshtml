@@ -1,0 +1,14 @@
+﻿@model SandboxWeb.Models.HomeViewModel
+
+@{
+    ViewData["Title"] = "Dev";
+}
+
+<div>
+    Typescript Test
+    <br />
+    Input: <input id="typescript_test_input" value="Testing..." onkeyup="document.getElementById('typescript_test_output').innerText = sayHello()" />
+    <br />
+    Output: <div id="typescript_test_output"></div>
+    <br />
+</div>

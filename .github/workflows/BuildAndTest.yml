@@ -1,4 +1,5 @@
-# Syntax: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
+# Github Workflow Syntax: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
+# .NET CLI Syntax: https://docs.microsoft.com/en-us/dotnet/core/tools
 name: .NET Build And Test
 
 on:
@@ -14,10 +15,31 @@ jobs:
 
     env: # These variables are available to the entire job.
       SOLUTION: ./src/DestinySandbox.sln
+      INIT_ENVIRONMENT_PROJECT: ./src/InitEnvironment/InitEnvironment.csproj
+      WEB_PROJECT: ./src/SandboxWeb/SandboxWeb.csproj
       WEB_DIRECTORY: ./src/SandboxWeb
-
+      TYPESCRIPT_EXPECTED_OUTPUT_FILENAME: /wwwroot/scripts/app # *.js, *.js.map, *.ts
+      PUBLISH_DIRECTORY: ${{ github.workspace }}/publishroot
+    
     steps:
     - uses: actions/checkout@v2
+
+#### SETUP NODE AND NPM
+
+    - uses: actions/setup-node@v2
+      with:
+        node-version: 'lts/*'
+        check-latest: true
+        #cache: 'npm'
+        #cache-dependency-path: '**/package-lock.json'
+
+    - run: npm install
+      working-directory: ${{ env.WEB_DIRECTORY }}
+
+    - run: npm run helloworld # verify npm is running
+      working-directory: ${{ env.WEB_DIRECTORY }}
+
+#### SETUP DOTNET
 
     # DISABLING PACKAGE CACHING BECAUSE NOT SUPPORTED BY DEPENDABOT
     # - uses: actions/cache@v2
@@ -35,11 +57,55 @@ jobs:
     - name: Dotnet Restore Dependencies
       run: dotnet restore ${{ env.SOLUTION }} # --use-lock-file
 
+#### Build and Verify Output
+
     - name: Dotnet Build
       run: dotnet build  ${{ env.SOLUTION }} --no-restore
 
+    - name: Verify Typescript Output
+      shell: pwsh
+      run: if (!(Test-Path -Path ${{ env.WEB_DIRECTORY }}${{ env.TYPESCRIPT_EXPECTED_OUTPUT_FILENAME }}.js -PathType Leaf)) { throw "Compiled Typescript Not Found .JS" }
+       
+    - name: Verify Typescript Output
+      shell: pwsh
+      run: if (!(Test-Path -Path ${{ env.WEB_DIRECTORY }}${{ env.TYPESCRIPT_EXPECTED_OUTPUT_FILENAME }}.js.map -PathType Leaf)) { throw "Compiled Typescript Not Found .JS.MAP" }
+       
+    - name: Verify Typescript Output
+      shell: pwsh
+      run: if (!(Test-Path -Path ${{ env.WEB_DIRECTORY }}${{ env.TYPESCRIPT_EXPECTED_OUTPUT_FILENAME }}.ts -PathType Leaf)) { throw "Compiled Typescript Not Found .TS" }
+      
+    # - name: Verify Typescript Output
+    #   shell: pwsh
+    #   run: |
+    #     if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js -PathType Leaf)) { throw "Compiled Typescript Not Found .JS" }
+    #     else if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js.map -PathType Leaf)) { throw "Compiled Typescript Not Found .JS.MAP" }
+    #     else if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.ts -PathType Leaf)) { throw "Compiled Typescript Not Found .TS" }
+
+#### Publish and Verify Output
+
+    - name: dotnet publish
+      run: dotnet publish ${{ env.WEB_PROJECT }} -o ${{ env.PUBLISH_DIRECTORY }}
+
+    - name: List files
+      shell: pwsh
+      run: Get-ChildItem '${{ env.PUBLISH_DIRECTORY }}' -Recurse -Force | Write-Host
+
+    - name: Verify Typescript Output
+      shell: pwsh
+      run: if (!(Test-Path -Path ${{ env.PUBLISH_DIRECTORY }}${{ env.TYPESCRIPT_EXPECTED_OUTPUT_FILENAME }}.js -PathType Leaf)) { throw "Compiled Typescript Not Found .JS" }
+       
+    - name: Verify Typescript Output
+      shell: pwsh
+      run: if (!(Test-Path -Path ${{ env.PUBLISH_DIRECTORY }}${{ env.TYPESCRIPT_EXPECTED_OUTPUT_FILENAME }}.js.map -PathType Leaf)) { throw "Compiled Typescript Not Found .JS.MAP" }
+       
+    - name: Verify Typescript Output
+      shell: pwsh
+      run: if (!(Test-Path -Path ${{ env.PUBLISH_DIRECTORY }}${{ env.TYPESCRIPT_EXPECTED_OUTPUT_FILENAME }}.ts -PathType Leaf)) { throw "Compiled Typescript Not Found .TS" }
+
+#### Run Tests
+
     - name: Dotnet Run Initialize Local Environment
-      run: dotnet run --project ./src/InitEnvironment/InitEnvironment.csproj
+      run: dotnet run --project ${{ env.INIT_ENVIRONMENT_PROJECT }}
 
     - name: Dotnet Test
       run: dotnet test  ${{ env.SOLUTION }} --no-build --verbosity normal
