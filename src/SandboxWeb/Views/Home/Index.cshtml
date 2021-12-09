@@ -149,10 +149,11 @@
         </p>
             
         <img class="img-fluid" src="@Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.GetScreenshotUri().AbsoluteUri)" alt="screenshot">
-
     </div>
 
     @*WeaponDetails Body: Perks *@
+    <br />
+
     <h3>Available Perks</h3>
     <div>
     @foreach (var perkTable in this.Model.WeaponDetails.PerkTables)
@@ -188,11 +189,12 @@
     </div>
 
     <hr class="wr-green"/>
-
     <h2>Weapon <span class="wr-green">Report</span></h2>
-    <p>Number of Permutations @Html.DisplayFor(x => x.WeaponDetails.PerkPermutationAnalysisList.Count)</p>
+    
 
     @*Weapon Attributes*@
+    <br />
+
     <h3>Affected Attributes</h3>
     <div>
         @await Html.PartialAsync("_AffectedAttributes", this.Model.WeaponDetails.StatPermutationPercentiles)
@@ -200,79 +202,81 @@
 
         
     @*WeaponDetails Body: Permutations *@
-    <div>
-        <div id="plotDiv" style="width:400px;height:500px;"></div>
+    <br />
+
+    <h3>Distribution of Net Points</h3>
+    <div id="plotDiv" style="width:400px;height:500px;"></div>
         
-        @*Hidden fields here are read by plotly library*@
-        <p id="permutations" style="display:none">
-            @Html.Raw(string.Join(",", this.Model.WeaponDetails.PerkPermutationAnalysisList.OrderByDescending(x => x.NetPoints).Select(x => x.NetPoints).AsEnumerable()))
-        </p>
+    @*Hidden fields here are read by plotly library*@
+    <p id="permutations" style="display:none">
+        @Html.Raw(string.Join(",", this.Model.WeaponDetails.PerkPermutationAnalysisList.OrderByDescending(x => x.NetPoints).Select(x => x.NetPoints).AsEnumerable()))
+    </p>
 
-        <script lang="javascript">
-            // https://github.com/plotly/plotly.js
-            // https://plotly.com/javascript/box-plots/
+    <script lang="javascript">
+        // https://github.com/plotly/plotly.js
+        // https://plotly.com/javascript/box-plots/
 
-            var weaponName = document.getElementById("weaponName").innerText;
-            var permutations = document.getElementById("permutations").innerText.split(',');
+        var weaponName = document.getElementById("weaponName").innerText;
+        var permutations = document.getElementById("permutations").innerText.split(',');
 
-            var plotData = [
-                {
-                    type: 'box',
-                    y: permutations,
-                    name: '+/- points',
-                    boxpoints: 'all',
-                    jitter: 0.5,
-                    whiskerwidth: 0.2,
-                    fillcolor: 'cls',
-                    marker: {
-                        size: 2
-                    },
-                    line: {
-                        width: 1
-                    }
+        var plotData = [
+            {
+                type: 'box',
+                y: permutations,
+                name: '+/- points',
+                boxpoints: 'all',
+                jitter: 0.5,
+                whiskerwidth: 0.2,
+                fillcolor: 'cls',
+                marker: {
+                    size: 2
+                },
+                line: {
+                    width: 1
                 }
-            ];
+            }
+        ];
 
-            var layout = {
-                title: "Distribution of Net Points",
-                hovermode: false,
-                clickmode: false,
-                dragmode: false,
-                yaxis: {
-                    autorange: true,
-                    fixedrange: true,
-                    showgrid: true,
-                    zeroline: true,
-                    dtick: 5,
-                    //gridcolor: 'rgb(255, 255, 255)',
-                    gridwidth: 1,
-                    zerolinecolor: 'rgb(255, 255, 255)',
-                    zerolinewidth: 2
-                },
-                xaxis: {
-                    fixedrange: true,
-                },
-                margin: {
-                    l: 40,
-                    r: 30,
-                    b: 80,
-                    t: 100
-                },
-                paper_bgcolor: 'rgb(243, 243, 243)',
-                plot_bgcolor: 'rgb(243, 243, 243)',
-                showlegend: false,
-            };
+        var layout = {
+            title: "",
+            hovermode: false,
+            clickmode: false,
+            dragmode: false,
+            yaxis: {
+                autorange: true,
+                fixedrange: true,
+                showgrid: true,
+                zeroline: true,
+                dtick: 5,
+                //gridcolor: 'rgb(255, 255, 255)',
+                gridwidth: 1,
+                zerolinecolor: 'rgb(255, 255, 255)',
+                zerolinewidth: 2
+            },
+            xaxis: {
+                fixedrange: true,
+            },
+            margin: {
+                l: 40,
+                r: 30,
+                b: 80,
+                t: 100
+            },
+            paper_bgcolor: 'rgb(243, 243, 243)',
+            plot_bgcolor: 'rgb(243, 243, 243)',
+            showlegend: false,
+        };
 
-            Plotly.newPlot('plotDiv', plotData, layout);
-        </script>
+        Plotly.newPlot('plotDiv', plotData, layout);
+    </script>
 
-        <p>
-            Net Points: perk permutation (percentile grade).
-            Grades: A = top 25%, B = second 25%, C = third 25%, D = bottom 25%
-        </p>
 
-        <div>
-            @await Html.PartialAsync("_PermutationView", this.Model.WeaponDetails.PerkPermutationAnalysisList)
-        </div>
-    </div>
+    <br />
+
+    <h3>Perk Permutations</h3>
+    <p>Number of Permutations @Html.DisplayFor(x => x.WeaponDetails.PerkPermutationAnalysisList.Count)</p>
+    <p>Net Points: perk permutation (percentile grade).</p>
+    <p>Grades: A = top 25%, B = second 25%, C = third 25%, D = bottom 25%</p>
+
+    @await Html.PartialAsync("_PermutationView", this.Model.WeaponDetails.PerkPermutationAnalysisList)
 }
