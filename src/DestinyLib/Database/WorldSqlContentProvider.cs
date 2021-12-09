@@ -112,6 +112,7 @@
                     // ASSUMPTION: There is only 1 intrinsic trait
                     if (indexes.Length != 1)
                     {
+                        // TODO: THIS SHOULD HAVE FAILED THE BUILD.
                         throw new ($"weapon id {id} name {weaponMetaData.Name} | intrinsic traits: {indexes.Length}");
                     }
 
