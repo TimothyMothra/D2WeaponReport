@@ -48,14 +48,16 @@
 
         public IList<Tuple<double, double>> InterpolationData { get; set; }
 
+        /// <summary>
+        /// <code>[{ x: 0, y: 20}, { x: 10, y: 10}, { x: 20, y: 15}, { x: 30, y: 10}]</code>.
+        /// </summary>
+        /// <returns></returns>
         public string GetInterpolationDataAsString()
         {
             if (this.InterpolationData == null)
             {
                 return "null";
             }
-
-        //data:[{ x: 0, y: 20}, { x: 10, y: 10}, { x: 20, y: 15}, { x: 30, y: 10}],
 
             var list = string.Join(",", this.InterpolationData.Select(x => $"{{x: {x.Item1}, y: {x.Item2}}}"));
 

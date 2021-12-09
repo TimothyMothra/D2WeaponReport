@@ -8,7 +8,7 @@
         <p class="text-muted">HashId: @Html.Raw(stat.HashId)</p>
         <ul>
             <li>BaseValue: @Html.Raw(stat.BaseValue)</li>
-            <li>Perk Percentiles (min, 25%, 50%, 75%, max): @Html.Raw(stat.Percentiles)</li>
+            <li>Pertentiles of Perk Permutations: @Html.Raw(stat.Percentiles) <br /><span class="text-muted">(min, 25%, 50%, 75%, max)</span></li>
             <li>Interpolation:
                 <p class="text-muted">Data: @Html.Raw(stat.GetInterpolationDataAsString())</p>
                 <div style="width:400px;">
