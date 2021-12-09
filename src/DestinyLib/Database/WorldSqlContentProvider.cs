@@ -112,7 +112,7 @@
                     // ASSUMPTION: There is only 1 intrinsic trait
                     if (indexes.Length != 1)
                     {
-                        throw new($"weapon id {id} name {weaponMetaData.Name} | intrinsic traits: {indexes.Length}");
+                        throw new ($"weapon id {id} name {weaponMetaData.Name} | intrinsic traits: {indexes.Length}");
                     }
 
                     intrinsicTraitsIndex = indexes[0];

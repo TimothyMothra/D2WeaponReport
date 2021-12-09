@@ -157,13 +157,9 @@
 
             @*Weapon Attributes*@
             <h3>Affected Attributes</h3>
-            <p>Name: Base Value - Percentiles (min, first quartile, median, third quartile, max)</p>
-            <ul>
-                @foreach (var stat in this.Model.WeaponDetails.StatPermutationPercentiles)
-                {
-                    <li>@Html.Raw(stat.Name): @Html.Raw(stat.BaseValue) @Html.Raw(stat.Percentiles)</li>
-                }
-            </ul>
+            <div>
+                @await Html.PartialAsync("_AffectedAttributes", this.Model.WeaponDetails.StatPermutationPercentiles)
+            </div>
 
         </div>
 

@@ -52,7 +52,12 @@
 
         public override string ToString()
         {
-            return $"({this.Minimum}, {this.FirstQuartile}, {this.Median}, {this.ThirdQuartile}, {this.Maximum})";
+            var minimum = Format(this.Minimum);
+            var first = Format(this.FirstQuartile);
+            var median = Format(this.Median);
+            var third = Format(this.ThirdQuartile);
+            var max = Format(this.Maximum);
+            return $"({minimum}, {first}, {median}, {third}, {max})";
         }
 
         public PercentileGrade GetPercentileGrade(double value)
@@ -82,5 +87,7 @@
                 throw new ArgumentOutOfRangeException(nameof(value), "Unexpected value");
             }
         }
+
+        private static string Format(double x) => x > 0 ? $"+{x}" : x.ToString();
     }
 }
