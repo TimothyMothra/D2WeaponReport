@@ -1,5 +1,7 @@
 ﻿@model List<DestinyLib.DataContract.Analysis.StatPermutationPercentiles>
- <div id="affectedAttributes">
+ 
+    
+<div id="affectedAttributes">
     @foreach (var stat in this.Model)
     {
         <p>@Html.Raw(stat.Name)</p>
@@ -8,70 +10,63 @@
             <li>BaseValue: @Html.Raw(stat.BaseValue)</li>
             <li>Perk Percentiles (min, 25%, 50%, 75%, max): @Html.Raw(stat.Percentiles)</li>
             <li>Interpolation:
-                <p>Data: <span>@Html.Raw(stat.GetInterpolationDataAsString())</span></p>
+                <p class="text-muted">Data: @Html.Raw(stat.GetInterpolationDataAsString())</p>
                 <div style="width:400px;">
-                    <canvas id="myChart"></canvas>
+                    <canvas id="chart_canvas_@Html.Raw(stat.HashId)"></canvas>
                 </div>
+
+                <script>
+                    new Chart(document.getElementById('chart_canvas_@Html.Raw(stat.HashId)').getContext('2d'), {
+                        type: 'scatter',
+                        data: {
+                            datasets: [{
+                                data: eval('@Html.Raw(stat.GetInterpolationDataAsString())')
+                                //[{x: 0, y: 20}, {x: 10, y: 10}, {x: 20, y: 15}, {x: 30, y: 10}],
+                            }],
+                        },
+                        options: {
+                            animation: false,
+                            showLine: true,
+                            elements: {
+                                line: {
+                                    borderColor: '#1CB574',
+                                },
+                                point: {
+                                    radius: 5,
+                                    backgroundColor: '#1CB574',
+                                },
+                            },
+                            scales: {
+                                x: {
+                                    type: 'linear',
+                                    position: 'bottom',
+                                    grid: {
+                                        color: '#43464B',
+                                        borderColor: '#FFF'
+                                    },
+                                    ticks: {
+                                        color: '#FFF'
+                                    }
+                                },
+                                y: {
+                                    grid: {
+                                        color: '#43464B',
+                                        borderColor: '#FFF'
+                                    },
+                                    ticks: {
+                                        color: '#FFF',
+                                    }
+                                },
+                            },
+                            plugins: {
+                                legend: {
+                                    display: false,
+                                }
+                            },
+                        }
+                    });
+                </script>
             </li>
         </ul>
     }
 </div>
-
-<script>
-const ctx = document.getElementById('myChart').getContext('2d');
-
-const data = {
-  datasets: [{
-    //label: 'Scatter Dataset',
-    data: [{x: 0, y: 20}, {x: 10, y: 10}, {x: 20, y: 15}, {x: 30, y: 10}],
-  }],
-};
-
-const config = {
-  type: 'scatter',
-  data: data,
-  options: {
-    animation: false,
-    showLine: true,
-    elements: {
-        line: {
-            borderColor: '#1CB574',
-        },
-        point: {
-            radius: 5,
-            backgroundColor: '#1CB574',
-        },
-    },
-    scales: {
-        x: {
-            type: 'linear',
-            position: 'bottom',
-            grid: {
-                color: '#43464B',
-                borderColor: '#FFF'
-            },
-            ticks: {
-                color: '#FFF'
-              }
-        },
-        y: {
-            grid: {
-                color: '#43464B',
-                borderColor: '#FFF'
-            },
-            ticks: {
-                color: '#FFF',
-              }
-        },
-        
-    },
-    plugins: {
-            legend: {
-                display: false,
-            }
-        }
-  }
-};
-
-const myChart = new Chart(ctx, config);
-</script>
