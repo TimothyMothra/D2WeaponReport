@@ -3,10 +3,12 @@
     @foreach (var stat in this.Model)
     {
         <p>@Html.Raw(stat.Name)</p>
+        <p class="text-muted">HashId: @Html.Raw(stat.HashId)</p>
         <ul>
             <li>BaseValue: @Html.Raw(stat.BaseValue)</li>
             <li>Perk Percentiles (min, 25%, 50%, 75%, max): @Html.Raw(stat.Percentiles)</li>
             <li>Interpolation:
+                <p>Data: <span>@Html.Raw(stat.GetInterpolationDataAsString())</span></p>
                 <div style="width:400px;">
                     <canvas id="myChart"></canvas>
                 </div>

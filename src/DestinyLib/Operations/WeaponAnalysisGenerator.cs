@@ -173,6 +173,7 @@
         private static List<StatPermutationPercentiles> CalculateStatPermutationPercentiles(WeaponDefinition weaponDefinition, List<PerkPermutation> perkPermutations, List<StatPermutation> statPermutations)
         {
             var statDefinitions = weaponDefinition.WeaponBaseStats.Values;
+            var interpolationDefinitions = weaponDefinition.WeaponBaseStats.StatGroupDefinition.InterpolationDefinitions;
 
             // Convert StatPermutations into Dictionary of StatId w/ list of values.
             var statsDictionary = new Dictionary<uint, List<double>>();
@@ -189,6 +190,7 @@
             foreach (var sd in statsDictionary)
             {
                 var matchingStatDefinition = statDefinitions.SingleOrDefault(x => x.MetaData.HashId == sd.Key);
+                var matchingInterpolationDefinition = interpolationDefinitions.SingleOrDefault(x => x.StatHashId == sd.Key);
 
                 if (matchingStatDefinition == null)
                 {
@@ -202,7 +204,8 @@
                     baseValue: matchingStatDefinition.Value,
                     hashId: sd.Key,
                     values: sd.Value,
-                    totalCount: perkPermutations.Count));
+                    totalCount: perkPermutations.Count,
+                    interpolationData: matchingInterpolationDefinition?.DataPoints));
             }
 
             return statPermutationPercentiles;
