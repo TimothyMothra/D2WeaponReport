@@ -149,7 +149,7 @@
             @*Hidden fields here are read by plotly library*@
             <p id="weaponName" style="display:none">@Html.DisplayFor(x => x.WeaponDetails.WeaponDefinition.MetaData.Name)</p>
             <p id="permutations" style="display:none">
-                @Html.Raw(string.Join(",", this.Model.WeaponDetails.PerkPermutationAnalysisList.OrderByDescending(x => x.MaxPoints).Select(x => x.MaxPoints).AsEnumerable()))
+                @Html.Raw(string.Join(",", this.Model.WeaponDetails.PerkPermutationAnalysisList.OrderByDescending(x => x.NetPoints).Select(x => x.NetPoints).AsEnumerable()))
             </p>
 
             @*Weapon Attributes*@

@@ -13,7 +13,7 @@
 
         public PerkPermutation PerkPermutation { get; private set; }
 
-        public double MaxPoints { get; set; }
+        public double NetPoints { get; set; }
 
         public string PerkNames => string.Join(", ", this.PerkPermutation.WeaponPerkList.Select(x => x.MetaData.Name));
 
@@ -21,6 +21,6 @@
 
         public List<Tuple<string, PercentileGrade>> StatAndPercentileGrades { get; internal set; }
 
-        public string ToDisplayString() => $"{this.MaxPoints}: {this.PerkNames} ({this.PercentileGrade})";
+        public string ToDisplayString() => $"{this.NetPoints}: {this.PerkNames} ({this.PercentileGrade})";
     }
 }

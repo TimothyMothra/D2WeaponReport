@@ -1,7 +1,7 @@
 ﻿@model List<DestinyLib.DataContract.Analysis.PerkPermutationAnalysis>
 
 <ul>
-    @foreach (var perkPermutationAnalysis in this.Model.OrderByDescending(x => x.MaxPoints))
+    @foreach (var perkPermutationAnalysis in this.Model.OrderByDescending(x => x.NetPoints))
     {
     <li>@Html.Raw(perkPermutationAnalysis.ToDisplayString())
         <p style="font-size: 0.85em;">

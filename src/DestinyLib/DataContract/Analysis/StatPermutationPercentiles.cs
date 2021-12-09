@@ -8,15 +8,6 @@
     /// </summary>
     public class StatPermutationPercentiles
     {
-        public StatPermutationPercentiles(uint hashId, string name, double baseValue, List<double> values)
-        {
-            this.HashId = hashId;
-            this.Name = name;
-            this.BaseValue = baseValue;
-            this.Count = values.Count;
-            this.Percentiles = new Percentiles(values);
-        }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="StatPermutationPercentiles"/> class.
         /// Collection of Values will be padded with zeros to meet the Total Count.

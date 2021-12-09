@@ -45,7 +45,7 @@
 
                 perkPermutationAnalysisList.Add(new PerkPermutationAnalysis(perkPerm)
                 {
-                    MaxPoints = CalculateMaxPoints(weaponDefinition, perkHashAndValues),
+                    NetPoints = CalculateNetPoints(weaponDefinition, perkHashAndValues),
                     PercentileGrade = CalculatePercentileGrade(statPermutationPercentiles, perkPerm),
                     StatAndPercentileGrades = CalculateStatAndPercentileGrades(statPermutationPercentiles, perkPerm),
                 });
@@ -101,8 +101,10 @@
             return displayString;
         }
 
-        private static double CalculateMaxPoints(WeaponDefinition weaponDefinition, Dictionary<uint, double> perkHashAndValues)
+        private static double CalculateNetPoints(WeaponDefinition weaponDefinition, Dictionary<uint, double> perkHashAndValues)
         {
+            // TODO: SOME STATS LESS IS PREFERRED (ex: charge time, draw time)
+
             var weaponStats = weaponDefinition.WeaponBaseStats.Values;
 
             double perkSum = 0;

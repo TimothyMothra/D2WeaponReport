@@ -17,12 +17,10 @@
 
             public IList<Tuple<double, double>> DataPoints { get; set; }
 
-#if DEBUG
             public override string ToString()
             {
                 return $"{this.StatHashId}, DataPoints: {this.DataPoints?.Count ?? -1}";
             }
-#endif
         }
     }
 }
