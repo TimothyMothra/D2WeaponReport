@@ -84,7 +84,7 @@ jobs:
 #### Publish and Verify Output
 
     - name: dotnet publish
-      run: dotnet publish ${{ env.WEB_PROJECT }} -o ${{ env.PUBLISH_DIRECTORY }}
+      run: dotnet publish ${{ env.WEB_PROJECT }} -o ${{ env.PUBLISH_DIRECTORY }} --configuration Release
 
     - name: List files
       shell: pwsh
@@ -108,4 +108,4 @@ jobs:
       run: dotnet run --project ${{ env.INIT_ENVIRONMENT_PROJECT }}
 
     - name: Dotnet Test
-      run: dotnet test  ${{ env.SOLUTION }} --no-build --verbosity normal
+      run: dotnet test  ${{ env.SOLUTION }} --no-build --verbosity normal --configuration Release
