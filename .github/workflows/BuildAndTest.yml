@@ -60,7 +60,7 @@ jobs:
 #### Build and Verify Output
 
     - name: Dotnet Build
-      run: dotnet build  ${{ env.SOLUTION }} --no-restore
+      run: dotnet build  ${{ env.SOLUTION }} --no-restore --configuration Release
 
     - name: Verify Typescript Output
       shell: pwsh
