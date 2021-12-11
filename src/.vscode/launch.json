@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/SandboxWeb/bin/Debug/net5.0/SandboxWeb.dll",
+            "program": "${workspaceFolder}/D2WeaponReportWeb/bin/Debug/net5.0/D2WeaponReportWeb.dll",
             "args": ["urls=http://localhost:5003"],
-            "cwd": "${workspaceFolder}/SandboxWeb",
+            "cwd": "${workspaceFolder}/D2WeaponReportWeb",
             "stopAtEntry": false,
             // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
             "serverReadyAction": {

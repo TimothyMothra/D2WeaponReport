@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConsoleApps", "ConsoleApps"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApp", "WebApp", "{29D60823-0D1D-45DD-8CED-EC4F6D774D2E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SandboxWeb", "SandboxWeb\SandboxWeb.csproj", "{54C124C5-7913-4BBE-947B-98B69B0DF75F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "D2WeaponReportWeb", "D2WeaponReportWeb\D2WeaponReportWeb.csproj", "{54C124C5-7913-4BBE-947B-98B69B0DF75F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

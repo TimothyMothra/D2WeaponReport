@@ -1,19 +1,16 @@
-﻿namespace SandboxWeb.Controllers
+﻿namespace D2WeaponReportWeb.Controllers
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
-
+    using D2WeaponReportWeb.Models;
     using DestinyLib.Database;
     using DestinyLib.DataContract;
     using DestinyLib.Operations;
     using DestinyLib.Scenarios;
-
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
-
-    using SandboxWeb.Models;
 
     public class HomeController : Controller
     {

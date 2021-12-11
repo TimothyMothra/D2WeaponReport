@@ -16,8 +16,8 @@ jobs:
     env: # These variables are available to the entire job.
       SOLUTION: ./src/DestinySandbox.sln
       INIT_ENVIRONMENT_PROJECT: ./src/InitEnvironment/InitEnvironment.csproj
-      WEB_PROJECT: ./src/SandboxWeb/SandboxWeb.csproj
-      WEB_DIRECTORY: ./src/SandboxWeb
+      WEB_PROJECT: ./src/D2WeaponReportWeb/D2WeaponReportWeb.csproj
+      WEB_DIRECTORY: ./src/D2WeaponReportWeb
       TYPESCRIPT_EXPECTED_OUTPUT_FILENAME: /wwwroot/scripts/app # *.js, *.js.map, *.ts
       PUBLISH_DIRECTORY: ${{ github.workspace }}/publishroot
     
@@ -77,9 +77,9 @@ jobs:
     # - name: Verify Typescript Output
     #   shell: pwsh
     #   run: |
-    #     if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js -PathType Leaf)) { throw "Compiled Typescript Not Found .JS" }
-    #     else if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.js.map -PathType Leaf)) { throw "Compiled Typescript Not Found .JS.MAP" }
-    #     else if (!(Test-Path -Path ./src/SandboxWeb/wwwroot/scripts/app.ts -PathType Leaf)) { throw "Compiled Typescript Not Found .TS" }
+    #     if (!(Test-Path -Path ./src/D2WeaponReportWeb/wwwroot/scripts/app.js -PathType Leaf)) { throw "Compiled Typescript Not Found .JS" }
+    #     else if (!(Test-Path -Path ./src/D2WeaponReportWeb/wwwroot/scripts/app.js.map -PathType Leaf)) { throw "Compiled Typescript Not Found .JS.MAP" }
+    #     else if (!(Test-Path -Path ./src/D2WeaponReportWeb/wwwroot/scripts/app.ts -PathType Leaf)) { throw "Compiled Typescript Not Found .TS" }
 
 #### Publish and Verify Output
 

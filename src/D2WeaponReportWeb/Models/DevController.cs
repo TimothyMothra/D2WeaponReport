@@ -1,4 +1,4 @@
-﻿namespace SandboxWeb.Models
+﻿namespace D2WeaponReportWeb.Models
 {
     using Microsoft.AspNetCore.Mvc;
 

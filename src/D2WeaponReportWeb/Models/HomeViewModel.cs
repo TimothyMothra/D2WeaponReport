@@ -1,4 +1,4 @@
-﻿namespace SandboxWeb.Models
+﻿namespace D2WeaponReportWeb.Models
 {
     using System.Collections.Generic;
 

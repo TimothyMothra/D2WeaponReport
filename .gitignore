@@ -358,4 +358,4 @@ MigrationBackup/
 /**/scripts/*.map
 
 # npm file
-/src/SandboxWeb/package-lock.json
+/src/**/package-lock.json

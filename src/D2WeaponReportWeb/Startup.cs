@@ -1,4 +1,4 @@
-namespace SandboxWeb
+namespace D2WeaponReportWeb
 {
     using System.IO;
     using System.Reflection;

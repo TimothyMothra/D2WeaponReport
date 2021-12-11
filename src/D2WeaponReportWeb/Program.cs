@@ -1,4 +1,4 @@
-namespace SandboxWeb
+namespace D2WeaponReportWeb
 {
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Hosting;
