@@ -17,6 +17,7 @@ This codebase is sloppy because I'm working in short bursts of large rewrites. _
 - [Community Wiki](http://destinydevs.github.io/BungieNetPlatform/)
 - [DestinySets ApiExplorer](https://data.destinysets.com/api)
 - [Additional Links](https://www.reddit.com/r/DestinyTheGame/comments/aj4jzj/destiny_api_usage/)
+- https://www.thegamer.com/destiny-2-weapon-stats-explained/
 
 ## Contributing
 
