@@ -2,9 +2,9 @@
 {
     public class WeaponStatDefinition
     {
-        public WeaponStatDefinition(WeaponStatMetaData weaponStatMetaData = default)
+        public WeaponStatDefinition(WeaponStatMetaData weaponStatMetaData = null)
         {
-            this.MetaData = weaponStatMetaData ?? throw new ArgumentNullException(nameof(weaponStatMetaData));
+            this.MetaData = weaponStatMetaData;
         }
 
         public WeaponStatMetaData MetaData { get; set; }
