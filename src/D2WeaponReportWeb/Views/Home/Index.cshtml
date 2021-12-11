@@ -205,6 +205,7 @@
     <br />
 
     <h3>Distribution of Net Points</h3>
+    <p>Number of Permutations @Html.DisplayFor(x => x.WeaponDetails.PerkPermutationAnalysisList.Count)</p>
     <div id="plotDiv" style="width:400px;height:500px;"></div>
         
     @*Hidden fields here are read by plotly library*@
@@ -274,9 +275,9 @@
     <br />
 
     <h3>Perk Permutations</h3>
-    <p>Number of Permutations @Html.DisplayFor(x => x.WeaponDetails.PerkPermutationAnalysisList.Count)</p>
+    
     <p>Net Points: perk permutation (percentile grade).</p>
-    <p>Grades: A = top 25%, B = second 25%, C = third 25%, D = bottom 25%</p>
+    <p>Grades are based on percentiles: <br /> A = top 25%, B = second 25%, C = third 25%, D = bottom 25%</p>
 
     @await Html.PartialAsync("_PermutationView", this.Model.WeaponDetails.PerkPermutationAnalysisList)
 }

@@ -3,13 +3,15 @@
 <ul>
     @foreach (var perkPermutationAnalysis in this.Model.OrderByDescending(x => x.NetPoints))
     {
-    <li>@Html.Raw(perkPermutationAnalysis.ToDisplayString())
-        <p style="font-size: 0.85em;">
-            @foreach (var namesAndGrade in perkPermutationAnalysis.StatAndPercentileGrades)
-            {
-                @Html.Raw($"{namesAndGrade.Item1} ({namesAndGrade.Item2}), ")
-            }
-        </p>
-    </li>
+        <li>
+            @Html.Raw($"{perkPermutationAnalysis.NetPoints}: {perkPermutationAnalysis.PerkNames}")
+            <span class="wr-green">@Html.Raw($"({perkPermutationAnalysis.PercentileGrade})")</span>
+            <p class="text-muted" style="font-size: 0.85em;">
+                @foreach (var namesAndGrade in perkPermutationAnalysis.StatAndPercentileGrades)
+                {
+                    @Html.Raw($"{namesAndGrade.Item1} ({namesAndGrade.Item2}), ")
+                }
+            </p>
+        </li>
     }
 </ul>

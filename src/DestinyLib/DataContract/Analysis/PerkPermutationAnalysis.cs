@@ -20,7 +20,5 @@
         public string PercentileGrade { get; set; }
 
         public List<Tuple<string, PercentileGrade>> StatAndPercentileGrades { get; internal set; }
-
-        public string ToDisplayString() => $"{this.NetPoints}: {this.PerkNames} ({this.PercentileGrade})";
     }
 }

@@ -4,11 +4,16 @@
 <div id="affectedAttributes">
     @foreach (var stat in this.Model)
     {
-        <p>@Html.Raw(stat.Name)</p>
-        <p class="text-muted">HashId: @Html.Raw(stat.HashId)</p>
+        <p>
+            @Html.Raw(stat.Name)
+            <br/><span class="text-muted">HashId: @Html.Raw(stat.HashId)</span>    
+        </p>
+        
         <ul>
             <li>BaseValue: @Html.Raw(stat.BaseValue)</li>
-            <li>Pertentiles of Perk Permutations: @Html.Raw(stat.Percentiles) <br /><span class="text-muted">(min, 25%, 50%, 75%, max)</span></li>
+            <li>Pertentiles of Perk Permutations: @Html.Raw(stat.Percentiles)
+                <br /><span class="text-muted">(min, 25%, 50%, 75%, max)</span>
+            </li>
             <li>Interpolation:
                 <p class="text-muted">Data: @Html.Raw(stat.GetInterpolationDataAsString())</p>
                 <div style="width:400px;">
