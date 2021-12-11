@@ -133,7 +133,7 @@
 @if (this.Model.WeaponDetails != null)
 {
     <h2>
-        <img src="@Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.GetIconUri().AbsoluteUri)" alt="icon" width="50" height="50">
+        <img src="@Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.GetIconUri(DestinyLib.LibEnvironment.GetDestinyHost()).AbsoluteUri)" alt="icon" width="50" height="50">
         <span id="weaponName">@Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.Name)</span>
     </h2>
 
@@ -148,7 +148,7 @@
             @Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.FrameDescription)
         </p>
             
-        <img class="img-fluid" src="@Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.GetScreenshotUri().AbsoluteUri)" alt="screenshot">
+        <img class="img-fluid" src="@Html.Raw(this.Model.WeaponDetails.WeaponDefinition.MetaData.GetScreenshotUri(DestinyLib.LibEnvironment.GetDestinyHost()).AbsoluteUri)" alt="screenshot">
     </div>
 
     @*WeaponDetails Body: Perks *@

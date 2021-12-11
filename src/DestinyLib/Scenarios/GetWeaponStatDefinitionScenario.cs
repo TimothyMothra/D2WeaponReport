@@ -2,8 +2,9 @@
 {
     using System.IO;
 
+    using BungieLib.Manifest;
     using DestinyLib.Database;
-    using DestinyLib.DataContract.Definitions;
+    using DestinyLib.Database.DataContract.Definitions;
 
     public static class GetWeaponStatDefinitionScenario
     {

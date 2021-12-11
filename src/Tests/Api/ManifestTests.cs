@@ -2,7 +2,7 @@
 {
     using System.Threading.Tasks;
 
-    using DestinyLib.Api;
+    using BungieLib.Manifest;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

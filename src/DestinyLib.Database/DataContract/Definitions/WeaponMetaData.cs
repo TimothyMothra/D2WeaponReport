@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DestinyLib.DataContract.Definitions
+namespace DestinyLib.Database.DataContract.Definitions
 {
     public class WeaponMetaData
     {
@@ -37,9 +37,9 @@ namespace DestinyLib.DataContract.Definitions
 
         public string CollectionDefintitionIconPath { get; set; }
 
-        public Uri GetIconUri() => new Uri(LibEnvironment.GetDestinyHost(), this.CollectionDefintitionIconPath ?? this.ItemDefinitionIconPath);
+        public Uri GetIconUri(Uri host) => new Uri(host, this.CollectionDefintitionIconPath ?? this.ItemDefinitionIconPath);
 
-        public Uri GetScreenshotUri() => new Uri(LibEnvironment.GetDestinyHost(), this.ScreenshotPath);
+        public Uri GetScreenshotUri(Uri host) => new Uri(host, this.ScreenshotPath);
 
         public override string ToString() => $"{this.HashId} {this.Name} {this.TypeName}";
     }

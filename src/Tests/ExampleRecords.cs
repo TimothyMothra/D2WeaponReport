@@ -3,9 +3,9 @@
     using System;
     using System.Collections.Generic;
 
-    using DestinyLib.DataContract.Definitions;
+    using DestinyLib.Database.DataContract.Definitions;
 
-    using static DestinyLib.DataContract.Definitions.WeaponStatGroupDefinition;
+    using static DestinyLib.Database.DataContract.Definitions.WeaponStatGroupDefinition;
 
     public static class ExampleRecords
     {

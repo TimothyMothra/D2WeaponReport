@@ -6,8 +6,10 @@
     using System.Linq;
     using System.Text.RegularExpressions;
 
+    using BungieLib.Manifest;
+
     using DestinyLib.Database;
-    using DestinyLib.DataContract;
+    using DestinyLib.Database.DataContract.Definitions;
 
     public static class SearchForWeaponScenario
     {

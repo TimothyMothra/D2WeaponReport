@@ -5,7 +5,7 @@
     using System.Diagnostics;
     using System.Linq;
 
-    using DestinyLib.DataContract.Definitions;
+    using DestinyLib.Database.DataContract.Definitions;
 
     public class PerkTable
     {

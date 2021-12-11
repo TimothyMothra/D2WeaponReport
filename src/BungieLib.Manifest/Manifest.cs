@@ -1,4 +1,4 @@
-﻿namespace DestinyLib.Api
+﻿namespace BungieLib.Manifest
 {
     using System;
     using System.IO;
@@ -6,7 +6,7 @@
     using System.Net.Http;
     using System.Threading.Tasks;
 
-    using DestinyLib.Database;
+    //using DestinyLib.Database;
 
     using Newtonsoft.Json;
 
@@ -38,7 +38,8 @@
         {
             var jsonResponse = await this.GetManifest();
 
-            dynamic jsonDynamic = JsonConvert.DeserializeObject(jsonResponse);
+            dynamic jsonDynamic = JsonConvert.DeserializeObject(jsonResponse) ?? throw new Exception("Result cannot be null");
+
             string path = jsonDynamic.Response.mobileWorldContentPaths.en;
 
             return new Uri(this.bungieHostUri, path);

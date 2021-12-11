@@ -5,9 +5,9 @@
     using System.Diagnostics;
     using System.Linq;
 
+    using DestinyLib.Database.DataContract.Definitions;
     using DestinyLib.DataContract;
     using DestinyLib.DataContract.Analysis;
-    using DestinyLib.DataContract.Definitions;
     using DestinyLib.Extensions;
 
     public static class WeaponAnalysisGenerator

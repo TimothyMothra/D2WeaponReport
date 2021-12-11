@@ -2,8 +2,8 @@
 {
     using System.Collections.Generic;
 
+    using DestinyLib.Database.DataContract.Definitions;
     using DestinyLib.DataContract.Analysis;
-    using DestinyLib.DataContract.Definitions;
 
     using static DestinyLib.Operations.WeaponPerkTableGenerator;
 

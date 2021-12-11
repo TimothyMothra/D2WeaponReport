@@ -2,9 +2,8 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-
+    using DestinyLib.Database.DataContract.Definitions;
     using DestinyLib.DataContract;
-    using DestinyLib.DataContract.Definitions;
 
     public static class PerkPermutationGenerator
     {

@@ -6,6 +6,7 @@
     using System.Linq;
     using D2WeaponReportWeb.Models;
     using DestinyLib.Database;
+    using DestinyLib.Database.DataContract.Definitions;
     using DestinyLib.DataContract;
     using DestinyLib.Operations;
     using DestinyLib.Scenarios;
@@ -81,7 +82,7 @@
                 {
                     Name = searchableWeaponRecord.Name,
                     Id = searchableWeaponRecord.HashId,
-                    IconUri = searchableWeaponRecord.GetIconUri().AbsoluteUri,
+                    IconUri = searchableWeaponRecord.GetIconUri(DestinyLib.LibEnvironment.GetDestinyHost()).AbsoluteUri,
                 });
             }
 

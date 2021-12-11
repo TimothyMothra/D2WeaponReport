@@ -4,12 +4,11 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using DestinyLib.DataContract;
-    using DestinyLib.DataContract.Definitions;
+    using DestinyLib.Database.DataContract.Definitions;
 
     using Newtonsoft.Json;
 
-    using static DestinyLib.DataContract.Definitions.WeaponStatGroupDefinition;
+    using static DestinyLib.Database.DataContract.Definitions.WeaponStatGroupDefinition;
 
     public class WorldSqlContentProvider
     {
@@ -30,6 +29,10 @@
         public WeaponDefinition GetWeaponDefinition(uint id)
         {
             var record = this.worldSqlContent.GetDestinyInventoryItemDefinition(id);
+            if (record == null)
+            {
+                throw new Exception($"unexpected null result for {nameof(this.worldSqlContent.GetDestinyInventoryItemDefinition)} id {id}");
+            }
 
             dynamic jsonDynamic = JsonConvert.DeserializeObject(record);
             if (jsonDynamic == null)
@@ -231,11 +234,7 @@
             return destinyCollectibleDefinition;
         }
 
-        public IList<SearchableWeaponRecord> GetSearchableWeapons()
-        {
-            // Source: (https://stackoverflow.com/questions/1202935/convert-rows-from-a-data-reader-into-typed-results).
-            return this.worldSqlContent.GetRecords(Properties.Resources.WorldSqlContent_GetAllWeapons, SearchableWeaponRecord.Parse);
-        }
+        public IList<SearchableWeaponRecord> GetSearchableWeapons() => this.worldSqlContent.GetSearchableWeapons();
 
         public WeaponStatGroupDefinition GetWeaponStatGroupDefinition(uint statGroupHashId)
         {

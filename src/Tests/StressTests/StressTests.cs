@@ -6,6 +6,8 @@
     using System.IO;
     using System.Linq;
 
+    using BungieLib.Manifest;
+
     using DestinyLib;
     using DestinyLib.Database;
     using DestinyLib.Operations;
@@ -22,7 +24,7 @@
         public StressTests()
         {
             var dbPath = new FileInfo(LibEnvironment.GetDatabaseFilePath("world_sql_content"));
-            this.worldSqlContent = new WorldSqlContent(connectionString: DestinyLib.Database.Database.MakeConnectionString(dbPath));
+            this.worldSqlContent = new WorldSqlContent(connectionString: Database.MakeConnectionString(dbPath));
         }
 
         /// <summary>

@@ -2,8 +2,10 @@
 {
     using System.IO;
 
+    using BungieLib.Manifest;
+
     using DestinyLib.Database;
-    using DestinyLib.DataContract.Definitions;
+    using DestinyLib.Database.DataContract.Definitions;
 
     // TODO: SCENARIOS WOULD BENEFIT FROM DEPENDENCY INJECTION
     public static class GetWeaponDefinitionScenario

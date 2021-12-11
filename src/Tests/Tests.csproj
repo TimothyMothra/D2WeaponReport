@@ -18,6 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BungieLib.Manifest\BungieLib.Manifest.csproj" />
+    <ProjectReference Include="..\DestinyLib.Database\DestinyLib.Database.csproj" />
     <ProjectReference Include="..\DestinyLib\DestinyLib.csproj" />
   </ItemGroup>
 

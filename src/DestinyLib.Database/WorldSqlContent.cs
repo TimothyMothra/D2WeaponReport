@@ -1,6 +1,8 @@
 ﻿namespace DestinyLib.Database
 {
-    public class WorldSqlContent : Database
+    using DestinyLib.Database.DataContract.Definitions;
+
+    public class WorldSqlContent : BungieLib.Manifest.Database
     {
         public WorldSqlContent(string connectionString) : base(connectionString) { }
 
@@ -38,5 +40,11 @@
         /// <param name="id"></param>
         /// <returns></returns>
         public string GetDestinyStatGroupDefinition(uint id) => this.GetJsonRecord("DestinyStatGroupDefinition", id);
+
+        public IList<SearchableWeaponRecord> GetSearchableWeapons()
+        {
+            // Source: (https://stackoverflow.com/questions/1202935/convert-rows-from-a-data-reader-into-typed-results).
+            return this.GetRecords(Properties.Resources.WorldSqlContent_GetAllWeapons, SearchableWeaponRecord.Parse);
+        }
     }
 }

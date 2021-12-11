@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DestinyLib.DataContract.Definitions
+namespace DestinyLib.Database.DataContract.Definitions
 {
     public class WeaponStatsCollection
     {

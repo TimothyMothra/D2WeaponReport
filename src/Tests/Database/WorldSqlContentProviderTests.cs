@@ -4,6 +4,7 @@
     using System.IO;
     using System.Linq;
 
+    using BungieLib.Manifest;
     using DestinyLib;
     using DestinyLib.Database;
 

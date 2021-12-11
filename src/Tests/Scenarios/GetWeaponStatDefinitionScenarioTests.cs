@@ -1,6 +1,6 @@
 ﻿namespace Tests.Scenarios
 {
-    using DestinyLib.DataContract.Definitions;
+    using DestinyLib.Database.DataContract.Definitions;
     using DestinyLib.Scenarios;
 
     using FluentAssertions;

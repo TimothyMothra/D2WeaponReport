@@ -1,14 +1,9 @@
 ﻿namespace DestinyLib.Operations
 {
-    using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Linq;
-
-    using DestinyLib.DataContract;
+    using DestinyLib.Database.DataContract.Definitions;
     using DestinyLib.DataContract.Analysis;
-    using DestinyLib.DataContract.Definitions;
-    using DestinyLib.Extensions;
 
     public static class WeaponPerkTableGenerator
     {

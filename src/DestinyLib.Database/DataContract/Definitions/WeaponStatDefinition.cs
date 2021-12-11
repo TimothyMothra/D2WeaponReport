@@ -1,10 +1,10 @@
-﻿namespace DestinyLib.DataContract.Definitions
+﻿namespace DestinyLib.Database.DataContract.Definitions
 {
     public class WeaponStatDefinition
     {
         public WeaponStatDefinition(WeaponStatMetaData weaponStatMetaData = default)
         {
-            this.MetaData = weaponStatMetaData;
+            this.MetaData = weaponStatMetaData ?? throw new ArgumentNullException(nameof(weaponStatMetaData));
         }
 
         public WeaponStatMetaData MetaData { get; set; }

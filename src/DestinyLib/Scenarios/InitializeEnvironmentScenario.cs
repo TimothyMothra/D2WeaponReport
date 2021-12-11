@@ -4,7 +4,7 @@
     using System.IO;
     using System.Threading.Tasks;
 
-    using DestinyLib.Api;
+    using BungieLib.Manifest;
 
     /// <summary>
     /// This scenario can make a root directory, create the root.marker, and download the manifest database.

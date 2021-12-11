@@ -1,4 +1,4 @@
-﻿namespace DestinyLib.DataContract.Definitions
+﻿namespace DestinyLib.Database.DataContract.Definitions
 {
     public class WeaponPerkMetaData
     {

@@ -1,4 +1,4 @@
-﻿namespace DestinyLib.DataContract
+﻿namespace DestinyLib.Database.DataContract.Definitions
 {
     using System;
     using System.Data;
@@ -32,7 +32,7 @@
             };
         }
 
-        public Uri GetIconUri() => new Uri(LibEnvironment.GetDestinyHost(), this.CollectionDefintitionIconPath ?? this.ItemDefinitionIconPath);
+        public Uri GetIconUri(Uri host) => new Uri(host, this.CollectionDefintitionIconPath ?? this.ItemDefinitionIconPath);
 
         //public static SearchableWeaponRecord ParseWithIcons(IDataRecord record)
         //{

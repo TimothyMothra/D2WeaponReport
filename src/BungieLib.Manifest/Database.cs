@@ -1,4 +1,4 @@
-﻿namespace DestinyLib.Database
+﻿namespace BungieLib.Manifest
 {
     using System;
     using System.Collections.Generic;
@@ -102,6 +102,11 @@
                 var command = connection.CreateCommand();
                 command.CommandText = "SELECT date('now')";
                 var result = command.ExecuteScalar();
+
+                if (result == null)
+                {
+                    return false;
+                }
 
                 return DateTime.TryParse(result.ToString(), out _);
             }

@@ -3,6 +3,8 @@ namespace D2WeaponReportWeb
     using System.IO;
     using System.Reflection;
 
+    using BungieLib.Manifest;
+
     using DestinyLib;
     using DestinyLib.Database;
 

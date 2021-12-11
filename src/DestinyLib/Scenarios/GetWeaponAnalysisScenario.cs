@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.IO;
 
+    using BungieLib.Manifest;
     using DestinyLib.Database;
     using DestinyLib.DataContract.Analysis;
     using DestinyLib.Operations;

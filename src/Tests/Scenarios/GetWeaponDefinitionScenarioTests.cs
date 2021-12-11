@@ -1,17 +1,10 @@
 ﻿namespace Tests.Scenarios
 {
-    using System.Collections.Generic;
     using System.Linq;
-
-    using DestinyLib.DataContract;
-    using DestinyLib.DataContract.Analysis;
-    using DestinyLib.DataContract.Definitions;
-    using DestinyLib.Extensions;
+    using DestinyLib.Database.DataContract.Definitions;
     using DestinyLib.Operations;
     using DestinyLib.Scenarios;
-
     using FluentAssertions;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]

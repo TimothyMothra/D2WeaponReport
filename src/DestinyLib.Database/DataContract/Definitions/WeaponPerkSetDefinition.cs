@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace DestinyLib.DataContract.Definitions
+namespace DestinyLib.Database.DataContract.Definitions
 {
     public class WeaponPerkSetDefinition
     {
