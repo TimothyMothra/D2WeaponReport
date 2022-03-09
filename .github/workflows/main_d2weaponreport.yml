@@ -26,7 +26,7 @@ jobs:
 
 #### SETUP NODE AND NPM
 
-    - uses: actions/setup-node@v2
+    - uses: actions/setup-node@v3
       with:
         node-version: 'lts/*'
         check-latest: true
