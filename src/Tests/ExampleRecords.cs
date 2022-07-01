@@ -125,7 +125,7 @@
                     Name = "Range",
                     Description = "Increases the effective range of this weapon.",
                 },
-                Value = 53,
+                Value = 48,
                 MinValue = 0,
                 MaxValue = 0,
                 DisplayMaximum = 100,
@@ -138,7 +138,7 @@
                     Name = "Stability",
                     Description = "How much or little recoil you will experience while firing the weapon.",
                 },
-                Value = 49,
+                Value = 43,
                 MinValue = 0,
                 MaxValue = 0,
                 DisplayMaximum = 100,
@@ -164,7 +164,7 @@
                     Name = "Reload Speed",
                     Description = "The time it takes to reload this weapon.",
                 },
-                Value = 61,
+                Value = 57,
                 MinValue = 0,
                 MaxValue = 0,
                 DisplayMaximum = 100,
@@ -190,7 +190,7 @@
                     Name = "Handling",
                     Description = "The speed with which the weapon can be readied and aimed.",
                 },
-                Value = 67,
+                Value = 63,
                 MinValue = 0,
                 MaxValue = 0,
                 DisplayMaximum = 100,
@@ -217,6 +217,19 @@
                     Description = "The weapon's tendency to move while firing.",
                 },
                 Value = 54,
+                MinValue = 0,
+                MaxValue = 0,
+                DisplayMaximum = 100,
+            });
+            weaponStatsCollection.Values.Add(new WeaponStatDefinition
+            {
+                MetaData = new WeaponStatMetaData
+                {
+                    HashId = 2714457168,
+                    Name = "Airborne Effectiveness",
+                    Description = "How accurate and stable this weapon is while airborne.",
+                },
+                Value = 10,
                 MinValue = 0,
                 MaxValue = 0,
                 DisplayMaximum = 100,
@@ -789,7 +802,7 @@
                 MaxValue = 100,
                 DataPoints = new List<Tuple<double, double>>
                 {
-                    Tuple.Create(0d, 10d),
+                    Tuple.Create(0d, 0d),
                     Tuple.Create(100d, 100d),
                 },
             });
@@ -800,7 +813,7 @@
                 MaxValue = 100,
                 DataPoints = new List<Tuple<double, double>>
                 {
-                    Tuple.Create(0d, 10d),
+                    Tuple.Create(0d, 0d),
                     Tuple.Create(100d, 100d),
                 },
             });
@@ -811,7 +824,7 @@
                 MaxValue = 100,
                 DataPoints = new List<Tuple<double, double>>
                 {
-                    Tuple.Create(0d, 10d),
+                    Tuple.Create(0d, 0d),
                     Tuple.Create(100d, 100d),
                 },
             });
@@ -822,7 +835,7 @@
                 MaxValue = 100,
                 DataPoints = new List<Tuple<double, double>>
                 {
-                    Tuple.Create(0d, 10d),
+                    Tuple.Create(0d, 0d),
                     Tuple.Create(100d, 100d),
                 },
             });
