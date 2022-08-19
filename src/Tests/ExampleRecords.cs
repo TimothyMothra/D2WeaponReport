@@ -567,6 +567,10 @@
                             {
                                 StatHash = 4188031367u,
                                 Value = -20,
+                            }, new WeaponPerkValueDefinition
+                            {
+                                StatHash = 2714457168u,
+                                Value = 10,
                             },
                         },
                     },
@@ -589,6 +593,10 @@
                             {
                                 StatHash = 1240592695u,
                                 Value = -5,
+                            }, new WeaponPerkValueDefinition
+                            {
+                                StatHash = 2714457168u,
+                                Value = 7,
                             },
                         },
                     },
