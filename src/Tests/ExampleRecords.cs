@@ -554,7 +554,7 @@
                         {
                             HashId = 2420895100u,
                             Name = "Extended Mag",
-                            Description = "This weapon has a greatly increased magazine size, but reloads much slower.\n  •  Greatly increases magazine size\n  •  Greatly decreases reload speed",
+                            Description = "This weapon has a greatly increased magazine size, but reloads much slower.\n  •  Greatly increases magazine size\n  •  Greatly decreases reload speed\n  •  Increases airborne effectiveness",
                             IconPath = "/common/destiny2_content/icons/4cd73ae5b1bc1ae0afc7adb34c2f2df6.png",
                         },
                         WeaponPerkValueList = new List<WeaponPerkValueDefinition>
@@ -580,7 +580,7 @@
                         {
                             HashId = 3177308360u,
                             Name = "Steady Rounds",
-                            Description = "This magazine is optimized for recoil control.\n  •  Greatly increases stability \n  •  Slightly decreases range",
+                            Description = "This magazine is optimized for recoil control.\n  •  Greatly increases stability \n  •  Slightly decreases range\n  •  Increases airborne effectiveness",
                             IconPath = "/common/destiny2_content/icons/adaf4315dab749519c41a233e9954598.png",
                         },
                         WeaponPerkValueList = new List<WeaponPerkValueDefinition>
@@ -669,7 +669,7 @@
                         {
                             HashId = 2387244414u,
                             Name = "Zen Moment",
-                            Description = "Causing damage with this weapon increases its stability.",
+                            Description = "Causing damage with this weapon reduces recoil over time.",
                             IconPath = "/common/destiny2_content/icons/49958f356ea1df930888d15fe6539fe1.png",
                         },
                         WeaponPerkValueList = null,
@@ -865,6 +865,50 @@
                     Tuple.Create(80d, 55d),
                     Tuple.Create(90d, 57d),
                     Tuple.Create(100d, 60d),
+                },
+            });
+
+            definition.InterpolationDefinitions.Add(new WeaponStatInterpolationDefinition
+            {
+                StatHashId = 1345609583,
+                MaxValue = 100,
+                DataPoints = new List<Tuple<double, double>>
+                {
+                    Tuple.Create(0d, 0d),
+                    Tuple.Create(100d, 100d),
+                },
+            });
+
+            definition.InterpolationDefinitions.Add(new WeaponStatInterpolationDefinition
+            {
+                StatHashId = 3555269338,
+                MaxValue = 100,
+                DataPoints = new List<Tuple<double, double>>
+                {
+                    Tuple.Create(0d, 0d),
+                    Tuple.Create(100d, 100d),
+                },
+            });
+
+            definition.InterpolationDefinitions.Add(new WeaponStatInterpolationDefinition
+            {
+                StatHashId = 2715839340,
+                MaxValue = 100,
+                DataPoints = new List<Tuple<double, double>>
+                {
+                    Tuple.Create(0d, 0d),
+                    Tuple.Create(100d, 100d),
+                },
+            });
+
+            definition.InterpolationDefinitions.Add(new WeaponStatInterpolationDefinition
+            {
+                StatHashId = 2714457168,
+                MaxValue = 100,
+                DataPoints = new List<Tuple<double, double>>
+                {
+                    Tuple.Create(0d, 0d),
+                    Tuple.Create(100d, 100d),
                 },
             });
 

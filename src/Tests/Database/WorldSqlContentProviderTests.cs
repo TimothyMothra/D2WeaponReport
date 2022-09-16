@@ -95,7 +95,7 @@
 
             var expectedRecord = ExampleRecords.GetGnawingHunger_StatGroupDefinition();
 
-            Assert.AreEqual(7, statGroupDefinition.InterpolationDefinitions.Count);
+            Assert.AreEqual(11, statGroupDefinition.InterpolationDefinitions.Count);
 
             statGroupDefinition.Should().BeEquivalentTo(expectedRecord);
         }
