@@ -23,22 +23,26 @@ This codebase is sloppy because I'm working in short bursts of large rewrites. _
 
 [Journal](journal/)
 
-### Prerequisits
+### Prerequisite
+
 - .NET v6 SDK (https://dotnet.microsoft.com/download/dotnet/6.0)
 - Node LTS (https://nodejs.org/en/download/)
 
-#### Initialize local environment.
-To get started you must initialze the local environment. 
+#### Initialize local environment
+
+To get started you must initialize the local environment.
 This will download the latest manifest db from Bungie.
 Unit tests expect this file.
 
 1. Run these command using the cli:
-   ```
+
+   ```CLI
    dotnet run --project .\src\InitEnvironment\InitEnvironment.csproj
    ```
 
-2. Now run this command to execute all tests. 
+2. Now run this command to execute all tests.
    This will confirm that the environment has been initialized.
-   ```
+
+   ```CLI
    dotnet test .\src\Tests\Tests.csproj
    ```
