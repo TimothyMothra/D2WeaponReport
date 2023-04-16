@@ -246,7 +246,7 @@
             {
                 SocketIndex = 1,
                 SocketTypeHash = 3362409147,
-                PlugSetHashId = 295878355,
+                PlugSetHashId = 2044988252u,
                 Values = new List<WeaponPerkDefinition>
                 {
                     new WeaponPerkDefinition
@@ -465,7 +465,7 @@
             {
                 SocketIndex = 2,
                 SocketTypeHash = 3815406785,
-                PlugSetHashId = 3964805173,
+                PlugSetHashId = 3985973594u,
                 Values = new List<WeaponPerkDefinition>
                 {
                     new WeaponPerkDefinition
@@ -640,7 +640,7 @@
             {
                 SocketIndex = 3,
                 SocketTypeHash = 2614797986,
-                PlugSetHashId = 2297212861,
+                PlugSetHashId = 1144396384u,
                 Values = new List<WeaponPerkDefinition>
                 {
                     new WeaponPerkDefinition
@@ -669,7 +669,7 @@
                         {
                             HashId = 2387244414u,
                             Name = "Zen Moment",
-                            Description = "Causing damage with this weapon reduces recoil over time.",
+                            Description = "Causing damage with this weapon reduces recoil and flinch over time.",
                             IconPath = "/common/destiny2_content/icons/49958f356ea1df930888d15fe6539fe1.png",
                         },
                         WeaponPerkValueList = null,
@@ -708,7 +708,7 @@
             {
                 SocketIndex = 4,
                 SocketTypeHash = 2614797986,
-                PlugSetHashId = 1853656119,
+                PlugSetHashId = 594510568u,
                 Values = new List<WeaponPerkDefinition>
                 {
                     new WeaponPerkDefinition
