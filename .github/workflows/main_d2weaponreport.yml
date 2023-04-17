@@ -41,7 +41,7 @@ jobs:
 
 #### SETUP DOTNET
 
-    - uses: actions/cache@v3.2.6
+    - uses: actions/cache@v3.3.1
       with:
         path: ~/.nuget/packages
         key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
